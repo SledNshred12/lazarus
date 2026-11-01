@@ -19,7 +19,16 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
+      # the runner already ships the Android SDK, so just point Gradle at it
+      - name: Find the Android SDK
+        run: |
+          SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          echo "ANDROID_SDK_ROOT=$SDK" >> $GITHUB_ENV
+          echo "ANDROID_HOME=$SDK" >> $GITHUB_ENV
+          echo "sdk.dir=$SDK" > local.properties
+          SDKMAN=$(ls "$SDK"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -1)
+          if [ -n "$SDKMAN" ]; then yes | "$SDKMAN" --licenses >/dev/null 2>&1 || true; fi
+          ls "$SDK/platforms" || true
 
       - uses: gradle/actions/setup-gradle@v4
 
@@ -30,7 +39,7 @@ jobs:
         env:
           LZ_STORE_PASS: ${{ secrets.KEY_PASS }}
           LZ_KEY_PASS: ${{ secrets.KEY_PASS }}
-        run: gradle assembleRelease --no-daemon
+        run: gradle assembleRelease --no-daemon --stacktrace
 
       - name: Name it properly
         run: |
