@@ -1,0 +1,38 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'io.github.slednshred12.lazarus'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "io.github.slednshred12.lazarus"
+        minSdk 24
+        targetSdk 34
+        versionCode 67
+        versionName "0.67.0"
+    }
+
+    signingConfigs {
+        release {
+            def ks = file('lazarus.jks')
+            if (ks.exists()) {
+                storeFile ks
+                storePassword System.getenv('LZ_STORE_PASS')
+                keyAlias 'lazarus'
+                keyPassword System.getenv('LZ_KEY_PASS')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
