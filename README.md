@@ -25,3 +25,10 @@ picks up new versions by itself.
 Pushing to `main` builds and signs the APK automatically and puts it on the Releases page.
 The signing key lives in the repository secrets (`KEYSTORE_B64`, `KEY_PASS`) so every build
 is signed with the same key and installs over the last one.
+
+## The web game
+
+The game itself lives in [`web/`](web/). Pushing a change to `web/` on `main` publishes it to
+[lazarus-a2j.pages.dev](https://lazarus-a2j.pages.dev/) automatically (see `.github/workflows/deploy-web.yml`).
+It uses the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+Changes to `web/` don't rebuild the APK.

@@ -1,0 +1,28 @@
+name: Deploy web game
+
+# Publishes the web/ folder to Cloudflare Pages (project "lazarus" -> lazarus-a2j.pages.dev)
+# whenever the game files change on main. Can also be run by hand from the Actions tab.
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'web/**', '.github/workflows/deploy-web.yml' ]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy web --project-name=lazarus --branch=main --commit-dirty=true

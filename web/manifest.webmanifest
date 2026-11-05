@@ -1,0 +1,12 @@
+{
+  "name": "Lazarus",
+  "short_name": "Lazarus",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#E4DAC6",
+  "theme_color": "#E4DAC6",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
