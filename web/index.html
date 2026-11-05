@@ -327,6 +327,17 @@ h1{margin:0;font-family:var(--font-display);font-weight:400;font-size:28px;lette
 .pfpbig{position:relative;flex:none;width:64px;height:64px}.pfpbig .pfpi,.pfpbig .pfpl{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;object-fit:cover;color:#F3EAD3;font-weight:800}
 .pfpbig .pdot{width:15px;height:15px;top:1px;right:1px}
 html.inbattle header.top{display:none}
+.pfpbtn{position:relative;overflow:hidden;cursor:pointer;text-align:center}
+.achflt{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 4px}
+.achfb{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(128,110,80,.35);background:transparent;color:inherit;border-radius:999px;padding:6px 11px;font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.achfb span{opacity:.6;font-weight:600;font-size:12px}.achfb i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.achfb.t0 i{background:#C8844A}.achfb.t1 i{background:#AEB8C0}.achfb.t2 i{background:#E0B030}
+.achfb.on{background:#2A2620;color:#F3EAD3;border-color:#2A2620}
+.lbtap{cursor:pointer}.lbtap:active{opacity:.7}
+.lbpf{flex:none;width:30px;height:30px;margin-right:8px;display:inline-flex}.lbpf .pfpi,.lbpf .pfpl{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;object-fit:cover;color:#F3EAD3;font-weight:800;font-size:13px}
+.lbph{display:flex;align-items:center;gap:14px;margin-bottom:10px}.lbph .pfpbig{width:72px;height:72px}.lbph .pfpi,.lbph .pfpl{width:72px!important;height:72px!important;border-radius:50%}
+.lbcol{display:block;width:100%;border-radius:10px;background:#6E6347}
+.lbachs{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}.lbach{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;min-width:0}.lbach span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 
 </head>
@@ -2984,8 +2995,9 @@ function earthPanel(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=91;
-var CHANGELOG=[{"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
+var GAME_VERSION=92;
+var CHANGELOG=[{"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
+{"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
 {"v": 89, "name": "0.73.1", "d": "Nov 3, 2026", "items": ["Forecast badge: the Colony and Wasteland tabs now show the weather over your region and what is coming next, with how many minutes until it arrives. A higher Weather Tower sees further ahead.", "You now get a heads-up for moderate rain, snow and wind too, not just heavy storms.", "Fix: rain splashes stay on the ground and move with your colony when you zoom in or out."]},
 {"v": 88, "name": "0.73.0", "d": "Nov 2, 2026", "items": ["Colony battles are now in 3D, just like the Citadel fights: houses, farms, wells, clinics, sanitizers and vaccine labs stand up off the ground, people walk around them, and buildings crumble into rubble when they fall. Tap anywhere on a building, roof included, to drop your virus.", "The Last Citadel is now the Black Fortress: black stone walls with glowing red seams, two rings of walls, fires on every tower, a lava moat, red crystal shield generators, and a huge black spire wrapped in burning reactor rings.", "The Last Citadel sends out new Wraith drones: black stealth wings with a red visor and a red cure beam.", "New virus type: Nanobots, unlocked by beating your second Citadel. In every Citadel fight, any cure drone that tries to clean a building infected with Nanobots gets swarmed by tiny machines and torn apart.", "When a storm is over your region you now see it on the Colony and Wasteland tabs, and every kind of weather has its own animation: rain with puddles and splashes, thunderstorms with real forked lightning that can strike your buildings, windstorms with blowing dust, fog, heat haze and more.", "Snow builds up on your roofs and the ground while it snows: a thick, smooth white layer on every roof (the Bunker's clock tower too) and drifts that blend into the ground. Snow, puddles and cracked ground fade away after the weather ends.", "The Storm Shelter works differently. Put your crops, your people or your buildings inside and storms can't touch them, for as long as you like. But you can't use what's in the shelter until you bring it back out.", "Fix: when you zoom in on your colony, the ground and dead trees around it now zoom and move with it."]},
@@ -3518,7 +3530,9 @@ document.addEventListener('click',function(e){
     else if(act==='tut') tutOpen();
     else if(act==='tutsec') tutSec(el.getAttribute('data-k'),0);
     else if(act==='ach') achOpen();
-    else if(act==='pfp') pfpPick();
+    else if(act==='lbprof') lbProfile(el.getAttribute('data-n'));
+    else if(act==='lbback'){ showOverlay(lbHtml()); }
+    else if(act==='achf'){ var sc=document.getElementById('ovCard'), y=sc?sc.scrollTop:0; achOpen(+el.getAttribute('data-f')); }
     else if(act==='pfpx') pfpClear();
     else if(act==='wxlayer'){ WX.layer=el.getAttribute('data-l')==='temp'?'temp':'storm'; try{ localStorage.setItem('lazarus-wxlayer',WX.layer); }catch(e){} wxSync(); }
     else if(act==='tutstep') tutSec(el.getAttribute('data-k'),+el.getAttribute('data-i'));
@@ -4313,7 +4327,7 @@ function mpOverlay(step){
     var nReal=(MP.roster||[]).length;
     h=h.replace('<h2>Play online</h2>','<h2>Account</h2>');
     h+='<p class="muted" style="margin-top:-6px">Signed in as '+esc((MP.user&&MP.user.email)||'')+'</p>';
-    h+='<div class="pfprow"><span class="pfpbig">'+pfpHtml(64)+'<span class="pdot'+(MP.on?' on':'')+'"></span></span><div class="info"><div class="name">'+esc(MP.pname||'No username yet')+'</div><div class="sub">'+(MP.on?'Online':'Offline')+'</div></div><div class="acts"><button class="btn sm" data-act="pfp" type="button">'+(pfpGet()?'Change picture':'Add picture')+'</button>'+(pfpGet()?'<button class="btn sm" data-act="pfpx" type="button">Remove</button>':'')+'</div></div>';
+    h+='<div class="pfprow"><span class="pfpbig">'+pfpHtml(64)+'<span class="pdot'+(MP.on?' on':'')+'"></span></span><div class="info"><div class="name">'+esc(MP.pname||'No username yet')+'</div><div class="sub">'+(MP.on?'Online':'Offline')+'</div></div><div class="acts">'+pfpPickBtn(pfpGet()?'Change picture':'Add picture')+(pfpGet()?'<button class="btn sm" data-act="pfpx" type="button">Remove</button>':'')+'</div></div>';
     h+='<div class="btns" style="margin-top:0"><button class="btn primary" data-ov="mp" data-do="wcreateOpen" type="button">Create World</button><button class="btn" data-ov="mp" data-do="worlds" type="button">Worlds</button><button class="btn" data-act="ach" type="button">\uD83C\uDFC6 Achievements</button></div>';
     h+='<div class="row"><div class="info"><div class="name">'+(MP.on?esc(MP.wname||'Online world'):'Offline world')+'</div><div class="sub">'+(MP.on?'Online'+(MP.pname?' as '+esc(MP.pname):'')+(nReal?' \u00b7 '+nReal+' / 13 players':'')+'. Purple lights on the map are people. White lights are colonies you hold.':'Just you and the bots. Nothing here is shared.')+'</div></div><div class="acts"><button class="btn sm" data-ov="mp" data-do="'+(MP.on?'toOff':'toOn')+'" type="button">'+(MP.on?'Play offline':'Play online')+'</button></div></div>';
     if(MP.pname) h+='<p class="hint">Your username: <b>'+esc(MP.pname)+'</b>. Friends type this to invite you.</p>';
@@ -4892,26 +4906,30 @@ function mpSetMode(m){
   if(m==='online') mpGoOnline(); else { mpGoOffline(); toast('Offline world: just you and the bots.'); }
 }
 /* ---- profile picture: a photo you pick (kept on this device), or the first letter of your username ---- */
-function pfpGet(){ try{ return localStorage.getItem('lazarus-pfp')||''; }catch(e){ return ''; } }
-function pfpHtml(sz){
-  var u=pfpGet(), st=sz?' style="width:'+sz+'px;height:'+sz+'px;font-size:'+Math.round(sz*.45)+'px"':'';
-  if(u) return '<img class="pfpi" src="'+u+'" alt=""'+st+'>';
-  var nm=(typeof MP!=='undefined'&&MP&&(MP.pname||(MP.user&&MP.user.email)))||'', ch=nm?nm.charAt(0).toUpperCase():'';
-  var hue=0; for(var i=0;i<nm.length;i++) hue=(hue*31+nm.charCodeAt(i))%360;
-  return '<span class="pfpl"'+(st?st.slice(0,-1)+';':' style="')+'background:'+(nm?'hsl('+hue+',38%,38%)':'#3A3A36')+'">'+(ch?esc(ch):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="width:58%;height:58%"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>')+'</span>';
+function pfpGet(){ var u=''; try{ u=localStorage.getItem('lazarus-pfp')||''; }catch(e){} return u||(S&&S.pfp)||''; }
+/* keep the picture in the save too, so it follows you to other devices and other players can see it */
+function pfpSync(){ if(!S) return; var u='', s=''; try{ u=localStorage.getItem('lazarus-pfp')||''; s=localStorage.getItem('lazarus-pfp-s')||''; }catch(e){}
+  if(!u&&S.pfp){ try{ localStorage.setItem('lazarus-pfp',S.pfp); if(S.pfpS) localStorage.setItem('lazarus-pfp-s',S.pfpS); }catch(e){} return; }
+  if(u!==(S.pfp||'')||s!==(S.pfpS||'')){ if(u){ S.pfp=u; S.pfpS=s||u; } else { delete S.pfp; delete S.pfpS; } save(); } }
+function pfpLetter(nm,sz){ var ch=nm?nm.charAt(0).toUpperCase():'', hue=0; for(var i=0;i<(nm||'').length;i++) hue=(hue*31+nm.charCodeAt(i))%360;
+  var st=' style="'+(sz?'width:'+sz+'px;height:'+sz+'px;font-size:'+Math.round(sz*.45)+'px;':'')+'background:'+(nm?'hsl('+hue+',38%,38%)':'#3A3A36')+'"';
+  return '<span class="pfpl"'+st+'>'+(ch?esc(ch):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="width:58%;height:58%"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>')+'</span>'; }
+function pfpImg(u,nm,sz){ return u&&/^data:image\/jpeg;base64,/.test(u)?'<img class="pfpi" src="'+u+'" alt=""'+(sz?' style="width:'+sz+'px;height:'+sz+'px"':'')+'>':pfpLetter(nm,sz); }
+function pfpHtml(sz){ var nm=(typeof MP!=='undefined'&&MP&&(MP.pname||(MP.user&&MP.user.email)))||''; return pfpImg(pfpGet(),nm,sz); }
+/* the file picker is a real <input> inside a <label>, which phones open reliably */
+function pfpPickBtn(label){ return '<label class="btn sm pfpbtn">'+label+'<input type="file" accept="image/*" class="pfpin" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></label>'; }
+function pfpShrink(im,n,q){ var s=Math.min(im.width,im.height), c=document.createElement('canvas'); c.width=c.height=n; var x=c.getContext('2d'); x.fillStyle='#222'; x.fillRect(0,0,n,n);
+  x.drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,n,n); return c.toDataURL('image/jpeg',q); }
+function pfpFile(f){
+  if(!f) return; var url=null; try{ url=URL.createObjectURL(f); }catch(e){}
+  var im=new Image();
+  im.onload=function(){ try{ var big=pfpShrink(im,128,.82), small=pfpShrink(im,40,.8); localStorage.setItem('lazarus-pfp',big); localStorage.setItem('lazarus-pfp-s',small); pfpSync(); toast('Profile picture updated.'); }catch(e){ toast('That picture could not be saved.'); }
+    if(url) URL.revokeObjectURL(url); mpHud(); if(ovOpen&&typeof MP!=='undefined'&&MP&&MP.view==='acct') mpOverlay('acct'); };
+  im.onerror=function(){ if(url) URL.revokeObjectURL(url); toast('That file is not a picture we can use. Try a photo.'); };
+  if(url) im.src=url; else { var rd=new FileReader(); rd.onload=function(){ im.src=rd.result; }; rd.readAsDataURL(f); }
 }
-function pfpPick(){
-  var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
-  inp.addEventListener('change',function(){ var f=inp.files&&inp.files[0]; if(!f) return; var rd=new FileReader();
-    rd.onload=function(){ var im=new Image(); im.onload=function(){ var s=Math.min(im.width,im.height), c=document.createElement('canvas'); c.width=c.height=160;
-        c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,160,160);
-        try{ localStorage.setItem('lazarus-pfp',c.toDataURL('image/jpeg',.85)); toast('Profile picture updated.'); }catch(e){ toast('That picture could not be saved.'); }
-        mpHud(); if(ovOpen&&typeof MP!=='undefined'&&MP&&MP.view==='acct') mpOverlay('acct'); };
-      im.onerror=function(){ toast('That file is not a picture we can use.'); }; im.src=rd.result; };
-    rd.readAsDataURL(f); });
-  inp.click();
-}
-function pfpClear(){ try{ localStorage.removeItem('lazarus-pfp'); }catch(e){} mpHud(); if(ovOpen&&MP&&MP.view==='acct') mpOverlay('acct'); }
+document.addEventListener('change',function(e){ var t=e.target; if(t&&t.classList&&t.classList.contains('pfpin')){ pfpFile(t.files&&t.files[0]); t.value=''; } });
+function pfpClear(){ try{ localStorage.removeItem('lazarus-pfp'); localStorage.removeItem('lazarus-pfp-s'); }catch(e){} if(S){ delete S.pfp; delete S.pfpS; save(); } mpHud(); if(ovOpen&&MP&&MP.view==='acct') mpOverlay('acct'); }
 function mpHud(){
   var b=document.getElementById('hAcct'); if(!b) return;
   if(typeof MP==='undefined'||!MP){ var bl0=document.getElementById('hBell'); if(bl0){ bl0.hidden=false; var d0=bl0.querySelector('.rdot'); if(d0) d0.hidden=!verUnseen(); } }
@@ -6016,6 +6034,60 @@ function lbLoad(){
     lbPaint();
   }).catch(function(){ if(want!==LB.at) return; LB.busy=false; LB.err='net'; LB.rows=null; lbPaint(); });
 }
+
+/* ---- a player's profile from the leaderboard: picture, stats, their colony and their achievements ---- */
+var LBP={at:0};
+function lbProfile(name){
+  if(!name||!lbCan()) return;
+  var want=++LBP.at, world=LB.scope==='world'?lbWorld():null;
+  showOverlay('<div data-lbp="1"><h2>'+esc(name)+'</h2><p class="muted">Loading…</p><div class="btns"><button class="btn" data-act="lbback" type="button">Back</button></div></div>');
+  MP.sb.rpc('lz_profile',{p_name:name,p_world:world||null}).then(function(r){
+    if(want!==LBP.at) return; var o=document.getElementById('ov'); if(!o||!o.querySelector('[data-lbp]')) return;
+    if(r.error||!r.data){ showOverlay('<div data-lbp="1"><h2>'+esc(name)+'</h2><p class="muted">Couldn’t load this player. Check your connection and try again.</p><div class="btns"><button class="btn" data-act="lbback" type="button">Back</button></div></div>'); return; }
+    showOverlay(lbProfileHtml(r.data));
+  }).catch(function(){ if(want!==LBP.at) return; showOverlay('<div data-lbp="1"><h2>'+esc(name)+'</h2><p class="muted">Can’t reach the server.</p><div class="btns"><button class="btn" data-act="lbback" type="button">Back</button></div></div>'); });
+}
+function lbLeague(peak){ var n=LEAGUES[0][1]; LEAGUES.forEach(function(l){ if((peak||0)>=l[0]) n=l[1]; }); return n; }
+function lbProfileHtml(d){
+  var pic=d.me?(pfpGet()||d.pfp):d.pfp;
+  var h='<div data-lbp="1"><div class="lbph"><span class="pfpbig">'+pfpImg(pic,d.name,72)+'</span><div><h2 style="margin:0">'+esc(d.name)+(d.me?' <span class="muted" style="font-size:14px">(you)</span>':'')+'</h2><div class="muted">'+esc(lbLeague(d.peak))+'</div></div></div>';
+  if(d.empty){ h+='<p class="muted">This player hasn’t saved a colony to their account yet.</p><div class="btns"><button class="btn" data-act="lbback" type="button">Back</button></div></div>'; return h; }
+  h+='<div class="facts"><div class="fact"><b class="num">'+fmt(d.trophies||0)+'</b><span>trophies</span></div><div class="fact"><b class="num">'+fmt(d.peak||0)+'</b><span>best ever</span></div>'+
+     '<div class="fact"><b class="num">'+fmt(d.wins||0)+'</b><span>outbreaks won</span></div><div class="fact"><b class="num">'+(d.finalBoss?'✓':fmt(d.bossWins||0))+'</b><span>'+(d.finalBoss?'Black Fortress beaten':'Citadels beaten')+'</span></div></div>';
+  var pic2=colonyPic(d.bld||[],d.land,d); if(pic2) h+='<h3 class="achc">Colony</h3><img class="lbcol" src="'+pic2+'" alt="'+esc(d.name)+'’s colony">';
+  var got=d.ach||{}, tot=0, n=0, rows='';
+  ACH.forEach(function(x){ var k=+got[x.id]||0; tot+=x.t?3:1; n+=Math.min(k,x.t?3:1);
+    if(!k) return; var ic=x.t?Math.min(k,3)-1:x.tier;
+    rows+='<div class="lbach">'+achIcon(ic,26)+'<span>'+esc(x.name)+(x.t?' '+['I','II','III'][Math.min(k,3)-1]:'')+'</span></div>'; });
+  h+='<h3 class="achc">Achievements · '+n+' of '+tot+'</h3>'+(rows?'<div class="lbachs">'+rows+'</div>':'<p class="muted">No achievements yet.</p>');
+  h+='<div class="btns"><button class="btn" data-act="lbback" type="button">Back</button><button class="btn" data-ov="close" type="button">Done</button></div></div>';
+  return h;
+}
+/* draw someone's colony with the game's own building art onto a picture */
+function colonyPic(list,land,d){
+  var bl=list.filter(function(b){ return b&&BT[b.type]&&isFinite(+b.x)&&isFinite(+b.y); }).map(function(b,i){ return {id:'p'+i,type:b.type,lv:Math.max(1,Math.min(20,+b.lv||1)),x:+b.x,y:+b.y,st:0,paid:1,crop:null,t0:0}; });
+  if(!bl.length) return '';
+  /* frame the part of the land that has buildings on it, with a tile of ground all round */
+  var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; bl.forEach(function(b){ var t=BT[b.type]; x0=Math.min(x0,b.x); y0=Math.min(y0,b.y); x1=Math.max(x1,b.x+t.w); y1=Math.max(y1,b.y+t.h); });
+  x0-=1; y0-=1; x1+=1; y1+=1;
+  var W2=360, H2=250, dpr=2, oc=document.createElement('canvas'); oc.width=W2*dpr; oc.height=H2*dpr;
+  var span=(x1-x0)+(y1-y0), bw=span*HW, bh=span*HH+64, s=Math.min((W2-14)/bw,(H2-10)/bh);
+  var sv={ctx:ctx,OX:OX,OY:OY,SN:SNOWA,FP:FUTPAL,bw:S.bossWins,fb:S.finalBoss}, out='';
+  try{
+    ctx=oc.getContext('2d'); ctx.fillStyle='#6E6347'; ctx.fillRect(0,0,oc.width,oc.height); ctx.setTransform(dpr*s,0,0,dpr*s,0,0);
+    var padX=(W2/s-bw)/2, padY=(H2/s-bh)/2+60;
+    OX=padX-(x0-y1)*HW; OY=padY-(x0+y0)*HH; SNOWA=0; S.bossWins=d.bossWins||0; S.finalBoss=d.finalBoss?1:0;
+    ctx.fillStyle='rgba(0,0,0,.2)'; poly([P(x0,y0,-4),P(x1,y0,-4),P(x1,y1,-4),P(x0,y1,-4)]); ctx.fill();
+    ctx.fillStyle='#BBAE83'; poly([P(x0,y0,0),P(x1,y0,0),P(x1,y1,0),P(x0,y1,0)]); ctx.fill();
+    ctx.strokeStyle='rgba(90,72,40,.16)'; ctx.lineWidth=.6; ctx.beginPath(); var i,a,b2;
+    for(i=x0+1;i<x1;i++){ a=P(i,y0,0); b2=P(i,y1,0); ctx.moveTo(a.x,a.y); ctx.lineTo(b2.x,b2.y); }
+    for(i=y0+1;i<y1;i++){ a=P(x0,i,0); b2=P(x1,i,0); ctx.moveTo(a.x,a.y); ctx.lineTo(b2.x,b2.y); } ctx.stroke();
+    orderBuildings(bl).forEach(function(b){ try{ drawBuilding(b,1,false); }catch(e){} });
+    out=oc.toDataURL('image/jpeg',.88);
+  }catch(e){ out=''; }
+  finally{ ctx=sv.ctx; OX=sv.OX; OY=sv.OY; SNOWA=sv.SN; FUTPAL=sv.FP; S.bossWins=sv.bw; S.finalBoss=sv.fb; }
+  return out;
+}
 function lbSet(k,v){ if(LB[k]===v) return; LB[k]=v; lbLoad(); }
 function lbPaint(){ var o=document.getElementById('ov'); if(o&&o.querySelector('[data-lb]')) showOverlay(lbHtml()); }
 function lbSeg(k,v,label,on,dis){
@@ -6043,7 +6115,8 @@ function lbHtml(){
       if(r.rank>last+1) h+='<div class="lbgap">\u00b7\u00b7\u00b7</div>';
       last=r.rank;
       var g=r.rank<=3?(' g'+r.rank):'';
-      h+='<div class="lbrow'+(r.me?' lbme':'')+'"><span class="lbr'+g+'">'+r.rank+'</span>'
+      h+='<div class="lbrow lbtap'+(r.me?' lbme':'')+'" data-act="lbprof" data-n="'+esc(r.name||'')+'" role="button" tabindex="0"><span class="lbr'+g+'">'+r.rank+'</span>'
+       +'<span class="lbpf">'+pfpImg(r.me?(pfpGet()||r.pfp):r.pfp,r.name||'',30)+'</span>'
        +'<span class="lbn">'+esc(r.name||'')+(r.me?' <span class="muted">(you)</span>':'')+'</span>'
        +'<span class="lbt gold">'+fmt(LB.mode==='peak'?r.peak:r.trophies)+'</span></div>';
     });
@@ -6415,7 +6488,7 @@ function achBattle(win,stars){
 /* things the game is quietly watching, every couple of seconds */
 var ACHP={at:0,blz:false};
 function achPoll(){
-  if(!S||!S.world) return; var now=Date.now(); if(now-ACHP.at<2000) return;
+  if(!S||!S.world) return; var now=Date.now(); if(now-ACHP.at<2000) return; try{ pfpSync(); }catch(e){}
   var el=ACHP.at?Math.min(10,(now-ACHP.at)/1000):0; ACHP.at=now;
   var a=achS(), n=a.n, f=a.f;
   if(mode==='home'&&!document.hidden) n.calm=(n.calm||0)+el;
@@ -6463,23 +6536,33 @@ function achSound(i){
     notes.forEach(function(f,k){ var o=c.createOscillator(), g=c.createGain(); o.type='triangle'; o.frequency.value=f; g.gain.setValueAtTime(0,t+k*.09); g.gain.linearRampToValueAtTime(.22,t+k*.09+.02); g.gain.exponentialRampToValueAtTime(.001,t+k*.09+.5);
       o.connect(g); g.connect(sfxBus()); o.start(t+k*.09); o.stop(t+k*.09+.55); }); }catch(e){}
 }
-/* the Achievements page */
-function achOpen(){
+/* the Achievements page, with a filter for each tier */
+var ACHF=-1;
+function achOpen(f){
+  if(typeof f==='number') ACHF=f;
   var a=achS(), total=0, got=0, earned=0;
   ACH.forEach(function(x){ var tiers=x.t?3:1, g=a.got[x.id]||0; total+=tiers; got+=g; for(var i=0;i<g;i++) earned+=ACH_PAY[x.t?i:x.tier]; });
   var h='<h2>Achievements</h2><p class="muted" style="margin-top:-6px">'+got+' of '+total+' earned · '+fmt(earned)+' credits so far</p>';
   h+='<div class="bar" style="margin:4px 0 10px"><i style="width:'+Math.round(got/total*100)+'%"></i></div>';
+  h+='<div class="achflt">'+[[-1,'All'],[0,'Bronze'],[1,'Silver'],[2,'Gold']].map(function(o){
+     var n=0, m=0; ACH.forEach(function(x){ var g=a.got[x.id]||0; if(o[0]<0) return; if(x.t){ m++; if(g>o[0]) n++; } else if(x.tier===o[0]||(o[0]===2&&x.tier===3)){ m++; if(g) n++; } });
+     return '<button class="achfb'+(ACHF===o[0]?' on':'')+(o[0]>=0?' t'+o[0]:'')+'" data-act="achf" data-f="'+o[0]+'" type="button">'+(o[0]>=0?'<i></i>':'')+o[1]+(o[0]>=0?' <span>'+n+'/'+m+'</span>':'')+'</button>'; }).join('')+'</div>';
+  var F=ACHF;
   ACH_CATS.forEach(function(c){
-    var list=ACH.filter(function(x){ return x.cat===c[0]; }); if(!list.length) return;
+    var list=ACH.filter(function(x){ if(x.cat!==c[0]) return false; if(F<0||x.t) return true; return x.tier===F||(F===2&&x.tier===3); });
+    if(!list.length) return;
     h+='<h3 class="achc">'+c[1]+'</h3>';
     list.forEach(function(x){
-      var g=a.got[x.id]||0, hide=x.secret&&!g, done=x.t?g>=3:g>=1, cur=x.t?Math.min(g,2):x.tier, ic=x.t?(g?g-1:0):x.tier, sub, prog='';
-      if(hide){ h+='<div class="achr lock">'+achIcon(0,34)+'<div class="info"><div class="name">???</div><div class="sub">A secret achievement. Keep playing to find it.</div></div></div>'; return; }
-      if(x.t){ var v=0; try{ v=x.v(); }catch(e){} var goal=x.t[Math.min(g,2)];
-        sub=done?achDesc(x,2):achDesc(x,g); if(!done) prog='<div class="bar sm"><i style="width:'+Math.min(100,Math.round(v/goal*100))+'%"></i></div><div class="muted achp">'+fmt(Math.min(v,goal))+' / '+fmt(goal)+'</div>';
-      } else sub=achDesc(x,0);
-      h+='<div class="achr'+(g?'':' lock')+(x.tier===3?' leg':'')+'">'+achIcon(ic,34)+'<div class="info"><div class="name">'+esc(x.name)+(x.t?' <span class="achtiers">'+[0,1,2].map(function(i){ return '<b class="'+(i<g?'on t'+i:'')+'">'+['I','II','III'][i]+'</b>'; }).join('')+'</span>':'')+'</div><div class="sub">'+sub+'</div>'+prog+'</div>'+
-        '<div class="achrw">'+(done?'✓':'+'+fmt(ACH_PAY[cur]))+'</div></div>';
+      var g=a.got[x.id]||0, hide=x.secret&&!g, done, ic, sub, prog='', pay;
+      if(hide){ h+='<div class="achr lock">'+achIcon(F>=0?F:0,34)+'<div class="info"><div class="name">???</div><div class="sub">A secret achievement. Keep playing to find it.</div></div></div>'; return; }
+      if(x.t){
+        var ti=F>=0?F:Math.min(g,2), v=0; try{ v=x.v(); }catch(e){}
+        done=F>=0?g>F:g>=3; ic=F>=0?F:(g?g-1:0); pay=ACH_PAY[ti]; sub=achDesc(x,ti);
+        if(!done){ var goal=x.t[ti]; prog='<div class="bar sm"><i style="width:'+Math.min(100,Math.round(v/goal*100))+'%"></i></div><div class="muted achp">'+fmt(Math.min(v,goal))+' / '+fmt(goal)+'</div>'; }
+      } else { done=g>=1; ic=x.tier; pay=ACH_PAY[x.tier]; sub=achDesc(x,0); }
+      var lit=F>=0&&x.t?done:g>0;
+      h+='<div class="achr'+(lit?'':' lock')+(x.tier===3?' leg':'')+'">'+achIcon(ic,34)+'<div class="info"><div class="name">'+esc(x.name)+(x.t?(F>=0?' '+['I','II','III'][F]:' <span class="achtiers">'+[0,1,2].map(function(i){ return '<b class="'+(i<g?'on t'+i:'')+'">'+['I','II','III'][i]+'</b>'; }).join('')+'</span>'):'')+'</div><div class="sub">'+sub+'</div>'+prog+'</div>'+
+        '<div class="achrw">'+(done?'✓':'+'+fmt(pay))+'</div></div>';
     });
   });
   h+='<div class="btns"><button class="btn" data-ov="close" type="button">Close</button></div>';
