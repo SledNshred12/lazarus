@@ -2061,7 +2061,7 @@ function lockScroll(on){ var b=document.body; if(on){ if(b.getAttribute('data-lk
   else { var v=b.getAttribute('data-lk'); if(v===null) return; b.removeAttribute('data-lk'); b.style.position=''; b.style.top=''; b.style.left=''; b.style.right=''; window.scrollTo(0,+v||0); } }
 function showOverlay(html){ ovOpen=true; $('#ovCard').innerHTML=html; $('#ov').hidden=false; $('#ovCard').scrollTop=0; lockScroll(true); var b=$('#ovCard button'); if(b) b.focus({preventScroll:true}); }
 function hideOverlay(){ ovOpen=false; $('#ov').hidden=true; $('#ovCard').innerHTML=''; lockScroll(false);
-  if(mode==='battle'&&B&&B.ended&&B.resHtml) setTimeout(function(){ if(mode==='battle'&&B&&B.ended&&B.resHtml&&!ovOpen&&!(typeof CINE!=='undefined'&&CINE.on)) showOverlay(B.resHtml); },0); if(typeof MP!=='undefined'&&MP&&MP.gate) setTimeout(function(){ if(MP.gate&&!ovOpen) mpOverlay('setpw'); },0); else if(typeof MP!=='undefined'&&MP&&MP.picking) setTimeout(function(){ if(MP.picking&&!ovOpen) mpOverlay('pick'); },0); }
+  if(mode==='battle'&&B&&B.ended&&B.resHtml) setTimeout(function(){ if(mode==='battle'&&B&&B.ended&&B.resHtml&&!ovOpen&&!(typeof CINE!=='undefined'&&CINE.on)) showOverlay(B.resHtml); },0); if(typeof MP!=='undefined'&&MP&&MP.gate) setTimeout(function(){ if(MP.gate&&!ovOpen) mpOverlay('setpw'); },0); else if(typeof MP!=='undefined'&&MP&&MP.nameReq&&MP.user) setTimeout(function(){ if(MP.nameReq&&MP.user&&!ovOpen) mpOverlay('name'); },0); else if(typeof MP!=='undefined'&&MP&&MP.picking) setTimeout(function(){ if(MP.picking&&!ovOpen) mpOverlay('pick'); },0); }
 function nextSeed(){ S.seed=(Math.imul(S.seed,1664525)+1013904223)>>>0; return S.seed; }
 function openTowns(){
   if(shBlock('people','Your people are in the shelter, so no one can launch a raid.')) return;
@@ -3179,8 +3179,8 @@ function earthPanel(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=96;
-var CHANGELOG=[{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=97;
+var CHANGELOG=[{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -4545,7 +4545,7 @@ function mpOverlay(step){
     h+='<p class="muted">You signed in with a temporary password. Pick your own before you play. At least 8 characters.</p><div><label class="muted" for="mpPw1">New password</label><input class="txt" id="mpPw1" type="password" autocomplete="new-password"></div><div><label class="muted" for="mpPw2">Type it again</label><input class="txt" id="mpPw2" type="password" autocomplete="new-password"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="setpw" type="button">Save password</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button></div>';
   } else if(step==='name'){
     h=h.replace('<h2>Play online</h2>','<h2>Pick a username</h2>');
-    h+='<p class="muted">This is the name other players see, and what friends type to invite you to their worlds.</p><div><label class="muted" for="mpName">Username</label><input class="txt" id="mpName" maxlength="20" autocomplete="off" autocapitalize="none"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="join" type="button">Save username</button><button class="btn" data-ov="close" type="button">Cancel</button></div>';
+    h+='<p class="muted">'+(MP.nameReq?'Every account needs a username before you can play. ':'')+'This is the name other players see, and what friends type to invite you to their worlds.</p><div><label class="muted" for="mpName">Username</label><input class="txt" id="mpName" maxlength="20" autocomplete="off" autocapitalize="none" value="'+esc(MP.pname||'')+'"><div class="muted" style="font-size:12px;margin-top:2px">2 to 20 letters, numbers, spaces, dots, dashes or underscores.</div></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="join" type="button">Save username</button>'+(MP.nameReq?'<button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button>':'<button class="btn" data-ov="close" type="button">Cancel</button>')+'</div>';
   } else if(step==='worlds'){ h=mpWorldsHtml();
   } else if(step==='bell'){ h=(MP.msg?'<p class="note">'+esc(MP.msg)+'</p>':'')+mpBellHtml(); MP.msg='';
   } else if(step==='wmanage'){ h=mpManageHtml();
@@ -4570,7 +4570,7 @@ function mpOverlay(step){
     h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button>':'')+'<button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div>';
   } else if(step==='signup'){
     h=h.replace('<h2>Play online</h2>','<h2>Create account</h2>');
-    h+='<p class="muted">Use your email and pick a password. At least 8 characters.</p><div><label class="muted" for="mpEmail">Email</label><input class="txt" id="mpEmail" type="email" autocomplete="username" autocapitalize="none" value="'+esc(MP.email||'')+'"></div><div><label class="muted" for="mpPw1">Password</label><input class="txt" id="mpPw1" type="password" autocomplete="new-password"></div><div><label class="muted" for="mpPw2">Type it again</label><input class="txt" id="mpPw2" type="password" autocomplete="new-password"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="signup" type="button">Create account</button><button class="btn" data-ov="mp" data-do="open" type="button">Back to sign in</button></div>';
+    h+='<p class="muted">Pick a username, then use your email and a password of at least 8 characters.</p><div><label class="muted" for="mpSuName">Username</label><input class="txt" id="mpSuName" maxlength="20" autocomplete="nickname" autocapitalize="none" value="'+esc(MP.suName||'')+'"><div class="muted" style="font-size:12px;margin-top:2px">Other players see this. 2 to 20 letters, numbers, spaces, dots, dashes or underscores.</div></div><div><label class="muted" for="mpEmail">Email</label><input class="txt" id="mpEmail" type="email" autocomplete="username" autocapitalize="none" value="'+esc(MP.email||'')+'"></div><div><label class="muted" for="mpPw1">Password</label><input class="txt" id="mpPw1" type="password" autocomplete="new-password"></div><div><label class="muted" for="mpPw2">Type it again</label><input class="txt" id="mpPw2" type="password" autocomplete="new-password"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="signup" type="button">Create account</button><button class="btn" data-ov="mp" data-do="open" type="button">Back to sign in</button></div>';
   } else if(step==='pick'){
     h=h.replace('<h2>Play online</h2>','<h2>Which game do you want?</h2>');
     var pk=MP.pick||{};
@@ -4601,6 +4601,20 @@ function mpOverlay(step){
 function mpVal(id){ var el=document.getElementById(id); return el?String(el.value||'').trim():''; }
 function mpRaw(id){ var el=document.getElementById(id); return el?String(el.value||''):''; }
 function mpFail(step,e,fallback){ MP.busy=false; MP.msg=e?mpErr(e):fallback; mpOverlay(step); }
+function mpNeedName(){
+  var want=MP.wantName; MP.wantName=null;
+  function ask(msg){ MP.nameReq=true; MP.afterName='gate'; if(msg) MP.msg=msg; mpOverlay('name'); }
+  if(!want){ ask(); return; }
+  mpR('lz_set_name',{p_name:want}).then(function(r){
+    if(r.error){ ask(mpErr(r.error)); return; }
+    MP.pname=(r.data&&r.data.name)||want; MP.nameReq=false; mpGateDone();
+  }).catch(function(e){ ask(mpErr(e)); });
+}
+function mpGateDone(){
+  var wl=MP.wl||{}, all=(wl.mine||[]).concat(wl['in']||[]);
+  if(ovOpen&&!/^(pick|notmain|worlds|bell|wmanage|wcreate|name)$/.test(MP.view||'')) hideOverlay();
+  if(mpPref()==='online'&&MP.pname&&MP.wid) mpGoOnline(); else { mpGoOffline(); toast(MP.wid||!all.length?'Signed in. You are in the offline world.':'Signed in. Pick a world from the Online menu.'); }
+}
 function mpGate(user){
   MP.user=user;
   if(user&&user.user_metadata&&user.user_metadata.must_set_password){ MP.gate=true; mpOverlay('setpw'); return; }
@@ -4613,6 +4627,7 @@ function mpGate(user){
     var wl=MP.wl||{}, all=(wl.mine||[]).concat(wl['in']||[]);
     if(MP.wid&&MP.wl&&!mpWorldById(MP.wid)) mpSetWid(null);
     if(!MP.wid&&all.length===1) mpSetWid(all[0].id);
+    if(!MP.pname){ mpNeedName(); return; }
     if(ovOpen&&!/^(pick|notmain|worlds|bell|wmanage|wcreate|name)$/.test(MP.view||'')) hideOverlay();
     if(mpPref()==='online'&&MP.pname&&MP.wid) mpGoOnline(); else { mpGoOffline(); toast(MP.wid||!all.length?'Signed in. You are in the offline world.':'Signed in. Pick a world from the Online menu.'); }
   });
@@ -4638,7 +4653,7 @@ function mpDo(what){
   if(what==='claim'){ mpClaim(); return; }
   if(what==='pickRemote'){ mpPickDone('remote'); return; }
   if(what==='out'&&TEST.on){ toast('Leave the test world first (Settings).'); return; }
-  if(what==='out'){ MP.gate=false; MP.isAdmin=false; mpUnstore(); var pp=mpPush(); mpStop(); Promise.resolve(pp).then(function(){ return MP.sb.auth.signOut(); }).then(function(){ MP.user=null; MP.me=null; MP.on=false; MP.pname=null; MP.wl=null; MP.inv=[]; MP.wid=null; mpClearReal(); if(KEY!==KEY_OFF) mpSwapSave(KEY_OFF); hideOverlay(); renderAll(); toast('Signed out. This device is back to its guest game.'); }); return; }
+  if(what==='out'){ MP.gate=false; MP.nameReq=false; MP.wantName=null; MP.isAdmin=false; mpUnstore(); var pp=mpPush(); mpStop(); Promise.resolve(pp).then(function(){ return MP.sb.auth.signOut(); }).then(function(){ MP.user=null; MP.me=null; MP.on=false; MP.pname=null; MP.wl=null; MP.inv=[]; MP.wid=null; mpClearReal(); if(KEY!==KEY_OFF) mpSwapSave(KEY_OFF); hideOverlay(); renderAll(); toast('Signed out. This device is back to its guest game.'); }); return; }
   if(mpWorldDo(what)) return;
   if(what==='admin'){ MP.made=null; mpOverlay('admin'); return; }
   if(what==='done'){ MP.made=null; hideOverlay(); return; }
@@ -4652,12 +4667,17 @@ function mpDo(what){
       MP.busy=false; mpGate(r.data.user);
     }).catch(function(e){ mpFail('login',e); });
   } else if(what==='signup'){
-    var se=mpVal('mpEmail').toLowerCase(), s1=mpRaw('mpPw1'), s2=mpRaw('mpPw2'); MP.email=se;
+    var se=mpVal('mpEmail').toLowerCase(), s1=mpRaw('mpPw1'), s2=mpRaw('mpPw2'), su=mpVal('mpSuName'); MP.email=se; MP.suName=su;
+    if(!su){ MP.msg='Pick a username.'; mpOverlay('signup'); return; }
+    if(!/^[A-Za-z0-9 _.-]{2,20}$/.test(su)){ MP.msg='Usernames are 2 to 20 letters, numbers, spaces, dots, dashes or underscores.'; mpOverlay('signup'); return; }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(se)){ MP.msg='Enter a valid email.'; mpOverlay('signup'); return; }
     if(s1.length<8){ MP.msg='Use at least 8 characters.'; mpOverlay('signup'); return; }
     if(s1!==s2){ MP.msg='The two passwords do not match.'; mpOverlay('signup'); return; }
     MP.busy=true;
-    MP.sb.functions.invoke('sign-up',{body:{email:se,password:s1}}).then(function(r){
+    MP.sb.rpc('lz_name_free',{p_name:su}).then(function(fr){
+      if(fr&&!fr.error&&fr.data===false){ MP.busy=false; MP.msg='That username is taken. Try another one.'; mpOverlay('signup'); return; }
+      MP.wantName=su;
+    return MP.sb.functions.invoke('sign-up',{body:{email:se,password:s1}}).then(function(r){
       if(r.error) return mpFnError(r.error).then(function(code){
         if(code==='email_taken'){ mpFail('login',null,'That email already has an account. Sign in instead.'); return; }
         if(code==='bad_email'){ mpFail('signup',null,'Enter a valid email.'); return; }
@@ -4666,8 +4686,9 @@ function mpDo(what){
       });
       return MP.sb.auth.signInWithPassword({email:se,password:s1}).then(function(r2){
         if(r2.error||!r2.data||!r2.data.user){ mpFail('login',null,'Account created. Sign in with your email and password.'); return; }
-        MP.busy=false; toast('Account created. You are signed in.'); mpGate(r2.data.user);
+        MP.busy=false; MP.suName=''; toast('Account created. You are signed in.'); mpGate(r2.data.user);
       });
+    });
     }).catch(function(e){ mpFail('signup',e); });
   } else if(what==='google'){
     MP.busy=true;
@@ -4702,6 +4723,7 @@ function mpDo(what){
       MP.busy=false; if(r.error){ MP.msg=mpErr(r.error); mpOverlay('name'); return; }
       MP.pname=(r.data&&r.data.name)||nm; toast('Username saved: '+MP.pname+'.');
       var nx=MP.afterName; MP.afterName=null;
+      if(nx==='gate'){ MP.nameReq=false; hideOverlay(); mpGateDone(); return; }
       if(nx==='create') mpOverlay('wcreate'); else if(nx==='worlds') mpOpenWorlds(); else if(nx==='online') mpGoOnline(); else if(nx==='board') lbOpen(); else hideOverlay();
     }).catch(function(e){ MP.busy=false; MP.msg=mpErr(e); mpOverlay('name'); });
   }
