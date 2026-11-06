@@ -442,6 +442,46 @@ html.pfr-archivist .acct.pfp .pfpi,html.pfr-archivist .acct.pfp .pfpl,html.pfr-a
 .wevh{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:color-mix(in srgb,var(--wc) 16%,var(--surface));border:1.5px solid var(--wc)}.wevh svg{color:var(--wc);flex:none}
 .wevrow{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid rgba(128,110,80,.22)}.wevrow>svg{color:var(--wc);flex:none}.wevrow .info{flex:1;display:flex;flex-direction:column}.wevrow .info span{font-size:12px;color:var(--ink-2)}
 
+/* bonus goal pill only in battles */
+html:not(.inbattle) #bBonus{display:none!important}
+/* virus tech tree */
+.techcard{margin:10px 0;padding:10px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.gpchip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;color:#2E7A3A}.gpi{vertical-align:-2px}
+.tmini{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}.tmini span{position:relative;display:flex;align-items:center;gap:4px;color:var(--bc);height:20px}.tmini span::after{content:'';flex:1;height:6px;border-radius:3px;background:var(--surface-2)}.tmini i{position:absolute;left:17px;right:0;top:7px;height:6px;border-radius:3px;background:var(--bc);max-width:calc(100% - 17px);z-index:1}
+.tech .techh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.gpbig{display:flex;flex-direction:column;align-items:center;padding:6px 10px;border-radius:12px;background:rgba(46,122,58,.12);color:#2E7A3A}.gpbig b{font-size:20px;line-height:1}.gpbig span{font-size:10px;font-weight:700}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:12px}
+.tcol{display:flex;flex-direction:column;align-items:center}.tbh{display:flex;align-items:center;gap:3px;color:var(--bc);font-size:11.5px;margin-bottom:6px}
+.tlink{width:3px;height:12px;background:var(--line);border-radius:2px}.tlink.on{background:var(--bc)}
+.tnode{display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:transparent;font:inherit;color:inherit;padding:0;width:100%}
+.tnode:focus{outline:none}
+.tdot{position:relative;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid var(--line);background:var(--surface-2);color:var(--ink-2)}
+.tdot em{position:absolute;bottom:-5px;right:-5px;font-style:normal;font-size:9px;font-weight:800;background:var(--surface);border:1.5px solid currentColor;border-radius:999px;padding:0 4px;line-height:13px}
+.tnm{font-size:10px;font-weight:700;line-height:1.1;text-align:center;min-height:22px;color:var(--ink-2)}
+.tnode.got .tdot{background:var(--bc);border-color:var(--bc);color:#fff}.tnode.got .tdot em{color:var(--bc)}.tnode.got .tnm{color:var(--ink)}
+.tnode.open .tdot{border-color:var(--bc);color:var(--bc);animation:tpul 1.6s ease-in-out infinite}.tnode.open .tnm{color:var(--ink)}
+.tnode.lock .tdot,.tnode.peak .tdot{opacity:.45}
+.tnode.sel .tdot{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--ink)}
+.tnode.pop .tdot{animation:tpop .5s ease-out}
+@keyframes tpul{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--bc) 25%,transparent)}}@keyframes tpop{40%{transform:scale(1.25)}}
+.tcore{display:flex;flex-direction:column;align-items:center;margin-top:2px;--bc:#5C9A2E}.tcl{width:75%;height:14px;border:3px solid var(--line);border-top:0;border-radius:0 0 14px 14px;margin-bottom:6px}
+.tnode.core{width:auto}.tnode.core .tdot{width:56px;height:56px;border-width:3px;background:#1E2418;color:#7ED957}.tnode.core.got .tdot{background:#7ED957;color:#1E2418;box-shadow:0 0 14px rgba(126,217,87,.7)}
+.tdet{margin-top:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--bc);background:color-mix(in srgb,var(--bc) 10%,var(--surface))}.tdh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}.tdh span{font-size:11.5px;color:var(--ink-2)}.tdet p{margin:6px 0}
+.gpnote{display:flex;align-items:center;gap:6px;margin:6px 0;font-weight:800;color:#2E7A3A}
+/* daily chest spin */
+.spin{text-align:center}.spinh{font-family:var(--font-display);font-size:26px;letter-spacing:.05em}.spinsub{font-size:13px;color:var(--ink-2);margin-bottom:12px}
+.reel{position:relative;height:150px;margin:0 -18px;overflow:hidden;background:linear-gradient(#1A1612,#2A231B 50%,#1A1612);border-top:2px solid #5A4A30;border-bottom:2px solid #5A4A30}
+.rtrack{position:absolute;left:0;top:12px;display:flex;will-change:transform}
+.scard{flex:none;width:100px;height:124px;margin:0 5px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#F3EAD3;background:linear-gradient(170deg,color-mix(in srgb,var(--rc) 55%,#1A1612),#1E1913 85%);border:2px solid var(--rc);box-shadow:inset 0 0 18px color-mix(in srgb,var(--rc) 35%,transparent);position:relative;overflow:hidden}
+.scard b{font-size:15px;line-height:1.1;max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.scard span{font-size:10.5px;opacity:.85}.scard i{position:absolute;bottom:0;left:0;right:0;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--rc);color:#fff;padding:1px 0}
+.scart{height:48px;display:flex;align-items:center;justify-content:center;color:var(--rc)}.scard .scart svg{filter:drop-shadow(0 0 6px color-mix(in srgb,var(--rc) 60%,transparent))}.scard.r0 .scart{color:#D6D0C4}
+.rmark{position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:#F2C230;z-index:3;box-shadow:0 0 10px #F2C230}.rmark::before,.rmark::after{content:'';position:absolute;left:50%;margin-left:-8px;border:8px solid transparent}.rmark::before{top:0;border-top-color:#F2C230}.rmark::after{bottom:0;border-bottom-color:#F2C230}
+.rfade{position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}.rfade.l{left:0;background:linear-gradient(90deg,#1A1612,rgba(26,22,18,0))}.rfade.r{right:0;background:linear-gradient(270deg,#1A1612,rgba(26,22,18,0))}
+.scard.won{animation:swon .9s ease-out forwards;z-index:4}.scard.won::after{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,color-mix(in srgb,var(--rc) 70%,transparent),transparent 30%);animation:srot 2s linear infinite;z-index:-1}
+@keyframes swon{0%{transform:scale(1)}40%{transform:scale(1.14);box-shadow:0 0 30px var(--rc)}100%{transform:scale(1.08);box-shadow:0 0 22px var(--rc)}}@keyframes srot{to{transform:rotate(360deg)}}
+.spinres{margin:14px 0 0;padding:10px;border-radius:12px;border:2px solid var(--rc);background:color-mix(in srgb,var(--rc) 14%,var(--surface));display:flex;flex-direction:column;gap:2px;animation:sres .4s ease-out}.spinres b{font-size:18px}.spinres span{font-size:12px}
+@keyframes sres{from{opacity:0;transform:translateY(8px)}}
+
 .miss{margin-bottom:14px}.mhd{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 4px}.mhd b{font-size:15px}
 .mrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(128,110,80,.2)}.mrow .info{flex:1;min-width:0}.mrow .name{font-weight:700}.mrow .sub{font-size:12px;opacity:.85}
 .mrow.got{opacity:.55}.mrow .bar.sm{margin:4px 0 3px}.mchest .name{color:#B07A10}
@@ -1861,6 +1901,7 @@ function labPanel(){
   var cap=sampleCap(), cnt=sampleCount();
   var h='<div><div style="display:flex;justify-content:space-between;font-weight:700"><span>Virus samples</span><span class="num">'+cnt+' / '+cap+'</span></div><div class="bar" style="margin-top:6px"><i style="width:'+Math.min(100,cnt/Math.max(1,cap)*100)+'%"></i></div><div class="muted" style="margin-top:6px">Food: <b class="num">'+fmt(S.food)+'</b>. Grow it on your farms. The more food you keep, the more each sample costs to culture (right now ×'+cultureMult().toFixed(1)+').</div></div>';
   h+=researchBlock();
+  try{ h+=techCardHtml(); }catch(e){}
   S.strains.forEach(function(st){
     var cost=cultureCost(st), n=S.samples[st.id]||0, space=cap-cnt, can=(S.food>=cost&&space>=1);
     var chips=TRAITS.filter(function(k){return (st.tr[k]||0)>0;}).map(function(k){ return '<span class="tchip">'+tName(k)+' '+st.tr[k]+'</span>'; }).join('');
@@ -2064,11 +2105,11 @@ function startOutbreak(col){
   var avail={},start={},params={},total=0;
   S.strains.forEach(function(st){ avail[st.id]=S.samples[st.id]||0; start[st.id]=avail[st.id]; params[st.id]=sparams(st); total+=avail[st.id]; });
   if(!col.boss){ var wrk=wxFx().raid; if(wrk!==1){ for(var pk in params){ params[pk].grow*=wrk; params[pk].trans*=wrk; } } }
-  var cap=70+9*Math.min(total,12), regen=8+.6*Math.min(total,12);
+  var cap=70+9*Math.min(total,12)+techSum('cap'), regen=(8+.6*Math.min(total,12))*(1+techSum('regen'));
   B={t:0,dur:150,speed:1,tier:col.tier,dz:dangerLv(),col:col,town:col.town||null,
      bld:col.bld.map(function(b){ var o={}; for(var k in b) o[k]=b[k]; o.hp=b.max; o.inf=0; o.sid=null; o.fallen=false; o.flash=0; return o; }),
      avail:avail,start:start,params:params,sel:null,ended:false,stars:0,pct:0,coreDown:false,alert:0,cure:0,fx:[],idleT:0,reason:'',sp:0,lastSid:{},
-     energy:Math.min(cap,55),cap:cap,regen:regen,steer:null,surgeCd:0,mutCd:0,mutT:0,seedAcc:0};
+     energy:Math.min(cap,55+techSum('e0')),cap:cap,regen:regen,steer:null,surgeCd:0,mutCd:0,mutT:0,seedAcc:0};
   B.sel=firstAvail();
   if(!col.boss){ rivalSetup(); colSetup(); try{ colPersSetup(); }catch(e){} }
   setMode('battle'); renderTray(); lastHud=''; updBHud();
@@ -2132,7 +2173,7 @@ function doSurge(){
   if(B.energy<30){ toast('Not enough energy to surge.'); return; }
   var hot=B.bld.filter(function(b){ return !b.fallen&&b.inf>.22&&b.sid; });
   if(!hot.length){ toast('Infect a building first, then surge to make it leap.'); return; }
-  B.energy-=30; B.surgeCd=6; achEv('surge');
+  B.energy-=30; B.surgeCd=6*(1+techSum('surge')); achEv('surge');
   hot.forEach(function(o){
     var near=B.bld.filter(function(b){ return b!==o&&!b.fallen&&b.inf<.2; }).sort(function(a,c){ return Math.hypot(a.x-o.x,a.y-o.y)-Math.hypot(c.x-o.x,c.y-o.y); })[0];
     if(near){ near.inf=Math.max(near.inf,.35); if(!near.sid) near.sid=o.sid; B.fx.push({type:'link',x:o.x,y:o.y,x2:near.x,y2:near.y,t:0,ttl:.5,c:B.params[o.sid]?B.params[o.sid].color:'#7ED957'}); B.fx.push({type:'ring',x:near.x,y:near.y,t:0,ttl:.5,c:B.params[o.sid]?B.params[o.sid].color:'#7ED957',r:near.r*1.6}); }
@@ -2212,7 +2253,7 @@ function stepOutbreak(dt){
   else if(B.alert>=1){
     var mut=mt>0?mw/mt:0;
     var phA=false; for(i=0;i<N&&!phA;i++){ b=bl2[i]; if(!b.fallen&&b.inf>.2&&b.sid&&B.params[b.sid]&&B.params[b.sid].phantom) phA=true; }
-    B.cure=Math.min(1,B.cure+(phA?.8:1)*(B.cureMul||1)*(0.006+0.003*B.tier+0.0035*vacc)*(1-0.06*mut)*(B.mutT>0?.5:1)*(1+.06*(B.dz||0))*(1+.35*(B.pw||0))*(B.boss?1:crewMul('saboteur'))*specMul('mil',.94)*(B.boss?1:wevMul('blood',1.25))*dt);
+    B.cure=Math.min(1,B.cure+(phA?.8:1)*(B.cureMul||1)*(0.006+0.003*B.tier+0.0035*vacc)*(1-0.06*mut)*(B.mutT>0?.5:1)*(1+.06*(B.dz||0))*(1+.35*(B.pw||0))*(B.boss?1:crewMul('saboteur'))*specMul('mil',.94)*(B.boss?1:wevMul('blood',1.25))*techCureMul()*dt);
     if(B.cure>=1){ endOutbreak('The rival finished a cure.'); return; }
   }
   for(i=0;i<B.fx.length;i++) B.fx[i].t+=dt;
@@ -2240,6 +2281,7 @@ function endOutbreak(reason){
   var colNote=''; try{ colNote=colAfterBattle(win,loot,dT); }catch(e){}
   var evoNote=''; try{ evoNote=evoAfterBattle(win,stars); missBattle(win,stars); }catch(e){}
   var specN=''; try{ specN=specAfterBattle(win,stars); }catch(e){}
+  try{ specN=techAfterBattle(win,stars)+specN; }catch(e){}
   save();
   var unl=[]; TRAITS.forEach(function(k){ if(TRAIT[k].unlock>oldPeak&&TRAIT[k].unlock<=S.peak) unl.push('Trait: '+tName(k)); });
   VECTORS.forEach(function(v){ if(VEC[v].unlock>oldPeak&&VEC[v].unlock<=S.peak) unl.push('Vector: '+VEC[v].name); });
@@ -2269,7 +2311,7 @@ function leaveBattle(){
 function setMode(m){
   if(m!=='home'&&FS.on) fsSet(false);
   if(m!=='home'&&tbubEl){ tbubEl.remove(); tbubEl=null; tbubId=null; }
-  mode=m; document.documentElement.classList.toggle('inbattle',m==='battle'); setTimeout(zoomBtns,0); $('#homePanel').hidden=m!=='home'; $('#battlePanel').hidden=m!=='battle'; $('#bhud').hidden=m!=='battle'; $('#bmeters').hidden=m!=='battle'; bossHud(); renderHUD();
+  mode=m; document.documentElement.classList.toggle('inbattle',m==='battle'); setTimeout(zoomBtns,0); $('#homePanel').hidden=m!=='home'; $('#battlePanel').hidden=m!=='battle'; $('#bhud').hidden=m!=='battle'; $('#bmeters').hidden=m!=='battle'; var bgp=document.getElementById('bBonus'); if(bgp&&m!=='battle') bgp.hidden=true; bossHud(); renderHUD();
 }
 function renderTray(){
   var list=S.strains.filter(function(st){return B.start[st.id]>0;});
@@ -2782,7 +2824,7 @@ function drawLevelFxHi(b,x,y,w,h,hz,time){
   if(lv>=9){
     var fb=P(x+.2,y+.2,top), ft=P(x+.2,y+.2,top+24), wv=Math.sin(time*4)*1.6;
     ctx.strokeStyle='#3E3A33'; ctx.lineWidth=1.6; ctx.beginPath(); ctx.moveTo(fb.x,fb.y); ctx.lineTo(ft.x,ft.y); ctx.stroke();
-    if(!ui.colony&&typeof bannerCanvas==='function'&&!FUTPAL){ bannerCanvas(ft.x,ft.y,14,9,time*4); } else {
+    if(!ui.colony&&typeof bannerCanvas==='function'){ bannerCanvas(ft.x,ft.y,14,9,time*4); } else {
     ctx.fillStyle=fc('#9A4A1B'); ctx.strokeStyle='#3A1E0C'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(ft.x,ft.y); ctx.quadraticCurveTo(ft.x+7,ft.y-2+wv,ft.x+14,ft.y+wv); ctx.lineTo(ft.x+14,ft.y+8+wv); ctx.quadraticCurveTo(ft.x+7,ft.y+6+wv,ft.x,ft.y+8); ctx.closePath(); ctx.fill(); ctx.stroke();
     ctx.fillStyle='#F3EAD3'; ctx.beginPath(); ctx.arc(ft.x+7,ft.y+4+wv*.5,2,0,TAU); ctx.fill(); }
   }
@@ -3135,8 +3177,8 @@ function earthPanel(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=94;
-var CHANGELOG=[{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=95;
+var CHANGELOG=[{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -3690,6 +3732,10 @@ document.addEventListener('click',function(e){
     else if(act==='expreport') expReport(el.getAttribute('data-id'));
     else if(act==='expchoose') expChoose(el.getAttribute('data-id'),el.getAttribute('data-c'));
     else if(act==='specopen') specOpen();
+    else if(act==='techopen'){ ui.techSel=null; techOpen(); }
+    else if(act==='techsel'){ ui.techSel=el.getAttribute('data-id'); techOpen(); }
+    else if(act==='techbuy') techBuy(el.getAttribute('data-id'));
+    else if(act==='spinskip') spinDone();
     else if(act==='wevopen') wevOpen();
     else if(act==='wevbuy') wevBuy(+el.getAttribute('data-i'));
     else if(act==='specshow') specShow(el.getAttribute('data-id'));
@@ -6627,6 +6673,8 @@ var ACH=[
  {id:'sets',cat:'colony',name:'Curator',d:'Complete {n} specimen sets.',t:[1,3,6],v:function(){ return specSets(); }},
  {id:'styled',cat:'colony',name:'Flag Bearer',d:'Customize your banner.',tier:0,ok:function(){ return achF('styled'); }},
  {id:'bloodwin',cat:'virus',name:'Blood Moon Rising',d:'Win an outbreak during a Blood Moon.',tier:1,ok:function(){ return achF('bloodwin'); }},
+ {id:'tech',cat:'virus',name:'Gene Splicer',d:'Unlock {n} tech tree upgrades.',t:[5,12,21],v:function(){ return techCount(); }},
+ {id:'techall',cat:'virus',name:'The Lazarus Strain',d:'Unlock the final upgrade in the tech tree.',tier:2,ok:function(){ return techHas('z'); }},
  /* weather */
  {id:'chase',cat:'wx',name:'Storm Chaser',d:'Open Storm Scan {n} times.',t:[5,10,25],v:function(){ return achN('scan'); }},
  {id:'proof',cat:'wx',name:'Weatherproof',d:'Shelter something while a heavy storm is over you.',tier:0,ok:function(){ return achF('shelter'); }},
@@ -6804,7 +6852,7 @@ function evoParams(st,p){
   if(evoHas(st,'phantom')) p.phantom=1;
   if(evoHas(st,'storm')) p.storm=1;
   if(evoHas(st,'hive')) p.hive=1;
-  p.lv=st.lv; return p;
+  p.lv=st.lv; try{ techParams(p); }catch(e){} return p;
 }
 function evoPick(id,m){
   var st=strainById(id); if(!st||!MUTS[m]) return; var t=evoPending(st); if(t<0||MUTS[m].t!==t) return;
@@ -6907,6 +6955,7 @@ function missClaim(id){
   toast('+'+fmt(P.cr)+' credits, +'+P.fd+' food'+(P.tr?', +'+P.tr+' trophies':'')); save(); renderAll();
 }
 function missChest(){
+  try{ chestSpin(); return; }catch(e){}
   var M=missS(); if(M.chest||!M.d.every(function(m){ return m.c; })) return;
   M.chest=1; var cr=Math.round(6000*(1+Math.min(3,(S.peak||0)/1500))); S.credits+=cr; S.food+=300;
   var lo=null; S.strains.forEach(function(st){ if(!lo||(S.samples[st.id]||0)<(S.samples[lo.id]||0)) lo=st; }); var sm=Math.max(0,Math.min(10,sampleCap()-sampleCount())); if(lo&&sm) S.samples[lo.id]=(S.samples[lo.id]||0)+sm;
@@ -7575,6 +7624,198 @@ function wevDraw(dt,time){
   }
 }
 
+
+/* ================= virus tech tree and the daily chest spin (0.76.0) =================
+   Tech tree: Gene Points (from outbreak wins, Citadels and the daily chest) buy upgrades that work for every strain.
+   Four branches of 5, then the Lazarus Strain at the bottom once all four branches are done.
+   State: S.tech {pts, got:{id:1}, g0:1 once the starting grant is paid}. */
+var TBR={
+  spread:{n:'Spread',c:'#5C9A2E',i:'<circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/>'},
+  lethal:{n:'Lethality',c:'#B3261E',i:'<path d="M12 3a7 7 0 0 0-7 7v3l2 2v4h10v-4l2-2v-3a7 7 0 0 0-7-7zM9 11h.01M15 11h.01M10 19v-2M14 19v-2"/>'},
+  resist:{n:'Resistance',c:'#3F7FB0',i:'<path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/>'},
+  lab:{n:'Lab Power',c:'#B08A1A',i:'<path d="M13 2 5 13h6l-1 9 8-11h-6z"/>'}
+};
+var TBRK=['spread','lethal','resist','lab'];
+var TECH=[
+ {id:'s1',b:'spread',t:1,n:'Fast Replication',d:'Strains grow 6% faster.',e:{grow:.06}},
+ {id:'s2',b:'spread',t:2,n:'Airborne Particles',d:'Strains jump between buildings 8% more easily.',e:{trans:.08}},
+ {id:'s3',b:'spread',t:3,n:'Wide Drift',d:'Strains reach 8% further.',e:{radius:.08}},
+ {id:'s4',b:'spread',t:4,n:'Super-Spreader',d:'Strains grow 10% faster.',e:{grow:.10}},
+ {id:'s5',b:'spread',t:5,n:'Pandemic',d:'Strains jump 15% more easily and reach 10% further.',e:{trans:.15,radius:.10}},
+ {id:'l1',b:'lethal',t:1,n:'Tissue Damage',d:'Infected buildings fall 8% faster.',e:{lethal:.08}},
+ {id:'l2',b:'lethal',t:2,n:'Necrosis',d:'Infected buildings fall 10% faster.',e:{lethal:.10}},
+ {id:'l3',b:'lethal',t:3,n:'Organ Failure',d:'Infected buildings fall 12% faster.',e:{lethal:.12}},
+ {id:'l4',b:'lethal',t:4,n:'Hemorrhage',d:'Infected buildings fall 15% faster.',e:{lethal:.15}},
+ {id:'l5',b:'lethal',t:5,n:'Total Collapse',d:'Infected buildings fall 20% faster.',e:{lethal:.20}},
+ {id:'r1',b:'resist',t:1,n:'Camouflage',d:'Colonies notice your strains 8% later.',e:{vdet:-.08}},
+ {id:'r2',b:'resist',t:2,n:'Tough Shell',d:'+1 resilience for every strain.',e:{res:1}},
+ {id:'r3',b:'resist',t:3,n:'Drug Resistance',d:'Cures take 6% longer.',e:{cure:-.06}},
+ {id:'r4',b:'resist',t:4,n:'Hardened Coat',d:'+2 resilience for every strain.',e:{res:2}},
+ {id:'r5',b:'resist',t:5,n:'Unstoppable',d:'Cures take 10% longer and colonies notice you 10% later.',e:{cure:-.10,vdet:-.10}},
+ {id:'p1',b:'lab',t:1,n:'Head Start',d:'Start every battle with 10 more energy.',e:{e0:10}},
+ {id:'p2',b:'lab',t:2,n:'Fast Recharge',d:'Energy refills 10% faster.',e:{regen:.10}},
+ {id:'p3',b:'lab',t:3,n:'Quick Surge',d:'Surge is ready again 15% sooner.',e:{surge:-.15}},
+ {id:'p4',b:'lab',t:4,n:'Big Tank',d:'Hold 15 more energy.',e:{cap:15}},
+ {id:'p5',b:'lab',t:5,n:'Overclock',d:'Energy refills 20% faster.',e:{regen:.20}},
+ {id:'z',b:'core',t:6,n:'The Lazarus Strain',d:'Everything your strains do is 10% stronger.',e:{grow:.10,trans:.10,lethal:.10,cure:-.05}}
+];
+var TCOST=[0,2,4,6,9,14,30], TPEAK=[0,0,0,0,1500,3000,4000];
+function techById(id){ for(var i=0;i<TECH.length;i++) if(TECH[i].id===id) return TECH[i]; return null; }
+function techS(){
+  if(!S.tech||typeof S.tech!=='object') S.tech={}; var T=S.tech; if(!T.got||typeof T.got!=='object') T.got={}; T.pts=T.pts||0;
+  if(!T.g0){ T.g0=1; T.pts+=Math.min(25,Math.floor((S.wins||0)/8)); }
+  return T;
+}
+function techHas(id){ return !!(S&&S.tech&&S.tech.got&&S.tech.got[id]); }
+var TPRE={spread:'s',lethal:'l',resist:'r',lab:'p'};
+function techNeed(n){ if(n.b==='core') return ['s5','l5','r5','p5']; return n.t>1?[TPRE[n.b]+(n.t-1)]:[]; }
+function techState(n){
+  if(techHas(n.id)) return 'got';
+  var reqOk=techNeed(n).every(techHas), pk=(S.peak||0)>=TPEAK[n.t];
+  if(!reqOk) return 'lock'; if(!pk) return 'peak'; return 'open';
+}
+function techSum(k){ var s=0; if(!S||!S.tech) return 0; TECH.forEach(function(n){ if(S.tech.got[n.id]&&n.e[k]) s+=n.e[k]; }); return s; }
+function techCount(){ return TECH.filter(function(n){ return techHas(n.id); }).length; }
+/* the effect on a strain's numbers */
+function techParams(p){
+  p.grow*=1+techSum('grow'); p.trans*=1+techSum('trans'); p.radius*=1+techSum('radius'); p.lethal*=1+techSum('lethal');
+  p.vdet*=Math.max(.5,1+techSum('vdet')); p.res+=techSum('res'); return p;
+}
+function techCureMul(){ return Math.max(.6,1+techSum('cure')); }
+function techBuy(id){
+  var n=techById(id), T=techS(); if(!n||techState(n)!=='open') return; var c=TCOST[n.t];
+  if(T.pts<c){ toast('You need '+c+' Gene Points.'); return; }
+  T.pts-=c; T.got[id]=1; ui.techSel=id; try{ achEv('tech'); if(id==='z') achEv('techall'); }catch(e){}
+  save(); techOpen(); renderAll(); try{ sfxUpgrade&&sfxUpgrade(Math.min(10,n.t*2)); }catch(e){}
+  var el=document.querySelector('.tnode[data-id="'+id+'"]'); if(el){ el.classList.add('pop'); }
+}
+function techIcon(b,sz){ var B2=TBR[b]||{i:'<path d="M12 3c3 4.5 6 8 6 11a6 6 0 0 1-12 0c0-3 3-6.5 6-11z"/><path d="M9.5 14.5l2 2 3.5-4"/>'}; return '<svg viewBox="0 0 24 24" width="'+(sz||20)+'" height="'+(sz||20)+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+B2.i+'</svg>'; }
+function techOpen(){
+  var T=techS(), sel=techById(ui.techSel)||null, h='<div class="tech"><div class="techh"><div><h2 style="margin:0">Virus Tech Tree</h2><div class="muted">'+techCount()+' of '+TECH.length+' unlocked · works for every strain</div></div><div class="gpbig">'+gpIcon(18)+'<b class="num">'+T.pts+'</b><span>Gene Points</span></div></div>';
+  h+='<div class="tgrid">';
+  TBRK.forEach(function(k){ var Bk=TBR[k];
+    h+='<div class="tcol" style="--bc:'+Bk.c+'"><div class="tbh">'+techIcon(k,16)+'<b>'+Bk.n+'</b></div>';
+    TECH.filter(function(n){ return n.b===k; }).forEach(function(n,i){ var st=techState(n);
+      if(i) h+='<i class="tlink'+(techHas(n.id)||st==='open'||st==='peak'?' on':'')+'"></i>';
+      h+='<button type="button" class="tnode '+st+(sel&&sel.id===n.id?' sel':'')+'" data-act="techsel" data-id="'+n.id+'"><span class="tdot">'+techIcon(k,18)+'<em>'+['','I','II','III','IV','V'][n.t]+'</em></span><span class="tnm">'+esc(n.n)+'</span></button>'; });
+    h+='</div>'; });
+  h+='</div>';
+  var z=techById('z'), zs=techState(z);
+  h+='<div class="tcore"><i class="tcl"></i><button type="button" class="tnode core '+zs+(sel&&sel.id==='z'?' sel':'')+'" data-act="techsel" data-id="z"><span class="tdot">'+techIcon('core',22)+'</span><span class="tnm">The Lazarus Strain</span></button></div>';
+  if(sel){ var s2=techState(sel), c=TCOST[sel.t], bc=sel.b==='core'?'#7ED957':TBR[sel.b].c;
+    h+='<div class="tdet" style="--bc:'+bc+'"><div class="tdh"><b>'+esc(sel.n)+'</b><span>'+(sel.b==='core'?'Final upgrade':TBR[sel.b].n+' · tier '+sel.t)+'</span></div><p>'+esc(sel.d)+'</p>';
+    if(s2==='got') h+='<p class="good"><b>Unlocked ✓</b></p>';
+    else if(s2==='lock') h+='<p class="muted">'+(sel.b==='core'?'Finish all four branches first.':'Unlock '+esc(techById(techNeed(sel)[0]).n)+' first.')+'</p>';
+    else if(s2==='peak') h+='<p class="muted">Reach '+fmt(TPEAK[sel.t])+' trophies to unlock this tier.</p>';
+    else h+='<button class="btn primary" data-act="techbuy" data-id="'+sel.id+'" '+(T.pts<c?'disabled':'')+' type="button">Unlock · '+gpIcon(14)+' '+c+'</button>';
+    h+='</div>'; }
+  else h+='<p class="hint">Tap an upgrade to see what it does. Earn Gene Points by winning outbreaks (1, or 2 with three stars), beating Citadels (5) and from the daily chest.</p>';
+  h+='<div class="btns"><button class="btn" data-ov="close" type="button">Close</button></div></div>';
+  if(ovOpen&&document.querySelector('#ovCard .tech')){ var sc=$('#ovCard').scrollTop; $('#ovCard').innerHTML=h; $('#ovCard').scrollTop=sc; } else showOverlay(h);
+}
+function gpIcon(sz){ return '<svg class="gpi" viewBox="0 0 24 24" width="'+(sz||14)+'" height="'+(sz||14)+'" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M7 3c0 6 10 6 10 12s-10 3-10 6M17 3c0 6-10 6-10 12s10 3 10 6M8 7h8M8 17h8"/></svg>'; }
+function techCardHtml(){
+  var T=techS(), open=TECH.filter(function(n){ return techState(n)==='open'&&T.pts>=TCOST[n.t]; }).length;
+  return '<div class="techcard"><div class="mhd"><b>Virus Tech Tree</b><span class="gpchip">'+gpIcon(13)+' '+T.pts+' Gene Points</span></div><div class="tmini">'+TBRK.map(function(k){ var n=TECH.filter(function(x){ return x.b===k&&techHas(x.id); }).length; return '<span style="--bc:'+TBR[k].c+'">'+techIcon(k,13)+'<i style="width:'+(n*20)+'%"></i></span>'; }).join('')+'</div>'+
+    '<div class="acts" style="margin-top:8px"><button class="btn'+(open?' primary':'')+'" data-act="techopen" type="button">Open tech tree'+(open?' · '+open+' ready':'')+'</button></div></div>';
+}
+function techAfterBattle(win,stars){
+  if(!win||!B) return ''; var g=B.boss?5:1+((stars||0)>=3?1:0); techS().pts+=g;
+  return '<p class="gpnote">'+gpIcon(14)+' +'+g+' Gene Point'+(g>1?'s':'')+' for the tech tree</p>';
+}
+
+/* ---- the daily chest spin ---- */
+var SPIN_R=[{n:'Common',c:'#8E8A80'},{n:'Rare',c:'#3E86D0'},{n:'Epic',c:'#8E4FCF'},{n:'Legendary',c:'#E0A21A'}];
+function spinPool(){
+  var lm=1+Math.min(3,(S.peak||0)/1500);
+  return [
+    {k:'cr',v:Math.round(5000*lm/100)*100,r:0,w:30},{k:'cr',v:Math.round(12000*lm/100)*100,r:1,w:16},{k:'cr',v:Math.round(30000*lm/100)*100,r:2,w:6},{k:'cr',v:Math.round(90000*lm/100)*100,r:3,w:1.5},
+    {k:'gp',v:3,r:0,w:20},{k:'gp',v:6,r:1,w:10},{k:'gp',v:12,r:2,w:4},{k:'gp',v:25,r:3,w:1},
+    {k:'sp',v:0,r:1,w:7},{k:'sp',v:1,r:2,w:3},{k:'sp',v:2,r:3,w:1}
+  ];
+}
+function spinPick(pool,rnd){ var t=0; pool.forEach(function(p){ t+=p.w; }); var x=rnd()*t; for(var i=0;i<pool.length;i++){ x-=pool[i].w; if(x<=0) return pool[i]; } return pool[0]; }
+function spinCard(p){
+  var R=SPIN_R[p.r], art, big, small;
+  if(p.k==='cr'){ art='<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/></svg>'; big=fmt(p.v); small='Credits'; }
+  else if(p.k==='gp'){ art=gpIcon(34); big='+'+p.v; small='Gene Points'; }
+  else { art=p.sp?spSvg(p.sp,46):'<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg>'; big=p.sp?esc(p.sp.name.split(' ')[0]):SPRAR[p.v].n; small=p.sp?SPR[p.sp.r].n:'Specialist'; }
+  return '<div class="scard r'+p.r+'" style="--rc:'+R.c+'"><div class="scart">'+art+'</div><b>'+big+'</b><span>'+small+'</span><i>'+R.n+'</i></div>';
+}
+function spinGive(p){
+  if(p.k==='cr'){ S.credits+=p.v; return; }
+  if(p.k==='gp'){ techS().pts+=p.v; return; }
+  if(crewS().list.length>=SP_ROSTER){ p.k='cr'; p.v=Math.round([15000,40000,120000][p.v]*(1+Math.min(3,(S.peak||0)/1500))/100)*100; p.full=1; S.credits+=p.v; return; }
+  var sp=spMake(SPKEYS[Math.floor(Math.random()*SPKEYS.length)],p.v,Math.floor(Math.random()*4294967295)); spAdd(sp); p.sp=sp;
+}
+var SPIN={};
+function chestSpin(){
+  var M=missS(); if(M.chest||!M.d.every(function(m){ return m.c; })) return;
+  M.chest=1; S.food+=300;
+  var pool=spinPool(), win=spinPick(pool,Math.random), prize={k:win.k,v:win.v,r:win.r}; spinGive(prize); save(); renderAll();
+  try{ misEv('chest'); }catch(e){}
+  var N=44, at=37, cards=[];
+  for(var i=0;i<N;i++){ var c=i===at?prize:spinPick(pool,Math.random); if(i!==at&&c.k==='sp') c={k:'sp',v:c.v,r:c.r}; cards.push(i===at?prize:{k:c.k,v:c.v,r:c.r}); }
+  var h='<div class="spin"><div class="spinh">Daily chest</div><div class="spinsub">All daily missions done!</div><div class="reel"><div class="rmark"></div><div class="rtrack" id="rtrack">'+cards.map(spinCard).join('')+'</div><div class="rfade l"></div><div class="rfade r"></div></div>'+
+    '<div class="spinres" id="spinRes" hidden></div><div class="btns"><button class="btn" id="spinSkip" data-act="spinskip" type="button">Skip</button></div></div>';
+  showOverlay(h);
+  var tr=document.getElementById('rtrack'), cw=110, reel=tr.parentNode, mid=reel.clientWidth/2, jit=(Math.random()-.5)*60;
+  var end=-(at*cw+cw/2-mid+jit);
+  SPIN={tr:tr,end:end,prize:prize,cw:cw,mid:mid,done:false,last:-1};
+  SPIN.anim=tr.animate([{transform:'translateX(0px)'},{transform:'translateX('+(end-14)+'px)',offset:.93},{transform:'translateX('+end+'px)'}],{duration:5600,easing:'cubic-bezier(.08,.62,.1,1)',fill:'forwards'});
+  SPIN.anim.onfinish=spinDone;
+  (function tick(){ if(SPIN.done||!SPIN.tr||!document.body.contains(SPIN.tr)) return; var m=new DOMMatrix(getComputedStyle(SPIN.tr).transform), idx=Math.floor((-m.m41+SPIN.mid)/SPIN.cw);
+    if(idx!==SPIN.last){ SPIN.last=idx; spinTick(); } requestAnimationFrame(tick); })();
+}
+function spinTick(){ try{ if(!sfxOk()) return; var c=MUS.ctx, o=c.createOscillator(), g=c.createGain(); o.type='triangle'; o.frequency.value=1250; g.gain.setValueAtTime(.06,c.currentTime); g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.045); o.connect(g); g.connect(sfxBus()); o.start(); o.stop(c.currentTime+.05); }catch(e){} }
+function spinDone(){
+  if(SPIN.done) return; SPIN.done=true; var p=SPIN.prize, R=SPIN_R[p.r];
+  try{ if(SPIN.anim) SPIN.anim.finish(); }catch(e){}
+  var cards=document.querySelectorAll('#rtrack .scard'), won=cards[37]; if(won) won.classList.add('won');
+  var res=document.getElementById('spinRes'); if(res){ res.hidden=false; res.style.setProperty('--rc',R.c);
+    res.innerHTML='<b>'+(p.k==='cr'?'+'+fmt(p.v)+' credits':p.k==='gp'?'+'+p.v+' Gene Points':esc(p.sp.name)+' joined your crew')+'</b><span>'+R.n+(p.full?' · your roster was full, so you got credits instead':'')+(p.k==='gp'?' · spend them in the Virus Tech Tree':'')+'</span><span class="muted">+300 food</span>'; }
+  var sk=document.getElementById('spinSkip'); if(sk){ sk.outerHTML=(p.k==='sp'&&p.sp?'<button class="btn" data-act="spreveal" data-id="'+p.sp.id+'" type="button">Meet them</button>':p.k==='gp'?'<button class="btn" data-act="techopen" type="button">Tech tree</button>':'')+'<button class="btn primary" data-ov="close" type="button">Claim</button>'; }
+  try{ sfxCollect&&sfxCollect('credits'); }catch(e){}
+}
+
+/* ---- keep colony buildings apart and on the board ----
+   Every building gets its real footprint (plus a gap) checked against the board edge, the walls, the river and
+   every building already placed. Anything that does not fit where the layout put it moves to the nearest free
+   spot; if there is no free spot at all it is left out, so two buildings can never sit on top of each other. */
+var CFIT={x0:70,x1:410,y0:72,y1:328};
+function colRect(b,gap){ var d=b.gw?[b.gw,b.gh]:(CDIM[b.k]||[1.2,1.2]); return {x0:b.x-d[0]*12.5-gap,x1:b.x+d[0]*12.5+gap,y0:b.y-d[1]*12.5-gap,y1:b.y+d[1]*12.5+gap}; }
+function rHit(a,b){ return a.x0<b.x1&&b.x0<a.x1&&a.y0<b.y1&&b.y0<a.y1; }
+function colGap(b,col){ return (b.k==='hall'||b.k==='san'||(b.k==='house'&&col.biome==='ruins'))?8:6; }
+var CROADX=[124,180,240,300,356], CROADY=[122,226,278];
+function colOnRoad(E){ for(var i=0;i<CROADX.length;i++) if(E.x0<CROADX[i]+9&&E.x1>CROADX[i]-9) return true; for(var j=0;j<CROADY.length;j++) if(E.y0<CROADY[j]+9&&E.y1>CROADY[j]-9) return true; return false; }
+function colFitOk(b,col,placed,box,roads){
+  var g=colGap(b,col), R=colRect(b,g), E=colRect(b,0);
+  if(roads&&b.k!=='hall'&&colOnRoad(E)) return false;
+  if(E.x0<box.x0||E.x1>box.x1||E.y0<box.y0||E.y1>box.y1) return false;
+  if(col.river){ for(var x=E.x0;x<=E.x1;x+=4){ var ry=colRiverY(x); if(E.y1>ry-27&&E.y0<ry+27) return false; } }
+  for(var i=0;i<placed.length;i++){ if(rHit(R,colRect(placed[i],placed[i].wall?2:colGap(placed[i],col)))) return false; }
+  return true;
+}
+function colFit(col){
+  var walls=col.bld.filter(function(b){ return b.wall; }), rest=col.bld.filter(function(b){ return !b.wall; });
+  var box=CFIT;
+  if(col.lay==='walled'&&walls.length){ var wx0=1e9,wx1=-1e9,wy0=1e9,wy1=-1e9; walls.forEach(function(w){ var r=colRect(w,0); wx0=Math.min(wx0,r.x0); wx1=Math.max(wx1,r.x1); wy0=Math.min(wy0,r.y0); wy1=Math.max(wy1,r.y1); });
+    box={x0:wx0+14,x1:wx1-14,y0:wy0+14,y1:wy1-14}; }
+  var placed=walls.slice(), keep=[], dropped=0, sum0=0; col.bld.forEach(function(b){ sum0+=b.loot||0; });
+  var grid=col.lay==='grid';
+  rest.forEach(function(b){
+    if(colFitOk(b,col,placed,box,grid)){ placed.push(b); keep.push(b); return; }
+    var ox=b.x, oy=b.y, best=null, bd=1e9;
+    for(var pass=grid?0:1;pass<2&&!best;pass++)
+      for(var y=box.y0;y<=box.y1;y+=6) for(var x=box.x0;x<=box.x1;x+=6){ var d=(x-ox)*(x-ox)+(y-oy)*(y-oy); if(d>=bd) continue; b.x=x; b.y=y; if(colFitOk(b,col,placed,box,pass===0)){ best=[x,y]; bd=d; } }
+    if(best){ b.x=best[0]; b.y=best[1]; placed.push(b); keep.push(b); } else { b.x=ox; b.y=oy; dropped++; }
+  });
+  col.bld=keep.concat(walls);
+  if(col.river) col.bld.forEach(function(b){ b.side=b.y>colRiverY(b.x)?1:0; });
+  var sum1=0; col.bld.forEach(function(b){ sum1+=b.loot||0; }); if(sum0>0&&col.loot) col.loot=Math.round(col.loot*sum1/sum0);
+  return dropped;
+}
+
 /* ================= colony types, places, leaders, goals and battle events (0.75.0) =================
    Every rival colony has a type (how it is laid out and how it fights back), a place (how it looks), a leader
    (a face, a name and things to say) and one bonus goal. All of it is worked out from the town's seed, so it
@@ -7723,12 +7964,12 @@ function colLayoutPts(lay,r,n){
     return pts.slice(0,n);
   }
   if(lay==='spread'){ rnd(64,416,70,330,62); return pts; }
-  if(lay==='walled'){ rnd(132,348,122,288,44); return pts; }
+  if(lay==='walled'){ rnd(126,354,122,280,44); return pts; }
   if(lay==='river'){ rnd(70,410,76,334,46,function(x,y){ return Math.abs(y-colRiverY(x))>34; }); return pts; }
   return null;
 }
 function colShape(col,tw){
-  var k=townKind(tw); if(!k) return col;
+  var k=townKind(tw); if(!k){ colFit(col); return col; }
   var r=mulberry((tw.seed^0x7f4a7c15)|0), lay=CKIND[k].lay;
   col.kind=k; col.biome=townBiome(tw); col.cgoal=townGoal(tw,k); col.lay=lay; col.leader=townLeader(tw).name;
   var others=col.bld.filter(function(b){ return b.k!=='hall'; }), pts=colLayoutPts(lay,r,others.length);
@@ -7738,10 +7979,11 @@ function colShape(col,tw){
   if(lay==='walled'){
     var hpW=EK.house.hp*(1.3+.35*tw.tier), segs=[];
     function seg(x,y,gw,gh,gate){ segs.push({k:'wall',x:x,y:y,r:15,hp:hpW*(gate?.55:1),max:hpW*(gate?.55:1),den:.55,loot:6,inf:0,sid:null,fallen:false,flash:0,ph:r()*TAU,folk:[],wall:1,gate:gate?1:0,gw:gw,gh:gh}); }
-    for(i=0;i<5;i++){ seg(128+i*56,100,2.24,.5,0); seg(128+i*56,300,2.24,.5,i===2); }
-    for(i=0;i<4;i++){ seg(100,127+i*49,.5,1.96,0); seg(380,127+i*49,.5,1.96,i===2); }
+    for(i=0;i<6;i++){ seg(86+25.67+i*51.33,88,2.053,.5,0); seg(86+25.67+i*51.33,312,2.053,.5,i===2); }
+    for(i=0;i<5;i++){ seg(92,94.25+21.15+i*42.3,.5,1.692,0); seg(388,94.25+21.15+i*42.3,.5,1.692,i===2); }
     col.bld=col.bld.concat(segs);
   }
+  colFit(col);
   return col;
 }
 /* ---- the attack screen ---- */
@@ -8280,7 +8522,7 @@ function bossTick(dt){
   bs.drones=bs.drones.filter(function(d){ return d.st!=='gone'; });
   bs.droneMax=Math.max(1,labs.length*maxPer);
   /* the cure labs push the cure along once the fortress is on alert */
-  if(B.alert>=1){ var alive=0; labs.forEach(function(l){ if(!l.fallen&&l.inf<.35) alive++; }); B.cure=Math.min(1,B.cure+(.0017*alive+(ph>=3?.0012:0)+(ph>=4?.0018:0))*(B.mutT>0?.5:1)*(1+.03*(B.dz||0))*dt); if(B.cure>=1){ endOutbreak('The Citadel finished a cure.'); return; } }
+  if(B.alert>=1){ var alive=0; labs.forEach(function(l){ if(!l.fallen&&l.inf<.35) alive++; }); B.cure=Math.min(1,B.cure+(.0017*alive+(ph>=3?.0012:0)+(ph>=4?.0018:0))*(B.mutT>0?.5:1)*(1+.03*(B.dz||0))*techCureMul()*dt); if(B.cure>=1){ endOutbreak('The Citadel finished a cure.'); return; } }
   if(core&&core.fallen&&!B.ended) endOutbreak('The Citadel has fallen!');
 }
 function bossAfter(win){
@@ -9068,7 +9310,7 @@ function bootStart(){
   musIcon();
 })();
 
-if(typeof window.__QC==='function'){ window.__QC({get S(){return S;},set S(v){S=v;},get B(){return B;},genColony:genColony,startOutbreak:startOutbreak,stepOutbreak:stepOutbreak,endOutbreak:endOutbreak,releaseAt:releaseAt,drawRival:drawRival,drawHome:drawHome,frame:frame,doUpgrade:doUpgrade,doClaim:doClaim,doCollect:doCollect,collectAll:collectAll,doPlant:doPlant,doHarvest:doHarvest,doPlantAll:doPlantAll,doSell:doSell,doCulture:doCulture,saveStrain:saveStrain,startPlace:startPlace,doPlace:doPlace,setGhost:setGhost,homeClick:homeClick,fits:fits,renderPanel:renderPanel,basePanel:basePanel,labPanel:labPanel,roadPanel:roadPanel,editorPanel:editorPanel,ui:ui,setMode:setMode,tickEconomy:tickEconomy,P:P,BT:BT,silhouettes:silhouettes,orderBuildings:orderBuildings,load:load,sparams:sparams,newStrainDraft:newStrainDraft,strainById:strainById,cultureCost:cultureCost,labPoints:labPoints,traitCap:traitCap,cropProgress:cropProgress,cropReady:cropReady,CROPS:CROPS,TRAITS:TRAITS,VECTORS:VECTORS,ensureColony:ensureColony,openTowns:openTowns,openTown:openTown,sendScout:sendScout,tickWorld:tickWorld,resolveTrip:resolveTrip,resolveInfected:resolveInfected,drawWorld:drawWorld,spawnDrop:spawnDrop,worldPanel:worldPanel,worldTap:worldTap,doTrainScout:doTrainScout,tripInfo:tripInfo,fogAt:fogAt,exploredPct:exploredPct,checkInbox:checkInbox,initView:initView,initTown:initTown,openDiplo:openDiplo,openTrade:openTrade,doTrade:doTrade,doGift:doGift,proposeAlliance:proposeAlliance,endAlliance:endAlliance,sendMission:sendMission,resolveSteal:resolveSteal,resolveSpy:resolveSpy,advanceTowns:advanceTowns,offend:offend,projInfo:projInfo,KEYNOW:function(){return KEY;},mpCheckRemote:mpCheckRemote,mpPush:mpPush,income:income,buildCost:buildCost,paidFor:paidFor,doDemolish:doDemolish,stripWater:stripWater,renderAll:renderAll,renderHUD:renderHUD,buildableList:buildableList,CINE:CINE,cineClose:cineClose,bossCrumbStart:bossCrumbStart,bossCrumbDraw:bossCrumbDraw,crumbChunks:crumbChunks,CRUMB_DUR:CRUMB_DUR,fall:fall,HOWTO:HOWTO,tutOpen:tutOpen,tutSec:tutSec,tutMaybe:tutMaybe,tutNewGame:tutNewGame,tutSeen:tutSeen,TUTIMG:TUTIMG,spyCost:spyCost,nextCost:nextCost,affordCount:affordCount,sfxBuild:sfxBuild,lzBuildSfx:lzBuildSfx,rivalPow:rivalPow,rivalPct:rivalPct,rivalDef:rivalDef,rivalSetup:rivalSetup,rivalTick:rivalTick,rivalSealed:rivalSealed,rivalWarn:rivalWarn,bossHpBar:bossHpBar,PINCH:PINCH,CHEST_T:CHEST_T,chestPlay:chestPlay,chestClose:chestClose,chestT:chestT,get CHEST(){return CHEST;},lzChestSfx:lzChestSfx,drawChest:drawChest,ironOn:ironOn,genBoss:genBoss,startBoss:startBoss,bossSpawn:bossSpawn,bossTick:bossTick,bossAfter:bossAfter,bossOK:bossOK,bossAt:bossAt,bossHit:bossHit,drawBoss:drawBoss,bossHud:bossHud,updBHud:updBHud,bossShow:bossShow,bubPlaceHtml:bubPlaceHtml,traitOpen:traitOpen,vecOpen:vecOpen,TRAIT:TRAIT,VEC:VEC,BP:BP,futPal:futPal,ironOf:ironOf,cultureMult:cultureMult,scoutCost:scoutCost,sctLv:sctLv,doScoutTrain:doScoutTrain,baseMoves:baseMoves,COSTS:COSTS,LIM:LIM,MAXLV:MAXLV,upCost:upCost,bCap:bCap,tripInfo3:tripInfo,ZM:ZM,zoomBy:zoomBy,zoomLevel:zoomLevel,FS:FS,fsSet:fsSet,fsTab:fsTab,immLv:immLv,immMult:immMult,immPct:immPct,get TS(){return TS;},get W(){return W;},get H(){return H;},TEST:TEST,testEnter:testEnter,testLeave:testLeave,testGive:testGive,testCan:testCan,SET:SET,setOpen:setOpen,setSwitch:setSwitch,setTheme:setTheme,setApply:setApply,SFX:SFX,LB:LB,RTERR:RTERR,rTile:rTile,curRegion:curRegion,regLook:regLook,WREG:WREG,wasteSpec:wasteSpec,lzWaste:lzWaste,musWant:musWant,lbOpen:lbOpen,lbHtml:lbHtml,lbSet:lbSet,lbLoad:lbLoad,lbWorld:lbWorld,lbCan:lbCan,offlineReady:offlineReady,sfxClick:sfxClick,clickBus:clickBus,buzz:buzz,clickTarget:clickTarget,VIBE:VIBE,lzClickSfx:lzClickSfx,testGive:testGive,testSection:testSection,lzMusic:lzMusic,bossWinSting:bossWinSting,leaveBattle:leaveBattle,cineGo:cineGo,cineReady:cineReady,MUS:MUS,musWant:musWant,musToggle:musToggle,musOn:musOn,BOOT:BOOT,bootNetDone:bootNetDone,bellToggle:bellToggle,GAME_VERSION_NAME:GAME_VERSION_NAME,verName:verName,syncBubble:syncBubble,bubTown:bubTown,mpBellMaybe:mpBellMaybe,mpOverlay:mpOverlay,showOverlay:showOverlay,hideOverlay:hideOverlay,seedsOf:seedsOf,doBuySeeds:doBuySeeds,chestAt:chestAt,leagueBonus:leagueBonus,claimable:claimable,doClaimV:doClaim,emptyFarms:emptyFarms,dangerLv:dangerLv,tripInfo2:tripInfo,scoutBtnRect:scoutBtnRect,scoutBtnState:scoutBtnState,worldTap:worldTap,GAME_VERSION:GAME_VERSION,CHANGELOG:CHANGELOG,bellOpen:bellOpen,verNotes:verNotes,verUnseen:verUnseen,EARTH:EARTH,E0:E0,earthStart:earthStart,earthMove:earthMove,earthCheck:earthCheck,earthTap:earthTap,earthIncome:earthIncome,regionState:regionState,canEnter:canEnter,regionCleared:regionCleared,earthPanel:earthPanel,earthFit:earthFit,earthZoomTo:earthZoomTo,drawEarth:drawEarth,regionMakes:regionMakes,gn:gn,doExpand:doExpand,nextLand:nextLand,landRow:landRow,buildMenu:buildMenu,LAND:LAND,MP:MP,mpPollWorlds:mpPollWorlds,mpPlayWorld:mpPlayWorld,mpEnter:mpEnter,mpActivate:mpActivate,mpApplyRoster:mpApplyRoster,mpPull:mpPull,mpSync:mpSync,mpEvents:mpEvents,mpAttack:mpAttack,mpGift:mpGift,mpResolveTrip:mpResolveTrip,openRealDiplo:openRealDiplo,mpDo:mpDo,mpGate:mpGate,mpGoOnline:mpGoOnline,mpClaim:mpClaim,mpIsMain:mpIsMain,enterColony:enterColony,exitColony:exitColony,openRaid:openRaid,doRaid:doRaid,raidOdds:raidOdds,applySteer:applySteer,doSurge:doSurge,doMutate:doMutate,battleBldAt:battleBldAt,AB:AB,ownedIncome:ownedIncome,mpRestoreList:mpRestoreList,mpRestore:mpRestore,mpBackup:mpBackup,mpCheckRemote:mpCheckRemote,mpPush:mpPush,mpOpenOffline:mpOpenOffline,mpTs:mpTs,mpGoOffline:mpGoOffline,mpSetMode:mpSetMode,bootState:bootState,get KEY(){return KEY;},mpPanel:mpPanel,worldPanelBase:worldPanelBase,mpDetail:mpDetail,mpPub:mpPub,startResearch:startResearch,tickResearch:tickResearch,openResearch:openResearch,researchBlock:researchBlock,slotsTotal:slotsTotal,resolveAttack:resolveAttack,startSterilize:startSterilize,claimTown:claimTown,buildTownLab:buildTownLab,popHit:popHit,ownedIncome:ownedIncome,ownedCount:ownedCount,attackTown:attackTown,adoptPlan:adoptPlan,addPlan:addPlan,doTrainSpy:doTrainSpy,townById:townById,tradePrices:tradePrices,relStatus:relStatus,WX:WX,wxRegion:wxRegion,wxFx:wxFx,wxActive:wxActive,wxVal:wxVal,wxNow:wxNow,wxStrike:wxStrike,wxBuild:wxBuild,wxToggle:wxToggle,wxUi:wxUi,tickWx:tickWx,shInfo:shInfo,shSet:shToggle,wxBolt:wxBolt,wxBldScreen:wxBldScreen,shIn:shIn,shToggle:shToggle,wxDrawSky:wxDrawSky,doRepair:doRepair,repairCost:repairCost,wxFcMin:wxFcMin,wxRange:wxRange,WXT:WXT,WX_SLOW:WX_SLOW,wxLine:wxLine,wxCard:wxCard}); window.__T4={WEV:WEV,wevAt:wevAt,wevNow:wevNow,wevNext:wevNext,wevOn:wevOn,wevUi:wevUi,wevOpen:wevOpen,wevBuy:wevBuy,wevShop:wevShop,wevDraw:wevDraw,cropYield:cropYield,tradeRate:tradeRate}; window.__T3={SPEC:SPEC,specGive:specGive,specRoll:specRoll,specById:specById,specSet:specSet,specCount:specCount,specMul:specMul,specOpen:specOpen,specShow:specShow,specReveal:specReveal,specAfterBattle:specAfterBattle,specNote:specNote,custOpen:custOpen,lkSet:lkSet,lookS:lookS,stColSet:stColSet,bannerSvg:bannerSvg,lkOpen:lkOpen,cropYield:cropYield,scol:scol}; window.__T2={crewS:crewS,spMake:spMake,spAdd:spAdd,spById:spById,crewMul:crewMul,crewOpen:crewOpen,spReveal:spReveal,recBoard:recBoard,recHire:recHire,spTrain:spTrain,spAssign:spAssign,expS:expS,expPlan:expPlan,expStart:expStart,expTick:expTick,expReport:expReport,expChoose:expChoose,expChance:expChance,EXPS:EXPS,scoutsHome:scoutsHome,get ui(){return ui;},cultureCost:cultureCost,tradeRate:tradeRate,tripInfo:tripInfo,wxFcMin:wxFcMin,upCost:upCost,addSamples:addSamples}; }
+if(typeof window.__QC==='function'){ window.__QC({get S(){return S;},set S(v){S=v;},get B(){return B;},genColony:genColony,startOutbreak:startOutbreak,stepOutbreak:stepOutbreak,endOutbreak:endOutbreak,releaseAt:releaseAt,drawRival:drawRival,drawHome:drawHome,frame:frame,doUpgrade:doUpgrade,doClaim:doClaim,doCollect:doCollect,collectAll:collectAll,doPlant:doPlant,doHarvest:doHarvest,doPlantAll:doPlantAll,doSell:doSell,doCulture:doCulture,saveStrain:saveStrain,startPlace:startPlace,doPlace:doPlace,setGhost:setGhost,homeClick:homeClick,fits:fits,renderPanel:renderPanel,basePanel:basePanel,labPanel:labPanel,roadPanel:roadPanel,editorPanel:editorPanel,ui:ui,setMode:setMode,tickEconomy:tickEconomy,P:P,BT:BT,silhouettes:silhouettes,orderBuildings:orderBuildings,load:load,sparams:sparams,newStrainDraft:newStrainDraft,strainById:strainById,cultureCost:cultureCost,labPoints:labPoints,traitCap:traitCap,cropProgress:cropProgress,cropReady:cropReady,CROPS:CROPS,TRAITS:TRAITS,VECTORS:VECTORS,ensureColony:ensureColony,openTowns:openTowns,openTown:openTown,sendScout:sendScout,tickWorld:tickWorld,resolveTrip:resolveTrip,resolveInfected:resolveInfected,drawWorld:drawWorld,spawnDrop:spawnDrop,worldPanel:worldPanel,worldTap:worldTap,doTrainScout:doTrainScout,tripInfo:tripInfo,fogAt:fogAt,exploredPct:exploredPct,checkInbox:checkInbox,initView:initView,initTown:initTown,openDiplo:openDiplo,openTrade:openTrade,doTrade:doTrade,doGift:doGift,proposeAlliance:proposeAlliance,endAlliance:endAlliance,sendMission:sendMission,resolveSteal:resolveSteal,resolveSpy:resolveSpy,advanceTowns:advanceTowns,offend:offend,projInfo:projInfo,KEYNOW:function(){return KEY;},mpCheckRemote:mpCheckRemote,mpPush:mpPush,income:income,buildCost:buildCost,paidFor:paidFor,doDemolish:doDemolish,stripWater:stripWater,renderAll:renderAll,renderHUD:renderHUD,buildableList:buildableList,CINE:CINE,cineClose:cineClose,bossCrumbStart:bossCrumbStart,bossCrumbDraw:bossCrumbDraw,crumbChunks:crumbChunks,CRUMB_DUR:CRUMB_DUR,fall:fall,HOWTO:HOWTO,tutOpen:tutOpen,tutSec:tutSec,tutMaybe:tutMaybe,tutNewGame:tutNewGame,tutSeen:tutSeen,TUTIMG:TUTIMG,spyCost:spyCost,nextCost:nextCost,affordCount:affordCount,sfxBuild:sfxBuild,lzBuildSfx:lzBuildSfx,rivalPow:rivalPow,rivalPct:rivalPct,rivalDef:rivalDef,rivalSetup:rivalSetup,rivalTick:rivalTick,rivalSealed:rivalSealed,rivalWarn:rivalWarn,bossHpBar:bossHpBar,PINCH:PINCH,CHEST_T:CHEST_T,chestPlay:chestPlay,chestClose:chestClose,chestT:chestT,get CHEST(){return CHEST;},lzChestSfx:lzChestSfx,drawChest:drawChest,ironOn:ironOn,genBoss:genBoss,startBoss:startBoss,bossSpawn:bossSpawn,bossTick:bossTick,bossAfter:bossAfter,bossOK:bossOK,bossAt:bossAt,bossHit:bossHit,drawBoss:drawBoss,bossHud:bossHud,updBHud:updBHud,bossShow:bossShow,bubPlaceHtml:bubPlaceHtml,traitOpen:traitOpen,vecOpen:vecOpen,TRAIT:TRAIT,VEC:VEC,BP:BP,futPal:futPal,ironOf:ironOf,cultureMult:cultureMult,scoutCost:scoutCost,sctLv:sctLv,doScoutTrain:doScoutTrain,baseMoves:baseMoves,COSTS:COSTS,LIM:LIM,MAXLV:MAXLV,upCost:upCost,bCap:bCap,tripInfo3:tripInfo,ZM:ZM,zoomBy:zoomBy,zoomLevel:zoomLevel,FS:FS,fsSet:fsSet,fsTab:fsTab,immLv:immLv,immMult:immMult,immPct:immPct,get TS(){return TS;},get W(){return W;},get H(){return H;},TEST:TEST,testEnter:testEnter,testLeave:testLeave,testGive:testGive,testCan:testCan,SET:SET,setOpen:setOpen,setSwitch:setSwitch,setTheme:setTheme,setApply:setApply,SFX:SFX,LB:LB,RTERR:RTERR,rTile:rTile,curRegion:curRegion,regLook:regLook,WREG:WREG,wasteSpec:wasteSpec,lzWaste:lzWaste,musWant:musWant,lbOpen:lbOpen,lbHtml:lbHtml,lbSet:lbSet,lbLoad:lbLoad,lbWorld:lbWorld,lbCan:lbCan,offlineReady:offlineReady,sfxClick:sfxClick,clickBus:clickBus,buzz:buzz,clickTarget:clickTarget,VIBE:VIBE,lzClickSfx:lzClickSfx,testGive:testGive,testSection:testSection,lzMusic:lzMusic,bossWinSting:bossWinSting,leaveBattle:leaveBattle,cineGo:cineGo,cineReady:cineReady,MUS:MUS,musWant:musWant,musToggle:musToggle,musOn:musOn,BOOT:BOOT,bootNetDone:bootNetDone,bellToggle:bellToggle,GAME_VERSION_NAME:GAME_VERSION_NAME,verName:verName,syncBubble:syncBubble,bubTown:bubTown,mpBellMaybe:mpBellMaybe,mpOverlay:mpOverlay,showOverlay:showOverlay,hideOverlay:hideOverlay,seedsOf:seedsOf,doBuySeeds:doBuySeeds,chestAt:chestAt,leagueBonus:leagueBonus,claimable:claimable,doClaimV:doClaim,emptyFarms:emptyFarms,dangerLv:dangerLv,tripInfo2:tripInfo,scoutBtnRect:scoutBtnRect,scoutBtnState:scoutBtnState,worldTap:worldTap,GAME_VERSION:GAME_VERSION,CHANGELOG:CHANGELOG,bellOpen:bellOpen,verNotes:verNotes,verUnseen:verUnseen,EARTH:EARTH,E0:E0,earthStart:earthStart,earthMove:earthMove,earthCheck:earthCheck,earthTap:earthTap,earthIncome:earthIncome,regionState:regionState,canEnter:canEnter,regionCleared:regionCleared,earthPanel:earthPanel,earthFit:earthFit,earthZoomTo:earthZoomTo,drawEarth:drawEarth,regionMakes:regionMakes,gn:gn,doExpand:doExpand,nextLand:nextLand,landRow:landRow,buildMenu:buildMenu,LAND:LAND,MP:MP,mpPollWorlds:mpPollWorlds,mpPlayWorld:mpPlayWorld,mpEnter:mpEnter,mpActivate:mpActivate,mpApplyRoster:mpApplyRoster,mpPull:mpPull,mpSync:mpSync,mpEvents:mpEvents,mpAttack:mpAttack,mpGift:mpGift,mpResolveTrip:mpResolveTrip,openRealDiplo:openRealDiplo,mpDo:mpDo,mpGate:mpGate,mpGoOnline:mpGoOnline,mpClaim:mpClaim,mpIsMain:mpIsMain,enterColony:enterColony,exitColony:exitColony,openRaid:openRaid,doRaid:doRaid,raidOdds:raidOdds,applySteer:applySteer,doSurge:doSurge,doMutate:doMutate,battleBldAt:battleBldAt,AB:AB,ownedIncome:ownedIncome,mpRestoreList:mpRestoreList,mpRestore:mpRestore,mpBackup:mpBackup,mpCheckRemote:mpCheckRemote,mpPush:mpPush,mpOpenOffline:mpOpenOffline,mpTs:mpTs,mpGoOffline:mpGoOffline,mpSetMode:mpSetMode,bootState:bootState,get KEY(){return KEY;},mpPanel:mpPanel,worldPanelBase:worldPanelBase,mpDetail:mpDetail,mpPub:mpPub,startResearch:startResearch,tickResearch:tickResearch,openResearch:openResearch,researchBlock:researchBlock,slotsTotal:slotsTotal,resolveAttack:resolveAttack,startSterilize:startSterilize,claimTown:claimTown,buildTownLab:buildTownLab,popHit:popHit,ownedIncome:ownedIncome,ownedCount:ownedCount,attackTown:attackTown,adoptPlan:adoptPlan,addPlan:addPlan,doTrainSpy:doTrainSpy,townById:townById,tradePrices:tradePrices,relStatus:relStatus,WX:WX,wxRegion:wxRegion,wxFx:wxFx,wxActive:wxActive,wxVal:wxVal,wxNow:wxNow,wxStrike:wxStrike,wxBuild:wxBuild,wxToggle:wxToggle,wxUi:wxUi,tickWx:tickWx,shInfo:shInfo,shSet:shToggle,wxBolt:wxBolt,wxBldScreen:wxBldScreen,shIn:shIn,shToggle:shToggle,wxDrawSky:wxDrawSky,doRepair:doRepair,repairCost:repairCost,wxFcMin:wxFcMin,wxRange:wxRange,WXT:WXT,WX_SLOW:WX_SLOW,wxLine:wxLine,wxCard:wxCard}); window.__T5={TECH:TECH,techS:techS,techBuy:techBuy,techOpen:techOpen,techState:techState,techSum:techSum,techParams:techParams,sparams:sparams,chestSpin:chestSpin,spinDone:spinDone,missS:missS,genColony:genColony,colOver:colOver,colShape:colShape,colFit:colFit,colRect:colRect,CDIM:CDIM,CKIND:CKIND,CBIOME:CBIOME,get SPIN(){return SPIN;},get ui(){return ui;}}; window.__T4={WEV:WEV,wevAt:wevAt,wevNow:wevNow,wevNext:wevNext,wevOn:wevOn,wevUi:wevUi,wevOpen:wevOpen,wevBuy:wevBuy,wevShop:wevShop,wevDraw:wevDraw,cropYield:cropYield,tradeRate:tradeRate}; window.__T3={SPEC:SPEC,specGive:specGive,specRoll:specRoll,specById:specById,specSet:specSet,specCount:specCount,specMul:specMul,specOpen:specOpen,specShow:specShow,specReveal:specReveal,specAfterBattle:specAfterBattle,specNote:specNote,custOpen:custOpen,lkSet:lkSet,lookS:lookS,stColSet:stColSet,bannerSvg:bannerSvg,lkOpen:lkOpen,cropYield:cropYield,scol:scol}; window.__T2={crewS:crewS,spMake:spMake,spAdd:spAdd,spById:spById,crewMul:crewMul,crewOpen:crewOpen,spReveal:spReveal,recBoard:recBoard,recHire:recHire,spTrain:spTrain,spAssign:spAssign,expS:expS,expPlan:expPlan,expStart:expStart,expTick:expTick,expReport:expReport,expChoose:expChoose,expChance:expChance,EXPS:EXPS,scoutsHome:scoutsHome,get ui(){return ui;},cultureCost:cultureCost,tradeRate:tradeRate,tripInfo:tripInfo,wxFcMin:wxFcMin,upCost:upCost,addSamples:addSamples}; }
 })();
 </script>
 </body>
