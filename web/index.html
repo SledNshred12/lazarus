@@ -518,6 +518,17 @@ html:not(.inbattle) #bBonus{display:none!important}
 .clearth{display:flex;gap:10px;align-items:center;padding:8px 10px;margin:0 0 8px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}.clearth .info{flex:1;min-width:0}.clearth .name{font-weight:800}.clearth .sub{font-size:12px;color:var(--ink-2)}
 .delwarn{padding:10px 12px;border-radius:12px;background:rgba(179,38,30,.12);border:1.5px solid #B3261E;color:#8A1D16;font-weight:700}\n.linkbtn{border:0;background:transparent;font:inherit;font-size:13px;text-decoration:underline;color:var(--ink-2);padding:6px}.linkbtn.danger{color:#B3261E}\n.acct.pfp .cldot{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border:2px solid var(--bg,#14110C)}
 
+.rpkinds{display:flex;flex-wrap:wrap;gap:6px}.rpkinds .btn.on{background:var(--accent);color:var(--accent-ink);box-shadow:none}
+.rptxt{width:100%;box-sizing:border-box;resize:vertical;min-height:110px;font:inherit;line-height:1.35;margin-top:4px}
+.rpcount{text-align:right;font-size:12px;margin-top:2px}
+.rpchk{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:13px;color:var(--ink-2)}.rpchk input{margin-top:2px;width:18px;height:18px;flex:none}
+.rpitem{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0;background:var(--surface)}.rpitem.done{opacity:.7}
+.rphead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.rphead .muted{font-size:12px}
+.rpbody{margin-top:4px;white-space:pre-wrap;word-break:break-word}
+.rpmeta{font-size:12px;margin-top:6px}.rpinfo{margin-top:6px;padding:8px 10px;border-radius:8px;background:var(--surface-2);font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-word}
+.rpbtns{margin-top:8px!important}
+.rptabs{box-shadow:inset 0 0 0 1px var(--line);margin-bottom:6px}.rptabs button.on{background:var(--accent);color:var(--accent-ink)}
+
 .miss{margin-bottom:14px}.mhd{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 4px}.mhd b{font-size:15px}
 .mrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(128,110,80,.2)}.mrow .info{flex:1;min-width:0}.mrow .name{font-weight:700}.mrow .sub{font-size:12px;opacity:.85}
 .mrow.got{opacity:.55}.mrow .bar.sm{margin:4px 0 3px}.mchest .name{color:#B07A10}
@@ -3221,8 +3232,8 @@ function earthPanel(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=101;
-var CHANGELOG=[{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=102;
+var CHANGELOG=[{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -3778,6 +3789,7 @@ document.addEventListener('click',function(e){
     else if(act==='delacct') delAcctOpen();
     else if(act==='delacctgo') delAcctGo();
     else if(CLACTS[act]) clAct(act,el);
+    else if(RPACTS[act]) rpAct(act,el);
     else if(act==='specopen') specOpen();
     else if(act==='techopen'){ ui.techSel=null; techOpen(); }
     else if(act==='techsel'){ ui.techSel=el.getAttribute('data-id'); techOpen(); }
@@ -4616,7 +4628,7 @@ function mpOverlay(step){
     var isM=MP.primary&&MP.primary===MP.dev;
     h+='<div class="row"><div class="info"><div class="name">Main device</div><div class="sub">'+(isM?'This device ('+esc(mpDevLabel())+')':(MP.primary?esc(MP.primaryLabel||'Another device'):'Not set yet. The first device you play on becomes it.'))+'. Only your main device saves to your account. Switch here when you change devices.</div></div><div class="acts">'+(isM?'':'<button class="btn sm primary" data-ov="mp" data-do="claim" type="button">Make this my main device</button>')+'</div></div>';
     h+='<p class="hint">Your offline and online colonies are separate, and both are saved to your account so they follow you to any phone or computer.</p>';
-    h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button>':'')+'<button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div><div class="btns" style="margin-top:0"><button class="linkbtn danger" data-act="delacct" type="button">Delete account</button></div>';
+    h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button><button class="btn" data-act="rplist" type="button">Reports</button>':'')+'<button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div><div class="btns" style="margin-top:0"><button class="linkbtn danger" data-act="delacct" type="button">Delete account</button></div>';
   } else if(step==='signup'){
     h=h.replace('<h2>Play online</h2>','<h2>Create account</h2>');
     h+='<p class="muted">Pick a username, then use your email and a password of at least 8 characters.</p><div><label class="muted" for="mpSuName">Username</label><input class="txt" id="mpSuName" maxlength="20" autocomplete="nickname" autocapitalize="none" value="'+esc(MP.suName||'')+'"><div class="muted" style="font-size:12px;margin-top:2px">Other players see this. 2 to 20 letters, numbers, spaces, dots, dashes or underscores.</div></div><div><label class="muted" for="mpEmail">Email</label><input class="txt" id="mpEmail" type="email" autocomplete="username" autocapitalize="none" value="'+esc(MP.email||'')+'"></div><div><label class="muted" for="mpPw1">Password</label><input class="txt" id="mpPw1" type="password" autocomplete="new-password"></div><div><label class="muted" for="mpPw2">Type it again</label><input class="txt" id="mpPw2" type="password" autocomplete="new-password"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="signup" type="button">Create account</button><button class="btn" data-ov="mp" data-do="open" type="button">Back to sign in</button></div>';
@@ -6285,6 +6297,7 @@ function settingsHTML(){
   h+=setRow('Screen shake and flashes','Turn off if it bothers your eyes',setSw('shake',SET.shake));
   if(navigator.wakeLock) h+=setRow('Keep screen on','Your screen won’t dim or lock while Lazarus is open',setSw('awake',SET.awake));
   h+='<div class="sethd">Help</div>';
+  h+='<div class="setrow"><div class="setl"><b>Report a problem</b><span class="muted">Something broken or not working right? Tell us</span></div><button class="btn sm" data-act="report" type="button">Report</button></div>';
   h+='<div class="setrow"><div class="setl"><b>How to play</b><span class="muted">A guide with pictures for every part of the game</span></div><button class="btn sm primary" data-act="tut" type="button">Open</button></div>';
   h+='<div class="sethd">About</div>';
   h+='<div class="setrow"><div class="setl"><b>Achievements</b><span class="muted">Goals to beat, with credits for each one</span></div><button class="btn sm" data-act="ach" type="button">Open</button></div>';
@@ -8220,6 +8233,88 @@ function delAcctGo(){
     try{ MP.sb.auth.signOut(); }catch(e){}
     if(KEY!==KEY_OFF) mpSwapSave(KEY_OFF); hideOverlay(); renderAll(); toast('Your account was deleted.');
   }).catch(function(e){ CL.busy=false; mpTimers&&MP.on&&mpTimers(); toast('Could not delete the account ('+clErr(e)+').'); });
+}
+
+/* ================= report a problem (0.77.3) ================= */
+var RP={kind:'bug',info:true,txt:'',list:null,filter:'open',open:null,sending:false,errs:[]};
+(function(){
+  function keep(m){ try{ m=String(m||'').slice(0,200); if(!m) return; RP.errs.push(new Date().toISOString().slice(11,19)+' '+m); if(RP.errs.length>6) RP.errs.shift(); }catch(e){} }
+  window.addEventListener('error',function(e){ keep((e&&e.message)||'error'); });
+  window.addEventListener('unhandledrejection',function(e){ var r=e&&e.reason; keep('promise: '+((r&&(r.message||r.code))||r)); });
+})();
+var RP_KINDS=[['bug','Something broke'],['account','Account or sign-in'],['player','A player'],['idea','Idea'],['other','Other']];
+var RPACTS={report:1,rpkind:1,rpinfo:1,rpsend:1,rplist:1,rpfilter:1,rpopen:1,rpset:1};
+function rpInfo(){
+  var i={v:GAME_VERSION_NAME,at:new Date().toISOString()};
+  try{ i.device=navigator.userAgent.slice(0,160); i.screen=innerWidth+'x'+innerHeight; }catch(e){}
+  try{ i.where=(typeof mode!=='undefined'?mode:'?')+'/'+(ui&&ui.tab||'?'); }catch(e){}
+  try{ i.world=MP.on?'online':'offline'; i.signedIn=!!MP.user; if(MP.pname) i.name=MP.pname; if(CL&&CL.me&&CL.me.clan) i.clan=CL.me.clan.name; }catch(e){}
+  try{ i.colony={credits:Math.floor(S.credits||0),food:Math.floor(S.food||0),samples:sampleCount(),trophies:S.trophies||0,wins:S.wins||0}; }catch(e){}
+  if(RP.errs.length) i.errors=RP.errs.slice();
+  return i;
+}
+function rpHtml(msg){
+  var h='<div class="rp"><h2 style="margin:0 0 6px">Report a problem</h2><p class="muted" style="margin:0 0 10px">Tell us what happened. The more detail the better: what you pressed, what you expected, and what you saw instead.</p>';
+  h+='<div class="sethd" style="margin-top:0">What is it about?</div><div class="rpkinds">';
+  RP_KINDS.forEach(function(k){ h+='<button class="btn sm'+(RP.kind===k[0]?' on':'')+'" data-act="rpkind" data-k="'+k[0]+'" type="button" aria-pressed="'+(RP.kind===k[0])+'">'+k[1]+'</button>'; });
+  h+='</div><label class="muted" for="rpTxt" style="display:block;margin-top:10px">What happened?</label><textarea id="rpTxt" class="txt rptxt" maxlength="1000" rows="5" placeholder="Example: I pressed Launch an outbreak and it took me to the Virus lab instead.">'+esc(RP.txt)+'</textarea>';
+  h+='<div class="rpcount muted" id="rpCount">'+RP.txt.length+' / 1000</div>';
+  h+='<label class="rpchk"><input type="checkbox" data-act="rpinfo"'+(RP.info?' checked':'')+'> <span>Send game info too (version, device, screen, and your colony numbers). It helps find the problem.</span></label>';
+  if(msg) h+='<p class="hint" style="color:var(--danger)">'+esc(msg)+'</p>';
+  h+='<div class="btns"><button class="btn primary" data-act="rpsend" type="button"'+(RP.sending?' disabled':'')+'>'+(RP.sending?'Sending...':'Send report')+'</button><button class="btn" data-ov="close" type="button">Cancel</button></div></div>';
+  return h;
+}
+function rpOpen(){ RP.sending=false; showOverlay(rpHtml()); rpBind(); }
+function rpBind(){ var t=document.getElementById('rpTxt'); if(!t) return; t.addEventListener('input',function(){ RP.txt=t.value; var c=document.getElementById('rpCount'); if(c) c.textContent=t.value.length+' / 1000'; }); }
+function rpRender(msg){ var c=document.getElementById('ovCard'); if(!c||!c.querySelector('.rp')) return; var t=document.getElementById('rpTxt'); if(t) RP.txt=t.value; c.innerHTML=rpHtml(msg); rpBind(); }
+function rpSend(){
+  var t=document.getElementById('rpTxt'); if(t) RP.txt=t.value;
+  var body=RP.txt.trim();
+  if(body.length<3){ rpRender('Write a few words about what happened.'); return; }
+  if(!MP.sb){ rpRender('Reports need an internet connection. Try again when you are online.'); return; }
+  RP.sending=true; rpRender();
+  var done=false, timer=setTimeout(function(){ if(done) return; done=true; RP.sending=false; rpRender('No answer from the server. Check your connection and try again.'); },15000);
+  MP.sb.rpc('lz_issue_send',{p_kind:RP.kind,p_body:body,p_info:RP.info?rpInfo():{}}).then(function(r){
+    if(done) return; done=true; clearTimeout(timer); RP.sending=false;
+    if(r&&r.error){ var m=String(r.error.message||''); rpRender(/too_many/.test(m)?'You have sent a lot of reports. Try again in an hour.':/too_short/.test(m)?'Write a few words about what happened.':'Could not send ('+(typeof mpErr==='function'?mpErr(r.error):m)+').'); return; }
+    RP.txt=''; RP.kind='bug';
+    showOverlay('<h2>Thanks!</h2><p>Your report was sent. We read every one.</p><div class="btns"><button class="btn primary" data-ov="close" type="button">Done</button></div>');
+  }).catch(function(e){ if(done) return; done=true; clearTimeout(timer); RP.sending=false; rpRender('Could not send. Check your connection and try again.'); });
+}
+/* ---- admin: read reports ---- */
+function rpAgo(ms){ var s=Math.max(0,(Date.now()-ms)/1000); return s<60?'just now':s<3600?Math.floor(s/60)+'m ago':s<86400?Math.floor(s/3600)+'h ago':Math.floor(s/86400)+'d ago'; }
+function rpListHtml(msg){
+  var h='<div class="rp"><h2 style="margin:0 0 6px">Problem reports</h2><div class="crewtabs rptabs">';
+  [['open','Open'],['fixed','Fixed'],['all','All']].forEach(function(f){ h+='<button class="'+(RP.filter===f[0]?'on':'')+'" data-act="rpfilter" data-k="'+f[0]+'" type="button">'+f[1]+'</button>'; });
+  h+='</div>';
+  if(msg) h+='<p class="hint">'+esc(msg)+'</p>';
+  if(!RP.list) h+='<p class="muted">Loading...</p>';
+  else if(!RP.list.length) h+='<p class="muted">No '+(RP.filter==='all'?'':RP.filter+' ')+'reports.</p>';
+  else RP.list.forEach(function(it){
+    var kind=(RP_KINDS.filter(function(k){ return k[0]===it.kind; })[0]||[0,it.kind])[1], op=RP.open===it.id;
+    h+='<div class="rpitem'+(it.status!=='open'?' done':'')+'"><div class="rphead"><b>'+esc(it.name||'Signed out player')+'</b><span class="muted">'+esc(kind)+' · '+rpAgo(it.at)+(it.status!=='open'?' · '+esc(it.status):'')+'</span></div>';
+    h+='<div class="rpbody">'+esc(it.body)+'</div>';
+    if(op){ if(it.email) h+='<div class="muted rpmeta">'+esc(it.email)+'</div>'; var inf=it.info||{}; var lines=Object.keys(inf).map(function(k){ var v=inf[k]; return esc(k)+': '+esc(typeof v==='object'?JSON.stringify(v):String(v)); }); if(lines.length) h+='<div class="rpinfo">'+lines.join('<br>')+'</div>'; }
+    h+='<div class="btns rpbtns"><button class="btn sm" data-act="rpopen" data-id="'+it.id+'" type="button">'+(op?'Less':'Details')+'</button>'+(it.status==='open'?'<button class="btn sm primary" data-act="rpset" data-id="'+it.id+'" data-s="fixed" type="button">Mark fixed</button><button class="btn sm" data-act="rpset" data-id="'+it.id+'" data-s="closed" type="button">Dismiss</button>':'<button class="btn sm" data-act="rpset" data-id="'+it.id+'" data-s="open" type="button">Reopen</button>')+'</div></div>';
+  });
+  h+='<div class="btns"><button class="btn" data-ov="mp" data-do="acct" type="button">Back</button><button class="btn" data-ov="close" type="button">Close</button></div></div>';
+  return h;
+}
+function rpList(){ RP.list=null; showOverlay(rpListHtml()); rpLoad(); }
+function rpLoad(msg){
+  mpR('lz_issue_list',{p_status:RP.filter}).then(function(r){ if(r&&r.error) throw r.error; RP.list=(r&&r.data)||[]; rpListRender(msg); }).catch(function(e){ RP.list=[]; rpListRender('Could not load reports ('+(typeof mpErr==='function'?mpErr(e):e)+').'); });
+}
+function rpListRender(msg){ var c=document.getElementById('ovCard'); if(!c||!c.querySelector('.rptabs')) return; var st=c.scrollTop; c.innerHTML=rpListHtml(msg); c.scrollTop=st; }
+function rpAct(act,el){
+  var k=el.getAttribute('data-k'), id=+el.getAttribute('data-id');
+  if(act==='report'){ rpOpen(); return; }
+  if(act==='rpkind'){ RP.kind=k; rpRender(); return; }
+  if(act==='rpinfo'){ RP.info=!!el.checked; return; }
+  if(act==='rpsend'){ if(!RP.sending) rpSend(); return; }
+  if(act==='rplist'){ rpList(); return; }
+  if(act==='rpfilter'){ RP.filter=k; RP.list=null; rpListRender(); rpLoad(); return; }
+  if(act==='rpopen'){ RP.open=RP.open===id?null:id; rpListRender(); return; }
+  if(act==='rpset'){ var s=el.getAttribute('data-s'); mpR('lz_issue_set',{p_id:id,p_status:s}).then(function(r){ if(r&&r.error) throw r.error; rpLoad(s==='fixed'?'Marked fixed.':s==='closed'?'Dismissed.':'Reopened.'); }).catch(function(e){ rpListRender('Could not update ('+(typeof mpErr==='function'?mpErr(e):e)+').'); }); return; }
 }
 
 /* ================= colony types, places, leaders, goals and battle events (0.75.0) =================
