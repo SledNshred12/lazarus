@@ -483,6 +483,32 @@ html:not(.inbattle) #bBonus{display:none!important}
 .spinres{margin:14px 0 0;padding:10px;border-radius:12px;border:2px solid var(--rc);background:color-mix(in srgb,var(--rc) 14%,var(--surface));display:flex;flex-direction:column;gap:2px;animation:sres .4s ease-out}.spinres b{font-size:18px}.spinres span{font-size:12px}
 @keyframes sres{from{opacity:0;transform:translateY(8px)}}
 
+/* clans */
+.cltag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:1px 6px;border-radius:6px;color:#fff;background:var(--cc);text-shadow:0 1px 1px rgba(0,0,0,.35);vertical-align:1px}
+.clhead{display:flex;gap:12px;align-items:center}.clhead .info{flex:1;min-width:0}.clname{font-family:var(--font-display);font-size:22px;letter-spacing:.03em;line-height:1.1}
+.clhead .sub,.clrow .sub{font-size:12.5px;color:var(--ink-2)}
+.clan .crewtabs button{white-space:nowrap;padding-left:4px;padding-right:4px}
+.cldot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#D8433A;vertical-align:1px}
+.clrow{display:flex;gap:10px;align-items:center;padding:9px 2px;border-top:1px solid rgba(128,110,80,.22)}.clrow .info{flex:1;min-width:0}.clrow .name{font-weight:800}
+.clrow.mine{background:rgba(92,122,18,.1);border-radius:10px}.clrk{width:22px;text-align:center;font-size:16px}
+.clpf{position:relative;flex:none;display:inline-flex}.clpf .pfpi,.clpf .pfpl{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;object-fit:cover;color:#F3EAD3;font-weight:800}.clpf .pdot{width:11px;height:11px}.clpf .pdot.on{background:#3FCF6B}
+.clrole{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 6px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);vertical-align:1px}.clrole.r3{background:#D9A520;color:#2A1E00}.clrole.r2{background:#4A86C8;color:#fff}
+.clopts{padding:4px 2px 10px 50px}.cldon{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.clcode{display:flex;align-items:center;gap:8px;padding:10px;border-radius:12px;background:var(--surface-2);margin:10px 0 4px}.clcode>div{flex:1;display:flex;flex-direction:column}.clcode b{font-size:22px;letter-spacing:.22em}
+.clchat{height:min(46vh,380px);overflow-y:auto;margin-top:10px;padding:8px;border-radius:12px;background:#1E1A14;display:flex;flex-direction:column;gap:6px}
+.clsys{align-self:center;font-size:11.5px;color:#A89B82;text-align:center;padding:2px 8px}
+.clmsg{display:flex}.clmsg.me{justify-content:flex-end}.clb{max-width:82%;padding:6px 10px;border-radius:12px;background:#2E2820;color:#EDE3CE}.clmsg.me .clb{background:#3E4A22}
+.clmeta{display:flex;align-items:center;gap:6px;font-size:11px;color:#B8AC94}.clmeta b{color:#F3EAD3;font-size:12px}.clmore{margin-left:auto;border:0;background:transparent;color:#B8AC94;font:inherit;font-weight:800;padding:0 2px}
+.cltext{font-size:14.5px;line-height:1.35;word-wrap:break-word;overflow-wrap:anywhere}.clmenu{display:flex;gap:6px;margin-top:6px}
+.clsend{display:flex;gap:6px;margin-top:8px}.clsend .txt{flex:1;margin:0}
+.clsrch{display:flex;gap:6px;margin:10px 0 4px}.clsrch .txt{flex:1;margin:0}
+.clmk .txt{margin-bottom:6px}.clmkb{display:flex;align-items:center;gap:10px;margin:10px 0}.clmkb span{font-size:12px}
+.clrew{display:flex;flex-direction:column;gap:4px;font-size:13px}.clrew b{display:inline-block;min-width:96px}
+.clhow{margin:4px 0 0;padding-left:18px;font-size:13px;color:var(--ink-2)}.clhow li{margin:3px 0}
+.clctl{margin-top:6px}.clbar{display:flex;align-items:center;gap:8px;margin:4px 0}.clbar i{flex:1;height:9px;border-radius:5px;background:var(--surface-2);overflow:hidden}.clbar i b{display:block;height:100%;border-radius:5px}.clbar .num{min-width:42px;text-align:right;font-size:12px;font-weight:800}.clbar.me .cltag{box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--ink)}
+.clearth{display:flex;gap:10px;align-items:center;padding:8px 10px;margin:0 0 8px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}.clearth .info{flex:1;min-width:0}.clearth .name{font-weight:800}.clearth .sub{font-size:12px;color:var(--ink-2)}
+.delwarn{padding:10px 12px;border-radius:12px;background:rgba(179,38,30,.12);border:1.5px solid #B3261E;color:#8A1D16;font-weight:700}\n.linkbtn{border:0;background:transparent;font:inherit;font-size:13px;text-decoration:underline;color:var(--ink-2);padding:6px}.linkbtn.danger{color:#B3261E}\n.acct.pfp .cldot{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border:2px solid var(--bg,#14110C)}
+
 .miss{margin-bottom:14px}.mhd{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 4px}.mhd b{font-size:15px}
 .mrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(128,110,80,.2)}.mrow .info{flex:1;min-width:0}.mrow .name{font-weight:700}.mrow .sub{font-size:12px;opacity:.85}
 .mrow.got{opacity:.55}.mrow .bar.sm{margin:4px 0 3px}.mchest .name{color:#B07A10}
@@ -2284,6 +2310,7 @@ function endOutbreak(reason){
   var evoNote=''; try{ evoNote=evoAfterBattle(win,stars); missBattle(win,stars); }catch(e){}
   var specN=''; try{ specN=specAfterBattle(win,stars); }catch(e){}
   try{ specN=techAfterBattle(win,stars)+specN; }catch(e){}
+  try{ if(win&&!B.boss) specN=clContrib(stars)+specN; }catch(e){}
   save();
   var unl=[]; TRAITS.forEach(function(k){ if(TRAIT[k].unlock>oldPeak&&TRAIT[k].unlock<=S.peak) unl.push('Trait: '+tName(k)); });
   VECTORS.forEach(function(v){ if(VEC[v].unlock>oldPeak&&VEC[v].unlock<=S.peak) unl.push('Vector: '+VEC[v].name); });
@@ -2970,7 +2997,7 @@ function earthPaths(){
   for(var k in EARTH.R){ EP.r[k]=new Path2D(EARTH.R[k].d); EP.c[k]=EARTH.R[k].cs.map(function(c){ return new Path2D(c[1]); }); }
   return EP;
 }
-function earthOn(){ return !(typeof MP!=='undefined'&&MP&&MP.on); }
+function earthOn(){ return !(typeof MP!=='undefined'&&MP&&MP.on)||!!(MP&&MP.global); }
 function E0(){
   if(!S.earth||typeof S.earth!=='object') S.earth={start:null,cur:null,held:{},past:{},acc:{c:0,f:0,s:0}};
   var e=S.earth; if(!e.held) e.held={}; if(!e.past) e.past={}; if(!e.acc) e.acc={c:0,f:0,s:0};
@@ -2981,7 +3008,7 @@ function regionName(k){ return EARTH.R[k]?EARTH.R[k].n:String(k); }
 function heldCount(){ return Object.keys(E0().held).length; }
 function regionProgress(){ var t=(S.world&&S.world.towns)||[]; return {done:t.filter(function(x){ return x.owned||x.dead; }).length, all:t.length}; }
 function regionCleared(){ var p=regionProgress(); return p.all>0&&p.done===p.all; }
-function canEnter(k){ var e=E0(); if(!e.start||!EARTH.R[k]||e.held[k]||k===e.cur) return false; return EARTH.R[k].adj.some(function(a){ return !!e.held[a]; }); }
+function canEnter(k){ var e=E0(); if(!e.start||!EARTH.R[k]||e.held[k]||k===e.cur) return false; return EARTH.R[k].adj.some(function(a){ return !!e.held[a]; })||clCanEnter(k); }
 function regionState(k){ var e=E0(); if(!e.start) return 'pick'; if(e.held[k]) return 'own'; if(k===e.cur) return 'here'; if(canEnter(k)) return 'open'; return 'locked'; }
 function regionMakes(k){ var t={credits:0,food:0,samples:0}; EARTH.R[k].cs.forEach(function(c){ t[c[3]]+=c[4]; }); return t; }
 function earthIncome(){
@@ -3033,7 +3060,7 @@ function earthStart(k){
 }
 function earthMove(k){
   var e=E0(); if(!earthOn()||mode!=='home'||!e.start) return;
-  if(!e.held[e.cur]){ toast('Clear '+regionName(e.cur)+' first.'); return; }
+  if(!e.held[e.cur]&&!clCanEnter(k)){ toast('Clear '+regionName(e.cur)+' first.'); return; }
   if(!canEnter(k)) return;
   var oi=ownedIncome(); if(oi.n) e.past[e.cur]={c:Math.round(oi.c),f:Math.round(oi.f),n:oi.n};
   var lost=S.scouts||0; S.scouts=0; e.moves=(e.moves||0)+1;
@@ -3078,6 +3105,7 @@ function drawEarth(dt,time){
     EARTH.R[k].cs.forEach(function(c,j){ ctx.globalAlpha=st==='own'?.92:.55; ctx.fillStyle=RCOL[c[3]][0]; ctx.fill(P2.c[k][j]); });
     ctx.globalAlpha=1;
   });
+  if(clOn()) keys.forEach(function(k){ var o=clOwner(k); if(!o) return; ctx.globalAlpha=.55+(o.me?.1*Math.sin(time*2.4):0); ctx.fillStyle=o.color; ctx.fill(P2.r[k]); ctx.globalAlpha=1; });
   ctx.strokeStyle='rgba(0,0,0,.30)'; ctx.lineWidth=.5/v.s; ctx.stroke(P2.inner);
   if(WX.scan) wxDrawScan(ctx,v);
   keys.forEach(function(k){
@@ -3105,7 +3133,7 @@ function drawEarth(dt,time){
       ctx.fillStyle='#8A8070'; ctx.strokeStyle='#2A1F0E'; ctx.lineWidth=1.2; ctx.fillRect(q.x-6,q.y-18,12,9); ctx.strokeRect(q.x-6,q.y-18,12,9); ctx.fillStyle='#E58B4B'; ctx.fillRect(q.x-2,q.y-15,4,6); }
     var show=bw>44||ui.esel===k||st==='here';
     if(!show) return;
-    var txt=R.n; if(st==='here'){ var pr=regionProgress(); txt+=' · '+pr.done+'/'+pr.all; }
+    var txt=R.n, oc=clOn()&&clOwner(k); if(oc) txt+=' ['+oc.tag+']'; if(st==='here'){ var pr=regionProgress(); txt+=' · '+pr.done+'/'+pr.all; }
     ctx.font='700 '+(bw>110?11:9.5)+'px sans-serif';
     var tw=ctx.measureText(txt).width+4; if(!fitsLabel(q.x-tw/2,q.y-7,tw,14)&&ui.esel!==k&&st!=='here') return;
     ctx.lineWidth=3; ctx.strokeStyle='rgba(15,12,8,.92)'; ctx.lineJoin='round'; ctx.miterLimit=2; ctx.strokeText(txt,q.x,q.y); ctx.fillStyle=st==='locked'?'#A89B82':'#F3EAD3'; ctx.fillText(txt,q.x,q.y);
@@ -3156,6 +3184,7 @@ function earthPanel(){
   var pr=regionProgress();
   h+='<div class="facts"><div class="fact"><b class="num">'+heldCount()+' / '+nKeys+'</b><span>regions held</span></div><div class="fact"><b class="num">'+pr.done+' / '+pr.all+'</b><span>colonies taken in '+esc(regionName(e.cur))+'</span></div><div class="fact"><b class="num">'+dangerLv()+'</b><span>Danger level</span></div></div>';
   var eiN=earthIncome(); h+='<p class="muted" style="margin:0">Every minute from Earth: '+makesText(eiN)+(eiN.samples?' \u00b7 next samples in '+earthSampleWait():'')+'</p>';
+  if(clOn()){ h+=clEarthTop(); if(!k&&S.earth.cur) h+='<div class="ecard"><div class="name">'+esc(regionName(S.earth.cur))+' <span style="color:#B5621F">· you are here</span></div>'+clRegionCard(S.earth.cur)+'</div>'; }
   h+=wxCard(k);
   if(k){
     var st=regionState(k), R=EARTH.R[k], nb=R.adj.map(regionName).join(', ');
@@ -3167,21 +3196,22 @@ function earthPanel(){
       h+='<div class="name">'+esc(R.n)+' <span style="color:#B5621F">· you are here</span></div><div class="sub">'+pr.done+' of '+pr.all+' colonies taken or silent. Clear them all and its countries make '+makesText(regionMakes(k))+' a minute for good.</div>'+
          '<div class="btns"><button class="btn primary" data-tab="world" type="button">Go to the Wasteland</button></div>';
     } else if(st==='open'){
-      var ready=!!e.held[e.cur];
-      h+='<div class="name">'+esc(R.n)+'</div><div class="sub">Next to '+esc(R.adj.filter(function(a){ return e.held[a]; }).map(regionName).join(', '))+'. A fresh wasteland of colonies at <b>Danger '+dangerLv()+'</b>, tougher than the last. Clear it and its countries make '+makesText(regionMakes(k))+' a minute.</div>'+
+      var ready=!!e.held[e.cur]||clCanEnter(k);
+      h+='<div class="name">'+esc(R.n)+'</div><div class="sub">'+(R.adj.some(function(a){ return e.held[a]; })?'Next to '+esc(R.adj.filter(function(a){ return e.held[a]; }).map(regionName).join(', ')):'Open to you through your clan’s land')+'. A fresh wasteland of colonies at <b>Danger '+dangerLv()+'</b>, tougher than the last. Clear it and its countries make '+makesText(regionMakes(k))+' a minute.</div>'+
          '<div class="btns"><button class="btn primary" data-act="emove" data-k="'+k+'" '+(ready?'':'disabled')+' type="button">Move your base here</button></div>'+
          (ready?'<p class="hint" style="margin:6px 0 0">Your whole colony comes with you: buildings, levels and land. Colonies you built up here stay behind but keep paying you.</p>':'<p class="muted" style="margin:6px 0 0">You can move once '+esc(regionName(e.cur))+' is cleared ('+pr.done+' of '+pr.all+' done).</p>');
     } else {
       h+='<div class="name">'+esc(R.n)+' <span class="muted">· locked</span></div><div class="sub">Hold a region next to it first. Next door: '+esc(nb)+'.</div><div class="sub" style="margin-top:4px">Makes '+makesText(regionMakes(k))+' a minute once it is yours.</div>';
     }
+    h+=clRegionCard(k);
     h+='<div class="btns"><button class="btn" data-act="efit" type="button">Whole Earth</button></div></div>';
   } else h+='<p class="hint" style="margin:0">Tap a region to see what its countries make. White is yours, the dashed ones are next door.</p>';
   return h;
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=98;
-var CHANGELOG=[{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=99;
+var CHANGELOG=[{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -3734,6 +3764,9 @@ document.addEventListener('click',function(e){
     else if(act==='expgo') expStart();
     else if(act==='expreport') expReport(el.getAttribute('data-id'));
     else if(act==='expchoose') expChoose(el.getAttribute('data-id'),el.getAttribute('data-c'));
+    else if(act==='delacct') delAcctOpen();
+    else if(act==='delacctgo') delAcctGo();
+    else if(CLACTS[act]) clAct(act,el);
     else if(act==='specopen') specOpen();
     else if(act==='techopen'){ ui.techSel=null; techOpen(); }
     else if(act==='techsel'){ ui.techSel=el.getAttribute('data-id'); techOpen(); }
@@ -4352,7 +4385,7 @@ function frame(now){
     syncBubble();
     slow+=dt; saveT+=dt;
     if(slow>=.5){
-      slow=0; try{ wevUi(); }catch(e){} try{ achPoll(); }catch(e){} if(!ovOpen&&!ui.colony) earthCheck(); $('#hCredits').textContent=fmt(S.credits); $('#hFood').textContent=fmt(S.food); updTrips(); checkInbox(); wxUi();
+      slow=0; try{ wevUi(); }catch(e){} try{ clTick(); }catch(e){} try{ achPoll(); }catch(e){} if(!ovOpen&&!ui.colony) earthCheck(); $('#hCredits').textContent=fmt(S.credits); $('#hFood').textContent=fmt(S.food); updTrips(); checkInbox(); wxUi();
       var sb=ui.sel?abGet(ui.sel):null;
       if(sb&&ui.tab==='base'&&!ui.place&&!ui.colony){
         if(sb.type==='trade'){ var sp=document.getElementById('storedNow'); if(sp) sp.textContent=fmt(sb.st||0); }
@@ -4386,6 +4419,7 @@ function mpSeenInv(){ try{ return JSON.parse(localStorage.getItem('lazarus-invse
 function mpHasNew(){ var s=mpSeenInv(); return (MP.inv||[]).some(function(i){ return s.indexOf(i.id)<0; }); }
 function mpMarkSeen(){ try{ localStorage.setItem('lazarus-invseen',JSON.stringify((MP.inv||[]).map(function(i){ return i.id; }))); }catch(e){} }
 function mpPollWorlds(){
+  MP.wl={mine:[],'in':[]}; MP.inv=[]; return Promise.resolve(MP.wl);
   if(!MP.sb||!MP.user||MP.gate) return Promise.resolve(null);
   return mpR('lz_worlds').then(function(r){
     if(r&&r.data){ var had=mpHasNew(), invKey=JSON.stringify(MP.inv||[]); MP.wl=r.data; MP.inv=r.data.invites||[]; if(!had&&mpHasNew()&&MP.inv[0]) toast(MP.inv[0].from+' invited you to a world. Tap the bell.'); mpHud(); mpBellMaybe(invKey); }
@@ -4394,6 +4428,7 @@ function mpPollWorlds(){
 }
 function mpWorldById(id){ var l=MP.wl||{}, out=null; (l.mine||[]).concat(l['in']||[]).forEach(function(w){ if(w.id===id) out=w; }); return out; }
 function mpOpenWorlds(tab){
+  clOpen(); return;
   if(tab) MP.wtab=tab; MP.wtab=MP.wtab||'mine';
   if(!MP.pname){ MP.afterName='worlds'; mpOverlay('name'); return; }
   mpPollWorlds().then(function(){ mpOverlay('worlds'); });
@@ -4561,14 +4596,14 @@ function mpOverlay(step){
     h=h.replace('<h2>Play online</h2>','<h2>Account</h2>');
     h+='<p class="muted" style="margin-top:-6px">Signed in as '+esc((MP.user&&MP.user.email)||'')+'</p>';
     h+='<div class="pfprow"><span class="pfpbig">'+pfpHtml(64)+'<span class="pdot'+(MP.on?' on':'')+'"></span></span><div class="info"><div class="name">'+esc(MP.pname||'No username yet')+'</div><div class="sub">'+(MP.on?'Online':'Offline')+'</div></div><div class="acts">'+pfpPickBtn(pfpGet()?'Change picture':'Add picture')+(pfpGet()?'<button class="btn sm" data-act="pfpx" type="button">Remove</button>':'')+'</div></div>';
-    h+='<div class="btns" style="margin-top:0"><button class="btn primary" data-ov="mp" data-do="wcreateOpen" type="button">Create World</button><button class="btn" data-ov="mp" data-do="worlds" type="button">Worlds</button><button class="btn" data-act="ach" type="button">'+tutIcon('trophy',15)+' Achievements</button><button class="btn" data-act="custopen" type="button">'+tutIcon('flag',15)+' Customize</button></div>';
-    h+='<div class="row"><div class="info"><div class="name">'+(MP.on?esc(MP.wname||'Online world'):'Offline world')+'</div><div class="sub">'+(MP.on?'Online'+(MP.pname?' as '+esc(MP.pname):'')+(nReal?' \u00b7 '+nReal+' / 13 players':'')+'. Purple lights on the map are people. White lights are colonies you hold.':'Just you and the bots. Nothing here is shared.')+'</div></div><div class="acts"><button class="btn sm" data-ov="mp" data-do="'+(MP.on?'toOff':'toOn')+'" type="button">'+(MP.on?'Play offline':'Play online')+'</button></div></div>';
-    if(MP.pname) h+='<p class="hint">Your username: <b>'+esc(MP.pname)+'</b>. Friends type this to invite you.</p>';
+    h+='<div class="btns" style="margin-top:0"><button class="btn primary" data-act="clopen" type="button">'+clIcon(15)+' Clan'+(clUnread()?' <i class="cldot"></i>':'')+'</button><button class="btn" data-act="ach" type="button">'+tutIcon('trophy',15)+' Achievements</button><button class="btn" data-act="custopen" type="button">'+tutIcon('flag',15)+' Customize</button></div>';
+    h+='<div class="row"><div class="info"><div class="name">'+(MP.on?'Online world':'Offline world')+'</div><div class="sub">'+(MP.on?'Online'+(MP.pname?' as '+esc(MP.pname):'')+(clMine()?' with '+esc(clMine().name)+' ['+esc(clMine().tag)+']':'')+'. Your clan takes over the world together.':'Just you and the bots. Nothing here is shared.')+'</div></div><div class="acts"><button class="btn sm" data-ov="mp" data-do="'+(MP.on?'toOff':'toOn')+'" type="button">'+(MP.on?'Play offline':'Play online')+'</button></div></div>';
+    if(MP.pname) h+='<p class="hint">Your username: <b>'+esc(MP.pname)+'</b>. Your clan sees this name.</p>';
     else h+='<p class="hint">You have no username yet. You need one to be on the leaderboard and for friends to invite you.</p><div class="btns" style="margin-top:0"><button class="btn primary" data-ov="mp" data-do="nameOpen" type="button">Pick a username</button></div>';
     var isM=MP.primary&&MP.primary===MP.dev;
     h+='<div class="row"><div class="info"><div class="name">Main device</div><div class="sub">'+(isM?'This device ('+esc(mpDevLabel())+')':(MP.primary?esc(MP.primaryLabel||'Another device'):'Not set yet. The first device you play on becomes it.'))+'. Only your main device saves to your account. Switch here when you change devices.</div></div><div class="acts">'+(isM?'':'<button class="btn sm primary" data-ov="mp" data-do="claim" type="button">Make this my main device</button>')+'</div></div>';
-    h+='<p class="hint">Every world keeps its own colony, supplies and progress, saved to your account so they follow you to any phone or computer.</p>';
-    h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button>':'')+'<button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div>';
+    h+='<p class="hint">Your offline and online colonies are separate, and both are saved to your account so they follow you to any phone or computer.</p>';
+    h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button>':'')+'<button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div><div class="btns" style="margin-top:0"><button class="linkbtn danger" data-act="delacct" type="button">Delete account</button></div>';
   } else if(step==='signup'){
     h=h.replace('<h2>Play online</h2>','<h2>Create account</h2>');
     h+='<p class="muted">Pick a username, then use your email and a password of at least 8 characters.</p><div><label class="muted" for="mpSuName">Username</label><input class="txt" id="mpSuName" maxlength="20" autocomplete="nickname" autocapitalize="none" value="'+esc(MP.suName||'')+'"><div class="muted" style="font-size:12px;margin-top:2px">Other players see this. 2 to 20 letters, numbers, spaces, dots, dashes or underscores.</div></div><div><label class="muted" for="mpEmail">Email</label><input class="txt" id="mpEmail" type="email" autocomplete="username" autocapitalize="none" value="'+esc(MP.email||'')+'"></div><div><label class="muted" for="mpPw1">Password</label><input class="txt" id="mpPw1" type="password" autocomplete="new-password"></div><div><label class="muted" for="mpPw2">Type it again</label><input class="txt" id="mpPw2" type="password" autocomplete="new-password"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="signup" type="button">Create account</button><button class="btn" data-ov="mp" data-do="open" type="button">Back to sign in</button></div>';
@@ -4614,7 +4649,7 @@ function mpNeedName(){
 function mpGateDone(){
   var wl=MP.wl||{}, all=(wl.mine||[]).concat(wl['in']||[]);
   if(ovOpen&&!/^(pick|notmain|worlds|bell|wmanage|wcreate|name)$/.test(MP.view||'')) hideOverlay();
-  if(mpPref()==='online'&&MP.pname&&MP.wid) mpGoOnline(); else { mpGoOffline(); toast(MP.wid||!all.length?'Signed in. You are in the offline world.':'Signed in. Pick a world from the Online menu.'); }
+  if(mpPref()==='online'&&MP.pname) mpGoOnline(); else { mpGoOffline(); toast(MP.wid||!all.length?'Signed in. You are in the offline world.':'Signed in. Pick a world from the Online menu.'); }
 }
 function mpGate(user){
   MP.user=user;
@@ -4630,7 +4665,7 @@ function mpGate(user){
     if(!MP.wid&&all.length===1) mpSetWid(all[0].id);
     if(!MP.pname){ mpNeedName(); return; }
     if(ovOpen&&!/^(pick|notmain|worlds|bell|wmanage|wcreate|name)$/.test(MP.view||'')) hideOverlay();
-    if(mpPref()==='online'&&MP.pname&&MP.wid) mpGoOnline(); else { mpGoOffline(); toast(MP.wid||!all.length?'Signed in. You are in the offline world.':'Signed in. Pick a world from the Online menu.'); }
+    if(mpPref()==='online'&&MP.pname) mpGoOnline(); else { mpGoOffline(); toast(MP.wid||!all.length?'Signed in. You are in the offline world.':'Signed in. Pick a world from the Online menu.'); }
   });
 }
 function mpFnError(err){
@@ -4764,7 +4799,7 @@ function mpEnter(){
 function mpActivate(me){
   if(S.mp&&S.mp.wid&&MP.wid&&S.mp.wid!==MP.wid){ toast('Switching worlds got mixed up, so nothing was changed. Try again.'); return; }
   MP.me={uid:me.uid,name:me.name,slot:me.slot}; MP.on=true;
-  if(!S.world||S.world.seed!==MP.seed){
+  if(!S.world||(S.world.seed!==MP.seed&&!(MP.global&&S.earth&&S.earth.start))){
     S.world=makeWorld(MP.seed); revealPts([{x:HOME.x,y:HOME.y}],3); S.trips=[];
   }
   S.mp={uid:me.uid,seed:MP.seed,gen:MP.gen||0,wid:MP.wid};
@@ -4918,9 +4953,9 @@ function mpPanel(){
   if(!MP.sb) return '';
   if(MP.me){
     var n=(MP.roster||[]).length;
-    return '<div class="row"><div class="info"><div class="name">'+esc(MP.wname||'Online')+' \u00b7 '+esc(MP.me.name)+'</div><div class="sub">'+n+' / 13 real players in this world. Purple lights on the map are people. White lights are colonies you hold.</div></div><div class="acts"><button class="btn sm" data-ov="mp" data-do="worlds" type="button">Worlds</button>'+(MP.isAdmin?'<button class="btn sm primary" data-ov="mp" data-do="admin" type="button">Logins</button>':'')+'<button class="btn sm" data-ov="mp" data-do="out" type="button">Sign out</button></div></div>';
+    return '<div class="row"><div class="info"><div class="name">'+esc(MP.wname||'Online')+' \u00b7 '+esc(MP.me.name)+'</div><div class="sub">Playing online'+(clMine()?' with '+esc(clMine().name):'')+'. Wins push your clan’s control on the Earth tab.</div></div><div class="acts"><button class="btn sm" data-ov="mp" data-do="worlds" type="button">Worlds</button>'+(MP.isAdmin?'<button class="btn sm primary" data-ov="mp" data-do="admin" type="button">Logins</button>':'')+'<button class="btn sm" data-ov="mp" data-do="out" type="button">Sign out</button></div></div>';
   }
-  return '<div class="row"><div class="info"><div class="name">Play online</div><div class="sub">Sign in to create your own world and invite friends, or join theirs.</div></div><div class="acts"><button class="btn sm primary" data-ov="mp" data-do="open" type="button">Sign in</button></div></div>';
+  return '<div class="row"><div class="info"><div class="name">Play online</div><div class="sub">Sign in to join a clan and take over the world with your friends.</div></div><div class="acts"><button class="btn sm primary" data-ov="mp" data-do="open" type="button">Sign in</button></div></div>';
 }
 function worldPanel(){ return earthLine()+bossRow()+worldPanelBase(); }
 
@@ -5137,7 +5172,7 @@ function mpGoOnline(locked){
   if(mode!=='home'){ mpLock(false); toast('Finish your outbreak first.'); return; }
   if(!locked){ if(MP.switching){ toast('Hang on, still switching worlds.'); return; } mpLock(true); }
   if(!MP.pname){ mpLock(false); MP.afterName='online'; mpOverlay('name'); return; }
-  if(!MP.wid){ mpLock(false); if(MP.on){ mpStop(); MP.on=false; MP.me=null; mpClearReal(); } if(KEY!==mpOfflineKey(MP.user.id)) mpOpenOffline(); mpOpenWorlds(); return; }
+  if(!MP.global||!MP.wid||MP.wid!==MP.okWid){ mpLock(false); if(MP.on){ mpStop(); MP.on=false; MP.me=null; mpClearReal(); } if(KEY!==mpOfflineKey(MP.user.id)) mpOpenOffline(); clGoOnline(); return; }
   var k=mpOnlineKey(MP.user.id), has=false; try{ has=!!localStorage.getItem(k); }catch(e){}
   MP.freshOnline=!has;
   if(KEY!==k){
@@ -5193,7 +5228,7 @@ function mpHud(){
   if(bl){ var showB=!!(MP&&MP.sb&&MP.user&&!MP.gate); if(bl.hidden) bl.hidden=false; var dot=bl.querySelector('.rdot'), nwI=showB&&mpHasNew(), nwV=verUnseen(), nw=nwI||nwV; if(dot&&dot.hidden===nw) dot.hidden=!nw; bl.setAttribute('aria-label',nwI?'Notifications, new invite':nwV?'Notifications, new update':'Notifications'); }
   if(typeof MP==='undefined'||!MP||!MP.sb){ b.hidden=true; return; }
   b.hidden=false;
-  var on=!!(MP.user&&MP.on), cls='acct pfp '+(on?'on':'off'), html=pfpHtml()+'<span class="pdot"></span>', tt=!MP.user?'Sign in to play online':on?'Online world. Tap for your account.':'Offline. Tap for your account.';
+  var on=!!(MP.user&&MP.on), cls='acct pfp '+(on?'on':'off'), html=pfpHtml()+'<span class="pdot"></span>'+(clUnread()||(CL.me&&CL.me.requests&&CL.me.requests.length)?'<i class="cldot"></i>':''), tt=!MP.user?'Sign in to play online':on?'Online world. Tap for your account.':'Offline. Tap for your account.';
   if(b.className!==cls) b.className=cls; if(b._h!==html){ b._h=html; b.innerHTML=html; } b.title=tt; b.setAttribute('aria-label',tt);
 }
 
@@ -6700,6 +6735,8 @@ var ACH=[
  {id:'bloodwin',cat:'virus',name:'Blood Moon Rising',d:'Win an outbreak during a Blood Moon.',tier:1,ok:function(){ return achF('bloodwin'); }},
  {id:'tech',cat:'virus',name:'Gene Splicer',d:'Unlock {n} tech tree upgrades.',t:[5,12,21],v:function(){ return techCount(); }},
  {id:'techall',cat:'virus',name:'The Lazarus Strain',d:'Unlock the final upgrade in the tech tree.',tier:2,ok:function(){ return techHas('z'); }},
+ {id:'clan',cat:'colony',name:'Brothers in Arms',d:'Join or start a clan.',tier:0,ok:function(){ return achF('clan'); }},
+ {id:'gift',cat:'colony',name:'Generous',d:'Send a gift to a clan mate.',tier:0,ok:function(){ return achF('gift'); }},
  /* weather */
  {id:'chase',cat:'wx',name:'Storm Chaser',d:'Open Storm Scan {n} times.',t:[5,10,25],v:function(){ return achN('scan'); }},
  {id:'proof',cat:'wx',name:'Weatherproof',d:'Shelter something while a heavy storm is over you.',tier:0,ok:function(){ return achF('shelter'); }},
@@ -7839,6 +7876,334 @@ function colFit(col){
   if(col.river) col.bld.forEach(function(b){ b.side=b.y>colRiverY(b.x)?1:0; });
   var sum1=0; col.bld.forEach(function(b){ sum1+=b.loot||0; }); if(sum0>0&&col.loot) col.loot=Math.round(col.loot*sum1/sum0);
   return dropped;
+}
+
+
+/* ================= clans and the online world takeover (0.77.0) =================
+   Online is one shared world. You need a clan to play it. Clan wins push control of the region you are in;
+   the clan with the most control (100+) owns it, and owned regions pay every member each hour.
+   Seasons last 4 weeks: the map resets and the top clans get rewards. Offline is untouched. */
+var CL={me:null,map:{},chat:[],last:0,seen:0,tab:'chat',find:'browse',search:null,board:null,busy:false,poll:null,mapAt:0,nextCollect:0,giftAt:0,draft:'',don:null};
+var CLCOL=['#C8322A','#E07B2E','#D9A520','#7ED957','#2E9E5B','#3FB8C8','#3E6FD0','#7A4FCF','#C04FA8','#E8E2D2'];
+function clIcon(sz){ return '<svg viewBox="0 0 24 24" width="'+(sz||18)+'" height="'+(sz||18)+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'; }
+function clOn(){ return !!(typeof MP!=='undefined'&&MP&&MP.on&&MP.global); }
+function clMine(){ return CL.me&&CL.me.clan?CL.me.clan:null; }
+function clRank(r){ return r==='leader'?3:r==='officer'?2:1; }
+function clRoleName(r){ return r==='leader'?'Leader':r==='officer'?'Officer':'Member'; }
+function clErr(e){
+  var m=String((e&&(e.message||e.msg))||e||'');
+  var map={in_clan:'You are already in a clan.',bad_clan_name:'Clan names are 3 to 24 letters, numbers or spaces, and must be clean.',bad_tag:'Tags are 2 to 5 letters or numbers.',
+    clan_name_taken:'Another clan has that name.',tag_taken:'Another clan has that tag.',clan_full:'That clan is full (20 members).',bad_code:'No clan has that code.',
+    not_allowed:'You can’t do that.',muted:'You are muted in this clan for now.',slow_down:'Slow down a little.',daily_limit:'You’ve hit today’s limit for that.',
+    too_many_requests:'You can only ask 5 clans at a time.',not_in_clan:'You are not in a clan.',no_clan:'That clan doesn’t exist anymore.',empty:'Type something first.'};
+  for(var k in map) if(m.indexOf(k)>=0) return map[k];
+  return (typeof mpErr==='function')?mpErr(e):m;
+}
+function clR(n,a){ return mpR(n,a).then(function(r){ if(r&&r.error) throw r.error; return r?r.data:null; }); }
+function clLoad(){ return clR('lzc_me').then(function(d){ CL.me=d; mpHud(); return d; }); }
+function clSeasonLeft(){ if(!CL.me||!CL.me.season_end) return ''; var ms=Math.max(0,CL.me.season_end-Date.now()), d=Math.floor(ms/86400000); return d>=2?d+' days':fmtLeft(ms); }
+
+/* ---- going online needs a clan ---- */
+function clGoOnline(){
+  if(!MP.user||!MP.pname){ mpGoOnline(); return; }
+  mpLock(true);
+  clR('lz_online_enter').then(function(d){
+    mpLock(false);
+    if(!d||!d.world){ toast('Online play is not ready yet.'); return; }
+    if(!d.clan){ MP.global=false; clLoad().catch(function(){}); clOpen(); toast('Join or start a clan to play online.'); return; }
+    MP.global=true; MP.okWid=d.world; mpSetWid(d.world); mpSetPref('online'); mpGoOnline(true);
+    clLoad().then(function(){ clSeasonClaim(); clCollect(); }).catch(function(){});
+  }).catch(function(e){ mpLock(false); toast('Could not go online ('+clErr(e)+').'); });
+}
+
+/* ---- the clan window ---- */
+function clOpen(tab){
+  if(tab) CL.tab=tab;
+  if(!MP.user){ mpOverlay(MP.google?'start':'login'); return; }
+  if(!MP.pname){ MP.afterName=null; mpOverlay('name'); return; }
+  if(!ovOpen||!document.querySelector('#ovCard .clan')) showOverlay('<div class="clan"><h2>Clan</h2><p class="muted">Loading...</p></div>');
+  clLoad().then(function(){ clRender(); if(clMine()) clChatPoll(true); }).catch(function(e){ clRender(clErr(e)); });
+}
+function clRender(err){
+  if(!ovOpen||!document.querySelector('#ovCard .clan')) return;
+  var c=clMine(), h='<div class="clan">';
+  if(err) h+='<p class="note">'+esc(err)+'</p>';
+  if(!c) h+=clFindHtml(); else h+=clHomeHtml(c);
+  h+='</div>';
+  var card=$('#ovCard'), sc=card.scrollTop, inp=document.getElementById('clMsg'), had=inp&&document.activeElement===inp, val=inp?inp.value:'';
+  card.innerHTML=h; card.scrollTop=sc;
+  var ni=document.getElementById('clMsg'); if(ni){ ni.value=val||CL.draft||''; if(had) ni.focus(); }
+  var cl=document.getElementById('clChat'); if(cl) cl.scrollTop=cl.scrollHeight;
+}
+function clBannerOf(c,w){ var b=(c&&c.banner&&c.banner.bg)?c.banner:{bg:'black',fg:'bone',em:'bio',pat:'plain'}; return bannerSvg(b,w||46); }
+function clTagHtml(c){ return '<span class="cltag" style="--cc:'+esc(c.color||'#7ED957')+'">'+esc(c.tag)+'</span>'; }
+
+/* no clan yet: start one, use a code, or find one */
+function clFindHtml(){
+  var t=CL.find||'browse', h='<h2 style="margin:0 0 4px">Clans</h2><p class="muted" style="margin:0 0 8px">Online, you and your clan take over the world together. Join a clan or start your own to play.</p>';
+  h+='<div class="crewtabs"><button type="button" data-act="clfind" data-t="browse" class="'+(t==='browse'?'on':'')+'">Find a clan</button><button type="button" data-act="clfind" data-t="code" class="'+(t==='code'?'on':'')+'">Invite code</button><button type="button" data-act="clfind" data-t="make" class="'+(t==='make'?'on':'')+'">Start a clan</button></div>';
+  if(t==='code'){
+    h+='<p class="muted">A friend in a clan can find its code on their clan screen.</p><div><label class="muted" for="clCode">Invite code</label><input class="txt" id="clCode" maxlength="6" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase;letter-spacing:.2em;font-weight:800"></div><div class="btns"><button class="btn primary" data-act="cljoincode" type="button">Join</button></div>';
+  } else if(t==='make'){
+    var col=CL.mkCol||CLCOL[3], L=lookS();
+    h+='<div class="clmk"><div class="clmkb">'+bannerSvg(L,64)+'<span class="muted">Your banner from Customize becomes the clan banner.</span></div>'+
+      '<div><label class="muted" for="clName">Clan name</label><input class="txt" id="clName" maxlength="24" autocomplete="off" value="'+esc(CL.mkName||'')+'"></div>'+
+      '<div><label class="muted" for="clTag">Tag (2 to 5 letters, shown next to names)</label><input class="txt" id="clTag" maxlength="5" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase;letter-spacing:.12em;font-weight:800" value="'+esc(CL.mkTag||'')+'"></div>'+
+      '<div><label class="muted" for="clDesc">About your clan (optional)</label><input class="txt" id="clDesc" maxlength="160" autocomplete="off" value="'+esc(CL.mkDesc||'')+'"></div>'+
+      '<div class="exsec" style="margin-top:8px">Map colour</div><div class="csws">'+CLCOL.map(function(c){ return '<button type="button" class="csw'+(c===col?' on':'')+'" style="--c:'+c+'" data-act="clmkcol" data-c="'+c+'"></button>'; }).join('')+'</div>'+
+      '<div class="exsec">Who can join</div><div class="crewtabs"><button type="button" data-act="clmkopen" data-v="1" class="'+(CL.mkOpen!==false?'on':'')+'">Anyone</button><button type="button" data-act="clmkopen" data-v="0" class="'+(CL.mkOpen===false?'on':'')+'">Ask first</button></div>'+
+      '<div class="btns"><button class="btn primary" data-act="clmake" type="button">Start clan</button></div></div>';
+  } else {
+    h+='<div class="clsrch"><input class="txt" id="clQ" maxlength="24" autocomplete="off" placeholder="Search by name or tag" value="'+esc(CL.q||'')+'"><button class="btn sm" data-act="clsearch" type="button">Search</button></div>';
+    var L2=CL.search;
+    if(!L2){ h+='<p class="muted">Loading clans...</p>'; setTimeout(function(){ clSearch(); },0); }
+    else if(!L2.length) h+='<p class="muted">No clans found. Start the first one!</p>';
+    else L2.forEach(function(c){
+      h+='<div class="clrow">'+clBannerOf(c,44)+'<div class="info"><div class="name">'+esc(c.name)+' '+clTagHtml(c)+'</div><div class="sub">'+c.n+' / 20 members · '+c.owned_n+' region'+(c.owned_n===1?'':'s')+' · '+(c.open?'Anyone can join':'Ask to join')+'</div>'+(c.descr?'<div class="sub">'+esc(c.descr)+'</div>':'')+'</div>'+
+        '<div class="acts">'+(c.asked?'<button class="btn sm" data-act="clunask" data-id="'+c.id+'" type="button">Asked · cancel</button>':c.n>=20?'<span class="muted">Full</span>':'<button class="btn sm primary" data-act="cljoin" data-id="'+c.id+'" type="button">'+(c.open?'Join':'Ask to join')+'</button>')+'</div></div>'; });
+  }
+  h+='<div class="btns"><button class="btn" data-ov="close" type="button">Close</button></div>';
+  return h;
+}
+function clSearch(){ var q=document.getElementById('clQ'); CL.q=q?q.value.trim():(CL.q||''); clR('lzc_search',{p_q:CL.q}).then(function(d){ CL.search=d||[]; clRender(); }).catch(function(e){ CL.search=[]; clRender(clErr(e)); }); }
+function clMake(){
+  var nm=(document.getElementById('clName')||{}).value||'', tg=((document.getElementById('clTag')||{}).value||'').toUpperCase(), ds=(document.getElementById('clDesc')||{}).value||'';
+  CL.mkName=nm; CL.mkTag=tg; CL.mkDesc=ds;
+  if(!/^[A-Za-z0-9 _.'-]{3,24}$/.test(nm.trim())){ clRender('Clan names are 3 to 24 letters, numbers or spaces.'); return; }
+  if(!/^[A-Z0-9]{2,5}$/.test(tg.trim())){ clRender('Tags are 2 to 5 letters or numbers.'); return; }
+  if(CL.busy) return; CL.busy=true; var L=lookS();
+  clR('lzc_create',{p_name:nm.trim(),p_tag:tg.trim(),p_color:CL.mkCol||CLCOL[3],p_descr:ds.trim(),p_open:CL.mkOpen!==false,p_banner:{bg:L.bg,fg:L.fg,em:L.em,pat:L.pat}}).then(function(){
+    CL.busy=false; CL.mkName=CL.mkTag=CL.mkDesc=''; try{ achEv('clan'); }catch(e){} toast('Clan started! Share your invite code with friends.'); CL.tab='members'; clAfterJoin();
+  }).catch(function(e){ CL.busy=false; clRender(clErr(e)); });
+}
+function clJoin(id){ if(CL.busy) return; CL.busy=true; clR('lzc_join',{p_clan:+id}).then(function(d){ CL.busy=false; if(d&&d.joined){ toast('You joined the clan!'); CL.tab='chat'; clAfterJoin(); } else { toast('Asked to join. An Officer will let you in.'); clSearch(); } }).catch(function(e){ CL.busy=false; clRender(clErr(e)); }); }
+function clJoinCode(){ var c=((document.getElementById('clCode')||{}).value||'').trim().toUpperCase(); if(!c){ clRender('Type the invite code.'); return; } if(CL.busy) return; CL.busy=true;
+  clR('lzc_join_code',{p_code:c}).then(function(){ CL.busy=false; toast('You joined the clan!'); CL.tab='chat'; clAfterJoin(); }).catch(function(e){ CL.busy=false; clRender(clErr(e)); }); }
+function clAfterJoin(){ try{ achEv('clan'); }catch(e){} clLoad().then(function(){ clRender(); clChatPoll(true); if(!MP.on) clGoOnline(); }).catch(function(e){ clRender(clErr(e)); }); }
+
+/* in a clan */
+function clHomeHtml(c){
+  var me=CL.me, role=me.role, t=CL.tab||'chat', unread=clUnread();
+  var h='<div class="clhead">'+clBannerOf(c,62)+'<div class="info"><div class="clname">'+esc(c.name)+' '+clTagHtml(c)+'</div><div class="sub">'+c.n+' / 20 members · '+(c.owned||[]).length+' region'+((c.owned||[]).length===1?'':'s')+' owned</div><div class="sub">Season '+me.season+' ends in <b>'+clSeasonLeft()+'</b></div></div></div>';
+  if(c.descr) h+='<p class="muted" style="margin:6px 0 0">'+esc(c.descr)+'</p>';
+  if(!MP.on) h+='<div class="note" style="margin-top:8px">You are offline. <button class="btn sm primary" data-act="clgo" type="button">Play online</button></div>';
+  h+='<div class="crewtabs" style="margin-top:10px"><button type="button" data-act="cltab" data-t="chat" class="'+(t==='chat'?'on':'')+'">Chat'+(unread&&t!=='chat'?' <i class="cldot"></i>':'')+'</button><button type="button" data-act="cltab" data-t="members" class="'+(t==='members'?'on':'')+'">Members'+((me.requests||[]).length?' <i class="cldot"></i>':'')+'</button><button type="button" data-act="cltab" data-t="top" class="'+(t==='top'?'on':'')+'">Top clans</button><button type="button" data-act="cltab" data-t="more" class="'+(t==='more'?'on':'')+'">More</button></div>';
+  if(t==='chat') h+=clChatHtml();
+  else if(t==='members') h+=clMembersHtml(c);
+  else if(t==='top') h+=clTopHtml();
+  else h+=clMoreHtml(c);
+  h+='<div class="btns"><button class="btn" data-ov="close" type="button">Close</button></div>';
+  return h;
+}
+function clUnread(){ var c=clMine(); if(!c||!CL.me) return false; var lc=CL.me.last_chat||0; var s=0; try{ s=+localStorage.getItem('lazarus-clseen-'+c.id)||0; }catch(e){} return lc>s; }
+function clMarkRead(){ var c=clMine(); if(!c) return; var m=CL.chat.length?CL.chat[CL.chat.length-1].id:(CL.me.last_chat||0); try{ localStorage.setItem('lazarus-clseen-'+c.id,String(m)); }catch(e){} if(CL.me) CL.me.last_chat=m; mpHud(); }
+function clTime(ms){ var d=new Date(ms), now=new Date(); var t=d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}); return d.toDateString()===now.toDateString()?t:d.toLocaleDateString([], {month:'short',day:'numeric'})+' '+t; }
+function clChatHtml(){
+  var me=MP.user&&MP.user.id, role=CL.me.role, h='<div class="clchat" id="clChat">';
+  if(!CL.chat.length) h+='<p class="muted" style="text-align:center;margin:30px 0">No messages yet. Say hi to your clan!</p>';
+  var lastDay='';
+  CL.chat.forEach(function(m){
+    if(m.sys){ h+='<div class="clsys">'+esc(m.msg)+'</div>'; return; }
+    var mine=m.uid===me, menu=CL.menu===m.id;
+    h+='<div class="clmsg'+(mine?' me':'')+'"><div class="clb"><div class="clmeta"><b>'+esc(m.name||'?')+'</b><span>'+clTime(m.at)+'</span><button type="button" class="clmore" data-act="clmenu" data-id="'+m.id+'" aria-label="Message options">···</button></div><div class="cltext">'+esc(m.msg)+'</div>'+
+      (menu?'<div class="clmenu">'+(mine||clRank(role)>=2?'<button type="button" class="btn sm" data-act="clhide" data-id="'+m.id+'">Delete</button>':'')+(!mine?'<button type="button" class="btn sm" data-act="clreport" data-id="'+m.id+'">Report</button>':'')+'</div>':'')+'</div></div>';
+  });
+  h+='</div>';
+  if(CL.me.muted) h+='<p class="note">You are muted for '+CL.me.muted+' more minute'+(CL.me.muted===1?'':'s')+'.</p>';
+  else h+='<div class="clsend"><input class="txt" id="clMsg" maxlength="200" autocomplete="off" placeholder="Message your clan" enterkeyhint="send"><button class="btn primary" data-act="clsend" type="button">Send</button></div>';
+  h+='<p class="hint" style="margin:6px 0 0">Be nice. Bad words are blocked, and messages reported 3 times are hidden.</p>';
+  return h;
+}
+function clMembersHtml(c){
+  var me=MP.user&&MP.user.id, my=CL.me.role, h='';
+  if(clRank(my)>=2){
+    h+='<div class="clcode"><div><span class="muted">Invite code</span><b>'+esc(CL.me.code||'')+'</b></div><button class="btn sm" data-act="clcopy" type="button">Copy</button><button class="btn sm" data-act="clnewcode" type="button">New code</button></div>';
+    (CL.me.requests||[]).forEach(function(q){ h+='<div class="clrow req"><div class="info"><div class="name">'+esc(q.name)+'</div><div class="sub">Wants to join</div></div><div class="acts"><button class="btn sm primary" data-act="clans" data-id="'+q.uid+'" data-v="1" type="button">Let in</button><button class="btn sm" data-act="clans" data-id="'+q.uid+'" data-v="0" type="button">No</button></div></div>'; });
+  }
+  (c.members||[]).forEach(function(m){
+    var on=m.seen!=null&&m.seen<150, self=m.uid===me, open=CL.mopen===m.uid;
+    h+='<div class="clrow mem'+(open?' open':'')+'"><span class="clpf">'+pfpImg(m.pfp,m.name,38)+'<i class="pdot'+(on?' on':'')+'"></i></span><div class="info"><div class="name">'+esc(m.name)+(self?' <span class="muted">(you)</span>':'')+' <span class="clrole r'+clRank(m.role)+'">'+clRoleName(m.role)+'</span></div><div class="sub">'+fmt(m.pts||0)+' control this season'+(m.muted?' · muted '+m.muted+'m':'')+'</div></div>'+
+      (self?'':'<div class="acts"><button class="btn sm" data-act="clmopen" data-id="'+m.uid+'" type="button">'+(open?'Close':'Options')+'</button></div>')+'</div>';
+    if(open&&!self){
+      h+='<div class="clopts">';
+      h+='<div class="exsec" style="margin-top:0">Send '+esc(m.name)+' something</div><div class="cldon">'+[['credits',5000],['credits',25000],['food',250],['food',1000],['samples',1],['samples',5]].map(function(d){ var have=d[0]==='credits'?S.credits:d[0]==='food'?S.food:sampleCount(); return '<button type="button" class="btn sm" data-act="cldonate" data-id="'+m.uid+'" data-k="'+d[0]+'" data-n="'+d[1]+'" '+(have<d[1]?'disabled':'')+'>'+fmt(d[1])+' '+(d[0]==='samples'&&d[1]===1?'sample':d[0])+'</button>'; }).join('')+'</div>';
+      var mr=clRank(my), tr=clRank(m.role);
+      if(mr>=2&&tr<mr) h+='<div class="exsec">Manage</div><div class="cldon"><button type="button" class="btn sm" data-act="clmute" data-id="'+m.uid+'" data-n="'+(m.muted?0:60)+'">'+(m.muted?'Unmute':'Mute 1 hour')+'</button><button type="button" class="btn sm" data-act="clkick" data-id="'+m.uid+'">'+(CL.kick===m.uid?'Tap again to remove':'Remove from clan')+'</button></div>';
+      if(my==='leader') h+='<div class="cldon">'+(m.role==='member'?'<button type="button" class="btn sm" data-act="clrole" data-id="'+m.uid+'" data-r="officer">Make Officer</button>':'<button type="button" class="btn sm" data-act="clrole" data-id="'+m.uid+'" data-r="member">Make Member</button>')+'<button type="button" class="btn sm" data-act="clrole" data-id="'+m.uid+'" data-r="leader">'+(CL.lead===m.uid?'Tap again to make Leader':'Make Leader')+'</button></div>';
+      h+='</div>';
+    }
+  });
+  h+='<p class="hint">Daily limits for gifts: 100,000 credits, 3,000 food and 20 samples.</p>';
+  return h;
+}
+function clTopHtml(){
+  var L=CL.board, myc=clMine()&&clMine().id, h='<p class="muted" style="margin:8px 0">Ranked by regions owned, then total control. When the season ends the top 3 clans win big rewards.</p>';
+  if(!L){ setTimeout(function(){ clR('lzc_board').then(function(d){ CL.board=d||[]; clRender(); }).catch(function(){ CL.board=[]; clRender(); }); },0); return h+'<p class="muted">Loading...</p>'; }
+  if(!L.length) h+='<p class="muted">No clans yet.</p>';
+  L.slice(0,30).forEach(function(c,i){ h+='<div class="clrow top'+(c.id===myc?' mine':'')+'"><b class="clrk">'+(i+1)+'</b>'+clBannerOf(c,36)+'<div class="info"><div class="name">'+esc(c.name)+' '+clTagHtml(c)+'</div><div class="sub">'+c.owned+' region'+(c.owned===1?'':'s')+' · '+fmt(c.pts)+' control · '+c.n+' member'+(c.n===1?'':'s')+'</div></div></div>'; });
+  h+='<div class="exsec">Season rewards (every member)</div><div class="clrew"><span><b>1st</b> 500,000 credits + 30 Gene Points</span><span><b>2nd</b> 300,000 credits + 20 Gene Points</span><span><b>3rd</b> 200,000 credits + 15 Gene Points</span><span><b>Held a region</b> 60,000 credits + 6 Gene Points</span></div>';
+  return h;
+}
+function clMoreHtml(c){
+  var me=CL.me, h='<div class="exsec">How taking over the world works</div><ul class="clhow"><li>Every outbreak you win online adds control for your clan in the region you are in. More stars and more danger mean more control.</li><li>A region is owned by the clan with the most control, once it has at least 100.</li><li>Control fades a little every hour, so keep fighting to hold your land. Other clans can steal it by out-fighting you.</li><li>Every member gets paid each hour for every region the clan owns.</li><li>Your clan’s land opens the way: you can move into any region your clan owns, or next to it.</li></ul>';
+  if(me.role==='leader'){
+    h+='<div class="exsec">Clan settings</div><div><label class="muted" for="clDesc2">About</label><input class="txt" id="clDesc2" maxlength="160" value="'+esc(c.descr||'')+'"></div>'+
+      '<div class="exsec">Map colour</div><div class="csws">'+CLCOL.map(function(x){ return '<button type="button" class="csw'+(x===c.color?' on':'')+'" style="--c:'+x+'" data-act="cledit" data-k="color" data-v="'+x+'"></button>'; }).join('')+'</div>'+
+      '<div class="exsec">Who can join</div><div class="crewtabs"><button type="button" data-act="cledit" data-k="open" data-v="1" class="'+(c.open?'on':'')+'">Anyone</button><button type="button" data-act="cledit" data-k="open" data-v="0" class="'+(!c.open?'on':'')+'">Ask first</button></div>'+
+      '<div class="btns"><button class="btn" data-act="cledit" data-k="descr" type="button">Save about</button><button class="btn" data-act="cledit" data-k="banner" type="button">Use my banner</button></div>';
+  }
+  h+='<div class="btns"><button class="btn" data-act="clleave" type="button">'+(CL.leave?'Tap again to leave the clan':'Leave clan')+'</button></div>';
+  if(CL.leave) h+='<p class="muted">'+(me.role==='leader'&&c.n>1?'An Officer (or your longest member) becomes the new Leader. ':'')+(c.n<=1?'You are the last member, so the clan will close. ':'')+'You go back to your offline world, and your online colony waits for you in your next clan.</p>';
+  return h;
+}
+
+/* ---- chat polling (fast while the chat is open, slow otherwise) ---- */
+function clChatPoll(now){
+  clearTimeout(CL.poll); if(!clMine()) return;
+  var open=ovOpen&&document.querySelector('#ovCard .clan')&&CL.tab==='chat';
+  var go=function(){
+    var after=CL.chat.length?CL.chat[CL.chat.length-1].id:0;
+    clR('lzc_chat_list',{p_after:after}).then(function(d){
+      if(d&&d.length){ CL.chat=CL.chat.concat(d).slice(-120); if(CL.me) CL.me.last_chat=Math.max(CL.me.last_chat||0,d[d.length-1].id); var o2=ovOpen&&document.querySelector('#ovCard .clan'); if(o2&&CL.tab==='chat'){ clMarkRead(); clRender(); } else mpHud(); }
+      else if(ovOpen&&document.querySelector('#ovCard .clan')&&CL.tab==='chat') clMarkRead();
+    }).catch(function(){}).then(function(){ clChatPoll(false); });
+  };
+  if(now) go(); else CL.poll=setTimeout(go,open?3000:45000);
+}
+function clSend(){
+  var i=document.getElementById('clMsg'); if(!i) return; var t=i.value.trim(); if(!t) return;
+  if(CL.busy) return; CL.busy=true; i.value=''; CL.draft='';
+  clR('lzc_chat_send',{p_msg:t}).then(function(){ CL.busy=false; clChatPoll(true); try{ achEv('chat'); }catch(e){} }).catch(function(e){ CL.busy=false; i.value=t; toast(clErr(e)); });
+}
+
+/* ---- actions ---- */
+function clAct(act,el){
+  var id=el.getAttribute('data-id');
+  if(act==='clopen'){ clOpen(); return; }
+  if(act==='clgo'){ hideOverlay(); clGoOnline(); return; }
+  if(act==='clfind'){ CL.find=el.getAttribute('data-t'); clRender(); return; }
+  if(act==='clsearch'){ CL.search=null; clSearch(); return; }
+  if(act==='clmake'){ clMake(); return; }
+  if(act==='clmkcol'){ CL.mkCol=el.getAttribute('data-c'); clKeep(); clRender(); return; }
+  if(act==='clmkopen'){ CL.mkOpen=el.getAttribute('data-v')==='1'; clKeep(); clRender(); return; }
+  if(act==='cljoin'){ clJoin(id); return; }
+  if(act==='cljoincode'){ clJoinCode(); return; }
+  if(act==='clunask'){ clR('lzc_cancel_request',{p_clan:+id}).then(function(){ clSearch(); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='cltab'){ CL.tab=el.getAttribute('data-t'); CL.menu=null; if(CL.tab==='top') CL.board=null; clRender(); if(CL.tab==='chat'){ clMarkRead(); clChatPoll(true); } return; }
+  if(act==='clsend'){ clSend(); return; }
+  if(act==='clmenu'){ CL.menu=CL.menu===+id?null:+id; clRender(); return; }
+  if(act==='clhide'){ clR('lzc_chat_hide',{p_id:+id}).then(function(){ CL.chat=CL.chat.filter(function(m){ return m.id!==+id; }); CL.menu=null; clRender(); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clreport'){ clR('lzc_chat_report',{p_id:+id}).then(function(){ CL.menu=null; toast('Reported. Thanks for keeping the clan friendly.'); clRender(); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clmopen'){ CL.mopen=CL.mopen===id?null:id; CL.kick=null; CL.lead=null; clRender(); return; }
+  if(act==='cldonate'){ clDonate(id,el.getAttribute('data-k'),+el.getAttribute('data-n')); return; }
+  if(act==='clmute'){ clR('lzc_mute',{p_uid:id,p_minutes:+el.getAttribute('data-n')}).then(function(){ clOpen('members'); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clkick'){ if(CL.kick!==id){ CL.kick=id; clRender(); return; } CL.kick=null; clR('lzc_kick',{p_uid:id}).then(function(){ CL.mopen=null; toast('Removed from the clan.'); clOpen('members'); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clrole'){ var r=el.getAttribute('data-r'); if(r==='leader'&&CL.lead!==id){ CL.lead=id; clRender(); return; } CL.lead=null; clR('lzc_role',{p_uid:id,p_role:r}).then(function(){ clOpen('members'); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clans'){ clR('lzc_answer',{p_uid:id,p_accept:el.getAttribute('data-v')==='1'}).then(function(){ clOpen('members'); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clcopy'){ var cd=CL.me&&CL.me.code; try{ navigator.clipboard.writeText(cd); toast('Code copied: '+cd); }catch(e){ toast('Your code: '+cd); } return; }
+  if(act==='clnewcode'){ clR('lzc_new_code').then(function(d){ CL.me.code=d.code; toast('New code: '+d.code+'. The old one no longer works.'); clRender(); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='cledit'){ var k=el.getAttribute('data-k'), v=el.getAttribute('data-v'), L=lookS(), a={p_descr:null,p_open:null,p_color:null,p_banner:null};
+    if(k==='color') a.p_color=v; else if(k==='open') a.p_open=v==='1'; else if(k==='descr') a.p_descr=(document.getElementById('clDesc2')||{}).value||''; else if(k==='banner') a.p_banner={bg:L.bg,fg:L.fg,em:L.em,pat:L.pat};
+    clR('lzc_edit',a).then(function(){ toast('Saved.'); CL.mapAt=0; clOpen('more'); }).catch(function(e){ toast(clErr(e)); }); return; }
+  if(act==='clleave'){ if(!CL.leave){ CL.leave=true; clRender(); return; } CL.leave=false; clR('lzc_leave').then(function(){ CL.chat=[]; CL.me=null; MP.global=false; toast('You left the clan.'); if(MP.on){ mpSetPref('offline'); mpGoOffline(); } clOpen(); }).catch(function(e){ toast(clErr(e)); }); return; }
+}
+function clKeep(){ var a=document.getElementById('clName'), b=document.getElementById('clTag'), c=document.getElementById('clDesc'); if(a) CL.mkName=a.value; if(b) CL.mkTag=b.value; if(c) CL.mkDesc=c.value; }
+function clDonate(uid,kind,n){
+  var have=kind==='credits'?S.credits:kind==='food'?S.food:sampleCount(); if(have<n){ toast('You don’t have that much.'); return; }
+  if(CL.busy) return; CL.busy=true;
+  clR('lzc_donate',{p_to:uid,p_kind:kind,p_amount:n}).then(function(d){
+    CL.busy=false; var a=d.sent||0;
+    if(kind==='credits') S.credits-=a; else if(kind==='food') S.food-=a; else { for(var i=0;i<a;i++){ var hi=null; S.strains.forEach(function(st){ if((S.samples[st.id]||0)>0&&(!hi||(S.samples[st.id]||0)>(S.samples[hi.id]||0))) hi=st; }); if(hi) S.samples[hi.id]--; } }
+    save(); renderAll(); toast('Sent '+fmt(a)+' '+kind+'.'+(d.left<n?' '+fmt(d.left)+' more '+kind+' left to give today.':'')); try{ achEv('gift'); }catch(e){} clChatPoll(true); clRender();
+  }).catch(function(e){ CL.busy=false; toast(clErr(e)); });
+}
+
+/* ---- gifts, hourly income and season rewards ---- */
+function clGifts(){
+  if(!clOn()) return; clR('lzc_gifts_take').then(function(l){ if(!l||!l.length) return; var t={credits:0,food:0,samples:0}, from=[];
+    l.forEach(function(g){ t[g.kind]=(t[g.kind]||0)+g.amount; if(from.indexOf(g.from)<0) from.push(g.from); });
+    S.credits+=t.credits; S.food+=t.food; var got=addSamples(t.samples); save(); renderAll();
+    toast(from.join(', ')+' sent you '+[t.credits?fmt(t.credits)+' credits':'',t.food?fmt(t.food)+' food':'',got?got+' sample'+(got>1?'s':''):''].filter(Boolean).join(', ')+'.');
+  }).catch(function(){});
+}
+function clRegionPay(k){ var m=regionMakes(k); return {credits:Math.round(600+m.credits*10),food:Math.round(m.food*10),samples:m.samples?2:1}; }
+function clCollect(){
+  if(!clOn()||Date.now()<CL.nextCollect) return;
+  CL.nextCollect=Date.now()+60000;
+  clR('lzc_collect').then(function(d){ if(!d) return; CL.nextCollect=Date.now()+Math.max(60,(d.next||3600))*1000;
+    var h=d.hours||0, own=(d.owned||[]).filter(function(k){ return EARTH.R[k]; }); if(!h||!own.length) return;
+    var t={credits:0,food:0,samples:0}, mul=1+.05*(own.length-1);
+    own.forEach(function(k){ var p=clRegionPay(k); t.credits+=p.credits; t.food+=p.food; t.samples+=p.samples; });
+    t.credits=Math.round(t.credits*h*mul); t.food=Math.round(t.food*h*mul); t.samples=Math.min(30,t.samples*h);
+    S.credits+=t.credits; S.food+=t.food; var got=addSamples(t.samples); save(); renderAll();
+    toast('Clan land paid you '+fmt(t.credits)+' credits, '+fmt(t.food)+' food'+(got?' and '+got+' samples':'')+' for '+h+' hour'+(h>1?'s':'')+' ('+own.length+' region'+(own.length>1?'s':'')+').');
+  }).catch(function(){});
+}
+function clSeasonClaim(){
+  clR('lzc_season_claim').then(function(d){ if(!d||d.none) return; var rk=d.rank, cr=0, gp=0;
+    if(rk===1){ cr=500000; gp=30; } else if(rk===2){ cr=300000; gp=20; } else if(rk===3){ cr=200000; gp=15; } else if(d.owned>0){ cr=60000; gp=6; }
+    if(!cr){ toast('Season '+d.season+' is over. A new map has started. Good luck this season!'); return; }
+    S.credits+=cr; techS().pts+=gp; save(); renderAll();
+    showOverlay('<div class="sprev r2" style="--rc:#D9A520"><div class="sprh">Season '+d.season+' rewards</div><p>'+(rk<=3?'Your clan finished <b>#'+rk+'</b> in the world!':'Your clan held '+d.owned+' region'+(d.owned>1?'s':'')+' at the end of the season.')+'</p><div class="exloot"><div class="gold">+'+fmt(cr)+' credits</div><div class="gpchip">'+gpIcon(16)+' +'+gp+' Gene Points</div></div><p class="muted">The map has reset for season '+(d.season+1)+'. Every clan starts again.</p><div class="btns"><button class="btn primary" data-ov="close" type="button">Collect</button></div></div>');
+  }).catch(function(){});
+}
+
+/* ---- the world map ---- */
+function clMapLoad(force){
+  if(!clOn()) return; if(!force&&Date.now()-CL.mapAt<30000) return; CL.mapAt=Date.now();
+  clR('lzc_map').then(function(d){ CL.map=d||{}; if(ui.tab==='earth') renderPanel(); }).catch(function(){});
+}
+function clOwner(k){ var l=CL.map&&CL.map[k]; if(!l||!l.length) return null; var t=l[0]; return t.pts>=100?t:null; }
+function clMyPts(k){ var l=(CL.map&&CL.map[k])||[]; for(var i=0;i<l.length;i++) if(l[i].me) return l[i].pts; return 0; }
+function clCanEnter(k){ if(!clOn()||!EARTH.R[k]) return false; var c=clMine(); if(!c) return false; var o=clOwner(k); if(o&&o.me) return true; return EARTH.R[k].adj.some(function(a){ var oa=clOwner(a); return oa&&oa.me; }); }
+function clRegionCard(k){
+  if(!clOn()) return ''; var l=(CL.map&&CL.map[k])||[], own=clOwner(k), mine=clMine(), h='<div class="clctl"><div class="exsec" style="margin-top:6px">Clan control</div>';
+  if(!l.length) h+='<p class="muted" style="margin:0">No clan has fought here yet this season. Win outbreaks here to claim it.</p>';
+  var top=Math.max(100,(l[0]&&l[0].pts)||0);
+  l.forEach(function(c){ h+='<div class="clbar'+(c.me?' me':'')+'"><span class="cltag" style="--cc:'+esc(c.color)+'">'+esc(c.tag)+'</span><i><b style="width:'+Math.min(100,Math.round(c.pts/top*100))+'%;background:'+esc(c.color)+'"></b></i><span class="num">'+fmt(c.pts)+'</span></div>'; });
+  if(own) h+='<p class="sub" style="margin:6px 0 0">Owned by <b>'+esc(own.name)+'</b>. '+(own.me?'It pays every member '+makesText({credits:clRegionPay(k).credits,food:clRegionPay(k).food,samples:0})+' an hour.':'Beat their control to take it.')+'</p>';
+  else if(l.length) h+='<p class="sub" style="margin:6px 0 0">Nobody owns it yet. The first clan to 100 control takes it.</p>';
+  return h+'</div>';
+}
+/* send control after a win online */
+function clContribPts(stars){ var cleared=!!(S.earth&&S.earth.cur&&S.earth.held&&S.earth.held[S.earth.cur]&&S.earth.held[S.earth.cur].at>Date.now()-15000); return Math.min(120,Math.round(10+6*(stars||0)+Math.min(30,dangerLv()*3)+(cleared?40:0))); }
+function clContrib(stars){
+  if(!clOn()||!S.earth||!S.earth.cur) return ''; var k=S.earth.cur, p=clContribPts(stars), c=clMine();
+  var send=function(tries){ clR('lzc_contrib',{p_region:k,p_pts:p}).then(function(){ CL.mapAt=0; clMapLoad(true); }).catch(function(e){ if(/slow_down/.test(String(e&&e.message||e))&&tries<1) setTimeout(function(){ send(tries+1); },16000); }); };
+  send(0);
+  return '<p class="gpnote" style="color:'+esc((c&&c.color)||'#7ED957')+'">'+clIcon(15)+' +'+p+' control for '+esc(c?'['+c.tag+']':'your clan')+' in '+esc(regionName(k))+'</p>';
+}
+function clTick(){ if(!clOn()) return; clCollect(); if(Date.now()-(CL.giftAt||0)>60000){ CL.giftAt=Date.now(); clGifts(); } if(ui.tab==='earth') clMapLoad(); }
+var CLACTS={clopen:1,clgo:1,clfind:1,clsearch:1,clmake:1,clmkcol:1,clmkopen:1,cljoin:1,cljoincode:1,clunask:1,cltab:1,clsend:1,clmenu:1,clhide:1,clreport:1,clmopen:1,cldonate:1,clmute:1,clkick:1,clrole:1,clans:1,clcopy:1,clnewcode:1,cledit:1,clleave:1};
+function clEarthTop(){
+  var c=clMine(); if(!c) return '';
+  var own=Object.keys(EARTH.R).filter(function(k){ var o=clOwner(k); return o&&o.me; });
+  return '<div class="clearth">'+clBannerOf(c,40)+'<div class="info"><div class="name">'+esc(c.name)+' '+clTagHtml(c)+'</div><div class="sub">Owns '+own.length+' of '+regionKeys().length+' regions · Season '+CL.me.season+' ends in '+clSeasonLeft()+'</div></div><button class="btn sm" data-act="clopen" type="button">Clan'+(clUnread()?' <i class="cldot"></i>':'')+'</button></div>';
+}
+/* enter sends a chat message */
+document.addEventListener('keydown',function(e){ if(e.key==='Enter'&&e.target&&e.target.id==='clMsg'){ e.preventDefault(); clSend(); } if(e.key==='Enter'&&e.target&&e.target.id==='clQ'){ e.preventDefault(); CL.search=null; clSearch(); } });
+document.addEventListener('input',function(e){ if(e.target&&e.target.id==='clMsg') CL.draft=e.target.value; });
+
+/* ---- delete your account (needs you to type DELETE) ---- */
+function delAcctOpen(){
+  var h='<div class="delacct"><h2 style="margin:0 0 6px">Delete account</h2><p>This permanently deletes <b>'+esc(MP.pname||'your account')+'</b> and everything saved to it:</p>'+
+    '<ul class="clhow"><li>Your username, sign-in and profile picture</li><li>Your offline and online colonies saved to the account, and their backups</li><li>Your clan spot and your chat messages. If you lead a clan, it passes to your best Officer or longest member.</li></ul>'+
+    '<p class="delwarn">This can’t be undone. The game on this device goes back to a guest game.</p>'+
+    '<div><label class="muted" for="delTxt">Type DELETE to confirm</label><input class="txt" id="delTxt" maxlength="10" autocomplete="off" autocapitalize="characters"></div>'+
+    '<div class="btns"><button class="btn virus" data-act="delacctgo" type="button">Delete my account</button><button class="btn" data-ov="mp" data-do="acct" type="button">Cancel</button></div></div>';
+  showOverlay(h);
+}
+function delAcctGo(){
+  var t=((document.getElementById('delTxt')||{}).value||'').trim().toUpperCase(); if(t!=='DELETE'){ toast('Type DELETE to confirm.'); return; }
+  if(CL.busy) return; CL.busy=true;
+  var uid=MP.user&&MP.user.id; mpStop();
+  clR('lz_delete_account').then(function(){
+    CL.busy=false; CL.me=null; CL.chat=[];
+    try{ Object.keys(localStorage).forEach(function(k){ if(uid&&k.indexOf(uid)>=0) localStorage.removeItem(k); }); localStorage.removeItem('lazarus-pfp'); localStorage.removeItem('lazarus-pfp-s'); localStorage.removeItem('lazarus-mode'); }catch(e){}
+    MP.user=null; MP.me=null; MP.on=false; MP.global=false; MP.pname=null; MP.wid=null; mpClearReal();
+    try{ MP.sb.auth.signOut(); }catch(e){}
+    if(KEY!==KEY_OFF) mpSwapSave(KEY_OFF); hideOverlay(); renderAll(); toast('Your account was deleted.');
+  }).catch(function(e){ CL.busy=false; mpTimers&&MP.on&&mpTimers(); toast('Could not delete the account ('+clErr(e)+').'); });
 }
 
 /* ================= colony types, places, leaders, goals and battle events (0.75.0) =================
@@ -9335,7 +9700,7 @@ function bootStart(){
   musIcon();
 })();
 
-if(typeof window.__QC==='function'){ window.__QC({get S(){return S;},set S(v){S=v;},get B(){return B;},genColony:genColony,startOutbreak:startOutbreak,stepOutbreak:stepOutbreak,endOutbreak:endOutbreak,releaseAt:releaseAt,drawRival:drawRival,drawHome:drawHome,frame:frame,doUpgrade:doUpgrade,doClaim:doClaim,doCollect:doCollect,collectAll:collectAll,doPlant:doPlant,doHarvest:doHarvest,doPlantAll:doPlantAll,doSell:doSell,doCulture:doCulture,saveStrain:saveStrain,startPlace:startPlace,doPlace:doPlace,setGhost:setGhost,homeClick:homeClick,fits:fits,renderPanel:renderPanel,basePanel:basePanel,labPanel:labPanel,roadPanel:roadPanel,editorPanel:editorPanel,ui:ui,setMode:setMode,tickEconomy:tickEconomy,P:P,BT:BT,silhouettes:silhouettes,orderBuildings:orderBuildings,load:load,sparams:sparams,newStrainDraft:newStrainDraft,strainById:strainById,cultureCost:cultureCost,labPoints:labPoints,traitCap:traitCap,cropProgress:cropProgress,cropReady:cropReady,CROPS:CROPS,TRAITS:TRAITS,VECTORS:VECTORS,ensureColony:ensureColony,openTowns:openTowns,openTown:openTown,sendScout:sendScout,tickWorld:tickWorld,resolveTrip:resolveTrip,resolveInfected:resolveInfected,drawWorld:drawWorld,spawnDrop:spawnDrop,worldPanel:worldPanel,worldTap:worldTap,doTrainScout:doTrainScout,tripInfo:tripInfo,fogAt:fogAt,exploredPct:exploredPct,checkInbox:checkInbox,initView:initView,initTown:initTown,openDiplo:openDiplo,openTrade:openTrade,doTrade:doTrade,doGift:doGift,proposeAlliance:proposeAlliance,endAlliance:endAlliance,sendMission:sendMission,resolveSteal:resolveSteal,resolveSpy:resolveSpy,advanceTowns:advanceTowns,offend:offend,projInfo:projInfo,KEYNOW:function(){return KEY;},mpCheckRemote:mpCheckRemote,mpPush:mpPush,income:income,buildCost:buildCost,paidFor:paidFor,doDemolish:doDemolish,stripWater:stripWater,renderAll:renderAll,renderHUD:renderHUD,buildableList:buildableList,CINE:CINE,cineClose:cineClose,bossCrumbStart:bossCrumbStart,bossCrumbDraw:bossCrumbDraw,crumbChunks:crumbChunks,CRUMB_DUR:CRUMB_DUR,fall:fall,HOWTO:HOWTO,tutOpen:tutOpen,tutSec:tutSec,tutMaybe:tutMaybe,tutNewGame:tutNewGame,tutSeen:tutSeen,TUTIMG:TUTIMG,spyCost:spyCost,nextCost:nextCost,affordCount:affordCount,sfxBuild:sfxBuild,lzBuildSfx:lzBuildSfx,rivalPow:rivalPow,rivalPct:rivalPct,rivalDef:rivalDef,rivalSetup:rivalSetup,rivalTick:rivalTick,rivalSealed:rivalSealed,rivalWarn:rivalWarn,bossHpBar:bossHpBar,PINCH:PINCH,CHEST_T:CHEST_T,chestPlay:chestPlay,chestClose:chestClose,chestT:chestT,get CHEST(){return CHEST;},lzChestSfx:lzChestSfx,drawChest:drawChest,ironOn:ironOn,genBoss:genBoss,startBoss:startBoss,bossSpawn:bossSpawn,bossTick:bossTick,bossAfter:bossAfter,bossOK:bossOK,bossAt:bossAt,bossHit:bossHit,drawBoss:drawBoss,bossHud:bossHud,updBHud:updBHud,bossShow:bossShow,bubPlaceHtml:bubPlaceHtml,traitOpen:traitOpen,vecOpen:vecOpen,TRAIT:TRAIT,VEC:VEC,BP:BP,futPal:futPal,ironOf:ironOf,cultureMult:cultureMult,scoutCost:scoutCost,sctLv:sctLv,doScoutTrain:doScoutTrain,baseMoves:baseMoves,COSTS:COSTS,LIM:LIM,MAXLV:MAXLV,upCost:upCost,bCap:bCap,tripInfo3:tripInfo,ZM:ZM,zoomBy:zoomBy,zoomLevel:zoomLevel,FS:FS,fsSet:fsSet,fsTab:fsTab,immLv:immLv,immMult:immMult,immPct:immPct,get TS(){return TS;},get W(){return W;},get H(){return H;},TEST:TEST,testEnter:testEnter,testLeave:testLeave,testGive:testGive,testCan:testCan,SET:SET,setOpen:setOpen,setSwitch:setSwitch,setTheme:setTheme,setApply:setApply,SFX:SFX,LB:LB,RTERR:RTERR,rTile:rTile,curRegion:curRegion,regLook:regLook,WREG:WREG,wasteSpec:wasteSpec,lzWaste:lzWaste,musWant:musWant,lbOpen:lbOpen,lbHtml:lbHtml,lbSet:lbSet,lbLoad:lbLoad,lbWorld:lbWorld,lbCan:lbCan,offlineReady:offlineReady,sfxClick:sfxClick,clickBus:clickBus,buzz:buzz,clickTarget:clickTarget,VIBE:VIBE,lzClickSfx:lzClickSfx,testGive:testGive,testSection:testSection,lzMusic:lzMusic,bossWinSting:bossWinSting,leaveBattle:leaveBattle,cineGo:cineGo,cineReady:cineReady,MUS:MUS,musWant:musWant,musToggle:musToggle,musOn:musOn,BOOT:BOOT,bootNetDone:bootNetDone,bellToggle:bellToggle,GAME_VERSION_NAME:GAME_VERSION_NAME,verName:verName,syncBubble:syncBubble,bubTown:bubTown,mpBellMaybe:mpBellMaybe,mpOverlay:mpOverlay,showOverlay:showOverlay,hideOverlay:hideOverlay,seedsOf:seedsOf,doBuySeeds:doBuySeeds,chestAt:chestAt,leagueBonus:leagueBonus,claimable:claimable,doClaimV:doClaim,emptyFarms:emptyFarms,dangerLv:dangerLv,tripInfo2:tripInfo,scoutBtnRect:scoutBtnRect,scoutBtnState:scoutBtnState,worldTap:worldTap,GAME_VERSION:GAME_VERSION,CHANGELOG:CHANGELOG,bellOpen:bellOpen,verNotes:verNotes,verUnseen:verUnseen,EARTH:EARTH,E0:E0,earthStart:earthStart,earthMove:earthMove,earthCheck:earthCheck,earthTap:earthTap,earthIncome:earthIncome,regionState:regionState,canEnter:canEnter,regionCleared:regionCleared,earthPanel:earthPanel,earthFit:earthFit,earthZoomTo:earthZoomTo,drawEarth:drawEarth,regionMakes:regionMakes,gn:gn,doExpand:doExpand,nextLand:nextLand,landRow:landRow,buildMenu:buildMenu,LAND:LAND,MP:MP,mpPollWorlds:mpPollWorlds,mpPlayWorld:mpPlayWorld,mpEnter:mpEnter,mpActivate:mpActivate,mpApplyRoster:mpApplyRoster,mpPull:mpPull,mpSync:mpSync,mpEvents:mpEvents,mpAttack:mpAttack,mpGift:mpGift,mpResolveTrip:mpResolveTrip,openRealDiplo:openRealDiplo,mpDo:mpDo,mpGate:mpGate,mpGoOnline:mpGoOnline,mpClaim:mpClaim,mpIsMain:mpIsMain,enterColony:enterColony,exitColony:exitColony,openRaid:openRaid,doRaid:doRaid,raidOdds:raidOdds,applySteer:applySteer,doSurge:doSurge,doMutate:doMutate,battleBldAt:battleBldAt,AB:AB,ownedIncome:ownedIncome,mpRestoreList:mpRestoreList,mpRestore:mpRestore,mpBackup:mpBackup,mpCheckRemote:mpCheckRemote,mpPush:mpPush,mpOpenOffline:mpOpenOffline,mpTs:mpTs,mpGoOffline:mpGoOffline,mpSetMode:mpSetMode,bootState:bootState,get KEY(){return KEY;},mpPanel:mpPanel,worldPanelBase:worldPanelBase,mpDetail:mpDetail,mpPub:mpPub,startResearch:startResearch,tickResearch:tickResearch,openResearch:openResearch,researchBlock:researchBlock,slotsTotal:slotsTotal,resolveAttack:resolveAttack,startSterilize:startSterilize,claimTown:claimTown,buildTownLab:buildTownLab,popHit:popHit,ownedIncome:ownedIncome,ownedCount:ownedCount,attackTown:attackTown,adoptPlan:adoptPlan,addPlan:addPlan,doTrainSpy:doTrainSpy,townById:townById,tradePrices:tradePrices,relStatus:relStatus,WX:WX,wxRegion:wxRegion,wxFx:wxFx,wxActive:wxActive,wxVal:wxVal,wxNow:wxNow,wxStrike:wxStrike,wxBuild:wxBuild,wxToggle:wxToggle,wxUi:wxUi,tickWx:tickWx,shInfo:shInfo,shSet:shToggle,wxBolt:wxBolt,wxBldScreen:wxBldScreen,shIn:shIn,shToggle:shToggle,wxDrawSky:wxDrawSky,doRepair:doRepair,repairCost:repairCost,wxFcMin:wxFcMin,wxRange:wxRange,WXT:WXT,WX_SLOW:WX_SLOW,wxLine:wxLine,wxCard:wxCard}); window.__T5={TECH:TECH,techS:techS,techBuy:techBuy,techOpen:techOpen,techState:techState,techSum:techSum,techParams:techParams,sparams:sparams,chestSpin:chestSpin,spinDone:spinDone,missS:missS,genColony:genColony,colOver:colOver,colShape:colShape,colFit:colFit,colRect:colRect,CDIM:CDIM,CKIND:CKIND,CBIOME:CBIOME,get SPIN(){return SPIN;},get ui(){return ui;}}; window.__T4={WEV:WEV,wevAt:wevAt,wevNow:wevNow,wevNext:wevNext,wevOn:wevOn,wevUi:wevUi,wevOpen:wevOpen,wevBuy:wevBuy,wevShop:wevShop,wevDraw:wevDraw,cropYield:cropYield,tradeRate:tradeRate}; window.__T3={SPEC:SPEC,specGive:specGive,specRoll:specRoll,specById:specById,specSet:specSet,specCount:specCount,specMul:specMul,specOpen:specOpen,specShow:specShow,specReveal:specReveal,specAfterBattle:specAfterBattle,specNote:specNote,custOpen:custOpen,lkSet:lkSet,lookS:lookS,stColSet:stColSet,bannerSvg:bannerSvg,lkOpen:lkOpen,cropYield:cropYield,scol:scol}; window.__T2={crewS:crewS,spMake:spMake,spAdd:spAdd,spById:spById,crewMul:crewMul,crewOpen:crewOpen,spReveal:spReveal,recBoard:recBoard,recHire:recHire,spTrain:spTrain,spAssign:spAssign,expS:expS,expPlan:expPlan,expStart:expStart,expTick:expTick,expReport:expReport,expChoose:expChoose,expChance:expChance,EXPS:EXPS,scoutsHome:scoutsHome,get ui(){return ui;},cultureCost:cultureCost,tradeRate:tradeRate,tripInfo:tripInfo,wxFcMin:wxFcMin,upCost:upCost,addSamples:addSamples}; }
+if(typeof window.__QC==='function'){ window.__QC({get S(){return S;},set S(v){S=v;},get B(){return B;},genColony:genColony,startOutbreak:startOutbreak,stepOutbreak:stepOutbreak,endOutbreak:endOutbreak,releaseAt:releaseAt,drawRival:drawRival,drawHome:drawHome,frame:frame,doUpgrade:doUpgrade,doClaim:doClaim,doCollect:doCollect,collectAll:collectAll,doPlant:doPlant,doHarvest:doHarvest,doPlantAll:doPlantAll,doSell:doSell,doCulture:doCulture,saveStrain:saveStrain,startPlace:startPlace,doPlace:doPlace,setGhost:setGhost,homeClick:homeClick,fits:fits,renderPanel:renderPanel,basePanel:basePanel,labPanel:labPanel,roadPanel:roadPanel,editorPanel:editorPanel,ui:ui,setMode:setMode,tickEconomy:tickEconomy,P:P,BT:BT,silhouettes:silhouettes,orderBuildings:orderBuildings,load:load,sparams:sparams,newStrainDraft:newStrainDraft,strainById:strainById,cultureCost:cultureCost,labPoints:labPoints,traitCap:traitCap,cropProgress:cropProgress,cropReady:cropReady,CROPS:CROPS,TRAITS:TRAITS,VECTORS:VECTORS,ensureColony:ensureColony,openTowns:openTowns,openTown:openTown,sendScout:sendScout,tickWorld:tickWorld,resolveTrip:resolveTrip,resolveInfected:resolveInfected,drawWorld:drawWorld,spawnDrop:spawnDrop,worldPanel:worldPanel,worldTap:worldTap,doTrainScout:doTrainScout,tripInfo:tripInfo,fogAt:fogAt,exploredPct:exploredPct,checkInbox:checkInbox,initView:initView,initTown:initTown,openDiplo:openDiplo,openTrade:openTrade,doTrade:doTrade,doGift:doGift,proposeAlliance:proposeAlliance,endAlliance:endAlliance,sendMission:sendMission,resolveSteal:resolveSteal,resolveSpy:resolveSpy,advanceTowns:advanceTowns,offend:offend,projInfo:projInfo,KEYNOW:function(){return KEY;},mpCheckRemote:mpCheckRemote,mpPush:mpPush,income:income,buildCost:buildCost,paidFor:paidFor,doDemolish:doDemolish,stripWater:stripWater,renderAll:renderAll,renderHUD:renderHUD,buildableList:buildableList,CINE:CINE,cineClose:cineClose,bossCrumbStart:bossCrumbStart,bossCrumbDraw:bossCrumbDraw,crumbChunks:crumbChunks,CRUMB_DUR:CRUMB_DUR,fall:fall,HOWTO:HOWTO,tutOpen:tutOpen,tutSec:tutSec,tutMaybe:tutMaybe,tutNewGame:tutNewGame,tutSeen:tutSeen,TUTIMG:TUTIMG,spyCost:spyCost,nextCost:nextCost,affordCount:affordCount,sfxBuild:sfxBuild,lzBuildSfx:lzBuildSfx,rivalPow:rivalPow,rivalPct:rivalPct,rivalDef:rivalDef,rivalSetup:rivalSetup,rivalTick:rivalTick,rivalSealed:rivalSealed,rivalWarn:rivalWarn,bossHpBar:bossHpBar,PINCH:PINCH,CHEST_T:CHEST_T,chestPlay:chestPlay,chestClose:chestClose,chestT:chestT,get CHEST(){return CHEST;},lzChestSfx:lzChestSfx,drawChest:drawChest,ironOn:ironOn,genBoss:genBoss,startBoss:startBoss,bossSpawn:bossSpawn,bossTick:bossTick,bossAfter:bossAfter,bossOK:bossOK,bossAt:bossAt,bossHit:bossHit,drawBoss:drawBoss,bossHud:bossHud,updBHud:updBHud,bossShow:bossShow,bubPlaceHtml:bubPlaceHtml,traitOpen:traitOpen,vecOpen:vecOpen,TRAIT:TRAIT,VEC:VEC,BP:BP,futPal:futPal,ironOf:ironOf,cultureMult:cultureMult,scoutCost:scoutCost,sctLv:sctLv,doScoutTrain:doScoutTrain,baseMoves:baseMoves,COSTS:COSTS,LIM:LIM,MAXLV:MAXLV,upCost:upCost,bCap:bCap,tripInfo3:tripInfo,ZM:ZM,zoomBy:zoomBy,zoomLevel:zoomLevel,FS:FS,fsSet:fsSet,fsTab:fsTab,immLv:immLv,immMult:immMult,immPct:immPct,get TS(){return TS;},get W(){return W;},get H(){return H;},TEST:TEST,testEnter:testEnter,testLeave:testLeave,testGive:testGive,testCan:testCan,SET:SET,setOpen:setOpen,setSwitch:setSwitch,setTheme:setTheme,setApply:setApply,SFX:SFX,LB:LB,RTERR:RTERR,rTile:rTile,curRegion:curRegion,regLook:regLook,WREG:WREG,wasteSpec:wasteSpec,lzWaste:lzWaste,musWant:musWant,lbOpen:lbOpen,lbHtml:lbHtml,lbSet:lbSet,lbLoad:lbLoad,lbWorld:lbWorld,lbCan:lbCan,offlineReady:offlineReady,sfxClick:sfxClick,clickBus:clickBus,buzz:buzz,clickTarget:clickTarget,VIBE:VIBE,lzClickSfx:lzClickSfx,testGive:testGive,testSection:testSection,lzMusic:lzMusic,bossWinSting:bossWinSting,leaveBattle:leaveBattle,cineGo:cineGo,cineReady:cineReady,MUS:MUS,musWant:musWant,musToggle:musToggle,musOn:musOn,BOOT:BOOT,bootNetDone:bootNetDone,bellToggle:bellToggle,GAME_VERSION_NAME:GAME_VERSION_NAME,verName:verName,syncBubble:syncBubble,bubTown:bubTown,mpBellMaybe:mpBellMaybe,mpOverlay:mpOverlay,showOverlay:showOverlay,hideOverlay:hideOverlay,seedsOf:seedsOf,doBuySeeds:doBuySeeds,chestAt:chestAt,leagueBonus:leagueBonus,claimable:claimable,doClaimV:doClaim,emptyFarms:emptyFarms,dangerLv:dangerLv,tripInfo2:tripInfo,scoutBtnRect:scoutBtnRect,scoutBtnState:scoutBtnState,worldTap:worldTap,GAME_VERSION:GAME_VERSION,CHANGELOG:CHANGELOG,bellOpen:bellOpen,verNotes:verNotes,verUnseen:verUnseen,EARTH:EARTH,E0:E0,earthStart:earthStart,earthMove:earthMove,earthCheck:earthCheck,earthTap:earthTap,earthIncome:earthIncome,regionState:regionState,canEnter:canEnter,regionCleared:regionCleared,earthPanel:earthPanel,earthFit:earthFit,earthZoomTo:earthZoomTo,drawEarth:drawEarth,regionMakes:regionMakes,gn:gn,doExpand:doExpand,nextLand:nextLand,landRow:landRow,buildMenu:buildMenu,LAND:LAND,MP:MP,mpPollWorlds:mpPollWorlds,mpPlayWorld:mpPlayWorld,mpEnter:mpEnter,mpActivate:mpActivate,mpApplyRoster:mpApplyRoster,mpPull:mpPull,mpSync:mpSync,mpEvents:mpEvents,mpAttack:mpAttack,mpGift:mpGift,mpResolveTrip:mpResolveTrip,openRealDiplo:openRealDiplo,mpDo:mpDo,mpGate:mpGate,mpGoOnline:mpGoOnline,mpClaim:mpClaim,mpIsMain:mpIsMain,enterColony:enterColony,exitColony:exitColony,openRaid:openRaid,doRaid:doRaid,raidOdds:raidOdds,applySteer:applySteer,doSurge:doSurge,doMutate:doMutate,battleBldAt:battleBldAt,AB:AB,ownedIncome:ownedIncome,mpRestoreList:mpRestoreList,mpRestore:mpRestore,mpBackup:mpBackup,mpCheckRemote:mpCheckRemote,mpPush:mpPush,mpOpenOffline:mpOpenOffline,mpTs:mpTs,mpGoOffline:mpGoOffline,mpSetMode:mpSetMode,bootState:bootState,get KEY(){return KEY;},mpPanel:mpPanel,worldPanelBase:worldPanelBase,mpDetail:mpDetail,mpPub:mpPub,startResearch:startResearch,tickResearch:tickResearch,openResearch:openResearch,researchBlock:researchBlock,slotsTotal:slotsTotal,resolveAttack:resolveAttack,startSterilize:startSterilize,claimTown:claimTown,buildTownLab:buildTownLab,popHit:popHit,ownedIncome:ownedIncome,ownedCount:ownedCount,attackTown:attackTown,adoptPlan:adoptPlan,addPlan:addPlan,doTrainSpy:doTrainSpy,townById:townById,tradePrices:tradePrices,relStatus:relStatus,WX:WX,wxRegion:wxRegion,wxFx:wxFx,wxActive:wxActive,wxVal:wxVal,wxNow:wxNow,wxStrike:wxStrike,wxBuild:wxBuild,wxToggle:wxToggle,wxUi:wxUi,tickWx:tickWx,shInfo:shInfo,shSet:shToggle,wxBolt:wxBolt,wxBldScreen:wxBldScreen,shIn:shIn,shToggle:shToggle,wxDrawSky:wxDrawSky,doRepair:doRepair,repairCost:repairCost,wxFcMin:wxFcMin,wxRange:wxRange,WXT:WXT,WX_SLOW:WX_SLOW,wxLine:wxLine,wxCard:wxCard}); window.__T6={delAcctOpen:delAcctOpen,delAcctGo:delAcctGo,get CL(){return CL;},clOpen:clOpen,clRender:clRender,clGoOnline:clGoOnline,clContrib:clContrib,clCollect:clCollect,clMapLoad:clMapLoad,clOwner:clOwner,clCanEnter:clCanEnter,get MP(){return MP;},mpGoOnline:mpGoOnline,mpSetWid:mpSetWid,earthMove:earthMove,canEnter:canEnter,mpOverlay:mpOverlay,clSend:clSend,clDonate:clDonate,clSeasonClaim:clSeasonClaim}; window.__T5={TECH:TECH,techS:techS,techBuy:techBuy,techOpen:techOpen,techState:techState,techSum:techSum,techParams:techParams,sparams:sparams,chestSpin:chestSpin,spinDone:spinDone,missS:missS,genColony:genColony,colOver:colOver,colShape:colShape,colFit:colFit,colRect:colRect,CDIM:CDIM,CKIND:CKIND,CBIOME:CBIOME,get SPIN(){return SPIN;},get ui(){return ui;}}; window.__T4={WEV:WEV,wevAt:wevAt,wevNow:wevNow,wevNext:wevNext,wevOn:wevOn,wevUi:wevUi,wevOpen:wevOpen,wevBuy:wevBuy,wevShop:wevShop,wevDraw:wevDraw,cropYield:cropYield,tradeRate:tradeRate}; window.__T3={SPEC:SPEC,specGive:specGive,specRoll:specRoll,specById:specById,specSet:specSet,specCount:specCount,specMul:specMul,specOpen:specOpen,specShow:specShow,specReveal:specReveal,specAfterBattle:specAfterBattle,specNote:specNote,custOpen:custOpen,lkSet:lkSet,lookS:lookS,stColSet:stColSet,bannerSvg:bannerSvg,lkOpen:lkOpen,cropYield:cropYield,scol:scol}; window.__T2={crewS:crewS,spMake:spMake,spAdd:spAdd,spById:spById,crewMul:crewMul,crewOpen:crewOpen,spReveal:spReveal,recBoard:recBoard,recHire:recHire,spTrain:spTrain,spAssign:spAssign,expS:expS,expPlan:expPlan,expStart:expStart,expTick:expTick,expReport:expReport,expChoose:expChoose,expChance:expChance,EXPS:EXPS,scoutsHome:scoutsHome,get ui(){return ui;},cultureCost:cultureCost,tradeRate:tradeRate,tripInfo:tripInfo,wxFcMin:wxFcMin,upCost:upCost,addSamples:addSamples}; }
 })();
 </script>
 </body>
