@@ -530,6 +530,30 @@ html:not(.inbattle) #bBonus{display:none!important}
 .rptabs{box-shadow:inset 0 0 0 1px var(--line);margin-bottom:6px}.rptabs button.on{background:var(--accent);color:var(--accent-ink)}
 
 .toast.ontop{position:fixed;z-index:40;left:50%;top:auto;bottom:calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 6px 20px rgba(0,0,0,.35);font-size:15px;padding:10px 16px;background:#0E1612}
+.supbox{margin:10px 0 4px;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.suphd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}.suphd .muted{font-size:12px}
+.supgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.supchip{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;border-radius:10px;border:2px solid var(--line);background:var(--surface-2);color:var(--ink);font:inherit;cursor:pointer}
+.supchip img{width:56px;height:42px}.supchip .sn{font-size:11.5px;font-weight:700;text-align:center;line-height:1.15}.supchip .sh{position:absolute;top:3px;right:5px;font-size:11px;color:var(--muted)}
+.supchip.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.supd{font-size:12.5px;margin:8px 0 0}
+.supshop{margin-top:8px}.supshop .suphd{margin:6px 0}
+.tcard.sup{border-style:dashed}.tcard.sup.on{border-style:solid;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}.tcard.sup img{display:block}
+.frrow{display:flex;gap:8px}.frrow .txt{flex:1;min-width:0}
+.frpl{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}.frpl .acts{margin-left:auto;display:flex;gap:6px}.frpl .muted{font-size:12.5px}
+.frpl .pdot{width:9px;height:9px;border-radius:50%;background:#8A8070;flex:none}.frpl .pdot.on{background:#4EB86A}
+.frpick{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;margin:6px 0;border-radius:10px;border:2px solid var(--line);background:var(--surface-2);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.frpick .ck{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);display:grid;place-items:center;font-size:13px}.frpick.on{border-color:var(--accent)}.frpick.on .ck{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.wvrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.wvrow .info{flex:1;min-width:0}.wvrow .name{font-weight:800}.wvrow .sub{font-size:12.5px;color:var(--muted)}.wvrow .acts{display:flex;gap:6px}
+.wvhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.wvpl{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.wvp{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:var(--surface-2)}.wvp>i{width:14px;height:14px;border-radius:4px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.3)}
+.wvp .info{flex:1;min-width:0;display:flex;flex-direction:column}.wvp .info span{font-size:12.5px;color:var(--muted)}.wvp.out{opacity:.55}
+.wvwin{display:flex;flex-direction:column;gap:2px;padding:12px;border-radius:12px;background:#3A2E14;color:#F2C230;margin:6px 0}.wvwin.me{background:#2A4A1E;color:#C8F0A0}.wvwin span{font-size:13px;opacity:.85}
+.wvlog{font-size:13px;display:flex;flex-direction:column;gap:4px;max-height:180px;overflow:auto}.wvlog .muted{font-size:11.5px;margin-right:4px}
+.anrec{margin:4px 0 8px}.anrl{font-size:13.5px}.anbar{height:10px;border-radius:6px;background:#C8483B;overflow:hidden;margin:5px 0}.anbar i{display:block;height:100%;background:#4EB86A}
+.anf .fact b{font-size:20px}.anstr{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.anchip{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;background:var(--surface-2);font-size:12.5px;font-weight:700}
+.clnm{background:none;border:0;padding:0;font:inherit;font-weight:800;color:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2);text-underline-offset:2px}
 .miss{margin-bottom:14px}.mhd{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 4px}.mhd b{font-size:15px}
 .mrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(128,110,80,.2)}.mrow .info{flex:1;min-width:0}.mrow .name{font-weight:700}.mrow .sub{font-size:12px;opacity:.85}
 .mrow.got{opacity:.55}.mrow .bar.sm{margin:4px 0 3px}.mchest .name{color:#B07A10}
@@ -598,7 +622,7 @@ html:not(.inbattle) #bBonus{display:none!important}
       <button class="btn" id="btnMutate" type="button">Mutate</button>
       <button class="btn" id="btnEnd" type="button">End</button>
     </div>
-    <p class="hint" style="margin-top:8px">Tap a building to drop your virus on it straight away (one sample). Drag across infected buildings to push the infection higher. <b>Surge</b> makes it leap to new buildings; <b>Mutate</b> sets back the rival cure and weakens their clinics. <span id="bGoal">Collapse half the colony for a win, the Hall for a second star, everything for a third — before their cure finishes.</span></p>
+    <p class="hint" style="margin-top:8px">Tap a building to drop your virus on it straight away (one sample). Drag across infected buildings to push the infection higher. <b>Supports</b> you brought sit next to your strains: tap one, then swipe a drone’s path or tap a target. <b>Surge</b> makes it leap to new buildings; <b>Mutate</b> sets back the rival cure and weakens their clinics. <span id="bGoal">Collapse half the colony for a win, the Hall for a second star, everything for a third — before their cure finishes.</span></p>
   </section>
 </div>
 
@@ -676,6 +700,8 @@ var BT={
   scout:{name:'Scout Post',w:2,h:2,hz:34,max:20,base:150,blurb:'Houses scouts. Higher levels extend range and cut risk.'},
   tower:{name:'Weather Tower',w:2,h:2,hz:46,max:20,base:250,blurb:'Reads the sky. Higher levels see storms farther away and warn you before they hit.'},
   shelter:{name:'Storm Shelter',w:2,h:2,hz:16,max:20,base:300,blurb:'Protects your crops, your people or your buildings from storms. Pick one at a time.'},
+  dronebay:{name:'Drone Bay',w:2,h:2,hz:16,max:6,base:800,blurb:'Builds drones and supply crates to bring into raids.'},
+  kennel:{name:'Kennel',w:2,h:2,hz:12,max:6,base:600,blurb:'Breeds infected rats, dogs and crows to bring into raids.'},
   /* water buildings no longer exist in the game. These entries are only kept so old saves that
      still have them can be refunded in full on load (see stripWater). */
   rain:{name:'Rain Catcher',w:2,h:2,hz:28,max:5,base:100,blurb:'Collects clean rainwater. Slow, but it never makes anyone sick.'},
@@ -683,11 +709,11 @@ var BT={
   filter:{name:'Water Filter',w:2,h:2,hz:24,max:5,base:220,blurb:'Cleans windpump water. Better filters mean fewer people get sick.'}
 };
 var MAXLV=20;   /* highest level for every building, Bunker included */
-var BUILDABLE=['farm','trade','incubator','lab','clinic','scout','tower','shelter'];
+var BUILDABLE=['farm','trade','incubator','lab','clinic','scout','tower','shelter','dronebay','kennel'];
 var BUILD_WATER=['rain','pump','filter'];
 function buildableList(){ return BUILDABLE; }
-var LIM={farm:[3,4,5,6,7,7,8,9,9,10],trade:[2,3,4,5,5,6,6,7,7,7],incubator:[1,2,2,3,3,3,4,4,4,4],lab:[1,1,2,2,2,3,3,3,3,3],clinic:[1,1,2,2,2,3,3,3,3,3],scout:[1,2,2,3,3,3,4,4,4,4],tower:[0,1,1,1,1,1,1,1,1,1],shelter:[0,0,1,1,1,2,2,2,3,3],rain:[2,3,4,5],pump:[1,2,2,3],filter:[1,1,2,2]};   /* by Bunker level */
-var COSTS={hall:[400,900,1800,3250,5850,10550,19000,34200,61550],farm:[150,350,700,1400,2500,4500,8100,14600,26300],trade:[200,450,900,1800,3250,5850,10550,19000,34200],incubator:[250,550,1100,2200,3950,7100,12800,23050,41500],lab:[300,700,1400,2800,5050,9100,16400,29500,53100],clinic:[250,600,1200,2400,4300,7750,13950,25100,45200],scout:[200,450,900,1800,3250,5850,10550,19000,34200],tower:[300,700,1400,2800,5050,9100,16400,29500,53100],shelter:[350,800,1600,3200,5800,10400,18700,33700,60700],rain:[120,300,650,1300],pump:[300,650,1300,2600],filter:[260,600,1200,2400]};
+var LIM={dronebay:[0,0,1,1,1,1,1,1,1,1],kennel:[0,0,0,1,1,1,1,1,1,1],farm:[3,4,5,6,7,7,8,9,9,10],trade:[2,3,4,5,5,6,6,7,7,7],incubator:[1,2,2,3,3,3,4,4,4,4],lab:[1,1,2,2,2,3,3,3,3,3],clinic:[1,1,2,2,2,3,3,3,3,3],scout:[1,2,2,3,3,3,4,4,4,4],tower:[0,1,1,1,1,1,1,1,1,1],shelter:[0,0,1,1,1,2,2,2,3,3],rain:[2,3,4,5],pump:[1,2,2,3],filter:[1,1,2,2]};   /* by Bunker level */
+var COSTS={dronebay:[1200,2600,5400,10800,20000],kennel:[900,2000,4200,8400,16000],hall:[400,900,1800,3250,5850,10550,19000,34200,61550],farm:[150,350,700,1400,2500,4500,8100,14600,26300],trade:[200,450,900,1800,3250,5850,10550,19000,34200],incubator:[250,550,1100,2200,3950,7100,12800,23050,41500],lab:[300,700,1400,2800,5050,9100,16400,29500,53100],clinic:[250,600,1200,2400,4300,7750,13950,25100,45200],scout:[200,450,900,1800,3250,5850,10550,19000,34200],tower:[300,700,1400,2800,5050,9100,16400,29500,53100],shelter:[350,800,1600,3200,5800,10400,18700,33700,60700],rain:[120,300,650,1300],pump:[300,650,1300,2600],filter:[260,600,1200,2400]};
 
 /* ================= save / state ================= */
 var KEY='lazarus-save-v3', V2='lazarus-save-v2', V1='quarantine-clash-save-v1';
@@ -1908,6 +1934,8 @@ function basePanel(){
       desc='Houses '+(2+b.lv)+' scouts (all posts: '+scoutCap()+'). Range '+(6+4*b.lv)+' tiles, reveals a radius of '+(3+sctLv('eyes')+(b.lv>=3?1:0)+(b.lv>=5?1:0))+' around each target, and each level cuts scout risk and trip time.';
       btn+='<button class="btn" data-act="trainscout" data-n="1" '+((S.food<scoutCost()||S.scouts>=scoutCap())?'disabled':'')+' type="button">Train scout · '+fmt(scoutCost())+' food</button>';
     }
+    else if(b.type==='dronebay') desc='Builds drones and packs supply crates for raids. Each level unlocks a new drone and adds hangar room ('+droneCap()+' drones now). Crates unlock at level '+CRATE_LV+'.';
+    else if(b.type==='kennel') desc='Breeds infected animals for raids: rats at level 1, dogs at 3, crows at 5. Room for '+petCap()+' packs.';
     else desc='While infected, farms and trade run at '+Math.round(clamp(.4+.1*bestLv('clinic'),0,1)*100)+'%'+(bestLv('clinic')<6?' (10% more a level, full speed at level 6)':'')+'. Rival attacks are also '+(4*bestLv('clinic'))+'% less likely to infect you.';
     if(b.type==='tower'){ var tfm=wxFcMin(b.lv); desc='Reads the sky. '+(tfm?'Warns you about '+tfm+' minutes ahead. ':'Upgrade to level 2 to see storms coming. ')+'Storm Scan shows '+(b.lv<=1?'rough colors':b.lv===2?'clearer colors':'every detail')+' and reaches '+(b.lv>=5?'the whole world':b.lv>=4?'far across the map':b.lv>=3?'a wide area':'only near your region')+'. Open it on the Earth tab.'; }
     else if(b.type==='shelter'){ var si=shInfo(); desc='Put your <b>crops</b>, your <b>people</b> or your <b>buildings</b> inside and storms can\'t touch them, for as long as you like. But you can\'t use what is inside until you bring it out: sheltered crops stop growing and can\'t be planted or harvested, sheltered people can\'t scout, spy or raid, and sheltered buildings stop making credits. Holds '+(si.cap===3?'all 3 at once':si.cap+' thing'+(si.cap>1?'s':'')+' at a time')+(si.cap<3?' (level '+(si.cap<2?5:10)+' holds more)':'')+'.'; ['crops','people','buildings'].forEach(function(m){ var on=si.inside[m]; btn+='<button class="btn'+(on?' primary':'')+'" data-act="shmode" data-m="'+m+'" '+((!on&&si.used>=si.cap)?'disabled':'')+' type="button">'+(on?'Bring '+m+' out':'Shelter '+m)+'</button>'; }); }
@@ -1919,6 +1947,8 @@ function basePanel(){
     if(canDemolish(b)) btn+='<button class="btn" data-act="del" data-id="'+b.id+'" type="button">'+(ui.confirmDel===b.id?'Tap again · +'+fmt(paidFor(b)):'Knock down')+'</button>';
     h+='<div class="row"><div class="info"><div class="name">'+d.name+' · Level '+b.lv+'</div><div class="sub">'+desc+'</div>'+extra+pips(b.lv,d.max)+'</div><div class="acts">'+btn+'</div></div>';
     if(b.type==='farm') h+=seedShopHtml();
+    if(b.type==='dronebay') h+=supBayPanel();
+    if(b.type==='kennel') h+=supKennelPanel();
     if(ui.confirmDel===b.id) h+='<p class="hint">Knocking it down gives back every credit you spent building and upgrading it: <b class="gold">'+fmt(paidFor(b))+'</b>.</p>';
   } else if(!ui.menu){
     h+='<p class="hint">Tap a building to upgrade or move it. Tap a farm to plant or harvest. A bubble over a farm or trade post means it is ready to collect. Press Build to add more.</p>';
@@ -2133,7 +2163,7 @@ function openTown(id){
   if(tw.real){ openRealDiplo(tw); return; }
   if(tw.dead||tw.owned){ toast(tw.owned?'That town is yours.':'No one is left to attack there.'); return; }
   if(sampleCount()===0){ toast('Culture some virus samples first.'); ui.tab='lab'; ui.edit=null; renderPanel(); return; }
-  ui.place=null;
+  ui.place=null; if(ui.supTown!==id){ ui.supPick=[]; ui.supTown=id; }
   pending=genColony(tw.tier,tw.seed,colOver(tw)); pending.seed=tw.seed; pending.name=tw.name; pending.town=tw.id; colShape(pending,tw);
   var p=pending, c=p.counts, recent=tw.last&&Date.now()-tw.last<600000;
   showOverlay('<h2>'+esc(p.name)+'</h2><p class="muted">Threat level '+(p.tier+1)+' of 10</p>'+colIntroHtml(tw,p)+
@@ -2141,7 +2171,7 @@ function openTown(id){
     '<p class="muted">Credits if fully collapsed: <b class="gold">'+fmt(Math.round(p.loot*(1+.4*rivalPow())))+'</b></p>'+rivalWarn(p.tier)+
     (recent?'<p class="note">Recently raided. Rewards are reduced for a few minutes.</p>':'')+attackWarn(tw)+
     (S.infected?'<p class="note">You are infected, so your strains spread 15% slower. A win cures you.</p>':'<p class="muted">A loss lets the rival infect your settlement until you win an outbreak.</p>')+
-    '<div class="btns"><button class="btn virus" data-ov="attack" type="button">Launch</button><button class="btn" data-ov="towns" type="button">All targets</button><button class="btn" data-ov="diplo" data-id="'+tw.id+'" type="button">Diplomacy</button><button class="btn" data-ov="close" type="button">Back</button></div>');
+    supPickHtml()+'<div class="btns"><button class="btn virus" data-ov="attack" type="button">Launch</button><button class="btn" data-ov="towns" type="button">All targets</button><button class="btn" data-ov="diplo" data-id="'+tw.id+'" type="button">Diplomacy</button><button class="btn" data-ov="close" type="button">Back</button></div>');
 }
 
 /* ================= outbreak simulation ================= */
@@ -2163,6 +2193,7 @@ function startOutbreak(col){
      energy:Math.min(cap,55+techSum('e0')),cap:cap,regen:regen,steer:null,surgeCd:0,mutCd:0,mutT:0,seedAcc:0};
   B.sel=firstAvail();
   if(!col.boss){ rivalSetup(); colSetup(); try{ colPersSetup(); }catch(e){} }
+  if(!col.boss){ try{ supStart(); }catch(e){ console.error(e); } } else ui.supPick=[];
   setMode('battle'); renderTray(); lastHud=''; updBHud();
   cineStart(col,function(){ toast('Tap a building to drop your virus. Drag over infected ones to push it higher.'); });
 }
@@ -2248,7 +2279,7 @@ function stepOutbreak(dt){
   if(B.steer&&B.steer.down) applySteer(dt);
   var bl2=B.bld, N=bl2.length, i, j, b, o, p, d;
   var sans=[], clin=[], vacc=0;
-  for(i=0;i<N;i++){ b=bl2[i]; if(b.flash>0) b.flash-=dt; if(b.fallen) continue; if(b.k==='san') sans.push(b); else if(b.k==='clinic') clin.push(b); else if(b.k==='vacc') vacc++; }
+  for(i=0;i<N;i++){ b=bl2[i]; if(b.flash>0) b.flash-=dt; if(b.fallen||(B.powerOff>0&&(b.k==='san'||b.k==='clinic'))) continue; if(b.k==='san') sans.push(b); else if(b.k==='clinic') clin.push(b); else if(b.k==='vacc') vacc++; }
   /* growth, recovery, lethality */
   for(i=0;i<N;i++){
     b=bl2[i]; if(b.fallen||b.inf<=0) continue;
@@ -2299,7 +2330,7 @@ function stepOutbreak(dt){
   }
   vis/=N;
   B.alert=Math.min(1,B.alert+0.14*(B.alertMul||1)*vis*(1+B.tier*.05)*(1+.04*(B.dz||0))*(1+.35*(B.pw||0))*dt);
-  if(!B.boss){ rivalTick(dt); B.bld.forEach(function(b){ if(b.crumb) b.crumb.t+=dt; }); try{ colTick(dt); }catch(e){} if(B.ended) return; }
+  if(!B.boss){ rivalTick(dt); B.bld.forEach(function(b){ if(b.crumb) b.crumb.t+=dt; }); try{ colTick(dt); }catch(e){} try{ supTick(dt); }catch(e){ console.error(e); } if(B.ended) return; }
   if(B.boss){ bossTick(dt); if(B.ended) return; }
   else if(B.alert>=1){
     var mut=mt>0?mw/mt:0;
@@ -2327,6 +2358,7 @@ function endOutbreak(reason){
   if(win){ dT=Math.max(1,Math.round((6+6*stars+B.tier*2)*mult*(1+.1*(B.dz||0))*(1+.3*(B.pw||0)))); S.trophies+=dT; S.wins++; S.infected=false; S.credits+=loot; if(tw){ tw.last=Date.now(); popNote=popHit(tw,stars); } }
   else { dT=-Math.min(S.trophies,8+Math.floor(B.tier/2)); S.trophies+=dT; S.losses++; S.infected=true; }
   S.peak=Math.max(S.peak||0,S.trophies);
+  try{ if(B.war) wvAfter(win); }catch(e){}
   immAfterBattle();
   try{ achBattle(win,stars); }catch(e){}
   var colNote=''; try{ colNote=colAfterBattle(win,loot,dT); }catch(e){}
@@ -2370,7 +2402,7 @@ function renderTray(){
   var list=S.strains.filter(function(st){return B.start[st.id]>0;});
   $('#tray').innerHTML=list.map(function(st){
     return '<button class="tcard'+(B.sel===st.id?' on':'')+'" data-sid="'+st.id+'" '+((B.avail[st.id]||0)<=0?'disabled':'')+' type="button">'+vicon(st.vec,32,scol(st))+'<span class="tn">'+esc(st.name)+'</span><span class="tc">×'+(B.avail[st.id]||0)+'</span>'+(immPct(st.id)?'<span class="imm">−'+immPct(st.id)+'%</span>':'')+'</button>';
-  }).join('');
+  }).join('')+supTrayHtml();
 }
 var lastHud='';
 function updBHud(){
@@ -2588,6 +2620,8 @@ function drawBuilding(b,time,ghost){
       ctx.beginPath(); ctx.moveTo(.88,.35); ctx.lineTo(1.12,.35); ctx.lineTo(1.12,.85); ctx.lineTo(1.5,1.6); ctx.lineTo(.5,1.6); ctx.lineTo(.88,.85); ctx.closePath(); ctx.fill(); ctx.stroke();
       ctx.fillStyle='#4ED08C'; ctx.beginPath(); ctx.moveTo(.72,1.15); ctx.lineTo(1.28,1.15); ctx.lineTo(1.5,1.6); ctx.lineTo(.5,1.6); ctx.closePath(); ctx.fill();
     });
+  } else if(b.type==='dronebay'){ supDrawBay(b,x,y,w,h,time);
+  } else if(b.type==='kennel'){ supDrawKennel(b,x,y,w,h,time);
   } else if(b.type==='scout'){
     drawBox(x,y,w,h,0,9,'#8F826B','#74684F','#5B513C');
     fillPts(fL(x,y,w,h,.3,.6,0,7),'#2E2519');
@@ -3032,7 +3066,7 @@ function heldCount(){ return Object.keys(E0().held).length; }
 function regionProgress(){ var t=(S.world&&S.world.towns)||[]; return {done:t.filter(function(x){ return x.owned||x.dead; }).length, all:t.length}; }
 function regionCleared(){ var p=regionProgress(); return p.all>0&&p.done===p.all; }
 function canEnter(k){ var e=E0(); if(!e.start||!EARTH.R[k]||e.held[k]||k===e.cur) return false; return EARTH.R[k].adj.some(function(a){ return !!e.held[a]; })||clCanEnter(k); }
-function regionState(k){ var e=E0(); if(!e.start) return 'pick'; if(e.held[k]) return 'own'; if(k===e.cur) return 'here'; if(canEnter(k)) return 'open'; return 'locked'; }
+function regionState(k){ if(warOn()) return wvRegState(k); var e=E0(); if(!e.start) return 'pick'; if(e.held[k]) return 'own'; if(k===e.cur) return 'here'; if(canEnter(k)) return 'open'; return 'locked'; }
 function regionMakes(k){ var t={credits:0,food:0,samples:0}; EARTH.R[k].cs.forEach(function(c){ t[c[3]]+=c[4]; }); return t; }
 function earthIncome(){
   var e=E0(), t={credits:0,food:0,samples:0}, k;
@@ -3128,7 +3162,8 @@ function drawEarth(dt,time){
     EARTH.R[k].cs.forEach(function(c,j){ ctx.globalAlpha=st==='own'?.92:.55; ctx.fillStyle=RCOL[c[3]][0]; ctx.fill(P2.c[k][j]); });
     ctx.globalAlpha=1;
   });
-  if(clOn()) keys.forEach(function(k){ var o=clOwner(k); if(!o) return; ctx.globalAlpha=.55+(o.me?.1*Math.sin(time*2.4):0); ctx.fillStyle=o.color; ctx.fill(P2.r[k]); ctx.globalAlpha=1; });
+  if(warOn()) keys.forEach(function(k){ var o=wvP(wvOwner(k)); if(!o) return; ctx.globalAlpha=.72+(o.uid===WV.st.me?.12*Math.sin(time*2.4):0); ctx.fillStyle=o.color; ctx.fill(P2.r[k]); ctx.globalAlpha=1; });
+  if(clOn()&&!warOn()) keys.forEach(function(k){ var o=clOwner(k); if(!o) return; ctx.globalAlpha=.55+(o.me?.1*Math.sin(time*2.4):0); ctx.fillStyle=o.color; ctx.fill(P2.r[k]); ctx.globalAlpha=1; });
   ctx.strokeStyle='rgba(0,0,0,.30)'; ctx.lineWidth=.5/v.s; ctx.stroke(P2.inner);
   if(WX.scan) wxDrawScan(ctx,v);
   keys.forEach(function(k){
@@ -3156,7 +3191,7 @@ function drawEarth(dt,time){
       ctx.fillStyle='#8A8070'; ctx.strokeStyle='#2A1F0E'; ctx.lineWidth=1.2; ctx.fillRect(q.x-6,q.y-18,12,9); ctx.strokeRect(q.x-6,q.y-18,12,9); ctx.fillStyle='#E58B4B'; ctx.fillRect(q.x-2,q.y-15,4,6); }
     var show=bw>44||ui.esel===k||st==='here';
     if(!show) return;
-    var txt=R.n, oc=clOn()&&clOwner(k); if(oc) txt+=' ['+oc.tag+']'; if(st==='here'){ var pr=regionProgress(); txt+=' · '+pr.done+'/'+pr.all; }
+    var txt=R.n, oc=clOn()&&!warOn()&&clOwner(k); if(warOn()){ var wo=wvP(wvOwner(k)); if(wo) txt+=' \u00b7 '+wo.name; } if(oc) txt+=' ['+oc.tag+']'; if(st==='here'){ var pr=regionProgress(); txt+=' · '+pr.done+'/'+pr.all; }
     ctx.font='700 '+(bw>110?11:9.5)+'px sans-serif';
     var tw=ctx.measureText(txt).width+4; if(!fitsLabel(q.x-tw/2,q.y-7,tw,14)&&ui.esel!==k&&st!=='here') return;
     ctx.lineWidth=3; ctx.strokeStyle='rgba(15,12,8,.92)'; ctx.lineJoin='round'; ctx.miterLimit=2; ctx.strokeText(txt,q.x,q.y); ctx.fillStyle=st==='locked'?'#A89B82':'#F3EAD3'; ctx.fillText(txt,q.x,q.y);
@@ -3194,6 +3229,10 @@ function earthLine(){
   return '<p class="muted" style="margin:0">Region: <b>'+esc(regionName(e.cur))+'</b> · '+pr.done+' of '+pr.all+' colonies taken'+' · Danger '+dangerLv()+(e.held[e.cur]?' · <b class="good">cleared</b>':'')+'</p>'+wxLine();
 }
 function earthPanel(){
+  if(warOn()) return warPanel();
+  return (frCan()?'<div class="acts" style="margin-bottom:8px"><button class="btn sm virus" data-act="wvlist" type="button">Friend wars</button><button class="btn sm" data-act="fropen" type="button">Friends</button></div>':'')+earthPanel0();
+}
+function earthPanel0(){
   if(!earthOn()) return '<p class="note">Earth is coming to online worlds in the next update. Switch to your offline world to play it now.</p>';
   var e=E0(), k=ui.esel&&EARTH.R[ui.esel]?ui.esel:null, h='', nKeys=regionKeys().length;
   if(!e.start){
@@ -3233,8 +3272,8 @@ function earthPanel(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=105;
-var CHANGELOG=[{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=106;
+var CHANGELOG=[{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -3660,7 +3699,7 @@ cv.addEventListener('pointerdown',function(e){
   if(mode==='home'&&ui.tab==='earth'){ var ev0=ui.ev||earthFit(); edrag={sx:e.clientX,sy:e.clientY,vx:ev0.x,vy:ev0.y,moved:false,p:p}; }
   else if(mode==='home'&&ui.tab==='world'){ wdrag={sx:e.clientX,sy:e.clientY,vx:ui.view.x,vy:ui.view.y,moved:false,p:p,btn:scoutBtnHit(p)}; }
   else if(mode==='home'){ if(ui.place){ down=true; setGhost(p); } else cdrag={sx:e.clientX,sy:e.clientY,px:ZM.px,py:ZM.py,moved:false,p:p}; }
-  else if(B){ if(colTruckTap(p)) return; var lp=colPick(p); B.steer={x:lp.x,y:lp.y,down:true}; applySteer(0); }
+  else if(B){ if(supDown(p)) return; if(colTruckTap(p)) return; var lp=colPick(p); B.steer={x:lp.x,y:lp.y,down:true}; applySteer(0); }
   try{ cv.setPointerCapture(e.pointerId); }catch(err){}
 });
 cv.addEventListener('pointermove',function(e){
@@ -3683,14 +3722,19 @@ cv.addEventListener('pointermove',function(e){
     return;
   }
   if(down&&mode==='home'&&ui.place) setGhost(pos(e));
+  else if(mode==='battle'&&B&&B.dpath){ supMove(pos(e)); }
   else if(mode==='battle'&&B&&B.steer&&B.steer.down){ var bp=colPick(pos(e)); B.steer.x=bp.x; B.steer.y=bp.y; }
 });
-['pointerup','pointercancel','pointerleave'].forEach(function(n){ cv.addEventListener(n,function(){ down=false; if(B&&B.steer) B.steer.down=false; if(cdrag){ var c0=cdrag; cdrag=null; if(n==='pointerup'&&!c0.moved) homeClick(c0.p); } if(wdrag){ var w=wdrag; wdrag=null; if(n==='pointerup'&&!w.moved) worldTap(w.p); } if(edrag){ var ed=edrag; edrag=null; if(n==='pointerup'&&!ed.moved) earthTap(ed.p); } }); });
+['pointerup','pointercancel','pointerleave'].forEach(function(n){ cv.addEventListener(n,function(){ down=false; if(B&&B.steer) B.steer.down=false; if(B&&B.dpath){ try{ supUp(); }catch(e){} } if(cdrag){ var c0=cdrag; cdrag=null; if(n==='pointerup'&&!c0.moved) homeClick(c0.p); } if(wdrag){ var w=wdrag; wdrag=null; if(n==='pointerup'&&!w.moved) worldTap(w.p); } if(edrag){ var ed=edrag; edrag=null; if(n==='pointerup'&&!ed.moved) earthTap(ed.p); } }); });
 document.addEventListener('input',function(e){ if(e.target&&e.target.id==='strainName'&&ui.edit) ui.edit.name=e.target.value; });
 
 document.addEventListener('click',function(e){
   var el=e.target.closest?e.target.closest('[data-act],[data-ov],[data-tab],[data-sid]'):null; if(!el) return;
   var act=el.getAttribute('data-act'), ov=el.getAttribute('data-ov'), tab=el.getAttribute('data-tab'), sid=el.getAttribute('data-sid');
+  if(act==='supuse'){ supArm(+el.getAttribute('data-i')); return; }
+  if(act==='suppick'){ supToggle(el.getAttribute('data-k'),el.getAttribute('data-id')); return; }
+  if(act==='supbuy'){ supBuy(el.getAttribute('data-k'),el.getAttribute('data-id')); return; }
+  if(act&&/^(fr|wv)/.test(act)&&wvAct(act,el)) return;
   if(tab){ if(ui.place) return; if(ui.colony&&tab!=='base') ui.colony=null; ui.tab=tab; ui.confirmReset=false; ui.confirmDel=null; renderPanel(); return; }
   if(ov){
     if(ov==='attack'){ hideOverlay(); attackTown(pending); startOutbreak(pending); }
@@ -3802,8 +3846,8 @@ document.addEventListener('click',function(e){
     else if(act==='custopen') custOpen(el.getAttribute('data-t')||null);
     else if(act==='lkset') lkSet(el.getAttribute('data-k'),el.getAttribute('data-v'));
     else if(act==='stcol') stColSet(el.getAttribute('data-id'),el.getAttribute('data-v'));
-    else if(act==='lbprof') lbProfile(el.getAttribute('data-n'));
-    else if(act==='lbback'){ showOverlay(lbHtml()); }
+    else if(act==='lbprof'){ LBP.back=el.getAttribute('data-back')==='clan'?function(){ clOpen(CL.tab); }:null; lbProfile(el.getAttribute('data-n')); }
+    else if(act==='lbback'){ if(LBP.back){ var fb=LBP.back; LBP.back=null; fb(); } else showOverlay(lbHtml()); }
     else if(act==='achf'){ var sc=document.getElementById('ovCard'), y=sc?sc.scrollTop:0; achOpen(+el.getAttribute('data-f')); }
     else if(act==='pfpx') pfpClear();
     else if(act==='wxlayer'){ WX.layer=el.getAttribute('data-l')==='temp'?'temp':'storm'; try{ localStorage.setItem('lazarus-wxlayer',WX.layer); }catch(e){} wxSync(); }
@@ -4629,7 +4673,7 @@ function mpOverlay(step){
     var isM=MP.primary&&MP.primary===MP.dev;
     h+='<div class="row"><div class="info"><div class="name">Main device</div><div class="sub">'+(isM?'This device ('+esc(mpDevLabel())+')':(MP.primary?esc(MP.primaryLabel||'Another device'):'Not set yet. The first device you play on becomes it.'))+'. Only your main device saves to your account. Switch here when you change devices.</div></div><div class="acts">'+(isM?'':'<button class="btn sm primary" data-ov="mp" data-do="claim" type="button">Make this my main device</button>')+'</div></div>';
     h+='<p class="hint">Your offline and online colonies are separate, and both are saved to your account so they follow you to any phone or computer.</p>';
-    h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button><button class="btn" data-act="rplist" type="button">Reports</button>':'')+'<button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div><div class="btns" style="margin-top:0"><button class="linkbtn danger" data-act="delacct" type="button">Delete account</button></div>';
+    h+='<div class="btns">'+(MP.isAdmin?'<button class="btn" data-ov="mp" data-do="admin" type="button">Logins</button><button class="btn" data-act="rplist" type="button">Reports</button>':'')+'<button class="btn" data-act="fropen" type="button">Friends</button><button class="btn" data-ov="mp" data-do="restoreOpen" type="button">Restore a save</button><button class="btn" data-ov="mp" data-do="out" type="button">Sign out</button><button class="btn" data-ov="close" type="button">Close</button></div><div class="btns" style="margin-top:0"><button class="linkbtn danger" data-act="delacct" type="button">Delete account</button></div>';
   } else if(step==='signup'){
     h=h.replace('<h2>Play online</h2>','<h2>Create account</h2>');
     h+='<p class="muted">Pick a username, then use your email and a password of at least 8 characters.</p><div><label class="muted" for="mpSuName">Username</label><input class="txt" id="mpSuName" maxlength="20" autocomplete="nickname" autocapitalize="none" value="'+esc(MP.suName||'')+'"><div class="muted" style="font-size:12px;margin-top:2px">Other players see this. 2 to 20 letters, numbers, spaces, dots, dashes or underscores.</div></div><div><label class="muted" for="mpEmail">Email</label><input class="txt" id="mpEmail" type="email" autocomplete="username" autocapitalize="none" value="'+esc(MP.email||'')+'"></div><div><label class="muted" for="mpPw1">Password</label><input class="txt" id="mpPw1" type="password" autocomplete="new-password"></div><div><label class="muted" for="mpPw2">Type it again</label><input class="txt" id="mpPw2" type="password" autocomplete="new-password"></div><div class="btns"><button class="btn primary" data-ov="mp" data-do="signup" type="button">Create account</button><button class="btn" data-ov="mp" data-do="open" type="button">Back to sign in</button></div>';
@@ -6364,7 +6408,7 @@ function lbProfile(name){
   MP.sb.rpc('lz_profile',{p_name:name,p_world:world||null}).then(function(r){
     if(want!==LBP.at) return; var o=document.getElementById('ov'); if(!o||!o.querySelector('[data-lbp]')) return;
     if(r.error||!r.data){ showOverlay('<div data-lbp="1"><h2>'+esc(name)+'</h2><p class="muted">Couldn’t load this player. Check your connection and try again.</p><div class="btns"><button class="btn" data-act="lbback" type="button">Back</button></div></div>'); return; }
-    showOverlay(lbProfileHtml(r.data));
+    var dd=r.data; LBP.more=null; MP.sb.rpc('lz_profile_more',{p_name:name}).then(function(r2){ if(want!==LBP.at) return; dd.more=(r2&&!r2.error)?r2.data:null; LBP.more=dd.more; showOverlay(lbProfileHtml(dd)); }).catch(function(){ if(want!==LBP.at) return; showOverlay(lbProfileHtml(dd)); });
   }).catch(function(){ if(want!==LBP.at) return; showOverlay('<div data-lbp="1"><h2>'+esc(name)+'</h2><p class="muted">Can’t reach the server.</p><div class="btns"><button class="btn" data-act="lbback" type="button">Back</button></div></div>'); });
 }
 function lbLeague(peak){ var n=LEAGUES[0][1]; LEAGUES.forEach(function(l){ if((peak||0)>=l[0]) n=l[1]; }); return n; }
@@ -6375,6 +6419,7 @@ function lbProfileHtml(d){
   h+='<div class="facts"><div class="fact"><b class="num">'+fmt(d.trophies||0)+'</b><span>trophies</span></div><div class="fact"><b class="num">'+fmt(d.peak||0)+'</b><span>best ever</span></div>'+
      '<div class="fact"><b class="num">'+fmt(d.wins||0)+'</b><span>outbreaks won</span></div><div class="fact"><b class="num">'+(d.finalBoss?'✓':fmt(d.bossWins||0))+'</b><span>'+(d.finalBoss?'Black Fortress beaten':'Citadels beaten')+'</span></div></div>';
   var pic2=colonyPic(d.bld||[],d.land,d); if(pic2) h+='<h3 class="achc">Colony</h3><img class="lbcol" src="'+pic2+'" alt="'+esc(d.name)+'’s colony">';
+  h+=lbMoreHtml(d);
   var got=d.ach||{}, tot=0, n=0, rows='';
   ACH.forEach(function(x){ var k=+got[x.id]||0; tot+=x.t?3:1; n+=Math.min(k,x.t?3:1);
     if(!k) return; var ic=x.t?Math.min(k,3)-1:x.tier;
@@ -6501,6 +6546,7 @@ function testGive(k){
     S.strains.forEach(function(st){ st.tr.spread=10; st.tr.lethal=10; st.tr.resil=10; st.tr.stealth=10; st.tr.mutate=10; S.samples[st.id]=Math.max(S.samples[st.id]||0,200); }); }
   /* ---- map ---- */
   else if(k==='discover'){ testDiscover(); }
+  else if(k==='supgive'){ var ss=supS(); DRONE_KINDS.forEach(function(d){ ss.dr[d]=(ss.dr[d]||0)+1; }); ss.cr=Math.max(ss.cr,2); PET_KINDS.forEach(function(d){ ss.pt[d]=(ss.pt[d]||0)+1; }); S.spies=Math.max(S.spies||0,3); }
   else if(k==='fog'){ var n=WG*WG, f=''; for(var i=0;i<n;i++) f+='1'; S.world.fog=f; }
   else if(k==='regions'){ var e=E0(); if(!e.start){ e.start='usa'; e.cur='usa'; }
     regionKeys().forEach(function(r){ if(r!==e.cur) e.held[r]=1; }); }
@@ -6523,6 +6569,7 @@ function testSection(){
     [['Resources',[['credits','+10,000 credits'],['food','+5,000 food'],['samples','+10 samples each'],['trophies','+100 trophies'],['rich','Pile of everything']]],
      ['Colony',[['maxbld','Max every building'],['ready','Make everything ready'],['crew','+15 scouts, +8 spies']]],
      ['Virus',[['maxvirus','Max strains, unlock all']]],
+     ['Supports',[['supgive','One of every drone, crate and pack, plus spies']]],
      ['Map',[['discover','Discover every colony'],['fog','Reveal the whole map'],['regions','Hold all but this region']]],
      ['Boss fights',[['boss','Put a Citadel on the map'],['bossfinal','Put The Black Fortress on the map'],['bossgo','Fight a boss right now'],['bosswon','Give me the boss rewards']]],
      ['Show me',[['chest','Play the reward chest'],['sting','Play the boss fanfare']]]
@@ -8039,7 +8086,7 @@ function clChatHtml(){
   CL.chat.forEach(function(m){
     if(m.sys){ h+='<div class="clsys">'+esc(m.msg)+'</div>'; return; }
     var mine=m.uid===me, menu=CL.menu===m.id;
-    h+='<div class="clmsg'+(mine?' me':'')+'"><div class="clb"><div class="clmeta"><b>'+esc(m.name||'?')+'</b><span>'+clTime(m.at)+'</span><button type="button" class="clmore" data-act="clmenu" data-id="'+m.id+'" aria-label="Message options">···</button></div><div class="cltext">'+esc(m.msg)+'</div>'+
+    h+='<div class="clmsg'+(mine?' me':'')+'"><div class="clb"><div class="clmeta"><button type="button" class="clnm" data-act="lbprof" data-back="clan" data-n="'+esc(m.name||'')+'">'+esc(m.name||'?')+'</button><span>'+clTime(m.at)+'</span><button type="button" class="clmore" data-act="clmenu" data-id="'+m.id+'" aria-label="Message options">···</button></div><div class="cltext">'+esc(m.msg)+'</div>'+
       (menu?'<div class="clmenu">'+(mine||clRank(role)>=2?'<button type="button" class="btn sm" data-act="clhide" data-id="'+m.id+'">Delete</button>':'')+(!mine?'<button type="button" class="btn sm" data-act="clreport" data-id="'+m.id+'">Report</button>':'')+'</div>':'')+'</div></div>';
   });
   h+='</div>';
@@ -8059,7 +8106,7 @@ function clMembersHtml(c){
     h+='<div class="clrow mem'+(open?' open':'')+'"><span class="clpf">'+pfpImg(m.pfp,m.name,38)+'<i class="pdot'+(on?' on':'')+'"></i></span><div class="info"><div class="name">'+esc(m.name)+(self?' <span class="muted">(you)</span>':'')+' <span class="clrole r'+clRank(m.role)+'">'+clRoleName(m.role)+'</span></div><div class="sub">'+fmt(m.pts||0)+' control this season'+(m.muted?' · muted '+m.muted+'m':'')+'</div></div>'+
       (self?'':'<div class="acts"><button class="btn sm" data-act="clmopen" data-id="'+m.uid+'" type="button">'+(open?'Close':'Options')+'</button></div>')+'</div>';
     if(open&&!self){
-      h+='<div class="clopts">';
+      h+='<div class="clopts"><div class="cldon" style="margin-bottom:6px"><button type="button" class="btn sm" data-act="lbprof" data-back="clan" data-n="'+esc(m.name)+'">View profile</button></div>';
       h+='<div class="exsec" style="margin-top:0">Send '+esc(m.name)+' something</div><div class="cldon">'+[['credits',5000],['credits',25000],['food',250],['food',1000],['samples',1],['samples',5]].map(function(d){ var have=d[0]==='credits'?S.credits:d[0]==='food'?S.food:sampleCount(); return '<button type="button" class="btn sm" data-act="cldonate" data-id="'+m.uid+'" data-k="'+d[0]+'" data-n="'+d[1]+'" '+(have<d[1]?'disabled':'')+'>'+fmt(d[1])+' '+(d[0]==='samples'&&d[1]===1?'sample':d[0])+'</button>'; }).join('')+'</div>';
       var mr=clRank(my), tr=clRank(m.role);
       if(mr>=2&&tr<mr) h+='<div class="exsec">Manage</div><div class="cldon"><button type="button" class="btn sm" data-act="clmute" data-id="'+m.uid+'" data-n="'+(m.muted?0:60)+'">'+(m.muted?'Unmute':'Mute 1 hour')+'</button><button type="button" class="btn sm" data-act="clkick" data-id="'+m.uid+'">'+(CL.kick===m.uid?'Tap again to remove':'Remove from clan')+'</button></div>';
@@ -8320,6 +8367,703 @@ function rpAct(act,el){
   if(act==='rpfilter'){ RP.filter=k; RP.list=null; rpListRender(); rpLoad(); return; }
   if(act==='rpopen'){ RP.open=RP.open===id?null:id; rpListRender(); return; }
   if(act==='rpset'){ var s=el.getAttribute('data-s'); mpR('lz_issue_set',{p_id:id,p_status:s}).then(function(r){ if(r&&r.error) throw r.error; rpLoad(s==='fixed'?'Marked fixed.':s==='closed'?'Dismissed.':'Reopened.'); }).catch(function(e){ rpListRender('Could not update ('+(typeof mpErr==='function'?mpErr(e):e)+').'); }); return; }
+}
+
+/* ================= 3D drones (Drone Bay) ================= */
+/* tiny iso renderer: models are lists of shapes in drone space (x forward, y right, z up), rotated by heading,
+   projected iso, painted back to front with simple light (top bright, left face mid, right face dark). */
+var DRONES={
+  duster:{n:'Scrap Duster',d:'Built from junk and tape. Sprays a short, wide strip.',lv:1},
+  hornet:{n:'Hornet',d:'Small hobby quad. Fast, long thin strip, hard to hit.',lv:2},
+  mist:{n:'Mist Boom',d:'Farm sprayer with a long boom. Covers the widest strip.',lv:3},
+  hauler:{n:'Plague Hauler',d:'Heavy six-rotor. Drops a canister that bursts in a circle.',lv:4},
+  swarm:{n:'Swarm Mother',d:'Opens up and lets out 6 tiny drones that each infect a spot.',lv:5},
+  wraith:{n:'Specter',d:'Military grade. Ducted fans and a cloak. Anti-air cannot see it.',lv:6}
+};
+function d3hex(h){ return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)]; }
+function d3shade(h,k,a){ var c=d3hex(h).map(function(v){ return Math.max(0,Math.min(255,Math.round(k>=0?v+(255-v)*k:v*(1+k)))); }); return a===undefined?'rgb('+c.join(',')+')':'rgba('+c.join(',')+','+a+')'; }
+function D3(c,ox,oy,S,ang){ this.c=c; this.ox=ox; this.oy=oy; this.S=S; this.ca=Math.cos(ang); this.sa=Math.sin(ang); this.items=[]; }
+D3.prototype.R=function(x,y){ return [x*this.ca-y*this.sa, x*this.sa+y*this.ca]; };
+D3.prototype.P=function(x,y,z){ var r=this.R(x,y); return {x:this.ox+(r[0]-r[1])*.866*this.S, y:this.oy+(r[0]+r[1])*.5*this.S-z*this.S, d:r[0]+r[1]}; };
+D3.prototype.add=function(depth,fn){ this.items.push({d:depth,f:fn}); };
+D3.prototype.depth=function(x,y,z){ var r=this.R(x,y); return r[0]+r[1]+z*.02; };
+D3.prototype.draw=function(){ this.items.sort(function(a,b){ return a.d-b.d; }).forEach(function(i){ i.f(); }); };
+D3.prototype.poly=function(pts,fill,stroke){ var c=this.c; c.beginPath(); pts.forEach(function(p,i){ c[i?'lineTo':'moveTo'](p.x,p.y); }); c.closePath(); if(fill){ c.fillStyle=fill; c.fill(); } if(stroke){ c.strokeStyle=stroke; c.lineWidth=.7; c.stroke(); } };
+/* box centred on (x,y,z) with size (lx,ly,lz), optional extra spin 'rot' around z */
+D3.prototype.box=function(x,y,z,lx,ly,lz,col,rot,edge){
+  var me=this, cr=Math.cos(rot||0), sr=Math.sin(rot||0);
+  function L(u,v){ return [x+u*cr-v*sr, y+u*sr+v*cr]; }
+  var hx=lx/2, hy=ly/2, z0=z-lz/2, z1=z+lz/2;
+  var q=[L(-hx,-hy),L(hx,-hy),L(hx,hy),L(-hx,hy)];
+  this.add(this.depth(x,y,z), function(){
+    for(var i=0;i<4;i++){ var a=q[i], b=q[(i+1)%4], mx=(a[0]+b[0])/2-x, my=(a[1]+b[1])/2-y, r=me.R(mx,my); if(r[0]+r[1]<=0.0001) continue;
+      var k=r[0]>r[1]?-.18:-.36; me.poly([me.P(a[0],a[1],z0),me.P(b[0],b[1],z0),me.P(b[0],b[1],z1),me.P(a[0],a[1],z1)],d3shade(col,k),edge===false?null:'rgba(0,0,0,.35)'); }
+    me.poly(q.map(function(p){ return me.P(p[0],p[1],z1); }),d3shade(col,.1),edge===false?null:'rgba(0,0,0,.3)');
+  });
+};
+/* convex hull helper for cylinders */
+function d3hull(p){ p=p.slice().sort(function(a,b){ return a.x-b.x||a.y-b.y; }); var cr=function(o,a,b){ return (a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x); }, lo=[], up=[], i;
+  for(i=0;i<p.length;i++){ while(lo.length>=2&&cr(lo[lo.length-2],lo[lo.length-1],p[i])<=0) lo.pop(); lo.push(p[i]); }
+  for(i=p.length-1;i>=0;i--){ while(up.length>=2&&cr(up[up.length-2],up[up.length-1],p[i])<=0) up.pop(); up.push(p[i]); }
+  up.pop(); lo.pop(); return lo.concat(up); }
+/* cylinder from point A to point B (any direction), radius r, n sides */
+D3.prototype.cyl=function(ax,ay,az,bx,by,bz,r,col,n,capCol){
+  var me=this; n=n||16; var dx=bx-ax, dy=by-ay, dz=bz-az, L=Math.hypot(dx,dy,dz)||1; dx/=L; dy/=L; dz/=L;
+  var ux,uy,uz; if(Math.abs(dz)<.9){ ux=-dy; uy=dx; uz=0; } else { ux=1; uy=0; uz=0; }
+  var ul=Math.hypot(ux,uy,uz); ux/=ul; uy/=ul; uz/=ul; var vx=dy*uz-dz*uy, vy=dz*ux-dx*uz, vz=dx*uy-dy*ux;
+  function ring(cx,cy,cz){ var out=[]; for(var i=0;i<n;i++){ var a=i/n*Math.PI*2+Math.PI/n, co=Math.cos(a)*r, si=Math.sin(a)*r; out.push(me.P(cx+ux*co+vx*si,cy+uy*co+vy*si,cz+uz*co+vz*si)); } return out; }
+  this.add(this.depth((ax+bx)/2,(ay+by)/2,(az+bz)/2), function(){
+    var A=ring(ax,ay,az), B=ring(bx,by,bz);
+    me.poly(d3hull(A.concat(B)),d3shade(col,-.22),'rgba(0,0,0,.35)');
+    /* light stripe along the side for roundness */
+    var rr=me.R(dx,dy), toward=(rr[0]+rr[1])*.7+dz; var capB=toward>0;
+    var cap=capB?B:A; me.poly(cap,capCol||d3shade(col,.12),'rgba(0,0,0,.3)');
+    var hl=[me.P(ax+(-ux*.3+vx*.6)*r*.9,ay+(-uy*.3+vy*.6)*r*.9,az+(-uz*.3+vz*.6)*r*.9+r*.25),me.P(bx+(-ux*.3+vx*.6)*r*.9,by+(-uy*.3+vy*.6)*r*.9,bz+(-uz*.3+vz*.6)*r*.9+r*.25)];
+    if(Math.abs(dz)<.9){ me.c.strokeStyle=d3shade(col,.35,.55); me.c.lineWidth=Math.max(1,r*me.S*.35); me.c.lineCap='round'; me.c.beginPath(); me.c.moveTo(hl[0].x,hl[0].y); me.c.lineTo(hl[1].x,hl[1].y); me.c.stroke(); me.c.lineCap='butt'; }
+  });
+};
+/* flat beam arm from radius r0 out to point (x,y), at height z */
+D3.prototype.beam=function(x,y,z,r0,w,h,col){ var L=Math.hypot(x,y), ux=x/L, uy=y/L, a=r0, b=L+1.2, mx=ux*(a+b)/2, my=uy*(a+b)/2;
+  this.box(mx,my,z,b-a,w,h,col,Math.atan2(y,x)); };
+/* thin arm between two points */
+D3.prototype.arm=function(ax,ay,az,bx,by,bz,w,col){ this.cyl(ax,ay,az,bx,by,bz,w,col,6); };
+/* rotor: motor can, blur disc and 2 or 3 blades spinning */
+D3.prototype.rotor=function(x,y,z,r,spin,bladeCol,blades,motorCol){
+  var me=this; blades=blades||2;
+  if(motorCol!==false) this.cyl(x,y,z-2.4,x,y,z,1.7,motorCol||'#2A2E32',10,'#5A6066');
+  this.add(this.depth(x,y,z)+.6, function(){
+    var disc=[]; for(var i=0;i<28;i++){ var a=i/28*Math.PI*2; disc.push(me.P(x+Math.cos(a)*r,y+Math.sin(a)*r,z+.2)); }
+    me.poly(disc,'rgba(225,232,236,.16)','rgba(30,34,36,.18)');
+    for(var b=0;b<blades;b++){ var a2=spin+b*Math.PI*2/blades, ca=Math.cos(a2), sa=Math.sin(a2), w=r*.11;
+      var tip=[x+ca*r,y+sa*r], nx=-sa*w, ny=ca*w;
+      me.poly([me.P(x+nx*.5,y+ny*.5,z+.3),me.P(tip[0]+nx,tip[1]+ny,z+.3),me.P(tip[0]-nx*.4,tip[1]-ny*.4,z+.3),me.P(x-nx*.5,y-ny*.5,z+.3)],bladeCol||'#24282A');
+      /* motion smear behind the blade */
+      var a3=a2-.35, t2=[x+Math.cos(a3)*r,y+Math.sin(a3)*r]; me.poly([me.P(x,y,z+.25),me.P(tip[0],tip[1],z+.25),me.P(t2[0],t2[1],z+.25)],'rgba(40,44,46,.16)');
+    }
+    var hub=me.P(x,y,z+.5); me.c.fillStyle='#4A5056'; me.c.beginPath(); me.c.ellipse(hub.x,hub.y,1.3*me.S,.7*me.S,0,0,Math.PI*2); me.c.fill();
+  });
+};
+D3.prototype.lamp=function(x,y,z,col,on){ var me=this; this.add(this.depth(x,y,z)+.8,function(){ var p=me.P(x,y,z); me.c.fillStyle=on?col:'#3A3E40'; me.c.beginPath(); me.c.arc(p.x,p.y,1.2*me.S,0,Math.PI*2); me.c.fill();
+  if(on){ var g=me.c.createRadialGradient(p.x,p.y,0,p.x,p.y,6*me.S); var cc=d3hex(col); g.addColorStop(0,'rgba('+cc.join(',')+',.55)'); g.addColorStop(1,'rgba(0,0,0,0)'); me.c.fillStyle=g; me.c.beginPath(); me.c.arc(p.x,p.y,6*me.S,0,Math.PI*2); me.c.fill(); } }); };
+D3.prototype.wire=function(pts,col,w){ var me=this; this.add(this.depth(pts[0][0],pts[0][1],pts[0][2])+.3,function(){ me.c.strokeStyle=col; me.c.lineWidth=w*me.S; me.c.beginPath(); pts.forEach(function(q,i){ var p=me.P(q[0],q[1],q[2]); me.c[i?'lineTo':'moveTo'](p.x,p.y); }); me.c.stroke(); }); };
+
+/* draw a drone: (gx,gy) screen position of the spot on the ground, h flying height (px), ang heading, S scale */
+function drawDrone3D(c,kind,gx,gy,h,ang,t,S,tint,spray){
+  S=S||1; var bob=Math.sin(t*2.6+gx*.05)*1.4*S;
+  /* ground shadow */
+  var sw={duster:17,hornet:12,mist:20,hauler:22,swarm:20,wraith:20}[kind]||16;
+  c.fillStyle='rgba(10,8,4,.3)'; c.beginPath(); c.ellipse(gx,gy,sw*S*1.1,sw*S*.55,0,0,Math.PI*2); c.fill();
+  var oy=gy-h*S+bob, d=new D3(c,gx,oy,S,ang), sp=t*14, blink=Math.sin(t*6)>0;
+  var spr=tint||'#7FD14A';
+  if(spray){ var col=d3hex(spr); for(var i=0;i<12;i++){ var f=((t*1.6+i/12)%1), w=kind==='mist'?24:kind==='duster'?11:kind==='hornet'?5:9;
+      var sx=gx+Math.sin(i*2.3+t*3)*w*S*f, sy=oy+f*(h*S-2)+2*S; c.fillStyle='rgba('+col.join(',')+','+(.55*(1-f*.9))+')'; c.beginPath(); c.arc(sx,sy,(1.4+2.6*f)*S,0,Math.PI*2); c.fill(); } }
+  if(kind==='duster'){
+    /* two wooden planks in an X, taped together */
+    d.box(0,0,0,30,3.4,1.8,'#9A6C3A',Math.PI/4); d.box(0,0,1.8,30,3.4,1.8,'#86592E',-Math.PI/4);
+    [[5,5],[-5,-5],[5,-5],[-5,5]].forEach(function(p){ d.box(p[0],p[1],1,2.2,4.4,4.2,'#A9AFB2',Math.atan2(p[1],p[0])); });
+    /* soda bottle tank on top */
+    d.cyl(-6,0,5.2,6,0,5.2,3.2,'#9CD27A',12,'#B8E29C'); d.cyl(6,0,5.2,8.6,0,5.2,1.4,'#9CD27A',8); d.cyl(8.6,0,5.2,9.8,0,5.2,1.5,'#E04A2E',8);
+    d.box(-1,0,8.2,5,6.6,.3,'#F2E6C8',0,false);
+    /* battery under a rubber band, wires dangling */
+    d.box(-2,0,-1.8,7,4,2.6,'#2E3A8C'); d.box(-2,0,-1.8,1,4.6,2.9,'#C8302A');
+    d.wire([[1.5,1.8,-2.6],[3.5,3.5,-5],[3,5,-8]],'#C8302A',.6); d.wire([[1.5,-1.4,-2.6],[4,-2.5,-6],[2.5,-3.6,-9]],'#1E1E1E',.6);
+    var arms=[[10.6,10.6,7.5,'#2A2E30',2],[10.6,-10.6,6,'#C8302A',2],[-10.6,10.6,7.5,'#2A2E30',2],[-10.6,-10.6,6.8,'#3E6EA8',3]];
+    arms.forEach(function(a,i){ d.rotor(a[0],a[1],4.6,a[2],sp*(i===1?.8:1)+i,a[3],a[4],i===2?'#6A5A3A':'#2A2E32'); });
+    d.lamp(3,0,9,'#FFBE3C',Math.sin(t*3)>.3);
+  } else if(kind==='hornet'){
+    [[8,8],[8,-8],[-8,8],[-8,-8]].forEach(function(a){ d.beam(a[0],a[1],.4,3.2,2,1.4,'#2A2E32'); });
+    d.cyl(-8,0,1,8,0,1,3.6,'#E2B232',14,'#F0C850');
+    var n0=d.items.length; [-3,1,5].forEach(function(k){ d.cyl(k-.45,0,1,k+.45,0,1,3.7,'#1E2224',14); }); for(var q=n0;q<d.items.length;q++) d.items[q].d+=6;
+    d.cyl(-8,0,1,-12,0,.6,1.2,'#1E2224',8);
+    d.box(8.5,0,1.4,2,3,2.2,'#1E2224');
+    [[8,8],[8,-8],[-8,8],[-8,-8]].forEach(function(a,i){ d.rotor(a[0],a[1],2.6,5.6,sp*1.3+i,'#1E2224',2); });
+    d.lamp(9.6,0,1.6,'#FFC83C',blink);
+  } else if(kind==='mist'){
+    [[11,11],[11,-11],[-11,11],[-11,-11]].forEach(function(a){ d.beam(a[0],a[1],1.4,6.5,2.4,1.8,'#3A4044'); d.cyl(a[0],a[1],-6,a[0],a[1],.5,.7,'#3A4044',6); });
+    d.box(0,0,1.6,14,12,5,'#E8ECEE');
+    d.cyl(0,0,4.1,0,0,10,4.2,'#3E8FD0',16,'#5AA6E0');
+    d.cyl(0,0,10,0,0,11.6,1.6,'#E8ECEE',10);
+    d.box(7.4,0,1.2,2.2,3.6,2.6,'#22262A');
+    /* the boom under the drone, with nozzles */
+    d.cyl(-1,-27,-2.2,-1,27,-2.2,.9,'#6A7278',8);
+    d.cyl(-1,0,-2.2,-1,0,-.5,.8,'#6A7278',6);
+    for(var k=-24;k<=24;k+=8){ d.box(-1,k,-3.6,1.4,1.4,1.8,'#3E8FD0',0); }
+    [[11,11],[11,-11],[-11,11],[-11,-11]].forEach(function(a,i){ d.rotor(a[0],a[1],3.4,8.2,sp+i,'#24282A',2); d.rotor(a[0],a[1],5.6,8.2,-sp+i,'#24282A',2); });
+    d.lamp(-1,-27,-2.2,'#FF463C',blink); d.lamp(-1,27,-2.2,'#46DC5A',blink);
+  } else if(kind==='hauler'){
+    for(var k2=0;k2<6;k2++){ var a=k2/6*Math.PI*2; d.beam(Math.cos(a)*17,Math.sin(a)*17,2.2,7.6,2.6,2,'#3A4044'); }
+    d.cyl(0,0,-.5,0,0,4.5,8.6,'#4E5A3C',6,'#5E6C48');
+    [7,-7].forEach(function(y){ d.arm(3,y*.8,-.5,3,y*1.3,-10,.6,'#2A2E30'); d.arm(-3,y*.8,-.5,-3,y*1.3,-10,.6,'#2A2E30'); d.arm(7,y*1.3,-10.5,-7,y*1.3,-10.5,.8,'#2A2E30'); });
+    d.cyl(0,0,-1,0,0,-11,3.6,'#B8C2C6',14,'#D0D8DC');
+    d.cyl(0,0,-5.4,0,0,-6.8,3.75,'#D0402E',14);
+    d.box(3.2,0,-3.4,.4,2.6,2.4,'#E8C030',0,false);
+    for(var k3=0;k3<6;k3++){ var a3=k3/6*Math.PI*2; d.rotor(Math.cos(a3)*17,Math.sin(a3)*17,4.8,7.4,sp*.85+k3,'#24282A',3); }
+    d.lamp(8.6,0,4.6,'#FF503C',blink); d.lamp(-8.6,0,4.6,'#FF503C',!blink);
+  } else if(kind==='swarm'){
+    [[13,13],[13,-13],[-13,13],[-13,-13]].forEach(function(a){ d.beam(a[0],a[1],2.2,8.2,2.6,2,'#30363A'); });
+    d.cyl(0,0,-2,0,0,5,9,'#5A3E6E',8,'#6E4E86');
+    for(var k4=0;k4<6;k4++){ var a4=k4/6*Math.PI*2; d.cyl(Math.cos(a4)*5.2,Math.sin(a4)*5.2,5,Math.cos(a4)*5.2,Math.sin(a4)*5.2,5.3,1.8,'#2A1E34',10); }
+    d.cyl(0,0,5,0,0,6.4,2.2,'#C890E8',10,'#E0B8FF');
+    [[13,13],[13,-13],[-13,13],[-13,-13]].forEach(function(a,i){ d.rotor(a[0],a[1],4.2,8.6,sp+i,'#24282A',2); });
+    var open=(Math.sin(t*1.1)+1)/2;
+    for(var m=0;m<6;m++){ var a5=m/6*Math.PI*2+t*.7, rr=7+open*24, mx=Math.cos(a5)*rr, my=Math.sin(a5)*rr, mz=4+open*5+Math.sin(t*4+m)*1.5;
+      d.box(mx,my,mz,4,4,1.6,'#8A68A6',a5); [[2.6,2.6],[-2.6,2.6],[2.6,-2.6],[-2.6,-2.6]].forEach(function(o,j){ d.rotor(mx+o[0],my+o[1],mz+1,1.9,sp*1.6+m+j,'#1E1E1E',2,false); }); }
+    d.lamp(9,0,3,'#C878FF',blink);
+  } else if(kind==='wraith'){
+    var cl=.82+.16*Math.sin(t*1.7); c.save(); c.globalAlpha=cl;
+    [[13,13],[13,-13],[-13,13],[-13,-13]].forEach(function(a){ d.beam(a[0]*.72,a[1]*.72,1,6,3,1.6,'#2E343C'); });
+    /* angular carbon body in layers */
+    d.box(0,0,0,22,12,3.6,'#2E343C'); d.box(1,0,2.7,15,8.4,1.8,'#3A414A'); d.box(11.5,0,.4,3,7,2.4,'#2E343C'); d.box(-11.5,0,.8,2,8,1.6,'#2E343C');
+    d.box(2,4.5,3.7,10,.6,.3,'#50BEFF',0,false); d.box(2,-4.5,3.7,10,.6,.3,'#50BEFF',0,false);
+    d.cyl(8,0,3.4,8,0,4.6,2.6,'#1A4A70',12,'#7FD0FF');
+    /* ducted fans: shroud ring with a fan inside */
+    [[13,13],[13,-13],[-13,13],[-13,-13]].forEach(function(a,i){
+      d.cyl(a[0],a[1],-1,a[0],a[1],3.2,6.6,'#353B44',20,'#101216');
+      d.add(d.depth(a[0],a[1],3.2)+.7,function(){ var c2=d.c;
+        for(var b=0;b<5;b++){ var an=sp*1.2+i+b*Math.PI*2/5, p0=d.P(a[0],a[1],3), p1=d.P(a[0]+Math.cos(an)*5.4,a[1]+Math.sin(an)*5.4,3); c2.strokeStyle='rgba(150,210,255,.45)'; c2.lineWidth=1.3*S; c2.beginPath(); c2.moveTo(p0.x,p0.y); c2.lineTo(p1.x,p1.y); c2.stroke(); }
+        var ring=[]; for(var j=0;j<28;j++){ var aa=j/28*Math.PI*2; ring.push(d.P(a[0]+Math.cos(aa)*6.6,a[1]+Math.sin(aa)*6.6,3.2)); }
+        d.poly(ring,null,null); c2.strokeStyle='rgba(80,190,255,'+(.55+.35*Math.sin(t*5+i))+')'; c2.lineWidth=1.1*S; c2.stroke(); });
+    });
+    d.lamp(10,3,1.6,'#50BEFF',true); d.lamp(10,-3,1.6,'#50BEFF',true); d.lamp(11.8,0,1.2,'#FF3228',Math.sin(t*8)>0);
+    d.draw(); c.restore();
+    c.strokeStyle='rgba(160,220,255,'+(.2+.12*Math.sin(t*3))+')'; c.lineWidth=1*S; c.setLineDash([3*S,4*S]); c.lineDashOffset=-t*20; c.beginPath(); c.ellipse(gx,oy+2*S,30*S,15*S,0,0,Math.PI*2); c.stroke(); c.setLineDash([]);
+    return;
+  }
+  d.draw();
+}
+
+/* ================= support attacks (0.78.0): sabotage, drones, animals, supply crates ================= */
+/* Only for normal colonies (never the Citadel or the Black Fortress). You pick up to 2 (3 at Bunker 10) before an
+   outbreak. Drones and crates come from the Drone Bay, animal packs from the Kennel, sabotage uses a spy. */
+var DRONE_KINDS=['duster','hornet','mist','hauler','swarm','wraith'];
+var DRONE_ST={
+  duster:{cost:400, spd:70, w:30,rate:.85,len:170},
+  hornet:{cost:900, spd:140,w:16,rate:1.3,len:270,dodge:.5},
+  mist:  {cost:1800,spd:80, w:46,rate:.7, len:290},
+  hauler:{cost:3500,spd:62, len:230,drop:66},
+  swarm: {cost:6000,spd:78, len:230,minis:6},
+  wraith:{cost:10000,spd:105,w:30,rate:1.15,len:310,stealth:1}
+};
+var PET_KINDS=['rats','dogs','crows'];
+var PETS={
+  rats: {n:'Rat pack',d:'6 rats. They tunnel under walls and go for houses.',lv:1,cost:250,count:6,spd:46},
+  dogs: {n:'Dog pack',d:'3 fast dogs. They chase cure trucks and defences.',lv:3,cost:700,count:3,spd:96},
+  crows:{n:'Crow flock',d:'5 crows. They fly over everything and land far away.',lv:5,cost:1400,count:5,spd:62}
+};
+var CRATE_COST=1800, CRATE_LV=2, CRATE_CAP=2;
+var SABO={
+  well: {n:'Poison the well',d:'A house starts the fight already infected.'},
+  power:{n:'Cut the power',d:'Clinics and sanitizers stay off for 20 seconds.'},
+  alarm:{n:'Jam the alarms',d:'Cure trucks and the alarm react late for 25 seconds.'}
+};
+function supS(){ if(!S.sup||typeof S.sup!=='object') S.sup={dr:{},pt:{},cr:0}; if(!S.sup.dr) S.sup.dr={}; if(!S.sup.pt) S.sup.pt={}; if(typeof S.sup.cr!=='number') S.sup.cr=0; return S.sup; }
+function bayLv(){ var m=0; bl('dronebay').forEach(function(b){ m=Math.max(m,b.lv); }); return m; }
+function kenLv(){ var m=0; bl('kennel').forEach(function(b){ m=Math.max(m,b.lv); }); return m; }
+function droneCap(){ return bayLv()?1+bayLv():0; }
+function petCap(){ return kenLv()?1+kenLv():0; }
+function droneCount(){ var n=0, d=supS().dr; for(var k in d) n+=d[k]||0; return n; }
+function petCount(){ var n=0, d=supS().pt; for(var k in d) n+=d[k]||0; return n; }
+function droneUnlocked(k){ return DRONE_KINDS.indexOf(k)<bayLv(); }
+function droneCost(k){ return Math.round(DRONE_ST[k].cost*buildMult()/10)*10; }
+function petCost(k){ return PETS[k].cost; }
+function supSlots(){ return hallLv()>=10?3:2; }
+function supBuy(kind,id){
+  var s=supS();
+  if(kind==='drone'){ if(!droneUnlocked(id)){ toast('Upgrade the Drone Bay to unlock that drone.'); return; } if(droneCount()>=droneCap()){ toast('The Drone Bay is full. Upgrade it for more room.'); return; }
+    var c=droneCost(id); if(S.credits<c){ toast('Not enough credits.'); return; } S.credits-=c; s.dr[id]=(s.dr[id]||0)+1; toast(DRONES[id].n+' built.'); }
+  else if(kind==='crate'){ if(bayLv()<CRATE_LV){ toast('Upgrade the Drone Bay to level '+CRATE_LV+' to pack supply crates.'); return; } if(s.cr>=CRATE_CAP){ toast('You can hold '+CRATE_CAP+' crates.'); return; }
+    var cc=Math.round(CRATE_COST*buildMult()/10)*10; if(S.credits<cc){ toast('Not enough credits.'); return; } S.credits-=cc; s.cr++; toast('Supply crate packed.'); }
+  else if(kind==='pet'){ var P0=PETS[id]; if(kenLv()<P0.lv){ toast('Upgrade the Kennel to level '+P0.lv+'.'); return; } if(petCount()>=petCap()){ toast('The Kennel is full. Upgrade it for more room.'); return; }
+    if(S.food<P0.cost){ toast('Not enough food.'); return; } S.food-=P0.cost; s.pt[id]=(s.pt[id]||0)+1; toast(P0.n+' ready.'); }
+  save(); renderAll();
+}
+/* ---------- little pictures for buttons ---------- */
+var SUPICO={};
+function supIcon(kind,id){
+  var key=kind+':'+id; if(SUPICO[key]) return SUPICO[key];
+  var cv=document.createElement('canvas'); cv.width=96; cv.height=72; var c=cv.getContext('2d');
+  try{
+    if(kind==='drone'){ drawDrone3D(c,id,48,62,16,-.2,0.4,1.25,null,false); }
+    else if(kind==='crate'){ var d=new D3(c,48,46,1.9,-.2); d.box(0,0,4,14,14,10,'#9A7444'); d.box(0,0,9.3,14.4,3,.6,'#5A4026'); d.box(0,0,9.3,3,14.4,.6,'#5A4026'); d.draw();
+      c.fillStyle='#E8C030'; c.beginPath(); c.moveTo(48,26); c.lineTo(53,35); c.lineTo(43,35); c.closePath(); c.fill(); }
+    else if(kind==='pet'){ c.translate(50,46); c.scale(id==='crows'?4.6:id==='rats'?4.4:3.8,id==='crows'?4.6:id==='rats'?4.4:3.8); petSprite(c,id,0,0,0,.3,true); }
+    else if(kind==='sabo'){ c.translate(48,40); c.scale(1.7,1.7); c.fillStyle='#2A2E30'; c.beginPath(); c.arc(0,-6,7,0,TAU); c.fill(); c.fillRect(-9,0,18,12); c.fillStyle='#C8A070'; c.fillRect(-5,-8,10,3);
+      c.fillStyle='#E5483B'; c.beginPath(); c.arc(9,8,4,0,TAU); c.fill(); c.strokeStyle='#FFF'; c.lineWidth=1.2; c.beginPath(); c.moveTo(7,6); c.lineTo(11,10); c.moveTo(11,6); c.lineTo(7,10); c.stroke(); }
+  }catch(e){}
+  return (SUPICO[key]=cv.toDataURL());
+}
+/* ---------- animals ---------- */
+function petSprite(c,kind,x,y,ang,t,still){
+  c.save(); c.translate(x,y);
+  var fx=Math.cos(ang)>=0?1:-1; c.scale(fx,1);
+  if(kind==='rats'){ var st=still?0:Math.sin(t*30)*1.2;
+    c.fillStyle='rgba(0,0,0,.25)'; c.beginPath(); c.ellipse(0,1.6,4.6,1.4,0,0,TAU); c.fill();
+    c.strokeStyle='#C89A90'; c.lineWidth=.8; c.beginPath(); c.moveTo(-3.6,0); c.quadraticCurveTo(-7,-1+st*.5,-9,1); c.stroke();
+    c.fillStyle='#6E6A66'; c.beginPath(); c.ellipse(0,-1,4.2,2.4,0,0,TAU); c.fill();
+    c.beginPath(); c.ellipse(3.6,-1.6,2,1.6,.3,0,TAU); c.fill(); c.fillStyle='#C89A90'; c.beginPath(); c.arc(2.8,-3.2,.9,0,TAU); c.fill();
+    c.fillStyle='#E04040'; c.beginPath(); c.arc(4.6,-2,.45,0,TAU); c.fill(); }
+  else if(kind==='dogs'){ var lg=still?0:Math.sin(t*22)*1.6;
+    c.fillStyle='rgba(0,0,0,.25)'; c.beginPath(); c.ellipse(0,3,6,1.6,0,0,TAU); c.fill();
+    c.strokeStyle='#4A3424'; c.lineWidth=1.3; c.beginPath(); c.moveTo(-3.5,0); c.lineTo(-3.5-lg*.5,3); c.moveTo(-1.5,0); c.lineTo(-1.5+lg*.5,3); c.moveTo(2.5,0); c.lineTo(2.5+lg*.5,3); c.moveTo(4,0); c.lineTo(4-lg*.5,3); c.stroke();
+    c.fillStyle='#7A5230'; c.beginPath(); c.ellipse(.4,-1.2,5,2.4,0,0,TAU); c.fill();
+    c.beginPath(); c.ellipse(5.6,-3,2.4,2,0,0,TAU); c.fill(); c.fillStyle='#4A3020'; c.beginPath(); c.moveTo(5,-4.6); c.lineTo(4,-6.6); c.lineTo(6,-5); c.closePath(); c.fill();
+    c.fillStyle='#2A1A10'; c.beginPath(); c.arc(7.8,-2.8,.7,0,TAU); c.fill(); c.fillStyle='#E04040'; c.beginPath(); c.arc(6,-3.6,.45,0,TAU); c.fill();
+    c.strokeStyle='#7A5230'; c.lineWidth=1.2; c.beginPath(); c.moveTo(-4.4,-2); c.lineTo(-6.6,-4+lg*.3); c.stroke(); }
+  else { var fl=still?.4:Math.sin(t*16);
+    c.fillStyle='#1C1C22'; c.beginPath(); c.ellipse(0,0,3.6,1.8,0,0,TAU); c.fill();
+    c.beginPath(); c.arc(3.4,-.6,1.5,0,TAU); c.fill(); c.fillStyle='#D8A030'; c.beginPath(); c.moveTo(4.6,-.8); c.lineTo(6.4,-.3); c.lineTo(4.6,.1); c.closePath(); c.fill();
+    c.fillStyle='#2A2A32'; c.beginPath(); c.moveTo(-1,-1); c.quadraticCurveTo(-2,-6*fl-1,-6,-5*fl); c.lineTo(1.5,-.5); c.closePath(); c.fill();
+    c.fillStyle='#14141A'; c.beginPath(); c.moveTo(-3,0); c.lineTo(-6.4,1.2); c.lineTo(-6,-1); c.closePath(); c.fill();
+    c.fillStyle='#E04040'; c.beginPath(); c.arc(3.9,-1,.4,0,TAU); c.fill(); }
+  c.restore();
+}
+/* ---------- picking supports before a raid ---------- */
+function supOwned(){
+  var s=supS(), out=[];
+  if(spiesHome()>0) for(var k in SABO) out.push({kind:'sabo',id:k,n:SABO[k].n,d:SABO[k].d+' Uses a spy, who might get caught.',have:spiesHome()});
+  DRONE_KINDS.forEach(function(k){ if(s.dr[k]>0) out.push({kind:'drone',id:k,n:DRONES[k].n,d:DRONES[k].d,have:s.dr[k]}); });
+  if(s.cr>0) out.push({kind:'crate',id:'crate',n:'Supply crate',d:'Looks like a gift. Bursts open inside their walls.',have:s.cr});
+  PET_KINDS.forEach(function(k){ if(s.pt[k]>0) out.push({kind:'pet',id:k,n:PETS[k].n,d:PETS[k].d,have:s.pt[k]}); });
+  return out;
+}
+function supPicked(kind,id){ return (ui.supPick||[]).some(function(p){ return p.kind===kind&&p.id===id; }); }
+function supToggle(kind,id){
+  ui.supPick=ui.supPick||[];
+  var i=-1; ui.supPick.forEach(function(p,j){ if(p.kind===kind&&p.id===id) i=j; });
+  if(i>=0) ui.supPick.splice(i,1);
+  else { if(kind==='sabo'&&ui.supPick.some(function(p){ return p.kind==='sabo'; })){ toast('One sabotage job per raid.'); return; }
+    if(ui.supPick.length>=supSlots()){ toast('You can bring '+supSlots()+' supports'+(supSlots()<3?'. A third slot opens at Bunker 10.':'.')); return; } ui.supPick.push({kind:kind,id:id}); }
+  if(pending&&pending.town) openTown(pending.town); else if(pending&&pending.war) wvAttack(pending.war.k);
+}
+function supPickHtml(){
+  var own=supOwned(), n=(ui.supPick||[]).length;
+  var h='<div class="supbox"><div class="suphd"><b>Supports</b><span class="muted">'+n+' of '+supSlots()+' picked</span></div>';
+  if(!own.length){ h+='<p class="muted" style="margin:4px 0 0">Build a <b>Drone Bay</b> or a <b>Kennel</b>, or keep a spy at home, to bring help into a raid.</p></div>'; return h; }
+  h+='<div class="supgrid">';
+  own.forEach(function(o){ var on=supPicked(o.kind,o.id);
+    h+='<button class="supchip'+(on?' on':'')+'" data-act="suppick" data-k="'+o.kind+'" data-id="'+o.id+'" type="button" aria-pressed="'+on+'"><img src="'+supIcon(o.kind,o.id)+'" alt=""><span class="sn">'+esc(o.n)+'</span><span class="sh">×'+o.have+'</span></button>'; });
+  h+='</div>';
+  var last=(ui.supPick||[]).slice(-1)[0]; if(last){ var lo=own.filter(function(o){ return o.kind===last.kind&&o.id===last.id; })[0]; if(lo) h+='<p class="muted supd">'+esc(lo.n)+': '+esc(lo.d)+'</p>'; }
+  return h+'</div>';
+}
+/* ---------- in the battle ---------- */
+function supSid(){ return B.sel||firstAvail()||Object.keys(B.params).filter(function(k){ return k!=='_rv'; })[0]; }
+function supInfect(b,amt,sid,add){
+  if(!b||b.fallen||!sid||!B.params[sid]) return;
+  if(b.sid&&b.sid!==sid&&b.sid==='_rv'){ b.inf=Math.max(0,b.inf-amt*.6); if(b.inf<.05){ b.sid=sid; b.inf=amt*.5; } return; }
+  b.inf=clamp(add?b.inf+amt:Math.max(b.inf,amt),0,.95); if(!b.sid||b.inf>0) b.sid=b.sid||sid; (B.used||(B.used={}))[sid]=1;
+}
+function supStart(){
+  B.sup=[]; B.drones=[]; B.pets=[]; B.crates=[]; B.flak=[]; B.arm=null; B.dpath=null; B.supLeft=0;
+  var pick=(ui.supPick||[]).slice(); ui.supPick=[];
+  if(B.boss) return;
+  /* anti-air and crate inspection, from threat 4 up (military camps have more) */
+  var tier=B.tier||0, mil=B.ckind==='mil';
+  var nAA=(tier>=3?1:0)+(tier>=6?1:0)+(tier>=8?1:0)+(mil?2:0);
+  var hosts=B.bld.filter(function(b){ return !b.wall&&b.g&&(b.k==='san'||b.k==='vacc'||b.k==='clinic'||b.k==='hall'||b.k==='well'); });
+  hosts.sort(function(a,b){ return (a.k==='hall'?-1:0)-(b.k==='hall'?-1:0)||((a.x*7+a.y*13)%11)-((b.x*7+b.y*13)%11); });
+  hosts.slice(0,nAA).forEach(function(b){ b.aa={cd:0,ang:0}; });
+  B.inspect=tier>=3?(mil?.5:.3+.02*tier):0;
+  pick.forEach(function(p){
+    if(p.kind==='sabo'){ supSabotage(p.id); return; }
+    B.sup.push({kind:p.kind,id:p.id,used:false});
+  });
+  if(B.sup.length) renderTray();
+}
+function supSabotage(job){
+  if(spiesHome()<=0) return;
+  var caught=Math.random()<clamp(.18+.03*(B.tier||0)+(B.ckind==='mil'?.1:0),.12,.55);
+  B.saboJob=job;
+  if(caught){ S.spies=Math.max(0,S.spies-1); B.alert=Math.max(B.alert,.3); B.cureMul=(B.cureMul||1)*1.15; B.saboFail=true;
+    setTimeout(function(){ toast('Your spy was caught! They know you are coming.'); },1600); save(); return; }
+  if(job==='well'){ var houses=B.bld.filter(function(b){ return !b.fallen&&!b.wall&&(b.k==='house'||b.k==='well'); }); var h0=houses[Math.floor(Math.random()*houses.length)]; if(h0){ supInfect(h0,.4,supSid()); B.fx.push({type:'ring',x:h0.x,y:h0.y,t:0,ttl:.9,c:B.params[supSid()].color,r:40}); } }
+  else if(job==='power'){ B.powerOff=20; }
+  else if(job==='alarm'){ B.jam=25; B.alertMul0=B.alertMul||1; B.alertMul=(B.alertMul||1)*.4; }
+  setTimeout(function(){ toast('Sabotage worked: '+SABO[job].n.toLowerCase()+'.'); },1600);
+}
+function supTrayHtml(){
+  if(!B||!B.sup||!B.sup.length) return '';
+  return B.sup.map(function(s,i){ var nm=s.kind==='drone'?DRONES[s.id].n:s.kind==='pet'?PETS[s.id].n:'Supply crate';
+    return '<button class="tcard sup'+(B.arm===i?' on':'')+'" data-act="supuse" data-i="'+i+'" '+(s.used?'disabled':'')+' type="button"><img src="'+supIcon(s.kind,s.id)+'" alt="" width="48" height="36"><span class="tn">'+esc(nm)+'</span><span class="tc">'+(s.used?'Used':B.arm===i?(s.kind==='drone'?'Swipe a path':'Tap a spot'):'Ready')+'</span></button>'; }).join('');
+}
+function supArm(i){
+  if(!B||B.ended||!B.sup||!B.sup[i]||B.sup[i].used) return;
+  B.arm=B.arm===i?null:i; renderTray();
+  if(B.arm!=null){ var s=B.sup[i]; toast(s.kind==='drone'?'Swipe across the colony to set the drone’s path.':s.kind==='crate'?'Tap the building the crate should be delivered to.':'Tap where the '+PETS[s.id].n.toLowerCase().replace(' pack','s').replace(' flock','s')+' should go.'); }
+}
+function supUseUp(s){
+  s.used=true; B.arm=null; var st=supS();
+  if(s.kind==='drone') st.dr[s.id]=Math.max(0,(st.dr[s.id]||0)-1);
+  else if(s.kind==='crate') st.cr=Math.max(0,st.cr-1);
+  else if(s.kind==='pet') st.pt[s.id]=Math.max(0,(st.pt[s.id]||0)-1);
+  save(); renderTray();
+}
+/* pointer: returns true when a support took the tap */
+function supDown(p){
+  if(!B||B.arm==null||!B.sup[B.arm]) return false;
+  var s=B.sup[B.arm], w=colPick(p);
+  if(s.kind==='drone'){ B.dpath=[{x:w.x,y:w.y}]; return true; }
+  if(s.kind==='crate'){ var b=battleBldAt(w); if(!b){ toast('Tap a building.'); return true; } supCrate(b); supUseUp(s); return true; }
+  if(s.kind==='pet'){ supPets(s.id,w); supUseUp(s); return true; }
+  return false;
+}
+function supMove(p){ if(!B||!B.dpath) return false; var w=colPick(p), l=B.dpath[B.dpath.length-1]; if(Math.hypot(w.x-l.x,w.y-l.y)>6) B.dpath.push({x:w.x,y:w.y}); return true; }
+function supUp(){
+  if(!B||!B.dpath) return; var path=B.dpath; B.dpath=null; var s=B.sup[B.arm]; if(!s) return;
+  var len=0; for(var i=1;i<path.length;i++) len+=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);
+  if(len<24){ var c0=path[0], dx=240-c0.x, dy=200-c0.y, dl=Math.hypot(dx,dy)||1; path=[c0,{x:c0.x+dx/dl*120,y:c0.y+dy/dl*120}]; }
+  supDrone(s.id,path); supUseUp(s);
+}
+function supEdge(x,y){ var c=[{x:-30,y:y},{x:510,y:y},{x:x,y:-30},{x:x,y:430}]; return c.sort(function(a,b){ return Math.hypot(a.x-x,a.y-y)-Math.hypot(b.x-x,b.y-y); })[0]; }
+function supDrone(kind,path){
+  var st=DRONE_ST[kind], out=[path[0]], len=0;
+  for(var i=1;i<path.length&&len<st.len;i++){ var a=out[out.length-1], b=path[i], d=Math.hypot(b.x-a.x,b.y-a.y); if(len+d>st.len){ var f=(st.len-len)/d; out.push({x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f}); len=st.len; break; } out.push(b); len+=d; }
+  var e=supEdge(out[0].x,out[0].y);
+  B.drones.push({kind:kind,pts:[e].concat(out),spray0:1,i:1,x:e.x,y:e.y,h:30,ang:0,sid:supSid(),st:'fly',t:0,hp:1});
+}
+function supCrate(b){ B.crates.push({b:b,x:b.x,y:b.y,t:0,st:'fall',sid:supSid()}); }
+function supPets(kind,w){
+  var P0=PETS[kind], e=supEdge(w.x,w.y), sid=supSid(), targets=[];
+  if(kind==='crows'){ targets=B.bld.filter(function(b){ return !b.fallen; }).sort(function(a,b){ return Math.hypot(b.x-e.x,b.y-e.y)-Math.hypot(a.x-e.x,a.y-e.y); }).slice(0,P0.count); }
+  for(var i=0;i<P0.count;i++){ var ox=(Math.random()-.5)*26, oy=(Math.random()-.5)*26;
+    B.pets.push({kind:kind,x:e.x+ox,y:e.y+oy,tx:(targets[i]||w).x+(kind==='crows'?0:ox*.4),ty:(targets[i]||w).y+(kind==='crows'?0:oy*.4),tb:targets[i]||null,spd:P0.spd*(.9+Math.random()*.2),sid:sid,ph:Math.random()*9,st:'go',life:22}); }
+}
+function supTick(dt){
+  if(!B||!B.sup) return;
+  if(B.powerOff>0){ B.powerOff-=dt; if(B.powerOff<=0) toast('Their power is back on.'); }
+  if(B.jam>0){ B.jam-=dt; (B.trucks||[]).forEach(function(t){ t.cd=Math.max(t.cd||0,.5); }); if(B.jam<=0){ B.alertMul=B.alertMul0||1; } }
+  var aaB=B.bld.filter(function(b){ return b.aa&&!b.fallen; });
+  aaB.forEach(function(b){ b.aa.cd=Math.max(0,b.aa.cd-dt); });
+  /* drones */
+  B.drones.forEach(function(d){
+    d.t+=dt; var st=DRONE_ST[d.kind];
+    if(d.st==='fly'){
+      var tgt=d.pts[d.i]; if(!tgt){ d.st='leave'; }
+      else { var dx=tgt.x-d.x, dy=tgt.y-d.y, dd=Math.hypot(dx,dy), mv=st.spd*dt;
+        d.ang=Math.atan2(dy,dx);
+        if(dd<=mv){ d.x=tgt.x; d.y=tgt.y; d.i++; } else { d.x+=dx/dd*mv; d.y+=dy/dd*mv; }
+        var spraying=d.i>=2;
+        if(spraying&&st.w){ B.bld.forEach(function(b){ var q=Math.hypot(b.x-d.x,b.y-d.y)-b.r*.5; if(q<st.w) supInfect(b,st.rate*dt*(1-Math.max(0,q)/st.w),d.sid,true); }); d.spray=true; }
+        if(d.i>=d.pts.length){
+          if(d.kind==='hauler'){ d.drop={x:d.x,y:d.y,t:.8}; }
+          if(d.kind==='swarm'){ var near=B.bld.filter(function(b){ return !b.fallen&&Math.hypot(b.x-d.x,b.y-d.y)<130; }).sort(function(){ return Math.random()-.5; }).slice(0,st.minis);
+            near.forEach(function(b){ B.drones.push({kind:'mini',pts:[{x:b.x,y:b.y}],i:0,x:d.x,y:d.y,h:24,ang:0,sid:d.sid,st:'fly',t:0,tb:b}); }); }
+          d.st='leave'; d.spray=false; var e=supEdge(d.x,d.y); d.pts=[e]; d.i=0;
+        } } }
+    else if(d.st==='leave'){ var e2=d.pts[0], ex=e2.x-d.x, ey=e2.y-d.y, ed=Math.hypot(ex,ey); d.ang=Math.atan2(ey,ex); if(ed<4) d.st='gone'; else { var m2=(st?st.spd:120)*1.3*dt; d.x+=ex/ed*Math.min(m2,ed); d.y+=ey/ed*Math.min(m2,ed); } }
+    if(d.kind==='mini'&&d.st==='fly'&&d.i>=1){ supInfect(d.tb,.42,d.sid); B.fx.push({type:'ring',x:d.x,y:d.y,t:0,ttl:.5,c:B.params[d.sid].color,r:20}); d.st='gone'; }
+    if(d.drop){ d.drop.t-=dt; if(d.drop.t<=0){ var r0=DRONE_ST.hauler.drop; B.bld.forEach(function(b){ var q=Math.hypot(b.x-d.drop.x,b.y-d.drop.y); if(q<r0) supInfect(b,.25+.4*(1-q/r0),d.sid); });
+      B.fx.push({type:'ring',x:d.drop.x,y:d.drop.y,t:0,ttl:.9,c:B.params[d.sid].color,r:r0*1.2}); B.fx.push({type:'boom',x:d.drop.x,y:d.drop.y,t:0,ttl:.6,r:30,c:B.params[d.sid].color}); d.drop=null; } }
+    /* anti-air */
+    if((d.st==='fly'||d.st==='leave')&&d.kind!=='wraith'){
+      aaB.forEach(function(b){ if(d.st==='dead') return; var q=Math.hypot(b.x-d.x,b.y-d.y); if(q>135) return; b.aa.ang=Math.atan2(d.y-b.y,d.x-b.x);
+        if(b.aa.cd<=0){ b.aa.cd=.55; B.flak.push({x:d.x+(Math.random()-.5)*22,y:d.y+(Math.random()-.5)*16,h:d.h+(Math.random()-.5)*10,t:0,fx:b.x,fy:b.y});
+          var hit=(d.kind==='mini'?.18:.24)*((st&&st.dodge)||1); if(Math.random()<hit){ d.st='dead'; d.fall=0; B.fx.push({type:'boom',x:d.x,y:d.y,t:0,ttl:.6,r:16,c:'#FF9A40'}); if(d.kind!=='mini') toast('Anti-air shot down your '+DRONES[d.kind].n+'!'); } } });
+    }
+    if(d.st==='dead'){ d.fall+=dt; d.h=Math.max(0,d.h-60*dt); if(d.h<=0) d.st='gone'; }
+  });
+  B.drones=B.drones.filter(function(d){ return d.st!=='gone'||d.drop; });
+  B.flak.forEach(function(f){ f.t+=dt; }); B.flak=B.flak.filter(function(f){ return f.t<.7; });
+  /* animals */
+  var sans=B.bld.filter(function(b){ return b.k==='san'&&!b.fallen; });
+  B.pets.forEach(function(a){
+    if(a.st!=='go') return; a.life-=dt; if(a.life<=0){ a.st='gone'; return; }
+    if(a.kind==='dogs'){ /* chase a truck if there is one, else the nearest defence */
+      var tr=(B.trucks||[]).filter(function(t){ return !t.sid; }).sort(function(p,q){ return Math.hypot(p.x-a.x,p.y-a.y)-Math.hypot(q.x-a.x,q.y-a.y); })[0];
+      if(tr){ a.tx=tr.x; a.ty=tr.y; a.ttr=tr; } else if(!a.tb){ var df=B.bld.filter(function(b){ return !b.fallen&&(b.k==='clinic'||b.k==='vacc'||b.k==='san'); }).sort(function(p,q){ return Math.hypot(p.x-a.tx,p.y-a.ty)-Math.hypot(q.x-a.tx,q.y-a.ty); })[0]; if(df){ a.tb=df; a.tx=df.x; a.ty=df.y; } } }
+    var dx=a.tx-a.x, dy=a.ty-a.y, dd=Math.hypot(dx,dy), mv=a.spd*dt; a.ang=Math.atan2(dy,dx); a.ph+=dt;
+    if(dd>mv){ a.x+=dx/dd*mv; a.y+=dy/dd*mv; }
+    if(a.kind==='rats'){ B.bld.forEach(function(b){ if(Math.hypot(b.x-a.x,b.y-a.y)<b.r*.6+6) supInfect(b,.05*dt,a.sid,true); });
+      if(B.powerOff<=0||!B.powerOff) sans.forEach(function(s2){ if(Math.hypot(s2.x-a.x,s2.y-a.y)<34&&Math.random()<.3*dt){ a.st='dead'; B.fx.push({type:'ring',x:a.x,y:a.y,t:0,ttl:.4,c:'#E8E0D0',r:8}); } }); }
+    if(a.kind==='dogs'){ (B.trucks||[]).forEach(function(t){ if(!t.sid&&t!==a.ttr&&Math.hypot(t.x-a.x,t.y-a.y)<38&&!(B.jam>0)&&Math.random()<.35*dt){ a.st='dead'; B.fx.push({type:'ring',x:a.x,y:a.y,t:0,ttl:.4,c:'#A0E8FF',r:10}); } }); }
+    if(a.kind==='crows'){ aaB.forEach(function(b){ if(Math.hypot(b.x-a.x,b.y-a.y)<120&&Math.random()<.12*dt){ a.st='dead'; B.fx.push({type:'ring',x:a.x,y:a.y,t:0,ttl:.4,c:'#FF9A40',r:8}); } }); }
+    if(a.st!=='go') return;
+    if(dd<=Math.max(mv,8)){
+      if(a.kind==='dogs'&&a.ttr&&Math.hypot(a.ttr.x-a.x,a.ttr.y-a.y)<14){ a.ttr.sid=a.sid; var nb=battleBldAt(a); if(nb) supInfect(nb,.35,a.sid); B.fx.push({type:'ring',x:a.x,y:a.y,t:0,ttl:.5,c:B.params[a.sid].color,r:18}); a.st='gone'; return; }
+      var tb=a.tb||B.bld.filter(function(b){ return !b.fallen; }).sort(function(p,q){ return Math.hypot(p.x-a.x,p.y-a.y)-Math.hypot(q.x-a.x,q.y-a.y); })[0];
+      if(tb){ supInfect(tb,a.kind==='rats'?.32:a.kind==='crows'?.3:.5,a.sid); B.fx.push({type:'ring',x:tb.x,y:tb.y,t:0,ttl:.5,c:B.params[a.sid].color,r:16});
+        if(a.kind==='rats'){ var h2=B.bld.filter(function(b){ return !b.fallen&&b!==tb&&b.k==='house'; }).sort(function(p,q){ return Math.hypot(p.x-a.x,p.y-a.y)-Math.hypot(q.x-a.x,q.y-a.y); })[Math.floor(Math.random()*2)]; if(h2&&Math.random()<.5){ a.tb=h2; a.tx=h2.x; a.ty=h2.y; return; } } }
+      a.st='gone';
+    }
+  });
+  B.pets=B.pets.filter(function(a){ return a.st==='go'; });
+  /* crates */
+  B.crates.forEach(function(c){
+    c.t+=dt;
+    if(c.st==='fall'&&c.t>=1.3){ c.st='land'; }
+    if(c.st==='land'&&c.t>=5){
+      if(Math.random()<(B.inspect||0)){ c.st='burn'; c.bt=0; toast('Their inspectors found your crate and burned it.'); }
+      else { c.st='open'; c.ot=0; var b=c.b; supInfect(b,.7,c.sid); B.bld.forEach(function(x){ if(x!==b&&Math.hypot(x.x-b.x,x.y-b.y)<75) supInfect(x,.34,c.sid); });
+        B.fx.push({type:'ring',x:b.x,y:b.y,t:0,ttl:1,c:B.params[c.sid].color,r:90}); B.fx.push({type:'boom',x:b.x,y:b.y,t:0,ttl:.7,r:34,c:B.params[c.sid].color}); toast('The crate burst open inside!'); } }
+    if(c.st==='burn'){ c.bt+=dt; if(c.bt>2.2) c.st='done'; }
+    if(c.st==='open'){ c.ot+=dt; if(c.ot>1.2) c.st='done'; }
+  });
+  B.crates=B.crates.filter(function(c){ return c.st!=='done'; });
+}
+/* drawn after the colony, in the battle's iso view */
+function supDraw(time){
+  if(!B||!B.sup) return;
+  var S2=Math.max(.6,BHW/21);
+  /* anti-air guns on their buildings */
+  B.bld.forEach(function(b){ if(!b.aa||b.fallen||!b.g) return; var g=b.g, base=BP(g.gx+g.w/2,g.gy+g.h/2,g.ht+1);
+    var d=new D3(ctx,base.x,base.y,S2*1.1,b.aa.ang||0); d.cyl(0,0,0,0,0,3,4.4,'#4A5440',10,'#5A6650'); d.box(0,0,5,6,5,4,'#55603F'); d.cyl(2,-1.3,6,12,-1.3,8,.8,'#22262A',6); d.cyl(2,1.3,6,12,1.3,8,.8,'#22262A',6); d.draw(); });
+  /* crates */
+  B.crates.forEach(function(c){ var g=c.b.g, top=g?g.ht:14, fall=c.st==='fall'?Math.max(0,1-c.t/1.3):0, z=top+fall*90, p=g?BP(g.gx+g.w/2,g.gy+g.h/2,z):cP(c.x,c.y,z);
+    if(c.st==='fall'){ ctx.strokeStyle='rgba(60,50,40,.7)'; ctx.lineWidth=.8; ctx.beginPath(); ctx.moveTo(p.x-6,p.y-4); ctx.lineTo(p.x-11,p.y-22); ctx.moveTo(p.x+6,p.y-4); ctx.lineTo(p.x+11,p.y-22); ctx.stroke();
+      ctx.fillStyle='#E8E0CC'; ctx.beginPath(); ctx.moveTo(p.x-13,p.y-21); ctx.quadraticCurveTo(p.x,p.y-38,p.x+13,p.y-21); ctx.closePath(); ctx.fill(); ctx.fillStyle='#D04030'; ctx.beginPath(); ctx.moveTo(p.x-4,p.y-21.5); ctx.quadraticCurveTo(p.x,p.y-33,p.x+4,p.y-21.5); ctx.closePath(); ctx.fill(); }
+    if(c.st!=='open'){ var d=new D3(ctx,p.x,p.y,S2*.9,-.3); d.box(0,0,5,13,13,10,'#9A7444'); d.box(0,0,10.3,13.4,2.6,.6,'#5A4026'); d.box(0,0,10.3,2.6,13.4,.6,'#5A4026'); d.draw();
+      if(c.st==='land'){ var left=Math.max(0,5-c.t); ctx.font='800 9px sans-serif'; ctx.textAlign='center'; ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fillText(Math.ceil(left)+'',p.x,p.y-16); } }
+    if(c.st==='burn'){ for(var k=0;k<6;k++){ var ph=(time*1.6+k/6)%1; ctx.fillStyle='rgba(255,'+Math.round(120+100*(1-ph))+',40,'+(1-ph)*.8+')'; ctx.beginPath(); ctx.arc(p.x+Math.sin(k*2+time*3)*5,p.y-6-ph*18,3+3*(1-ph),0,TAU); ctx.fill(); } } });
+  /* animals */
+  B.pets.forEach(function(a){ var z=a.kind==='crows'?34+Math.sin(a.ph*3)*3:0, p=cP(a.x,a.y,z), sc=a.kind==='crows'?1.1:1;
+    if(a.kind==='crows'){ var gq=cP(a.x,a.y,0); ctx.fillStyle='rgba(0,0,0,.2)'; ctx.beginPath(); ctx.ellipse(gq.x,gq.y,3.5,1.4,0,0,TAU); ctx.fill(); }
+    ctx.save(); ctx.translate(p.x,p.y); ctx.scale(sc,sc); var sp=cP(a.x+Math.cos(a.ang),a.y+Math.sin(a.ang),z); petSprite(ctx,a.kind,0,0,Math.atan2(sp.y-p.y,sp.x-p.x),time+a.ph,false);
+    var col=B.params[a.sid]?B.params[a.sid].color:'#7ED957'; ctx.fillStyle=rgba(col,.55); ctx.beginPath(); ctx.arc(0,-5,1.6,0,TAU); ctx.fill(); ctx.restore(); });
+  /* drones and their paths */
+  if(B.dpath&&B.dpath.length>1){ ctx.save(); ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=2; ctx.setLineDash([6,5]); ctx.lineDashOffset=-time*30; ctx.beginPath(); B.dpath.forEach(function(q,i){ var p=cP(q.x,q.y,2); ctx[i?'lineTo':'moveTo'](p.x,p.y); }); ctx.stroke(); ctx.restore(); }
+  B.drones.forEach(function(d){ if(d.st==='gone') return; var p=cP(d.x,d.y,0), ga=cP(d.x+Math.cos(d.ang)*10,d.y+Math.sin(d.ang)*10,0);
+    var ang=Math.atan2(ga.y-p.y,ga.x-p.x)-Math.atan2(.5,.866);
+    if(d.kind==='mini'){ var q=cP(d.x,d.y,d.h); ctx.fillStyle='rgba(0,0,0,.2)'; ctx.beginPath(); ctx.ellipse(p.x,p.y,4,1.8,0,0,TAU); ctx.fill(); ctx.fillStyle='#8A68A6'; ctx.fillRect(q.x-2.5,q.y-1.5,5,3); ctx.fillStyle='rgba(220,230,235,.5)'; ctx.beginPath(); ctx.ellipse(q.x,q.y-1,6,2,0,0,TAU); ctx.fill(); return; }
+    ctx.save(); if(d.st==='dead'){ ctx.translate(p.x,p.y); ctx.rotate(Math.sin(d.fall*20)*.3); ctx.translate(-p.x,-p.y); }
+    var col=B.params[d.sid]?B.params[d.sid].color:'#7ED957';
+    drawDrone3D(ctx,d.kind,p.x,p.y,d.h,ang,time+d.t,S2,col,!!d.spray&&d.st==='fly');
+    if(d.st==='dead'){ ctx.fillStyle='rgba(60,60,60,.5)'; ctx.beginPath(); ctx.arc(p.x,p.y-d.h*S2-6,5,0,TAU); ctx.fill(); }
+    ctx.restore(); });
+  B.flak.forEach(function(f){ var k=f.t/.7, p=cP(f.x,f.y,f.h*S2*1.6), o=cP(f.fx,f.fy,22);
+    if(k<.15){ ctx.strokeStyle='rgba(255,220,140,.8)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(o.x,o.y); ctx.lineTo(p.x,p.y); ctx.stroke(); }
+    ctx.fillStyle='rgba(70,64,58,'+(.7*(1-k))+')'; ctx.beginPath(); ctx.arc(p.x,p.y,3+7*k,0,TAU); ctx.fill();
+    if(k<.25){ ctx.fillStyle='rgba(255,200,90,'+(1-k*4)+')'; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,TAU); ctx.fill(); } });
+}
+/* ---------- the two new buildings at home ---------- */
+function supDrawBay(b,x,y,w,h,time){
+  drawBox(x,y,w,h,0,2.5,'#8E9294','#74787A','#5E6264');
+  plane(x,y,2.5,function(){ ctx.strokeStyle='#E8C030'; ctx.lineWidth=.09; ctx.beginPath(); ctx.arc(1.05,1.15,.62,0,TAU); ctx.stroke();
+    ctx.fillStyle='#F2EAD8'; ctx.fillRect(.86,.86,.1,.58); ctx.fillRect(1.14,.86,.1,.58); ctx.fillRect(.86,1.1,.38,.1); });
+  drawBox(x,y,.7,h,2.5,14,'#A7AAA2','#8A8E86','#70746E');
+  drawBox(x-.04,y-.04,.78,h+.08,14,16,'#5E6A50','#4C573F','#3C4532');
+  var pole=P(x+.35,y+.3,16); ctx.strokeStyle='#3A3E40'; ctx.lineWidth=1.4; ctx.beginPath(); ctx.moveTo(pole.x,pole.y); ctx.lineTo(pole.x,pole.y-12); ctx.stroke();
+  ctx.fillStyle=Math.sin(time*5)>0?'#FF5A3C':'#6A2A1C'; ctx.beginPath(); ctx.arc(pole.x,pole.y-13,1.8,0,TAU); ctx.fill();
+  var dk=DRONE_KINDS[clamp(b.lv,1,6)-1], pp=P(x+1.25,y+1.15,2.5);
+  try{ drawDrone3D(ctx,dk,pp.x,pp.y,4+2*Math.sin(time*1.4),-.4,time,HW/34,null,false); }catch(e){}
+}
+function supDrawKennel(b,x,y,w,h,time){
+  drawBox(x,y,w,h,0,1.2,'#9A7A50','#7E6040','#664C32');
+  /* fence */
+  var posts=[[0,0],[1,0],[2,0],[2,1],[2,2],[0,1],[0,2],[1,2]];
+  posts.forEach(function(q){ drawBox(x+q[0]*.92+.02,y+q[1]*.92+.02,.12,.12,1.2,8,'#8A6236','#6E4C28','#583C1E'); });
+  ctx.strokeStyle='#6E4C28'; ctx.lineWidth=1.2; [[0,0,2,0],[2,0,2,2],[0,0,0,2]].forEach(function(l){ [4,6.6].forEach(function(z){ var a=P(x+l[0]*.92+.08,y+l[1]*.92+.08,z), c=P(x+l[2]*.92+.08,y+l[3]*.92+.08,z); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y); ctx.stroke(); }); });
+  /* doghouse */
+  drawBox(x+.2,y+.2,.9,.8,1.2,9,'#B48A54','#9A7244','#7E5C36');
+  fillPts(fL(x+.2,y+.2,.9,.8,.3,.7,1.2,6.4),'#2A1E14');
+  drawGable(x+.2,y+.2,.9,.8,9,5,'#8A3A28','#A44A32','#6E2E20');
+  /* bowl and a dog pacing */
+  var bw=P(x+1.5,y+.5,1.2); ctx.fillStyle='#C0302A'; ctx.beginPath(); ctx.ellipse(bw.x,bw.y,3.2,1.6,0,0,TAU); ctx.fill();
+  var k=(Math.sin(time*.7)+1)/2, dp=P(x+.6+k*1.1,y+1.55,1.2); ctx.save(); ctx.translate(dp.x,dp.y-2); ctx.scale(1.1,1.1); petSprite(ctx,'dogs',0,0,Math.cos(time*.7)>0?0:Math.PI,time,false); ctx.restore();
+  if(b.lv>=1){ var rp=P(x+1.6,y+1.2,1.2); ctx.save(); ctx.translate(rp.x,rp.y); petSprite(ctx,'rats',0,0,Math.sin(time)*3,time,false); ctx.restore(); }
+  if(b.lv>=5){ var cp=P(x+.65,y+.6,14); ctx.save(); ctx.translate(cp.x,cp.y); petSprite(ctx,'crows',0,0,0,time*.3,true); ctx.restore(); }
+}
+function supBayPanel(){
+  var s=supS(), lv=bayLv(), h='<div class="supshop"><div class="suphd"><b>Hangar</b><span class="muted">'+droneCount()+' of '+droneCap()+' drones</span></div>';
+  DRONE_KINDS.forEach(function(k,i){ var un=droneUnlocked(k), c=droneCost(k);
+    h+='<div class="row brow"><img class="bimg" src="'+supIcon('drone',k)+'" alt=""><div class="info"><div class="name">'+DRONES[k].n+(s.dr[k]?' <span class="muted">×'+s.dr[k]+'</span>':'')+'</div><div class="sub">'+(un?DRONES[k].d:'Unlocks at Drone Bay level '+(i+1)+'.')+'</div></div><div class="acts"><button class="btn sm primary" data-act="supbuy" data-k="drone" data-id="'+k+'" '+((!un||S.credits<c||droneCount()>=droneCap())?'disabled':'')+' type="button">'+(un?'Build · '+fmt(c):'Locked')+'</button></div></div>'; });
+  var cc=Math.round(CRATE_COST*buildMult()/10)*10, cu=lv>=CRATE_LV;
+  h+='<div class="row brow"><img class="bimg" src="'+supIcon('crate','crate')+'" alt=""><div class="info"><div class="name">Supply crate'+(s.cr?' <span class="muted">×'+s.cr+'</span>':'')+'</div><div class="sub">'+(cu?'Looks like a gift. Delivered to a building, it bursts open inside their walls. Bigger colonies may inspect it and burn it. Hold '+CRATE_CAP+'.':'Unlocks at Drone Bay level '+CRATE_LV+'.')+'</div></div><div class="acts"><button class="btn sm primary" data-act="supbuy" data-k="crate" data-id="crate" '+((!cu||S.credits<cc||s.cr>=CRATE_CAP)?'disabled':'')+' type="button">'+(cu?'Pack · '+fmt(cc):'Locked')+'</button></div></div>';
+  return h+'</div>';
+}
+function supKennelPanel(){
+  var s=supS(), lv=kenLv(), h='<div class="supshop"><div class="suphd"><b>Pens</b><span class="muted">'+petCount()+' of '+petCap()+' packs</span></div>';
+  PET_KINDS.forEach(function(k){ var P0=PETS[k], un=lv>=P0.lv;
+    h+='<div class="row brow"><img class="bimg" src="'+supIcon('pet',k)+'" alt=""><div class="info"><div class="name">'+P0.n+(s.pt[k]?' <span class="muted">×'+s.pt[k]+'</span>':'')+'</div><div class="sub">'+(un?P0.d:'Unlocks at Kennel level '+P0.lv+'.')+'</div></div><div class="acts"><button class="btn sm primary" data-act="supbuy" data-k="pet" data-id="'+k+'" '+((!un||S.food<P0.cost||petCount()>=petCap())?'disabled':'')+' type="button">'+(un?'Breed · '+fmt(P0.cost)+' food':'Locked')+'</button></div></div>'; });
+  return h+'</div>';
+}
+
+/* ================= friends, friend wars, richer profiles (0.78.0) ================= */
+var FR={data:null,busy:false,msg:'',draft:''};
+var WV={id:null,st:null,list:null,poll:null,busy:false,msg:'',pick:{},draft:'',cool:0};
+function frCan(){ return !!(MP&&MP.sb&&MP.user&&!MP.gate&&MP.pname); }
+function frErr(e){ var m=String((e&&(e.message||e))||''); return /no_player/.test(m)?'No player has that username.':/self/.test(m)?'That is you.':/too_many_wars/.test(m)?'You are already in 5 wars.':/too_many/.test(m)?'Too many requests waiting. Try again later.':/full/.test(m)?'That is full.':/taken/.test(m)?'Someone already picked that country.':/need_two/.test(m)?'You need at least 2 players.':/need_picks/.test(m)?'Everyone has to pick a country first.':/not_adjacent/.test(m)?'You can only attack regions next to yours.':/allied/.test(m)?'That region belongs to an ally.':/shield/.test(m)?'That region was just taken. It is shielded for a little while.':/too_fast/.test(m)?'Wait a minute between captures.':/not_live/.test(m)?'This war is not running.':/signin/.test(m)?'Sign in first.':'Something went wrong ('+(typeof mpErr==='function'?mpErr(e):m)+').'; }
+function frR(fn,args){ return MP.sb.rpc(fn,args||{}).then(function(r){ if(r&&r.error) throw r.error; return r?r.data:null; }); }
+function frAgo(ms){ if(!ms) return 'never'; var s=Math.max(0,(Date.now()-ms)/1000); return s<120?'just now':s<3600?Math.floor(s/60)+'m ago':s<86400?Math.floor(s/3600)+'h ago':Math.floor(s/86400)+'d ago'; }
+/* ---------- friends ---------- */
+function frOpen(){ if(!frCan()){ toast('Sign in with a username to have friends.'); return; } FR.msg=''; showOverlay(frHtml()); frLoad(); }
+function frLoad(){ FR.busy=true; frR('lzf_list').then(function(d){ FR.data=d||{friends:[],incoming:[],outgoing:[]}; FR.busy=false; frPaint(); }).catch(function(e){ FR.busy=false; FR.msg=frErr(e); frPaint(); }); }
+function frPaint(){ var c=document.getElementById('ovCard'); if(!c||!c.querySelector('[data-fr]')) return; var t=document.getElementById('frName'); if(t) FR.draft=t.value; c.innerHTML=frHtml(); var t2=document.getElementById('frName'); if(t2&&FR.draft){ t2.value=FR.draft; } }
+function frHtml(){
+  var d=FR.data, h='<div data-fr="1"><h2 style="margin:0 0 4px">Friends</h2><p class="muted" style="margin:0 0 10px">Add friends by username, then start a friend war and race to take over the world.</p>';
+  h+='<div class="frrow"><input id="frName" class="txt" maxlength="20" placeholder="Friend’s username" autocomplete="off" autocapitalize="off"><button class="btn primary" data-act="fradd" type="button">Add</button></div>';
+  if(FR.msg) h+='<p class="hint">'+esc(FR.msg)+'</p>';
+  if(!d){ h+='<p class="muted">'+(FR.busy?'Loading…':'')+'</p>'; }
+  else {
+    if(d.incoming.length){ h+='<div class="sethd">Requests</div>'; d.incoming.forEach(function(f){ h+='<div class="frpl"><b>'+esc(f.name)+'</b><span class="muted">wants to be friends</span><div class="acts"><button class="btn sm primary" data-act="frans" data-id="'+f.uid+'" data-v="1" type="button">Accept</button><button class="btn sm" data-act="frans" data-id="'+f.uid+'" data-v="0" type="button">No</button></div></div>'; }); }
+    h+='<div class="sethd">Your friends · '+d.friends.length+'</div>';
+    if(!d.friends.length) h+='<p class="muted">No friends yet.</p>';
+    d.friends.forEach(function(f){ var on=f.seen&&Date.now()-f.seen<10*60000; h+='<div class="frpl"><i class="pdot'+(on?' on':'')+'"></i><button class="linkbtn" data-act="frprof" data-n="'+esc(f.name)+'" type="button"><b>'+esc(f.name)+'</b></button><span class="muted">'+(on?'online':'seen '+frAgo(f.seen))+'</span><div class="acts"><button class="btn sm" data-act="frdel" data-id="'+f.uid+'" type="button">'+(FR.del===f.uid?'Tap to remove':'Remove')+'</button></div></div>'; });
+    if(d.outgoing.length){ h+='<div class="sethd">Waiting on</div>'; d.outgoing.forEach(function(f){ h+='<div class="frpl"><b>'+esc(f.name)+'</b><span class="muted">request sent</span><div class="acts"><button class="btn sm" data-act="frdel" data-id="'+f.uid+'" type="button">Cancel</button></div></div>'; }); }
+  }
+  h+='<div class="btns"><button class="btn virus" data-act="wvlist" type="button">Friend wars</button><button class="btn" data-ov="close" type="button">Close</button></div></div>';
+  return h;
+}
+function frAdd(name){ name=(name||'').trim(); if(!name){ FR.msg='Type a username.'; frPaint(); return; }
+  frR('lzf_add',{p_name:name}).then(function(r){ FR.msg=r==='accepted'?'You are now friends with '+name+'.':r==='already'?'You are already friends.':'Request sent to '+name+'.'; FR.draft=''; var t=document.getElementById('frName'); if(t) t.value=''; frLoad(); if(LBP.more){ LBP.more.asked=true; } }).catch(function(e){ FR.msg=frErr(e); frPaint(); }); }
+/* ---------- profile analytics ---------- */
+function lbMoreHtml(d){
+  var m=d.more; if(!m) return '';
+  var w=+d.wins||0, l=+d.losses||0, tot=w+l, wr=tot?Math.round(w/tot*100):0;
+  var h='<h3 class="achc">Analytics</h3>';
+  h+='<div class="anrec"><div class="anrl"><b>'+fmt(w)+'</b> won · <b>'+fmt(l)+'</b> lost</div><div class="anbar"'+(tot?'':' style="background:var(--surface-2)"')+'><i style="width:'+wr+'%"></i></div><div class="anrl muted">'+(tot?wr+'% win rate over '+fmt(tot)+' outbreaks':'No outbreaks yet')+'</div></div>';
+  h+='<div class="facts anf">'+
+    '<div class="fact"><b class="num">'+(m.hall||1)+'</b><span>Bunker level</span></div>'+
+    '<div class="fact"><b class="num">'+fmt(m.blds||0)+'</b><span>buildings</span></div>'+
+    '<div class="fact"><b class="num">'+fmt(m.owned||0)+'</b><span>colonies captured</span></div>'+
+    '<div class="fact"><b class="num">'+fmt(m.regions||0)+'</b><span>Earth regions held</span></div>'+
+    '<div class="fact"><b class="num">'+fmt(m.crew||0)+'</b><span>crew</span></div>'+
+    '<div class="fact"><b class="num">'+fmt(m.specimens||0)+'</b><span>specimens found</span></div>'+
+    '<div class="fact"><b class="num">'+fmt(m.wars||0)+'</b><span>friend wars won</span></div>'+
+    '<div class="fact"><b class="num">'+((m.strains||[]).length)+'</b><span>strains</span></div></div>';
+  if((m.strains||[]).length) h+='<div class="anstr">'+m.strains.slice(0,6).map(function(s){ var v=VEC[s.vec]; return '<span class="anchip">'+(v?vicon(s.vec,16,'#7ED957'):'')+esc(s.name||'Strain')+'</span>'; }).join('')+'</div>';
+  h+='<div class="kv"><span>Clan</span><b>'+(m.clan?esc(m.clan.name)+' ['+esc(m.clan.tag)+']':'None')+'</b></div>';
+  h+='<div class="kv"><span>Playing since</span><b>'+(m.joined?new Date(m.joined).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'?')+'</b></div>';
+  h+='<div class="kv"><span>Last played</span><b>'+frAgo(m.seen)+'</b></div>';
+  if(!d.me) h+='<div class="btns" style="margin-top:8px">'+(m.friend?'<button class="btn" disabled type="button">Friends ✓</button>':m.asked?'<button class="btn" disabled type="button">Request sent</button>':'<button class="btn primary" data-act="fraddn" data-n="'+esc(d.name)+'" type="button">Add friend</button>')+'</div>';
+  return h;
+}
+function lbProfileFrom(name,back){ LBP.back=back||null; lbProfile(name); }
+/* ---------- friend wars: list and create ---------- */
+function wvList(){ if(!frCan()){ toast('Sign in with a username to play friend wars.'); return; } WV.msg=''; WV.list=null; showOverlay(wvListHtml()); wvLoadList(); }
+function wvLoadList(){ frR('lzw2_list').then(function(d){ WV.list=d||[]; wvPaintList(); }).catch(function(e){ WV.list=[]; WV.msg=frErr(e); wvPaintList(); }); }
+function wvPaintList(){ var c=document.getElementById('ovCard'); if(!c||!c.querySelector('[data-wvl]')) return; c.innerHTML=wvListHtml(); }
+function wvListHtml(){
+  var h='<div data-wvl="1"><h2 style="margin:0 0 4px">Friend wars</h2><p class="muted" style="margin:0 0 10px">Everyone picks a country on the Earth map. Win outbreaks to take the regions next to yours, from the wasteland or from each other. Make alliances or break them. The first to take over the whole world wins.</p>';
+  if(WV.msg) h+='<p class="hint">'+esc(WV.msg)+'</p>';
+  if(!WV.list) h+='<p class="muted">Loading…</p>';
+  else if(!WV.list.length) h+='<p class="muted">No wars yet. Start one with your friends.</p>';
+  else WV.list.forEach(function(w){
+    var st=w.status==='lobby'?'Waiting to start':w.status==='live'?'In progress':'Finished';
+    var win=w.winners&&w.winners.length?' · won by '+w.winners.map(function(x){ return x.name; }).join(' & '):'';
+    h+='<div class="wvrow"><div class="info"><div class="name">'+esc(w.name)+'</div><div class="sub">'+st+' · '+w.players+' player'+(w.players===1?'':'s')+(w.invited?' · '+w.invited+' invited':'')+(w.status==='live'?' · you hold '+w.mine:'')+esc(win)+'</div></div><div class="acts">'+
+      (w.my==='invited'?'<button class="btn sm primary" data-act="wvjoin" data-id="'+w.id+'" data-v="1" type="button">Join</button><button class="btn sm" data-act="wvjoin" data-id="'+w.id+'" data-v="0" type="button">No</button>':'<button class="btn sm primary" data-act="wvgo" data-id="'+w.id+'" type="button">Open</button>')+'</div></div>'; });
+  h+='<div class="btns"><button class="btn virus" data-act="wvnew" type="button">New war</button><button class="btn" data-act="fropen" type="button">Friends</button><button class="btn" data-ov="close" type="button">Close</button></div></div>';
+  return h;
+}
+function wvNew(){
+  if(!FR.data){ frR('lzf_list').then(function(d){ FR.data=d; wvNew(); }).catch(function(e){ toast(frErr(e)); }); return; }
+  WV.pick={}; showOverlay(wvNewHtml());
+}
+function wvNewHtml(){
+  var fr=(FR.data&&FR.data.friends)||[], n=Object.keys(WV.pick).length;
+  var h='<div data-wvn="1"><h2 style="margin:0 0 6px">New friend war</h2><label class="muted" for="wvName">Name</label><input id="wvName" class="txt" maxlength="24" placeholder="'+esc((MP.pname||'My')+'’s war')+'" value="'+esc(WV.draft||'')+'">';
+  h+='<div class="sethd">Invite friends · '+n+' of 7</div>';
+  if(!fr.length) h+='<p class="muted">Add some friends first.</p>';
+  fr.forEach(function(f){ var on=!!WV.pick[f.uid]; h+='<button class="frpick'+(on?' on':'')+'" data-act="wvtog" data-id="'+f.uid+'" type="button" aria-pressed="'+on+'"><span class="ck">'+(on?'✓':'')+'</span>'+esc(f.name)+'</button>'; });
+  h+='<div class="btns"><button class="btn virus" data-act="wvmake" '+(n?'':'disabled')+' type="button">Create war</button><button class="btn" data-act="wvlist" type="button">Back</button></div></div>';
+  return h;
+}
+function wvMake(){ var t=document.getElementById('wvName'), nm=t?t.value:''; var ids=Object.keys(WV.pick);
+  frR('lzw2_create',{p_name:nm,p_uids:ids}).then(function(id){ WV.draft=''; toast('War created. Pick your country.'); wvGo(id); }).catch(function(e){ toast(frErr(e)); }); }
+/* ---------- the war on the Earth map ---------- */
+function warOn(){ return !!(WV.id&&WV.st); }
+function wvGo(id){ WV.id=+id; WV.st=null; ui.esel=null; hideOverlay(); ui.tab='earth'; ui.colony=null; renderAll(); wvLoad(); wvPollStart(); }
+function wvExit(){ WV.id=null; WV.st=null; ui.esel=null; wvPollStop(); renderAll(); }
+function wvLoad(){ if(!WV.id) return Promise.resolve(); var id=WV.id; return frR('lzw2_state',{p_war:id}).then(function(d){ if(WV.id!==id) return; WV.st=d; renderPanel(); }).catch(function(e){ toast(frErr(e)); if(/not_in/.test(String(e&&e.message))) wvExit(); }); }
+function wvPollStart(){ wvPollStop(); WV.poll=setInterval(function(){ if(mode==='home'&&ui.tab==='earth'&&WV.id&&!document.hidden) wvLoad(); },15000); }
+function wvPollStop(){ if(WV.poll){ clearInterval(WV.poll); WV.poll=null; } }
+function wvMe(){ var s=WV.st; return s&&s.players.filter(function(p){ return p.uid===s.me; })[0]; }
+function wvP(uid){ var s=WV.st; return s&&uid?s.players.filter(function(p){ return p.uid===uid; })[0]:null; }
+function wvAllied(a,b){ if(a===b) return true; return (WV.st.allies||[]).some(function(x){ return x.status==='ally'&&((x.a===a&&x.b===b)||(x.a===b&&x.b===a)); }); }
+function wvOwner(k){ var s=WV.st; if(!s) return null; if(s.status==='lobby'){ var p=s.players.filter(function(q){ return q.region===k&&q.state==='in'; })[0]; return p?p.uid:null; } var r=s.regions[k]; return r?r.owner:null; }
+function wvCanAttack(k){
+  var s=WV.st, me=s&&s.me; if(!s||s.status!=='live') return {ok:false}; var mp=wvMe(); if(!mp||mp.state!=='in') return {ok:false,why:'You are out of this war.'};
+  var o=wvOwner(k); if(o===me) return {ok:false};
+  if(o&&wvAllied(me,o)) return {ok:false,why:'Held by your ally.'};
+  var adj=EARTH.R[k].adj.some(function(a){ return wvOwner(a)===me; }); if(!adj) return {ok:false,why:'Not next to any of your regions.'};
+  var r=s.regions[k]; if(r&&r.shield&&r.shield>s.now) return {ok:false,why:'Shielded for '+fmtTime((r.shield-s.now)/1000)+' after it changed hands.'};
+  return {ok:true};
+}
+function wvRegState(k){ var s=WV.st, o=wvOwner(k); if(o&&o===s.me) return 'own'; if(s.status==='lobby') return 'pick'; if(wvCanAttack(k).ok) return 'open'; return 'locked'; }
+function wvLogText(t){ return esc(t).replace(/\{(\w+)\}/g,function(m,k){ return EARTH.R[k]?esc(EARTH.R[k].n):k; }); }
+function wvTier(k){ var s=WV.st, o=wvOwner(k), mp=wvMe(), mine=mp?mp.held:1;
+  if(!o) return clamp(1+Math.floor(mine/3),0,8);
+  var p=wvP(o); return clamp(3+Math.floor((p?p.held:1)/2)+Math.floor(((p&&p.hall)||1)/4),0,9); }
+function warPanel(){
+  var s=WV.st, me=s.me, mp=wvMe(), k=ui.esel&&EARTH.R[ui.esel]?ui.esel:null, h='';
+  h+='<div class="wvhead"><div><div class="name" style="font-weight:800;font-size:17px">'+esc(s.name)+'</div><div class="muted" style="font-size:13px">Friend war · '+(s.status==='lobby'?'waiting to start':s.status==='live'?'in progress':'finished')+'</div></div><button class="btn sm" data-act="wvexit" type="button">My Earth</button></div>';
+  if(s.status==='done'){ var ws=(s.winners||[]).map(function(x){ return x.name; }); var won=(s.winners||[]).some(function(x){ return x.uid===me; });
+    h+='<div class="wvwin'+(won?' me':'')+'"><b>'+(won?'You won the war!':esc(ws.join(' & '))+' won the war')+'</b><span>'+(ws.length>1?'The alliance took over the whole world.':'They took over the whole world.')+'</span></div>'; }
+  /* players */
+  h+='<div class="wvpl">';
+  s.players.forEach(function(p){ var ally=p.uid!==me&&wvAllied(me,p.uid), req=(s.allies||[]).filter(function(x){ return x.status==='pending'&&((x.a===me&&x.b===p.uid)||(x.b===me&&x.a===p.uid)); })[0];
+    h+='<div class="wvp'+(p.state==='out'?' out':'')+'"><i style="background:'+p.color+'"></i><div class="info"><b>'+esc(p.name)+(p.uid===me?' (you)':'')+'</b><span>'+(p.state==='invited'?'invited':s.status==='lobby'?(p.region?esc(regionName(p.region)):'picking…'):p.state==='out'?'wiped out':p.held+' region'+(p.held===1?'':'s'))+(ally?' · ally':'')+'</span></div>';
+    if(p.uid!==me&&s.status!=='done'&&p.state==='in'&&mp&&mp.state==='in'){
+      if(ally) h+='<button class="btn sm" data-act="wvally" data-id="'+p.uid+'" data-v="break" type="button">'+(WV.brk===p.uid?'Tap to break':'Break alliance')+'</button>';
+      else if(req&&req.by!==me) h+='<button class="btn sm primary" data-act="wvally" data-id="'+p.uid+'" data-v="accept" type="button">Accept alliance</button>';
+      else if(req) h+='<span class="muted" style="font-size:12px">asked</span>';
+      else h+='<button class="btn sm" data-act="wvally" data-id="'+p.uid+'" data-v="ask" type="button">Ask to ally</button>';
+    }
+    h+='</div>'; });
+  h+='</div>';
+  if(s.status==='lobby'){
+    var ownerMe=s.owner===me;
+    h+='<p class="muted" style="margin:6px 0">'+(mp&&mp.region?'You start in <b>'+esc(regionName(mp.region))+'</b>. Tap another region to change.':'Tap a region on the map to pick where you start.')+'</p>';
+    if(k){ var taken=wvOwner(k); h+='<div class="ecard"><div class="name">'+esc(regionName(k))+'</div><div class="sub">Next to '+EARTH.R[k].adj.map(regionName).join(', ')+'.</div>'+(taken&&taken!==me?'<p class="muted">'+esc((wvP(taken)||{}).name||'Someone')+' picked this.</p>':taken===me?'<p class="good">Your country.</p>':'<div class="btns"><button class="btn primary" data-act="wvpick" data-k="'+k+'" type="button">Start here</button></div>')+'</div>'; }
+    h+='<div class="btns">'+(ownerMe?'<button class="btn virus" data-act="wvstart" type="button">Start the war</button><button class="btn" data-act="wvinv" type="button">Invite friends</button>':'<span class="muted">Waiting for '+esc((wvP(s.owner)||{}).name||'the host')+' to start.</span>')+'</div>';
+  }
+  if(s.status==='live'&&k){
+    var o=wvOwner(k), op=wvP(o), ca=wvCanAttack(k), cool=mp&&mp.cap?Math.max(0,60-(s.now-mp.cap)/1000):0;
+    h+='<div class="ecard"><div class="name">'+esc(regionName(k))+' <span style="color:'+(op?op.color:'#A89B82')+'">· '+(o===me?'yours':op?esc(op.name):'wasteland')+'</span></div>';
+    h+='<div class="sub">'+(o===me?'You hold this region.':'Threat '+(wvTier(k)+1)+' of 10. '+(o?'Their colony fights back with their strength.':'Rival survivors hold it.'))+'</div>';
+    if(ca.ok) h+='<div class="btns"><button class="btn virus" data-act="wvatk" data-k="'+k+'" '+(cool>0?'disabled':'')+' type="button">'+(cool>0?'Ready in '+Math.ceil(cool)+'s':'Attack '+esc(regionName(k)))+'</button></div>';
+    else if(ca.why&&o!==me) h+='<p class="muted" style="margin:6px 0 0">'+esc(ca.why)+'</p>';
+    h+='</div>';
+  } else if(s.status==='live') h+='<p class="muted" style="margin:6px 0">Tap a region next to yours to attack it.</p>';
+  if((s.log||[]).length){ h+='<div class="sethd">War log</div><div class="wvlog">'+s.log.slice(0,12).map(function(l){ return '<div><span class="muted">'+frAgo(l.at)+'</span> '+wvLogText(l.t)+'</div>'; }).join('')+'</div>'; }
+  h+='<div class="btns"><button class="btn" data-act="wvlist" type="button">All wars</button><button class="btn" data-act="wvleave" type="button">'+(WV.lv?'Tap again to leave':'Leave war')+'</button></div>';
+  return h;
+}
+function wvAttack(k){
+  var ca=wvCanAttack(k); if(!ca.ok){ toast(ca.why||'You can’t attack that.'); return; }
+  if(sampleCount()===0){ toast('Culture some virus samples first.'); return; }
+  var o=wvOwner(k), op=wvP(o), tier=wvTier(k), seed=Math.abs((WV.id*7919+k.charCodeAt(0)*131+k.charCodeAt(1)*17+(o?o.charCodeAt(0)*3:0)+tier*101)|0)%1000000007;
+  var col; try{ col=genColony(tier,seed); }catch(e){ toast('Could not build that fight.'); return; }
+  col.seed=seed; col.name=regionName(k)+(op?' · '+op.name:''); col.war={id:WV.id,k:k};
+  pending=col;
+  showOverlay('<h2>'+esc(col.name)+'</h2><p class="muted">Friend war · Threat '+(tier+1)+' of 10</p><p>Win this outbreak and <b>'+esc(regionName(k))+'</b> becomes yours'+(op?', taken from '+esc(op.name):'')+'.</p>'+
+    supPickHtml()+'<div class="btns"><button class="btn virus" data-act="wvlaunch" type="button">Launch</button><button class="btn" data-ov="close" type="button">Back</button></div>');
+}
+function wvLaunch(){ if(!pending||!pending.war) return; hideOverlay(); var w=pending.war; startOutbreak(pending); if(B) B.war=w; }
+function wvAfter(win){
+  var w=B&&B.war; if(!w||!win) return;
+  frR('lzw2_capture',{p_war:w.id,p_region:w.k}).then(function(r){
+    toast(r&&r.won?'You took over the world! The war is won.':'You took '+regionName(w.k)+'!'); if(WV.id===w.id) wvLoad(); })
+  .catch(function(e){ toast('Won, but the region stayed put: '+frErr(e)); });
+}
+/* clicks */
+function wvAct(act,el){
+  var id=el.getAttribute('data-id'), v=el.getAttribute('data-v'), k=el.getAttribute('data-k');
+  if(act==='fropen'){ frOpen(); return true; }
+  if(act==='fradd'){ var t=document.getElementById('frName'); frAdd(t?t.value:''); return true; }
+  if(act==='fraddn'){ frR('lzf_add',{p_name:el.getAttribute('data-n')}).then(function(r){ toast(r==='accepted'?'You are now friends!':'Friend request sent.'); el.disabled=true; el.textContent=r==='accepted'?'Friends ✓':'Request sent'; }).catch(function(e){ toast(frErr(e)); }); return true; }
+  if(act==='frans'){ frR('lzf_answer',{p_uid:id,p_ok:v==='1'}).then(frLoad).catch(function(e){ FR.msg=frErr(e); frPaint(); }); return true; }
+  if(act==='frdel'){ if(FR.del!==id&&FR.data&&FR.data.friends.some(function(f){ return f.uid===id; })){ FR.del=id; frPaint(); return true; } FR.del=null; frR('lzf_remove',{p_uid:id}).then(frLoad).catch(function(e){ FR.msg=frErr(e); frPaint(); }); return true; }
+  if(act==='frprof'){ lbProfileFrom(el.getAttribute('data-n'),frOpen); return true; }
+  if(act==='wvlist'){ wvList(); return true; }
+  if(act==='wvnew'){ wvNew(); return true; }
+  if(act==='wvtog'){ var t2=document.getElementById('wvName'); if(t2) WV.draft=t2.value; if(WV.pick[id]) delete WV.pick[id]; else if(Object.keys(WV.pick).length<7) WV.pick[id]=1; var c=document.getElementById('ovCard'); if(c) c.innerHTML=wvNewHtml(); return true; }
+  if(act==='wvmake'){ wvMake(); return true; }
+  if(act==='wvjoin'){ frR('lzw2_join',{p_war:+id,p_ok:v==='1'}).then(function(){ if(v==='1') wvGo(id); else wvLoadList(); }).catch(function(e){ WV.msg=frErr(e); wvPaintList(); }); return true; }
+  if(act==='wvgo'){ wvGo(id); return true; }
+  if(act==='wvexit'){ wvExit(); return true; }
+  if(act==='wvpick'){ frR('lzw2_pick',{p_war:WV.id,p_region:k}).then(wvLoad).catch(function(e){ toast(frErr(e)); }); return true; }
+  if(act==='wvstart'){ frR('lzw2_start',{p_war:WV.id}).then(function(){ toast('The war has begun!'); wvLoad(); }).catch(function(e){ toast(frErr(e)); }); return true; }
+  if(act==='wvinv'){ var have={}; WV.st.players.forEach(function(p){ have[p.uid]=1; });
+    frR('lzf_list').then(function(d){ FR.data=d; var h='<div><h2 style="margin:0 0 6px">Invite friends</h2>'; var any=false;
+      (d.friends||[]).forEach(function(f){ if(have[f.uid]) return; any=true; h+='<div class="frpl"><b>'+esc(f.name)+'</b><div class="acts"><button class="btn sm primary" data-act="wvinv1" data-id="'+f.uid+'" type="button">Invite</button></div></div>'; });
+      if(!any) h+='<p class="muted">All your friends are already in this war.</p>'; h+='<div class="btns"><button class="btn" data-ov="close" type="button">Done</button></div></div>'; showOverlay(h); }).catch(function(e){ toast(frErr(e)); }); return true; }
+  if(act==='wvinv1'){ frR('lzw2_invite',{p_war:WV.id,p_uid:id}).then(function(){ el.disabled=true; el.textContent='Invited'; wvLoad(); }).catch(function(e){ toast(frErr(e)); }); return true; }
+  if(act==='wvally'){ if(v==='break'&&WV.brk!==id){ WV.brk=id; renderPanel(); return true; } WV.brk=null; frR('lzw2_ally',{p_war:WV.id,p_uid:id,p_act:v}).then(function(){ toast(v==='ask'?'Alliance request sent.':v==='accept'?'You are now allies.':'Alliance broken.'); wvLoad(); }).catch(function(e){ toast(frErr(e)); }); return true; }
+  if(act==='wvatk'){ wvAttack(k); return true; }
+  if(act==='wvlaunch'){ wvLaunch(); return true; }
+  if(act==='wvleave'){ if(!WV.lv){ WV.lv=1; renderPanel(); setTimeout(function(){ WV.lv=0; },4000); return true; } WV.lv=0; frR('lzw2_leave',{p_war:WV.id}).then(function(){ toast('You left the war.'); wvExit(); }).catch(function(e){ toast(frErr(e)); }); return true; }
+  return false;
 }
 
 /* ================= colony types, places, leaders, goals and battle events (0.75.0) =================
@@ -9028,7 +9772,7 @@ function drawCol3D(){
       poly([BP(g.gx,g.gy,0),BP(g.gx+g.w,g.gy,0),BP(g.gx+g.w,g.gy+g.h,0),BP(g.gx,g.gy+g.h,0)]); ctx.stroke();
       if(!reduce){ for(var s=0;s<3;s++){ var ph=((time*.7+s/3+b.ph)%1), sp=BP(g.gx+g.w*(.25+.25*s),g.gy+g.h*.5,g.ht*.6+ph*18); ctx.fillStyle=rgba(col,(1-ph)*.7*b.inf); ctx.beginPath(); ctx.arc(sp.x,sp.y,1.6+ph*2.2,0,TAU); ctx.fill(); } } }
   });
-  colProps(true,time); colDrawRunners(time); colDrawSiren(time);
+  colProps(true,time); colDrawRunners(time); colDrawSiren(time); try{ supDraw(time); }catch(e){}
   if(B.boltReq){ var bq=B.boltReq, bp=bq.g?BP(bq.g.gx+bq.g.w/2,bq.g.gy+bq.g.h/2,bq.g.ht*.8):cP(bq.x,bq.y,10); B.boltReq=null; try{ wxBolt(bp.x,bp.y,true); }catch(e){} }
   /* clinic treatment beams, from roof to roof */
   if(B.treat) B.treat.forEach(function(f){
