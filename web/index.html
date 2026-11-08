@@ -700,8 +700,8 @@ var BT={
   scout:{name:'Scout Post',w:2,h:2,hz:34,max:20,base:150,blurb:'Houses scouts. Higher levels extend range and cut risk.'},
   tower:{name:'Weather Tower',w:2,h:2,hz:46,max:20,base:250,blurb:'Reads the sky. Higher levels see storms farther away and warn you before they hit.'},
   shelter:{name:'Storm Shelter',w:2,h:2,hz:16,max:20,base:300,blurb:'Protects your crops, your people or your buildings from storms. Pick one at a time.'},
-  dronebay:{name:'Drone Bay',w:2,h:2,hz:16,max:6,base:800,blurb:'Builds drones and supply crates to bring into raids.'},
-  kennel:{name:'Kennel',w:2,h:2,hz:12,max:6,base:600,blurb:'Breeds infected rats, dogs and crows to bring into raids.'},
+  dronebay:{name:'Drone Bay',w:2,h:2,hz:16,max:20,base:800,blurb:'Builds drones and supply crates to bring into raids.'},
+  kennel:{name:'Kennel',w:2,h:2,hz:12,max:20,base:600,blurb:'Breeds infected rats, dogs and crows to bring into raids.'},
   /* water buildings no longer exist in the game. These entries are only kept so old saves that
      still have them can be refunded in full on load (see stripWater). */
   rain:{name:'Rain Catcher',w:2,h:2,hz:28,max:5,base:100,blurb:'Collects clean rainwater. Slow, but it never makes anyone sick.'},
@@ -713,7 +713,7 @@ var BUILDABLE=['farm','trade','incubator','lab','clinic','scout','tower','shelte
 var BUILD_WATER=['rain','pump','filter'];
 function buildableList(){ return BUILDABLE; }
 var LIM={dronebay:[0,0,1,1,1,1,1,1,1,1],kennel:[0,0,0,1,1,1,1,1,1,1],farm:[3,4,5,6,7,7,8,9,9,10],trade:[2,3,4,5,5,6,6,7,7,7],incubator:[1,2,2,3,3,3,4,4,4,4],lab:[1,1,2,2,2,3,3,3,3,3],clinic:[1,1,2,2,2,3,3,3,3,3],scout:[1,2,2,3,3,3,4,4,4,4],tower:[0,1,1,1,1,1,1,1,1,1],shelter:[0,0,1,1,1,2,2,2,3,3],rain:[2,3,4,5],pump:[1,2,2,3],filter:[1,1,2,2]};   /* by Bunker level */
-var COSTS={dronebay:[1200,2600,5400,10800,20000],kennel:[900,2000,4200,8400,16000],hall:[400,900,1800,3250,5850,10550,19000,34200,61550],farm:[150,350,700,1400,2500,4500,8100,14600,26300],trade:[200,450,900,1800,3250,5850,10550,19000,34200],incubator:[250,550,1100,2200,3950,7100,12800,23050,41500],lab:[300,700,1400,2800,5050,9100,16400,29500,53100],clinic:[250,600,1200,2400,4300,7750,13950,25100,45200],scout:[200,450,900,1800,3250,5850,10550,19000,34200],tower:[300,700,1400,2800,5050,9100,16400,29500,53100],shelter:[350,800,1600,3200,5800,10400,18700,33700,60700],rain:[120,300,650,1300],pump:[300,650,1300,2600],filter:[260,600,1200,2400]};
+var COSTS={dronebay:[1200,2600,5400,10800,20000,34000,52000,75000,105000],kennel:[900,2000,4200,8400,16000,27000,42000,61000,85000],hall:[400,900,1800,3250,5850,10550,19000,34200,61550],farm:[150,350,700,1400,2500,4500,8100,14600,26300],trade:[200,450,900,1800,3250,5850,10550,19000,34200],incubator:[250,550,1100,2200,3950,7100,12800,23050,41500],lab:[300,700,1400,2800,5050,9100,16400,29500,53100],clinic:[250,600,1200,2400,4300,7750,13950,25100,45200],scout:[200,450,900,1800,3250,5850,10550,19000,34200],tower:[300,700,1400,2800,5050,9100,16400,29500,53100],shelter:[350,800,1600,3200,5800,10400,18700,33700,60700],rain:[120,300,650,1300],pump:[300,650,1300,2600],filter:[260,600,1200,2400]};
 
 /* ================= save / state ================= */
 var KEY='lazarus-save-v3', V2='lazarus-save-v2', V1='quarantine-clash-save-v1';
@@ -1934,8 +1934,8 @@ function basePanel(){
       desc='Houses '+(2+b.lv)+' scouts (all posts: '+scoutCap()+'). Range '+(6+4*b.lv)+' tiles, reveals a radius of '+(3+sctLv('eyes')+(b.lv>=3?1:0)+(b.lv>=5?1:0))+' around each target, and each level cuts scout risk and trip time.';
       btn+='<button class="btn" data-act="trainscout" data-n="1" '+((S.food<scoutCost()||S.scouts>=scoutCap())?'disabled':'')+' type="button">Train scout · '+fmt(scoutCost())+' food</button>';
     }
-    else if(b.type==='dronebay') desc='Builds drones and packs supply crates for raids. Each level unlocks a new drone and adds hangar room ('+droneCap()+' drones now). Crates unlock at level '+CRATE_LV+'.';
-    else if(b.type==='kennel') desc='Breeds infected animals for raids: rats at level 1, dogs at 3, crows at 5. Room for '+petCap()+' packs.';
+    else if(b.type==='dronebay') desc='Builds drones and packs supply crates for raids. Levels 1 to 6 each unlock a new drone. Every level adds hangar room ('+droneCap()+' drones now, up to 12)'+(bayLv()>6?' and makes drones '+Math.round((droneBoost()-1)*100)+'% faster and stronger':', and from level 7 every level makes drones faster and stronger')+'. Crates unlock at level '+CRATE_LV+'.';
+    else if(b.type==='kennel') desc='Breeds infected animals for raids: rats at level 1, dogs at 3, crows at 5. Room for '+petCap()+' packs (up to 12). From level 7 animals get faster, and packs get bigger at levels 11 and 16'+(kenLv()>6?' (now '+Math.round((petBoost()-1)*100)+'% faster)':'')+'.';
     else desc='While infected, farms and trade run at '+Math.round(clamp(.4+.1*bestLv('clinic'),0,1)*100)+'%'+(bestLv('clinic')<6?' (10% more a level, full speed at level 6)':'')+'. Rival attacks are also '+(4*bestLv('clinic'))+'% less likely to infect you.';
     if(b.type==='tower'){ var tfm=wxFcMin(b.lv); desc='Reads the sky. '+(tfm?'Warns you about '+tfm+' minutes ahead. ':'Upgrade to level 2 to see storms coming. ')+'Storm Scan shows '+(b.lv<=1?'rough colors':b.lv===2?'clearer colors':'every detail')+' and reaches '+(b.lv>=5?'the whole world':b.lv>=4?'far across the map':b.lv>=3?'a wide area':'only near your region')+'. Open it on the Earth tab.'; }
     else if(b.type==='shelter'){ var si=shInfo(); desc='Put your <b>crops</b>, your <b>people</b> or your <b>buildings</b> inside and storms can\'t touch them, for as long as you like. But you can\'t use what is inside until you bring it out: sheltered crops stop growing and can\'t be planted or harvested, sheltered people can\'t scout, spy or raid, and sheltered buildings stop making credits. Holds '+(si.cap===3?'all 3 at once':si.cap+' thing'+(si.cap>1?'s':'')+' at a time')+(si.cap<3?' (level '+(si.cap<2?5:10)+' holds more)':'')+'.'; ['crops','people','buildings'].forEach(function(m){ var on=si.inside[m]; btn+='<button class="btn'+(on?' primary':'')+'" data-act="shmode" data-m="'+m+'" '+((!on&&si.used>=si.cap)?'disabled':'')+' type="button">'+(on?'Bring '+m+' out':'Shelter '+m)+'</button>'; }); }
@@ -2671,7 +2671,7 @@ function drawBuilding(b,time,ghost){
 }
 
 
-var BOXZ={hall:18,farm:3,trade:12,incubator:12,lab:16,scout:9,clinic:14};
+var BOXZ={dronebay:31.5,hall:18,farm:3,trade:12,incubator:12,lab:16,scout:9,clinic:14};
 function lvFaceLines(x,y,w,h,z1,z2,n,col){
   ctx.strokeStyle=col; ctx.lineWidth=1; ctx.beginPath();
   for(var i=1;i<n;i++){ var z=z1+(z2-z1)*i/n, a=P(x,y+h,z), b2=P(x+w,y+h,z), c=P(x+w,y,z); ctx.moveTo(a.x,a.y); ctx.lineTo(b2.x,b2.y); ctx.lineTo(c.x,c.y); }
@@ -2786,7 +2786,7 @@ function futProps(b,x,y,w,h,top,time){
 function drawLevelFxFut(b,x,y,w,h,hz,time){
   if((b.lv||1)<11) return;
   var top=BOXZ[b.type]||12;
-  futFaces(b,x,y,w,h,top,time); futEdges(b,x,y,w,h,top,time); futProps(b,x,y,w,h,top,time);
+  if(b.type!=='dronebay'){ futFaces(b,x,y,w,h,top,time); futEdges(b,x,y,w,h,top,time); } futProps(b,x,y,w,h,top,time);
 }
 /* roofs and towers change colour with the building: slate metal, then white steel, then dark glass */
 var FUTPAL=null;
@@ -2920,7 +2920,7 @@ function drawLevelFxHi(b,x,y,w,h,hz,time){
     ctx.strokeStyle='#F2C230'; ctx.lineWidth=2;
     var e1=P(x,y+h,top), e2=P(x+w,y+h,top), e3=P(x+w,y,top), g1=P(x,y+h,0), g2=P(x+w,y+h,0), g3=P(x+w,y,0);
     ctx.beginPath(); ctx.moveTo(e1.x,e1.y); ctx.lineTo(e2.x,e2.y); ctx.lineTo(e3.x,e3.y); ctx.moveTo(g1.x,g1.y); ctx.lineTo(g2.x,g2.y); ctx.lineTo(g3.x,g3.y); ctx.stroke();
-    var bc=P(x+w/2,y+h/2,(BT[t].hz||20)+6), pu=.5+.5*Math.sin(time*3);
+    var bc=P(x+w/2,y+h/2,(BT[t].hz||20)+6), pu=.5+.5*Math.sin(time*3); if(t==='dronebay') bc={x:-999,y:-999};
     if(!reduce){ var gg=ctx.createRadialGradient(bc.x,bc.y,1,bc.x,bc.y,20); gg.addColorStop(0,'rgba(255,205,60,'+(.7*pu+.2)+')'); gg.addColorStop(1,'rgba(255,205,60,0)'); ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(bc.x,bc.y,20,0,TAU); ctx.fill(); }
     ctx.fillStyle='#FFD447'; ctx.strokeStyle='#7A5A00'; ctx.lineWidth=1; ctx.beginPath(); ctx.arc(bc.x,bc.y,3.4,0,TAU); ctx.fill(); ctx.stroke();
   }
@@ -2976,7 +2976,7 @@ function drawLevelFx(b,x,y,w,h,hz,time){
     }
   }
   /* level 5: a pulsing beacon on top (gold from level 10) */
-  if(lv>=5&&lv<10){
+  if(lv>=5&&lv<10&&t!=='dronebay'){
     var bc=P(x+w/2,y+h/2,(BT[t].hz||20)+6), pu=.5+.5*Math.sin(time*4);
     ctx.strokeStyle='#3E3A33'; ctx.lineWidth=1.6; ctx.beginPath(); ctx.moveTo(bc.x,bc.y+6); ctx.lineTo(bc.x,bc.y); ctx.stroke();
     if(!reduce){ var gr=ctx.createRadialGradient(bc.x,bc.y,1,bc.x,bc.y,14); gr.addColorStop(0,'rgba(255,90,60,'+(.55*pu)+')'); gr.addColorStop(1,'rgba(255,90,60,0)'); ctx.fillStyle=gr; ctx.beginPath(); ctx.arc(bc.x,bc.y,14,0,TAU); ctx.fill(); }
@@ -3272,8 +3272,8 @@ function earthPanel0(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=106;
-var CHANGELOG=[{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=107;
+var CHANGELOG=[{"v": 107, "name": "0.78.1", "d": "Nov 7, 2026", "items": ["The Drone Bay is now a launch tower that grows with every level.", "The Drone Bay and Kennel now go up to level 20. Higher levels hold more and make drones and animals faster and stronger.", "Axiom Games intro when the game starts, and the Axiom logo on the loading screen."]},{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -8559,8 +8559,10 @@ var SABO={
 function supS(){ if(!S.sup||typeof S.sup!=='object') S.sup={dr:{},pt:{},cr:0}; if(!S.sup.dr) S.sup.dr={}; if(!S.sup.pt) S.sup.pt={}; if(typeof S.sup.cr!=='number') S.sup.cr=0; return S.sup; }
 function bayLv(){ var m=0; bl('dronebay').forEach(function(b){ m=Math.max(m,b.lv); }); return m; }
 function kenLv(){ var m=0; bl('kennel').forEach(function(b){ m=Math.max(m,b.lv); }); return m; }
-function droneCap(){ return bayLv()?1+bayLv():0; }
-function petCap(){ return kenLv()?1+kenLv():0; }
+function droneCap(){ return bayLv()?Math.min(12,1+bayLv()):0; }
+function droneBoost(){ return 1+.03*Math.max(0,bayLv()-6); }
+function petBoost(){ return 1+.03*Math.max(0,kenLv()-6); }
+function petCap(){ return kenLv()?Math.min(12,1+kenLv()):0; }
 function droneCount(){ var n=0, d=supS().dr; for(var k in d) n+=d[k]||0; return n; }
 function petCount(){ var n=0, d=supS().pt; for(var k in d) n+=d[k]||0; return n; }
 function droneUnlocked(k){ return DRONE_KINDS.indexOf(k)<bayLv(); }
@@ -8725,8 +8727,9 @@ function supCrate(b){ B.crates.push({b:b,x:b.x,y:b.y,t:0,st:'fall',sid:supSid()}
 function supPets(kind,w){
   var P0=PETS[kind], e=supEdge(w.x,w.y), sid=supSid(), targets=[];
   if(kind==='crows'){ targets=B.bld.filter(function(b){ return !b.fallen; }).sort(function(a,b){ return Math.hypot(b.x-e.x,b.y-e.y)-Math.hypot(a.x-e.x,a.y-e.y); }).slice(0,P0.count); }
-  for(var i=0;i<P0.count;i++){ var ox=(Math.random()-.5)*26, oy=(Math.random()-.5)*26;
-    B.pets.push({kind:kind,x:e.x+ox,y:e.y+oy,tx:(targets[i]||w).x+(kind==='crows'?0:ox*.4),ty:(targets[i]||w).y+(kind==='crows'?0:oy*.4),tb:targets[i]||null,spd:P0.spd*(.9+Math.random()*.2),sid:sid,ph:Math.random()*9,st:'go',life:22}); }
+  var cnt=P0.count+Math.floor(Math.max(0,kenLv()-6)/5);
+  for(var i=0;i<cnt;i++){ var ox=(Math.random()-.5)*26, oy=(Math.random()-.5)*26;
+    B.pets.push({kind:kind,x:e.x+ox,y:e.y+oy,tx:(targets[i]||w).x+(kind==='crows'?0:ox*.4),ty:(targets[i]||w).y+(kind==='crows'?0:oy*.4),tb:targets[i]||null,spd:P0.spd*petBoost()*(.9+Math.random()*.2),sid:sid,ph:Math.random()*9,st:'go',life:22}); }
 }
 function supTick(dt){
   if(!B||!B.sup) return;
@@ -8739,11 +8742,11 @@ function supTick(dt){
     d.t+=dt; var st=DRONE_ST[d.kind];
     if(d.st==='fly'){
       var tgt=d.pts[d.i]; if(!tgt){ d.st='leave'; }
-      else { var dx=tgt.x-d.x, dy=tgt.y-d.y, dd=Math.hypot(dx,dy), mv=st.spd*dt;
+      else { var dx=tgt.x-d.x, dy=tgt.y-d.y, dd=Math.hypot(dx,dy), mv=st.spd*dt*(d.kind==='mini'?1:droneBoost());
         d.ang=Math.atan2(dy,dx);
         if(dd<=mv){ d.x=tgt.x; d.y=tgt.y; d.i++; } else { d.x+=dx/dd*mv; d.y+=dy/dd*mv; }
         var spraying=d.i>=2;
-        if(spraying&&st.w){ B.bld.forEach(function(b){ var q=Math.hypot(b.x-d.x,b.y-d.y)-b.r*.5; if(q<st.w) supInfect(b,st.rate*dt*(1-Math.max(0,q)/st.w),d.sid,true); }); d.spray=true; }
+        if(spraying&&st.w){ B.bld.forEach(function(b){ var q=Math.hypot(b.x-d.x,b.y-d.y)-b.r*.5; if(q<st.w) supInfect(b,st.rate*droneBoost()*dt*(1-Math.max(0,q)/st.w),d.sid,true); }); d.spray=true; }
         if(d.i>=d.pts.length){
           if(d.kind==='hauler'){ d.drop={x:d.x,y:d.y,t:.8}; }
           if(d.kind==='swarm'){ var near=B.bld.filter(function(b){ return !b.fallen&&Math.hypot(b.x-d.x,b.y-d.y)<130; }).sort(function(){ return Math.random()-.5; }).slice(0,st.minis);
@@ -8758,7 +8761,7 @@ function supTick(dt){
     if((d.st==='fly'||d.st==='leave')&&d.kind!=='wraith'){
       aaB.forEach(function(b){ if(d.st==='dead') return; var q=Math.hypot(b.x-d.x,b.y-d.y); if(q>135) return; b.aa.ang=Math.atan2(d.y-b.y,d.x-b.x);
         if(b.aa.cd<=0){ b.aa.cd=.55; B.flak.push({x:d.x+(Math.random()-.5)*22,y:d.y+(Math.random()-.5)*16,h:d.h+(Math.random()-.5)*10,t:0,fx:b.x,fy:b.y});
-          var hit=(d.kind==='mini'?.18:.24)*((st&&st.dodge)||1); if(Math.random()<hit){ d.st='dead'; d.fall=0; B.fx.push({type:'boom',x:d.x,y:d.y,t:0,ttl:.6,r:16,c:'#FF9A40'}); if(d.kind!=='mini') toast('Anti-air shot down your '+DRONES[d.kind].n+'!'); } } });
+          var hit=(d.kind==='mini'?.18:.24)*((st&&st.dodge)||1)/droneBoost(); if(Math.random()<hit){ d.st='dead'; d.fall=0; B.fx.push({type:'boom',x:d.x,y:d.y,t:0,ttl:.6,r:16,c:'#FF9A40'}); if(d.kind!=='mini') toast('Anti-air shot down your '+DRONES[d.kind].n+'!'); } } });
     }
     if(d.st==='dead'){ d.fall+=dt; d.h=Math.max(0,d.h-60*dt); if(d.h<=0) d.st='gone'; }
   });
@@ -8835,17 +8838,60 @@ function supDraw(time){
     if(k<.25){ ctx.fillStyle='rgba(255,200,90,'+(1-k*4)+')'; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,TAU); ctx.fill(); } });
 }
 /* ---------- the two new buildings at home ---------- */
+/* Drone Bay: a concrete launch tower that grows with each level, a pad on the roof */
+function bayPadLights(x,y,z,time,cx,cy,r,col){ for(var i=0;i<8;i++){ var a=i/8*TAU, q=P(x+cx+Math.cos(a)*r,y+cy+Math.sin(a)*r,z); var on=((Math.floor(time*6)+i)%8)<2; ctx.fillStyle=on?(col||'#FFE070'):'#6A5A2A'; ctx.beginPath(); ctx.arc(q.x,q.y,1.3,0,TAU); ctx.fill(); } }
 function supDrawBay(b,x,y,w,h,time){
-  drawBox(x,y,w,h,0,2.5,'#8E9294','#74787A','#5E6264');
-  plane(x,y,2.5,function(){ ctx.strokeStyle='#E8C030'; ctx.lineWidth=.09; ctx.beginPath(); ctx.arc(1.05,1.15,.62,0,TAU); ctx.stroke();
-    ctx.fillStyle='#F2EAD8'; ctx.fillRect(.86,.86,.1,.58); ctx.fillRect(1.14,.86,.1,.58); ctx.fillRect(.86,1.1,.38,.1); });
-  drawBox(x,y,.7,h,2.5,14,'#A7AAA2','#8A8E86','#70746E');
-  drawBox(x-.04,y-.04,.78,h+.08,14,16,'#5E6A50','#4C573F','#3C4532');
-  var pole=P(x+.35,y+.3,16); ctx.strokeStyle='#3A3E40'; ctx.lineWidth=1.4; ctx.beginPath(); ctx.moveTo(pole.x,pole.y); ctx.lineTo(pole.x,pole.y-12); ctx.stroke();
-  ctx.fillStyle=Math.sin(time*5)>0?'#FF5A3C':'#6A2A1C'; ctx.beginPath(); ctx.arc(pole.x,pole.y-13,1.8,0,TAU); ctx.fill();
-  var dk=DRONE_KINDS[clamp(b.lv,1,6)-1], pp=P(x+1.25,y+1.15,2.5);
-  try{ drawDrone3D(ctx,dk,pp.x,pp.y,4+2*Math.sin(time*1.4),-.4,time,HW/34,null,false); }catch(e){}
+  var LV=clamp(b.lv||1,1,20), lv=Math.min(LV,6);
+  var top=[0,6,10,15,20,25,30][lv]+Math.max(0,LV-6)*.6;                 /* tower height */
+  var wall=LV>=17?['#24323C','#1E2A33','#151E26']:LV>=14?['#EEF2F4','#D3DBDF','#B9C4C9']:LV>=11?['#70767B','#5C6166','#4A4F54']:lv>=6?['#C4C8C6','#A6AAA8','#8A8E8C']:lv>=4?['#B4B6AE','#9A9C94','#80827C']:['#A49C8A','#8A8270','#70695A'];
+  var glow=LV>=11?(LV>=17?'#41E0FF':'#7FD0FF'):'#50BEFF';
+  drawBox(x,y,w,h,0,1.5,'#8A8C88','#72746F','#5E605C');
+  drawBox(x+.14,y+.14,w-.28,h-.28,1.5,top,wall[0],wall[1],wall[2]);
+  var bx=x+.14, by=y+.14, bw=w-.28, bh=h-.28;
+  /* door, and sandbags at low levels */
+  fillPts(fL(bx,by,bw,bh,.4,.6,1.5,7),'#3A3226');
+  if(lv<=2){ for(var s=0;s<4;s++){ var sp=P(bx+.15+s*.22,by+bh+.12,1.5); ctx.fillStyle='#B8A478'; ctx.strokeStyle='rgba(60,50,30,.5)'; ctx.lineWidth=.8; ctx.beginPath(); ctx.ellipse(sp.x,sp.y-1.5,3.4,2,0,0,TAU); ctx.fill(); ctx.stroke(); } }
+  /* windows: slits first, then a lit band, then a glass control room */
+  if(lv===1){ fillPts(fR(bx,by,bw,bh,.3,.45,3.4,4.6),'#2A2420'); fillPts(fR(bx,by,bw,bh,.6,.75,3.4,4.6),'#2A2420'); }
+  else { var wz=[0,0,4.5,7,9,11,13][lv], wz2=wz+3.2;
+    fillPts(fL(bx,by,bw,bh,.1,.9,wz,wz2),'#2A3A46'); fillPts(fR(bx,by,bw,bh,.1,.9,wz,wz2),'#24323C');
+    var gl=.2+.15*Math.sin(time*2); ctx.fillStyle='rgba(120,200,255,'+gl+')'; poly(fL(bx,by,bw,bh,.1,.9,wz,wz2)); ctx.fill(); }
+  if(lv>=5){ /* glass control room ring near the top */
+    var cz=top-5.5; fillPts(fL(bx,by,bw,bh,.05,.95,cz,cz+3.4),'#3A6A88'); fillPts(fR(bx,by,bw,bh,.05,.95,cz,cz+3.4),'#305A74');
+    ctx.fillStyle='rgba(160,225,255,'+(.25+.12*Math.sin(time*1.6))+')'; poly(fL(bx,by,bw,bh,.05,.95,cz,cz+3.4)); ctx.fill(); }
+  if(lv>=6){ /* blue light strips, more of them as it levels up */
+    var al=.6+.35*Math.sin(time*3); ctx.strokeStyle=glow; ctx.globalAlpha=al; ctx.lineWidth=LV>=11?1.8:1.4;
+    var zs=LV>=17?[4,top-1.2]:LV>=11?[4,top-1.2]:[4];
+    zs.forEach(function(zz){ [fL,fR].forEach(function(f){ var q=f(bx,by,bw,bh,0,1,zz,zz); ctx.beginPath(); ctx.moveTo(q[2].x,q[2].y); ctx.lineTo(q[3].x,q[3].y); ctx.stroke(); }); });
+    if(LV>=14){ var e0=P(bx+bw,by+bh,1.5), e1=P(bx+bw,by+bh,top); ctx.beginPath(); ctx.moveTo(e0.x,e0.y); ctx.lineTo(e1.x,e1.y); ctx.stroke(); }
+    ctx.globalAlpha=1; }
+  /* roof deck */
+  var deck=LV>=17?['#1C252C','#151C22','#0F1418']:lv>=6?['#4E5660','#3E454E','#30363E']:['#6E726C','#5A5E58','#4A4E48'];
+  drawBox(x+.1,y+.1,w-.2,h-.2,top,top+1.5,deck[0],deck[1],deck[2]);
+  var dz=top+1.5;
+  plane(x+.05,y+.05,dz,function(){
+    if(lv===1){ ctx.fillStyle='rgba(220,60,40,.85)'; ctx.fillRect(.7,.65,.1,.6); ctx.fillRect(1.1,.65,.1,.6); ctx.fillRect(.7,.9,.5,.1); return; }
+    ctx.strokeStyle=lv>=6?glow:'#E8C030'; ctx.lineWidth=.07; ctx.beginPath(); ctx.arc(.95,.95,.6,0,TAU); ctx.stroke();
+    if(lv>=4){ ctx.setLineDash([.12,.1]); ctx.beginPath(); ctx.arc(.95,.95,.72,0,TAU); ctx.stroke(); ctx.setLineDash([]); }
+    ctx.fillStyle='#F2EAD8'; ctx.fillRect(.78,.68,.09,.54); ctx.fillRect(1.03,.68,.09,.54); ctx.fillRect(.78,.9,.34,.09); });
+  /* rails from level 3 */
+  if(lv>=3){ ctx.strokeStyle=lv>=6?'#2A3038':'#3A3E40'; ctx.lineWidth=.9; var rz=dz+3;
+    [[0,0,1,0],[1,0,1,1],[0,0,0,1]].forEach(function(l){ var a=P(x+.08+l[0]*(w-.16),y+.08+l[1]*(h-.16),rz), c=P(x+.08+l[2]*(w-.16),y+.08+l[3]*(h-.16),rz); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y); ctx.stroke(); });
+    [[0,0],[1,0],[1,1],[0,1]].forEach(function(q){ var a=P(x+.08+q[0]*(w-.16),y+.08+q[1]*(h-.16),dz), c=P(x+.08+q[0]*(w-.16),y+.08+q[1]*(h-.16),rz); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y); ctx.stroke(); }); }
+  /* mast: a whip antenna at first, then a radar dish (bigger at 6) */
+  var m=P(x+w-.3,y+.3,dz), mh=lv<=1?10:lv<=3?12:lv<=5?14:17, m2=P(x+w-.3,y+.3,dz+mh);
+  ctx.strokeStyle='#4A4E50'; ctx.lineWidth=lv>=4?1.8:1.2; ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(m2.x,m2.y); ctx.stroke();
+  if(lv>=4){ var ra=time*1.2, ds=lv>=6?8:6; ctx.save(); ctx.translate(m2.x,m2.y); ctx.scale(Math.cos(ra),1); ctx.fillStyle='#DDE2E4'; ctx.strokeStyle='#4A4E50'; ctx.lineWidth=1; ctx.beginPath(); ctx.ellipse(0,0,ds,ds*.66,0,0,TAU); ctx.fill(); ctx.stroke(); ctx.fillStyle='#4A4E50'; ctx.beginPath(); ctx.arc(0,0,1.2,0,TAU); ctx.fill(); ctx.restore(); }
+  else if(lv>=2){ ctx.strokeStyle='#4A4E50'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(m2.x-4,m2.y+3); ctx.lineTo(m2.x+4,m2.y+3); ctx.moveTo(m2.x-3,m2.y+6); ctx.lineTo(m2.x+3,m2.y+6); ctx.stroke(); }
+  var bc=lv>=6?'#50BEFF':'#FF5A3C'; ctx.fillStyle=Math.sin(time*5)>0?bc:'#3A2420'; ctx.beginPath(); ctx.arc(m2.x,m2.y-(lv>=4?6:1),1.7,0,TAU); ctx.fill();
+  if(lv>=6&&!reduce){ var gg=ctx.createRadialGradient(m2.x,m2.y-6,0,m2.x,m2.y-6,9); gg.addColorStop(0,'rgba(80,190,255,.5)'); gg.addColorStop(1,'rgba(80,190,255,0)'); ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(m2.x,m2.y-6,9,0,TAU); ctx.fill(); }
+  /* floodlights from level 5 */
+  if(lv>=5){ [[1,0],[0,1]].forEach(function(q){ var fp=P(x+.08+q[0]*(w-.16),y+.08+q[1]*(h-.16),dz+5); ctx.fillStyle='#2A2E30'; ctx.fillRect(fp.x-2,fp.y-1.5,4,3); ctx.fillStyle='rgba(255,250,220,.9)'; ctx.beginPath(); ctx.arc(fp.x,fp.y,1.2,0,TAU); ctx.fill(); }); }
+  if(lv>=3) bayPadLights(x+.05,y+.05,dz,time,.95,.95,.62,lv>=6?'#7FD0FF':null);
+  var dk=DRONE_KINDS[lv-1], pp=P(x+1,y+1,dz);
+  try{ drawDrone3D(ctx,dk,pp.x,pp.y,3+2*Math.sin(time*1.4),-.4,time,HW/40,null,false); }catch(e){}
 }
+
 function supDrawKennel(b,x,y,w,h,time){
   drawBox(x,y,w,h,0,1.2,'#9A7A50','#7E6040','#664C32');
   /* fence */
@@ -10705,6 +10751,63 @@ function cineScene(x,kind,d,t){
   }
 }
 
+/* ================= Axiom Games: studio intro + logo ================= */
+var AXI={dur:3.4};
+function axiomCube(c,cx,cy,s,hole,alpha){
+  var k=.866*s; c.save(); c.globalAlpha=alpha==null?1:alpha;
+  function q(pts,col){ c.beginPath(); pts.forEach(function(p,i){ c[i?'lineTo':'moveTo'](cx+p[0],cy+p[1]); }); c.closePath(); c.fillStyle=col; c.fill(); }
+  q([[-k,-.5*s],[0,0],[0,s],[-k,.5*s]],'#5D69F0');
+  q([[0,0],[k,-.5*s],[k,.5*s],[0,s]],'#3C44AE');
+  q([[0,-s],[k,-.5*s],[0,0],[-k,-.5*s]],'#B5BCF8');
+  if(hole>0){ var h=.42*hole; q([[0,-.5*s-.5*s*h],[k*h,-.5*s],[0,-.5*s+.5*s*h],[-k*h,-.5*s]],'#0A0C1C'); }
+  c.restore();
+}
+/* small mark + wordmark, used on the loading screen */
+function axiomBadge(c,x,y,a){
+  c.save(); c.globalAlpha=a==null?1:a; axiomCube(c,x+9,y-9,8,1);
+  c.textAlign='left'; c.fillStyle='#EDE8FF'; c.font="800 13px 'Barlow Semi Condensed','Arial Narrow',sans-serif";
+  var t='AXIOM', xx=x+24; for(var i=0;i<t.length;i++){ c.fillText(t[i],xx,y-6); xx+=c.measureText(t[i]).width+2.2; }
+  c.fillStyle='#8E95E8'; c.font="700 7.5px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; xx=x+24.5; var g='GAMES'; for(var j=0;j<g.length;j++){ c.fillText(g[j],xx,y+3); xx+=c.measureText(g[j]).width+3.6; }
+  c.restore();
+}
+function axiomEase(t){ t=Math.max(0,Math.min(1,t)); return 1-Math.pow(1-t,3); }
+function axiomBack(t){ t=Math.max(0,Math.min(1,t)); var s=1.6; return 1+(s+1)*Math.pow(t-1,3)+s*Math.pow(t-1,2); }
+/* the intro, drawn in the 360x640 boot space. t in seconds */
+function axiomIntro(c,t,Wd,Hd){
+  var fadeIn=Math.min(1,t/.35), fadeOut=t>AXI.dur-.45?Math.max(0,(AXI.dur-t)/.45):1;
+  c.fillStyle='#0A0C1C'; c.fillRect(-400,-400,Wd+800,Hd+800);
+  c.save(); c.globalAlpha=fadeIn*fadeOut;
+  var cx=Wd/2, cy=Hd/2-60, s=52;
+  /* soft glow behind the cube */
+  if(!reduce&&t>.9){ var gl=Math.min(1,(t-.9)/.6), g=c.createRadialGradient(cx,cy,4,cx,cy,140); g.addColorStop(0,'rgba(110,120,250,'+(.28*gl)+')'); g.addColorStop(1,'rgba(110,120,250,0)'); c.fillStyle=g; c.fillRect(cx-160,cy-160,320,320); }
+  /* three faces fly in and lock together */
+  var k=.866*s, pT=axiomBack((t-.25)/.6), pL=axiomBack((t-.4)/.6), pR=axiomBack((t-.55)/.6);
+  function face(pts,col,dx,dy,p){ if(p<=0) return; c.save(); c.globalAlpha=c.globalAlpha*Math.min(1,p*1.4); c.translate(dx*(1-p),dy*(1-p)); c.beginPath(); pts.forEach(function(q,i){ c[i?'lineTo':'moveTo'](cx+q[0],cy+q[1]); }); c.closePath(); c.fillStyle=col; c.fill(); c.restore(); }
+  face([[-k,-.5*s],[0,0],[0,s],[-k,.5*s]],'#5D69F0',-120,40,pL);
+  face([[0,0],[k,-.5*s],[k,.5*s],[0,s]],'#3C44AE',120,40,pR);
+  face([[0,-s],[k,-.5*s],[0,0],[-k,-.5*s]],'#B5BCF8',0,-140,pT);
+  /* the notch punches through, with a ring */
+  if(t>1.15){ var hp=axiomBack((t-1.15)/.35), h=.42*hp; c.beginPath(); c.moveTo(cx,cy-.5*s-.5*s*h); c.lineTo(cx+k*h,cy-.5*s); c.lineTo(cx,cy-.5*s+.5*s*h); c.lineTo(cx-k*h,cy-.5*s); c.closePath(); c.fillStyle='#0A0C1C'; c.fill();
+    var rp=Math.min(1,(t-1.15)/.6); if(rp<1){ c.strokeStyle='rgba(200,206,255,'+(.8*(1-rp))+')'; c.lineWidth=2; c.beginPath(); c.ellipse(cx,cy,30+90*rp,(30+90*rp)*.58,0,0,Math.PI*2); c.stroke(); } }
+  /* shine sweeping across the top */
+  if(t>1.5&&t<2.1&&!reduce){ var sp=(t-1.5)/.6; c.save(); c.beginPath(); c.moveTo(cx,cy-s); c.lineTo(cx+k,cy-.5*s); c.lineTo(cx,cy); c.lineTo(cx-k,cy-.5*s); c.closePath(); c.clip(); var sx=cx-k+2*k*sp; var sg=c.createLinearGradient(sx-20,0,sx+20,0); sg.addColorStop(0,'rgba(255,255,255,0)'); sg.addColorStop(.5,'rgba(255,255,255,.55)'); sg.addColorStop(1,'rgba(255,255,255,0)'); c.fillStyle=sg; c.fillRect(sx-20,cy-s,40,s*1.2); c.restore(); }
+  /* AXIOM, letter by letter, spacing settles */
+  var word='AXIOM', ty=cy+s+78; c.textAlign='center'; c.textBaseline='alphabetic';
+  c.font="800 50px 'Barlow Semi Condensed','Arial Narrow',sans-serif";
+  var sp2=10+16*(1-axiomEase((t-1.3)/.9)), widths=word.split('').map(function(ch){ return c.measureText(ch).width; }), tw=widths.reduce(function(a,b){ return a+b; },0)+sp2*(word.length-1), x0=cx-tw/2;
+  for(var i=0;i<word.length;i++){ var lt=(t-1.3-i*.09)/.35; if(lt>0){ c.save(); c.globalAlpha=c.globalAlpha*Math.min(1,lt); c.fillStyle='#FFFFFF'; c.textAlign='left'; c.fillText(word[i],x0,ty+(1-axiomEase(lt))*14); c.restore(); } x0+=widths[i]+sp2; }
+  if(t>1.9){ var ga=Math.min(1,(t-1.9)/.4); c.save(); c.globalAlpha=c.globalAlpha*ga; c.fillStyle='#8E95E8'; c.font="700 15px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; var gw='GAMES', gws=gw.split('').map(function(ch){ return c.measureText(ch).width; }), gs=13, gt=gws.reduce(function(a,b){ return a+b; },0)+gs*4, gx=cx-gt/2; c.textAlign='left'; for(var j=0;j<5;j++){ c.fillText(gw[j],gx,ty+34); gx+=gws[j]+gs; } c.restore(); }
+  c.restore();
+  if(t>.6&&t<AXI.dur-.5){ c.save(); c.globalAlpha=.35; c.fillStyle='#8E95E8'; c.font="600 11px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; c.textAlign='center'; c.fillText('tap to skip',Wd/2,Hd-22); c.restore(); }
+}
+/* a short chime for the logo, only when sound is allowed */
+function axiomChime(){
+  try{ var A=window.AudioContext||window.webkitAudioContext; if(!A) return; var ac=AXI.ac||(AXI.ac=new A()); if(ac.state!=='running') return;
+    var now=ac.currentTime, notes=[[0,523.25],[.14,659.25],[.28,783.99],[.46,1046.5]];
+    notes.forEach(function(n){ var o=ac.createOscillator(), g=ac.createGain(); o.type='sine'; o.frequency.value=n[1]; g.gain.setValueAtTime(0,now+n[0]); g.gain.linearRampToValueAtTime(.12,now+n[0]+.02); g.gain.exponentialRampToValueAtTime(.001,now+n[0]+1.2); o.connect(g); g.connect(ac.destination); o.start(now+n[0]); o.stop(now+n[0]+1.3); });
+  }catch(e){}
+}
+
 /* ================= loading screen ================= */
 var BOOT={t0:performance.now(),net:false,netAt:0,done:false,after:[],p:0,ord:null,paths:null,tip:''};
 var BOOT_TIPS=['Tap a colony on the Wasteland map to scout, talk or attack.','Every region you clear raises the Danger level, and the loot.','Tap a crop on any empty farm to plant every empty farm at once.','Supply chests arrive every 100 trophies after 650.','Clear every colony in a region and it is yours for good.','Buy more land from the Build menu to fit more buildings.'];
@@ -10714,12 +10817,13 @@ function bootNetDone(){ if(!BOOT.net){ BOOT.net=true; BOOT.netAt=performance.now
 function bootRR(c,a,b,w,h,r){ c.beginPath(); c.moveTo(a+r,b); c.arcTo(a+w,b,a+w,b+h,r); c.arcTo(a+w,b+h,a,b+h,r); c.arcTo(a,b+h,a,b,r); c.arcTo(a,b,a+w,b,r); c.closePath(); }
 function bootDraw(now){
   var el=document.getElementById('boot'), cvb=document.getElementById('bootCv'); if(!el||!cvb) return;
-  var t=(now-BOOT.t0)/1000, vw=window.innerWidth, vh=window.innerHeight, dpr=Math.min(2,window.devicePixelRatio||1);
+  var tAll=(now-BOOT.t0)/1000, t=tAll-AXI.dur, vw=window.innerWidth, vh=window.innerHeight, dpr=Math.min(2,window.devicePixelRatio||1);
   if(cvb.width!==Math.round(vw*dpr)||cvb.height!==Math.round(vh*dpr)){ cvb.width=Math.round(vw*dpr); cvb.height=Math.round(vh*dpr); }
   var c=cvb.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0);
   c.fillStyle='#0E0C08'; c.fillRect(0,0,vw,vh);
   var k=Math.min(vw/360,vh/640,1.6), ox=(vw-360*k)/2, oy=(vh-640*k)/2; c.save(); c.translate(ox,oy); c.scale(k,k);
   var Wd=360, Hd=640, TAU2=Math.PI*2;
+  if(t<0){ c.restore(); c.save(); c.scale(1,1); c.fillStyle='#0A0C1C'; c.fillRect(0,0,vw,vh); c.translate(ox,oy); c.scale(k,k); axiomIntro(c,tAll,Wd,Hd); c.restore(); if(!BOOT.done) requestAnimationFrame(bootDraw); return; }
   /* progress: creeps toward 90% while loading, then fills */
   var ready=bootReady(t), target=ready?1:.9*(1-Math.exp(-t/1.1));
   BOOT.p+= (target-BOOT.p)*Math.min(1,(ready?.16:.08)); if(ready&&BOOT.p>.995) BOOT.p=1;
@@ -10742,15 +10846,18 @@ function bootDraw(now){
   c.fillStyle='#EDE3CE'; c.font="700 18px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; c.fillText(p<1?(n+' of '+BOOT.ord.length+' regions have fallen'):'THE WORLD IS YOURS TO TAKE',Wd/2,by+42);
   c.fillStyle='#8F8470'; c.font="600 14px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; c.fillText(p>=1?BOOT_STAT[4]:BOOT_STAT[Math.min(3,Math.floor(p*4))],Wd/2,by+64);
   if(p>=1){ c.save(); c.globalAlpha=reduce?1:(.55+.45*Math.sin(t*4)); if(!reduce){ c.shadowColor='rgba(126,217,87,.6)'; c.shadowBlur=14; } c.fillStyle='#9EF06E'; c.font="28px 'Black Ops One',Impact,sans-serif"; c.fillText('TAP TO ENTER',Wd/2,by+112); c.restore(); }
-  c.textAlign='left'; c.fillStyle='#7ED957'; c.font="700 12px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; c.fillText('TIP',24,Hd-56);
+  c.textAlign='left'; c.fillStyle='#7ED957'; c.font="700 12px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; c.fillText('TIP',24,Hd-74);
   c.fillStyle='#CFC5B2'; c.font="600 14px 'Barlow Semi Condensed','Arial Narrow',sans-serif";
-  var words=BOOT.tip.split(' '), line='', yy=Hd-38; words.forEach(function(w){ var tt=line?line+' '+w:w; if(c.measureText(tt).width>Wd-48){ c.fillText(line,24,yy); yy+=17; line=w; } else line=tt; }); c.fillText(line,24,yy);
+  var words=BOOT.tip.split(' '), line='', yy=Hd-56; words.forEach(function(w){ var tt=line?line+' '+w:w; if(c.measureText(tt).width>Wd-48){ c.fillText(line,24,yy); yy+=17; line=w; } else line=tt; }); c.fillText(line,24,yy);
   c.textAlign='right'; c.fillStyle='rgba(237,227,206,.4)'; c.font="600 12px 'Barlow Semi Condensed','Arial Narrow',sans-serif"; c.fillText('v'+GAME_VERSION_NAME,Wd-12,Hd-10);
   c.restore();
+  c.save(); var kb=Math.min(k*1.15,1.5), sab=Math.max(0,(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0)); c.translate(ox,Math.max(oy+(Hd-8)*k,vh-16-sab)); c.scale(kb,kb); axiomBadge(c,20,0,.92); c.restore();
+  if(t<.45){ c.save(); c.globalAlpha=1-t/.45; c.fillStyle='#0A0C1C'; c.fillRect(0,0,vw,vh); c.restore(); }
   if(p>=1&&!BOOT.tap){ BOOT.tap=true; bootTapArm(); }
   if(!BOOT.done) requestAnimationFrame(bootDraw);
 }
 function bootReady(t){
+  if(t<0) return false;
   if(t>7) return true;                 /* never keep anyone waiting longer than this */
   if(t<2.1) return false;              /* long enough to see it */
   if(ovOpen) return true;              /* a sign-in or pick-a-world screen needs the player */
@@ -10769,6 +10876,9 @@ function bootStart(){
   BOOT.tip=BOOT_TIPS[Math.floor(Math.random()*BOOT_TIPS.length)];
   var tx=document.getElementById('bootTxt'); if(tx) tx.style.display='none';
   if(!(typeof MP!=='undefined'&&MP&&MP.sb)) bootNetDone();
+  var skipI=function(){ var tA=(performance.now()-BOOT.t0)/1000; if(tA<AXI.dur-.5) BOOT.t0=performance.now()-(AXI.dur-.45)*1000; };
+  var el0=document.getElementById('boot'); if(el0) el0.addEventListener('pointerdown',skipI);
+  setTimeout(axiomChime,1150);
   requestAnimationFrame(bootDraw);
 }
 (function boot(){
