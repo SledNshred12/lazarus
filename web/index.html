@@ -341,6 +341,48 @@ html.inbattle header.top{display:none}
 .mpcard{border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .mpcard .t{font-weight:800;font-size:19px}.mpcard .s{color:var(--ink-2);font-size:14px;line-height:1.35}
 .mpcard .btns{margin-top:4px}
+.sm{margin:-18px;display:flex;flex-direction:column}
+.smhero{position:relative;background:radial-gradient(circle at 50% 115%,rgba(111,184,220,.22),transparent 62%),linear-gradient(160deg,#141D23,#090D10);min-height:172px;display:flex;flex-direction:column;justify-content:flex-end;color:#F3EAD3}
+.smheroc{padding:0 18px 16px}
+.smkick{font-size:11.5px;font-weight:800;letter-spacing:.14em;color:#6FB8DC;text-transform:uppercase}
+.smttl{font-family:var(--font-display);font-size:27px;line-height:1.06;margin-top:5px;color:#F3EAD3}
+.smsubt{font-size:13.5px;color:#BDB29A;margin-top:6px;line-height:1.32}
+.smb{padding:14px 18px 20px;display:flex;flex-direction:column;gap:14px}
+.smgo{width:100%;justify-content:center;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.smnow{border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;padding:12px 14px;background:var(--surface)}
+.smnowk{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.smnowt{font-weight:800;font-size:18px;margin-top:2px}
+.smnowd{color:var(--ink-2);font-size:14px;line-height:1.35;margin-top:3px}
+.smbar{height:9px;border-radius:5px;background:var(--surface-2);margin-top:10px;overflow:hidden}
+.smbar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.smnowp{font-size:12px;color:var(--ink-2);margin-top:4px;font-variant-numeric:tabular-nums}
+.smhd{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.smlist{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.smrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.smrow:last-child{border-bottom:0}
+.smrow.lock{opacity:.45}
+.smrow.now{background:rgba(120,170,60,.12)}
+.smn{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--surface-2);color:var(--ink-2)}
+.smrow.done .smn,.smrow.now .smn{background:var(--accent);color:var(--accent-ink)}
+.smrt{flex:1;min-width:0}.smrt b{display:block;font-size:15px}
+.smrt span{font-size:12.5px;color:var(--ink-2)}
+.smtag{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.smscn{display:flex;gap:8px;flex-wrap:wrap}
+.smscb{display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--line);border-bottom-width:3px;border-radius:12px;background:var(--surface);color:var(--ink);font:700 13px var(--font-body);cursor:pointer}
+.smscb svg{width:15px;height:15px;fill:currentColor;stroke:none}
+.smck{display:flex;flex-direction:column;gap:6px}
+.smckr{padding:8px 11px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0;font-size:13.5px}
+.smnote{font-size:12.5px;color:var(--ink-2);line-height:1.4;margin:0}
+.smsay{display:flex;flex-direction:column;gap:10px}
+.smsayh{display:flex;align-items:center;gap:11px}
+.smport{flex:none;border:2px solid;border-radius:50%;display:grid;place-items:center;background:var(--surface-2)}
+.smport svg{width:62%;height:62%}
+.smsayn{font-weight:800;font-size:17px;line-height:1.1}
+.smsayr{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--ink-2)}
+.smsayt{margin:0;font-size:15.5px;line-height:1.45}
+.smsayk{margin:0;font-size:12.5px;font-style:italic;color:var(--ink-2)}
+.smopts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.smopt{justify-content:flex-start;text-align:left;font-weight:700}
 .dp{margin:-18px;display:flex;flex-direction:column}
 .dphero{position:relative;background:radial-gradient(circle at 50% 85%,rgba(126,217,87,.16),transparent 60%),#1B1915;background-size:cover;background-position:center;background-repeat:no-repeat;min-height:130px}
 .dphero.col{aspect-ratio:360/250;min-height:0}
@@ -613,7 +655,7 @@ html:not(.inbattle) #bBonus{display:none!important}
 <div id="boot" style="position:fixed;inset:0;z-index:60;background:#0E0C08;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease"><canvas id="bootCv" style="position:absolute;inset:0;width:100%;height:100%"></canvas><div id="bootTxt" style="position:relative;color:#EDE3CE;font:56px 'Black Ops One',Impact,sans-serif;text-shadow:0 0 18px rgba(126,217,87,.55)">LAZARUS</div></div>
 <div class="wrap">
   <header class="top">
-    <div class="titlerow"><div class="brand"><img class="logo" src="data:image/png;base64,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" alt="" width="32" height="32"><h1>Lazarus</h1></div><div class="hbtns"><button class="bell" id="hSet" data-act="settings" type="button" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="bell" id="hMusic" data-act="music" type="button" aria-label="Music" title="Music"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button><button class="bell" id="hBell" data-act="bell" type="button" aria-label="Notifications" title="Notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="rdot" hidden></span></button><button class="acct" id="hAcct" data-ov="mp" data-do="acct" type="button" hidden>Sign in</button></div></div>
+    <div class="titlerow"><div class="brand"><img class="logo" src="data:image/png;base64,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" alt="" width="32" height="32"><h1>Lazarus</h1></div><div class="hbtns"><button class="bell" id="hSet" data-act="settings" type="button" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="bell" id="hMusic" data-act="music" type="button" aria-label="Music" title="Music"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button><button class="bell" id="hStory" data-act="story" type="button" aria-label="Story" title="Story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.6A1.6 1.6 0 0 1 5.6 3H11v16.4H5.6A1.6 1.6 0 0 0 4 21z"/><path d="M20 4.6A1.6 1.6 0 0 0 18.4 3H13v16.4h5.4A1.6 1.6 0 0 1 20 21z"/></svg><span class="rdot" id="smDot" hidden></span></button><button class="bell" id="hBell" data-act="bell" type="button" aria-label="Notifications" title="Notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="rdot" hidden></span></button><button class="acct" id="hAcct" data-ov="mp" data-do="acct" type="button" hidden>Sign in</button></div></div>
     <div class="chips">
       <div class="chip" title="Credits">
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="#E0AE2E" stroke="#8F6200" stroke-width="1.5"/><circle cx="9" cy="9" r="4.2" fill="none" stroke="#8F6200" stroke-width="1.4"/></svg>
@@ -3326,8 +3368,8 @@ function earthPanel0(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=113;
-var CHANGELOG=[{"v": 113, "name": "0.79.0", "d": "Nov 8, 2026", "items": ["New Play multiplayer button on your Account screen. It takes you to your clan, or lets you pick a friend to challenge to a war. You need to be signed in with a username."]},{"v": 112, "name": "0.78.6", "d": "Nov 8, 2026", "items": ["Profiles now show the whole colony across the top, with the picture and name sitting on its corner. This goes for other players and for your own Account screen."]},{"v": 111, "name": "0.78.5", "d": "Nov 8, 2026", "items": ["Your Account screen (tap your picture) now looks like a profile: a big picture at the top, your trophies in a row, your league, and an overview of your colony. Everything it had before is still there."]},{"v": 110, "name": "0.78.4", "d": "Nov 8, 2026", "items": ["Player profiles have a new look: a big picture at the top, your stats in a row, and an overview of your colony, record and achievements.", "Your colony now sits on a thick slab of ground with a shadow underneath, and buildings cast a softer, longer shadow.", "New How to play topic: Weather and storms. Tap the forecast badge to open it.", "Deleting your account now also removes your profile picture from the device."]},{"v": 109, "name": "0.78.3", "d": "Nov 7, 2026", "items": ["Rats and dogs now run around buildings instead of over them, and go behind buildings that are in front of them.", "Picking a support no longer jumps the raid window back to the top.", "Friend requests now show up under the bell. Accept or decline them right there.", "The bell gets a red dot when someone sends you a friend request."]},{"v": 108, "name": "0.78.2", "d": "Nov 7, 2026", "items": ["The Axiom Games intro now plays its own theme music. Tap to start, then sit back.", "The intro animation matches the original Axiom Games intro.", "No more TAP TO ENTER. The game opens on its own once it has loaded."]},{"v": 107, "name": "0.78.1", "d": "Nov 7, 2026", "items": ["The Drone Bay is now a launch tower that grows with every level.", "The Drone Bay and Kennel now go up to level 20. Higher levels hold more and make drones and animals faster and stronger.", "Axiom Games intro when the game starts, and the Axiom logo on the loading screen."]},{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=114;
+var CHANGELOG=[{"v": 114, "name": "0.80.0", "d": "Nov 8, 2026", "items": ["Story mode. Tap the book at the top of the screen to open The Lazarus Files: who you are, who woke you up, and why anyone would do that to a person.", "Chapter one is playable now. Objectives are things you were going to do anyway, and the choices you make are remembered.", "Animated scenes play inside the game, in the game's own style."]},{"v": 113, "name": "0.79.0", "d": "Nov 8, 2026", "items": ["New Play multiplayer button on your Account screen. It takes you to your clan, or lets you pick a friend to challenge to a war. You need to be signed in with a username."]},{"v": 112, "name": "0.78.6", "d": "Nov 8, 2026", "items": ["Profiles now show the whole colony across the top, with the picture and name sitting on its corner. This goes for other players and for your own Account screen."]},{"v": 111, "name": "0.78.5", "d": "Nov 8, 2026", "items": ["Your Account screen (tap your picture) now looks like a profile: a big picture at the top, your trophies in a row, your league, and an overview of your colony. Everything it had before is still there."]},{"v": 110, "name": "0.78.4", "d": "Nov 8, 2026", "items": ["Player profiles have a new look: a big picture at the top, your stats in a row, and an overview of your colony, record and achievements.", "Your colony now sits on a thick slab of ground with a shadow underneath, and buildings cast a softer, longer shadow.", "New How to play topic: Weather and storms. Tap the forecast badge to open it.", "Deleting your account now also removes your profile picture from the device."]},{"v": 109, "name": "0.78.3", "d": "Nov 7, 2026", "items": ["Rats and dogs now run around buildings instead of over them, and go behind buildings that are in front of them.", "Picking a support no longer jumps the raid window back to the top.", "Friend requests now show up under the bell. Accept or decline them right there.", "The bell gets a red dot when someone sends you a friend request."]},{"v": 108, "name": "0.78.2", "d": "Nov 7, 2026", "items": ["The Axiom Games intro now plays its own theme music. Tap to start, then sit back.", "The intro animation matches the original Axiom Games intro.", "No more TAP TO ENTER. The game opens on its own once it has loaded."]},{"v": 107, "name": "0.78.1", "d": "Nov 7, 2026", "items": ["The Drone Bay is now a launch tower that grows with every level.", "The Drone Bay and Kennel now go up to level 20. Higher levels hold more and make drones and animals faster and stronger.", "Axiom Games intro when the game starts, and the Axiom logo on the loading screen."]},{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -3866,6 +3908,11 @@ document.addEventListener('click',function(e){
     else if(act==='bossshow') bossShow();
     else if(act==='seeds') doBuySeeds(el.getAttribute('data-crop'),+el.getAttribute('data-n'));
     else if(act==='bell') bellOpen();
+    else if(act==='story') smOpen();
+    else if(act==='smgo') smStep();
+    else if(act==='smok') smOk();
+    else if(act==='smpick') smPick(+el.getAttribute('data-i'));
+    else if(act==='smsc') smPlay(el.getAttribute('data-sc'),function(){ smOpen(); });
     else if(act==='tut') tutOpen();
     else if(act==='tutsec') tutSec(el.getAttribute('data-k'),0);
     else if(act==='ach') achOpen();
@@ -6990,6 +7037,7 @@ function achBattle(win,stars){
 /* things the game is quietly watching, every couple of seconds */
 var ACHP={at:0,blz:false};
 function achPoll(){
+  try{ smPoll(); }catch(e){}
   if(!S||!S.world) return; var now=Date.now(); if(now-ACHP.at<2000) return; try{ pfpSync(); missDot(); }catch(e){}
   var el=ACHP.at?Math.min(10,(now-ACHP.at)/1000):0; ACHP.at=now;
   var a=achS(), n=a.n, f=a.f;
@@ -10810,6 +10858,551 @@ function bossCrumbDraw(b,time){
   return true;
 }
 
+/* ================= story mode: The Lazarus Files (0.80.0) =================
+   State lives in S.story (loaded by the catch-all in load()).
+   SMS() is the accessor; SMD holds the chapters; smPoll() is driven from achPoll().
+   Scenes are drawn on the CINE canvas in the 360x640 space, like the Axiom intro. */
+var SM={pend:null,open:false,tab:null};
+function SMS(){
+  if(!S) return {ch:1,mi:0,b:null,ck:{},kt:0,vt:0,seen:{},said:{},done:[],started:0};
+  if(!S.story||typeof S.story!=='object') S.story={ch:1,mi:0,b:null,ck:{},kt:0,vt:0,seen:{},said:{},done:[],started:0};
+  var s=S.story;
+  if(typeof s.ch!=='number') s.ch=1; if(typeof s.mi!=='number') s.mi=0;
+  if(!s.ck||typeof s.ck!=='object') s.ck={}; if(!s.seen||typeof s.seen!=='object') s.seen={};
+  if(!s.said||typeof s.said!=='object') s.said={}; if(!Array.isArray(s.done)) s.done=[];
+  if(typeof s.kt!=='number') s.kt=0; if(typeof s.vt!=='number') s.vt=0;
+  return s;
+}
+var SMCAST={
+  cole:{n:'Cole Wren',c:'#CFC5B2',i:'<circle cx="12" cy="8.6" r="3.9"/><path d="M4.6 21c0-4.1 3.3-6.6 7.4-6.6s7.4 2.5 7.4 6.6"/>'},
+  kes:{n:'Dr. Kessler',c:'#6FB8DC',i:'<circle cx="12" cy="8.2" r="3.7"/><path d="M4.8 21c0-4 3.2-6.4 7.2-6.4s7.2 2.4 7.2 6.4"/><path d="M8.2 7.4h7.6"/>'},
+  van:{n:'Cmdr. Vance',c:'#E0A03A',i:'<path d="M5 10.5h14l-1.4-3.2a2 2 0 0 0-1.8-1.2H8.2a2 2 0 0 0-1.8 1.2z"/><path d="M3.4 12.6h17.2"/><path d="M6 21c0-3.6 2.7-5.8 6-5.8s6 2.2 6 5.8"/>'},
+  dri:{n:'The drifter',c:'#A6CC3A',i:'<path d="M12 3.4c-4 0-6.4 3-6.4 7.2 0 1.4.3 2.6.8 3.6"/><path d="M12 3.4c4 0 6.4 3 6.4 7.2 0 1.4-.3 2.6-.8 3.6"/><path d="M6.4 14.2c0 3.9 2.5 6.8 5.6 6.8s5.6-2.9 5.6-6.8"/>'},
+  nar:{n:'',c:'#8F8470',i:''}
+};
+/* chapters. Missions use a goal: k = counter, n = how many since the mission opened.
+   Counters: built, mut, win, exped, boss, scene (watching a scene finishes it). */
+var SMD=[
+  {k:'wake',t:'Wake Up',s:'You do not remember your name.',
+   open:'k1',
+   ms:[{k:'w1',t:'Open your eyes',d:'Watch where you woke up.',g:{k:'scene',sc:'pod'}},
+       {k:'w2',t:'Get on your feet',d:'Put up two buildings.',g:{k:'built',n:2},say:'k2'},
+       {k:'w3',t:'Give it teeth',d:'Mutate your strain once in the Virus lab.',g:{k:'mut',n:1},say:'k3'},
+       {k:'w4',t:'First blood',d:'Win an outbreak against a settlement.',g:{k:'win',n:1},say:'k4'}],
+   end:'k5',ask:'crane',pay:{cr:20000,fd:400}},
+  {k:'scav',t:'Scavengers',s:'Her notes are still out there.',ms:[]},
+  {k:'rem',t:'The Remnant',s:'Someone is hunting you.',ms:[]},
+  {k:'zero',t:'Ground Zero',s:'Where it all started.',ms:[]},
+  {k:'fort',t:'The Black Fortress',s:'One of them is telling the truth.',ms:[]}
+];
+/* radio messages. who, lines (one per tap-through is overkill: all lines in one card). */
+var SMSAY={
+  k1:{w:'kes',t:['If you can hear me, do not try to stand yet.','The pod kept you under for a long time. Your legs will take a minute.','I am Elena Kessler. I put you in there. I am going to get you out.']},
+  k2:{w:'kes',t:['Walls first, questions later.','There is a hall at the centre of that plot and not much else. Build. Anything.','Shelter buys you time, and time is the only thing I can still get you.']},
+  k3:{w:'kes',t:['The samples in your blood are not dormant.','Take them to the lab and push one. Change a trait, any trait, and see what it does.','I know how that sounds. Do it anyway.']},
+  k4:{w:'kes',t:['There is a settlement east of you.','They will not open the gate for a stranger and they will not share.','Release a strain. Take what you need. I will not pretend that is kind.']},
+  k5:{w:'kes',t:['You did it. You are standing, and you are fed, and you are dangerous.','I need to ask you something, and you can lie to me if you want to.','When you came out of the pod you were holding something.']}
+};
+/* the small choices. Each records into SMS().ck and nudges trust. */
+var SMASK={
+  crane:{w:'kes',t:['When you came out of the pod you were holding something. What was it?'],
+    o:[{v:'tell',t:'Tell her: a paper crane',k:1,r:'A crane. Folded small, worn soft at the wings. Somebody made that for you, or you made it for somebody.'},
+       {v:'keep',t:'Say it was nothing',k:-1,r:'Nothing. All right. Keep your nothing, Cole. Everyone out here keeps one.'}]}
+};
+/* ---------- state helpers ---------- */
+function smChD(){ var s=SMS(); return SMD[Math.max(0,Math.min(SMD.length-1,s.ch-1))]; }
+function smMsD(){ var c=smChD(), s=SMS(); return c.ms[s.mi]||null; }
+function smCnt(k){
+  try{
+    var a=achS();
+    if(k==='built') return a.n.built||0;
+    if(k==='mut') return a.n.mut||0;
+    if(k==='exped') return a.n.exped||0;
+  }catch(e){}
+  if(k==='win') return S.wins||0;
+  if(k==='boss') return S.bossWins||0;
+  return 0;
+}
+function smSnap(){ var s=SMS(); s.b={built:smCnt('built'),mut:smCnt('mut'),win:smCnt('win'),exped:smCnt('exped'),boss:smCnt('boss')}; }
+function smProg(){
+  var m=smMsD(), s=SMS(); if(!m) return {p:0,n:1};
+  if(m.g.k==='scene') return {p:s.seen[m.g.sc]?1:0,n:1};
+  var b=(s.b&&s.b[m.g.k])||0, n=m.g.n||1;
+  return {p:Math.max(0,Math.min(n,smCnt(m.g.k)-b)),n:n};
+}
+function smLive(){ var s=SMS(); return !!s.started&&s.ch<=SMD.length&&(smChD().ms.length>0||s.mi>0); }
+function smReady(){ /* something waiting for the player */
+  var s=SMS(); if(!s.started) return true; if(SM.pend) return true;
+  var m=smMsD(); if(!m) return false; var p=smProg(); return p.p>=p.n;
+}
+function smDot(){ var d=document.getElementById('smDot'); if(!d) return; var on=smReady(); if(d.hidden===on) d.hidden=!on; }
+/* ---------- the engine ---------- */
+function smPoll(){
+  if(!S) return; var s=SMS();
+  if(!s.started){ smDot(); return; }
+  var m=smMsD(); if(!m){ SM.pend=null; smDot(); return; }
+  var p=smProg(), ready=p.p>=p.n;
+  if(!ready){ SM.pend=null; SM.shown=0; smDot(); return; }
+  SM.pend=1; smDot();
+  if(CINE.on) return;
+  if(ovOpen){ /* the journal is open: refresh it once so the button appears */
+    try{ if(document.querySelector('#ovCard .sm')&&!SM.shown){ SM.shown=1; smOpen(); } }catch(e){}
+    return;
+  }
+  SM.shown=0;
+  if(typeof mode!=='undefined'&&mode!=='home') return;
+  smStep();
+}
+/* move the story on by one beat. Safe to call any time. */
+function smStep(){
+  var s=SMS();
+  if(!s.started){ s.started=1; s.ch=1; s.mi=0; smSnap(); save(); var c0=SMD[0];
+    smPlay('pod',function(){ s.seen.pod=1; save(); smSay(c0.open,function(){ smNext(); }); }); return; }
+  var c=smChD(), m=smMsD();
+  if(!m){ smOpen(); return; }
+  var p=smProg(); if(p.p<p.n){ smOpen(); return; }
+  SM.pend=null; smNext();
+}
+/* current mission is done: bank it and open the next one */
+function smNext(){
+  var s=SMS(), c=smChD(), m=c.ms[s.mi];
+  if(m){ if(s.done.indexOf(c.k+'/'+m.k)<0) s.done.push(c.k+'/'+m.k); s.mi++; }
+  SM.pend=null;
+  var nx=c.ms[s.mi];
+  if(nx){ smSnap(); save(); smDot();
+    if(nx.say) smSay(nx.say,function(){ smOpen(); }); else smOpen();
+    return;
+  }
+  /* chapter over */
+  s.mi=c.ms.length; save();
+  function fin(){
+    if(c.pay){ var mul=1+Math.min(3,(S.peak||0)/1500), cr=Math.round(c.pay.cr*mul), fd=c.pay.fd;
+      S.credits+=cr; S.food+=fd; toast('Chapter complete. +'+fmt(cr)+' credits, +'+fd+' food'); }
+    s.ch++; s.mi=0; smSnap(); save(); smDot();
+    try{ renderAll(); }catch(e){}
+    smOpen();
+  }
+  if(c.end) smSay(c.end,function(){ if(c.ask) smAsk(c.ask,fin); else fin(); });
+  else if(c.ask) smAsk(c.ask,fin);
+  else fin();
+}
+/* ---------- radio messages ---------- */
+function smPort(w,sz){
+  var p=SMCAST[w]||SMCAST.nar; sz=sz||56;
+  if(!p.i) return '';
+  return '<span class="smport" style="width:'+sz+'px;height:'+sz+'px;border-color:'+p.c+'">'+
+    '<svg viewBox="0 0 24 24" fill="none" stroke="'+p.c+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p.i+'</svg></span>';
+}
+function smSay(id,then){
+  var d=SMSAY[id]; if(!d){ if(then) then(); return; }
+  var s=SMS(); s.said[id]=1; save();
+  SM.after=then||null;
+  var p=SMCAST[d.w]||SMCAST.nar;
+  var h='<div class="smsay"><div class="smsayh">'+smPort(d.w)+'<div><div class="smsayn" style="color:'+p.c+'">'+esc(p.n)+'</div><div class="smsayr">RADIO</div></div></div>';
+  d.t.forEach(function(ln){ h+='<p class="smsayt">'+esc(ln)+'</p>'; });
+  h+='<div class="btns"><button class="btn primary" data-act="smok" type="button">Continue</button></div></div>';
+  showOverlay(h);
+}
+function smAsk(id,then){
+  var d=SMASK[id]; if(!d){ if(then) then(); return; }
+  SM.after=then||null; SM.ask=id;
+  var p=SMCAST[d.w]||SMCAST.nar;
+  var h='<div class="smsay"><div class="smsayh">'+smPort(d.w)+'<div><div class="smsayn" style="color:'+p.c+'">'+esc(p.n)+'</div><div class="smsayr">RADIO</div></div></div>';
+  d.t.forEach(function(ln){ h+='<p class="smsayt">'+esc(ln)+'</p>'; });
+  h+='<div class="smopts">';
+  d.o.forEach(function(o,i){ h+='<button class="btn smopt" data-act="smpick" data-i="'+i+'" type="button">'+esc(o.t)+'</button>'; });
+  h+='</div></div>';
+  showOverlay(h);
+}
+function smPick(i){
+  var id=SM.ask, d=SMASK[id]; if(!d) return; var o=d.o[i]; if(!o) return;
+  var s=SMS(); s.ck[id]=o.v; s.kt+=(o.k||0); s.vt+=(o.v2||0); save(); SM.ask=null;
+  var p=SMCAST[d.w]||SMCAST.nar, then=SM.after; SM.after=null;
+  var h='<div class="smsay"><div class="smsayh">'+smPort(d.w)+'<div><div class="smsayn" style="color:'+p.c+'">'+esc(p.n)+'</div><div class="smsayr">RADIO</div></div></div>'+
+    '<p class="smsayt">'+esc(o.r)+'</p><p class="smsayk">She will remember this.</p>'+
+    '<div class="btns"><button class="btn primary" data-act="smok" type="button">Continue</button></div></div>';
+  SM.after=then; showOverlay(h);
+}
+function smOk(){ var then=SM.after; SM.after=null; hideOverlay(); if(then) setTimeout(then,160); }
+/* ---------- the journal ---------- */
+function smOpen(tab){
+  if(tab) SM.tab=tab;
+  var s=SMS();
+  if(!s.started){ showOverlay(smIntroHtml()); return; }
+  showOverlay(smHtml());
+}
+function smIntroHtml(){
+  return '<div class="sm"><div class="smhero"><div class="dptop"><span class="dptitle">Story</span>'+
+    '<button class="dpx" data-ov="close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
+    '<div class="smheroc"><div class="smkick">A story for one</div><div class="smttl">THE LAZARUS FILES</div>'+
+    '<div class="smsubt">You woke up in a box with no name and no memory. Somebody on the radio knows both.</div></div></div>'+
+    '<div class="smb"><p class="smnote">The story runs alongside your colony. Objectives are things you were going to do anyway, and your choices are remembered.</p>'+
+    '<div class="btns"><button class="btn primary smgo" data-act="smgo" type="button">Begin</button></div></div></div>';
+}
+function smHtml(){
+  var s=SMS(), c=smChD(), m=smMsD(), p=smProg(), done=!m;
+  var h='<div class="sm"><div class="smhero"><div class="dptop"><span class="dptitle">Story</span>'+
+    '<button class="dpx" data-ov="close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
+    '<div class="smheroc"><div class="smkick">THE LAZARUS FILES</div><div class="smttl">'+esc(c.t.toUpperCase())+'</div>'+
+    '<div class="smsubt">Chapter '+Math.min(s.ch,SMD.length)+' of '+SMD.length+' · '+esc(c.s)+'</div></div></div><div class="smb">';
+  /* the live objective */
+  if(m){
+    var pct=Math.round(100*Math.min(1,p.p/p.n));
+    h+='<div class="smnow"><div class="smnowk">Now</div><div class="smnowt">'+esc(m.t)+'</div><div class="smnowd">'+esc(m.d)+'</div>';
+    if(m.g.k!=='scene') h+='<div class="smbar"><i style="width:'+pct+'%"></i></div><div class="smnowp">'+p.p+' of '+p.n+'</div>';
+    h+='</div>';
+    if(p.p>=p.n) h+='<div class="btns"><button class="btn primary smgo" data-act="smgo" type="button">Continue the story</button></div>';
+    else if(m.g.k==='scene') h+='<div class="btns"><button class="btn primary smgo" data-act="smsc" data-sc="'+esc(m.g.sc)+'" type="button">Watch</button></div>';
+  } else if(s.ch>SMD.length){
+    h+='<div class="smnow"><div class="smnowk">The end</div><div class="smnowt">You made your choice.</div><div class="smnowd">The files are closed.</div></div>';
+  } else {
+    h+='<div class="smnow"><div class="smnowk">Next</div><div class="smnowt">'+esc(c.t)+'</div>'+
+       '<div class="smnowd">This chapter is still being written. Your colony keeps going in the meantime.</div></div>';
+  }
+  /* chapters */
+  h+='<div class="smhd">Chapters</div><div class="smlist">';
+  SMD.forEach(function(cc,i){
+    var st=i+1<s.ch?'done':(i+1===s.ch?'now':'lock');
+    h+='<div class="smrow '+st+'"><span class="smn">'+(i+1)+'</span><div class="smrt"><b>'+esc(st==='lock'?cc.t:cc.t)+'</b>'+
+       '<span>'+esc(st==='lock'?'Locked':cc.s)+'</span></div>'+
+       '<span class="smtag">'+(st==='done'?'Done':st==='now'?'Here':'')+'</span></div>';
+  });
+  h+='</div>';
+  /* scenes you have watched */
+  var sc=[]; for(var k in SMSCN){ if(s.seen[k]) sc.push(k); }
+  if(sc.length){
+    h+='<div class="smhd">Scenes</div><div class="smscn">';
+    sc.forEach(function(k){ h+='<button class="smscb" data-act="smsc" data-sc="'+esc(k)+'" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5.5v13l11-6.5z"/></svg><span>'+esc(SMSCN[k].t)+'</span></button>'; });
+    h+='</div>';
+  }
+  /* choices */
+  var ck=[]; for(var ak in s.ck){ if(SMASK[ak]){ var o=null; SMASK[ak].o.forEach(function(x){ if(x.v===s.ck[ak]) o=x; }); if(o) ck.push([ak,o]); } }
+  if(ck.length){
+    h+='<div class="smhd">What you chose</div><div class="smck">';
+    ck.forEach(function(e){ h+='<div class="smckr"><b>'+esc(e[1].t)+'</b></div>'; });
+    h+='</div>';
+  }
+  h+='<p class="smnote">Objectives are things you were going to do anyway. Choices are remembered, and the last one decides how it ends.</p>';
+  h+='</div></div>';
+  return h;
+}
+/* ---------- scene player ---------- */
+var SMSCN={
+  pod:{t:'Waking up',dur:16.4,
+    l:[[1.5,3.4,'kes','If you can hear me, you are awake. Do not try to stand.'],
+       [5.2,3.6,'kes','Your name is Cole. Cole Wren. Mine is Elena Kessler.'],
+       [9.3,2.0,'cole','...how long?'],
+       [11.5,3.2,'kes','Long enough. Do not look at the sky yet.'],
+       [12.4,1.6,'nar','You do not remember folding it.']]}
+};
+function smPlay(id,then){
+  var d=SMSCN[id]; if(!d){ if(then) then(); return; }
+  var s=SMS(); s.seen[id]=1; save();
+  SM.scn=id;
+  cineOpen('story',{id:id},d.dur,function(){ smDot(); if(then) then(); });
+}
+/* drawn in the 360x640 space */
+function smScene(x,d,t){
+  var id=(d&&d.id)||'pod', SC=SMSCN[id]||SMSCN.pod, W=360,H=640;
+  x.fillStyle='#000'; x.fillRect(-600,-600,W+1200,H+1200);
+  x.save(); x.beginPath(); x.rect(0,0,W,H); x.clip();
+  var FD="'Black Ops One',Impact,sans-serif", FB="'Barlow Semi Condensed','Arial Narrow',sans-serif";
+  function cl(v,a,b){ return Math.max(a,Math.min(b,v)); }
+  function eo(p){ return 1-Math.pow(1-cl(p,0,1),3); }
+  function sm1(p){ p=cl(p,0,1); return p*p*(3-2*p); }
+  function fade(t0,len){ return cl((t-t0)/(len||.6),0,1); }
+  x.save();
+  if(id==='pod') smPod(x,t,W,H,cl,eo,sm1,fade);
+  x.restore();
+  /* letterbox + subtitles + skip */
+  smBars(x,t,W,H,cl);
+  smSubs(x,t,SC,W,H,cl,FB);
+  var endp=t>=SC.dur-.9;
+  x.globalAlpha=endp?(.55+.45*Math.sin(t*4)):(.32+.2*Math.sin(t*5));
+  x.fillStyle=endp?'#9EF06E':'#8F8470'; x.font=(endp?'700 13px ':'700 12px ')+FB; x.textAlign='center';
+  x.fillText(endp?'TAP TO CONTINUE':'TAP TO SKIP',W/2,H-16); x.globalAlpha=1;
+  x.restore();
+}
+function smBars(x,t,W,H,cl){
+  var a=cl(t/.5,0,1)*36;
+  x.fillStyle='#000'; x.fillRect(0,0,W,a); x.fillRect(0,H-a,W,a);
+}
+function smSubs(x,t,SC,W,H,cl,FB){
+  var cur=null; (SC.l||[]).forEach(function(l){ if(t>=l[0]&&t<l[0]+l[1]) cur=l; });
+  if(!cur) return;
+  var p=SMCAST[cur[2]]||SMCAST.nar, a=Math.min(1,Math.min((t-cur[0])/.3,(cur[0]+cur[1]-t)/.3));
+  x.save(); x.globalAlpha=cl(a,0,1);
+  x.font="600 16px "+FB; x.textAlign='center';
+  var words=String(cur[3]).split(' '), lines=[], line='';
+  words.forEach(function(w){ var tt=line?line+' '+w:w; if(x.measureText(tt).width>W-56){ lines.push(line); line=w; } else line=tt; });
+  if(line) lines.push(line);
+  var nmh=p.n?20:0, bh=lines.length*21+nmh+18, by=H-56-bh;
+  x.fillStyle='rgba(6,8,10,.72)'; x.fillRect(0,by,W,bh);
+  if(p.n){ x.fillStyle=p.c; x.font="700 11.5px "+FB; x.fillText(p.n.toUpperCase(),W/2,by+15); }
+  x.fillStyle='#EDE3CE'; x.font=(cur[2]==='nar'?"italic 600 15.5px ":"600 16px ")+FB;
+  if(cur[2]==='nar') x.fillStyle='#BDB29A';
+  lines.forEach(function(ln,i){ x.fillText(ln,W/2,by+nmh+18+i*21); });
+  x.restore();
+}
+/* the waking scene: four cuts. A wide, a closer, the hand, the title. */
+function smPod(x,t,W,H,cl,eo,sm1,fade){
+  var cut = t<7.0?0 : t<11.6?1 : t<14.1?2 : 3;
+  var ct = t - [0,7.0,11.6,14.1][cut];
+  x.fillStyle='#05080A'; x.fillRect(0,0,W,H);
+  if(cut===0) smPodWide(x,t,ct,W,H,cl,eo);
+  else if(cut===1) smPodNear(x,t,ct,W,H,cl,eo);
+  else if(cut===2) smPodHand(x,t,ct,W,H,cl,eo);
+  else smPodTitle(x,t,ct,W,H,cl,eo);
+  /* dust over everything but the title */
+  if(cut<3) for(var dn=0;dn<30;dn++){
+    var sp=.22+((dn%7)/7)*.5, dy=((t*sp*26+dn*41)%(H+60))-30, dx=((dn*83)%W)+Math.sin(t*.6+dn)*9;
+    x.fillStyle='rgba(225,235,240,'+(.05+.09*((dn%5)/5))+')';
+    x.beginPath(); x.arc(dx,dy,.8+(dn%3)*.5,0,Math.PI*2); x.fill();
+  }
+  /* vignette */
+  var vg=x.createRadialGradient(W/2,300,110,W/2,300,430);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.74)');
+  x.fillStyle=vg; x.fillRect(0,0,W,H);
+  /* cut to black between shots, and open on black */
+  var fin=cl(ct/.45,0,1); if(cut>0&&fin<1){ x.fillStyle='rgba(0,0,0,'+(1-fin)+')'; x.fillRect(0,0,W,H); }
+  if(t<1.1){ x.fillStyle='rgba(0,0,0,'+(1-cl(t/1.1,0,1))+')'; x.fillRect(0,0,W,H); }
+}
+/* shared bits */
+function smRoom(x,t,W,H,hz,sc){
+  /* floor plate and far wall */
+  var g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,'#070C0F'); g.addColorStop(.5,'#0A1115'); g.addColorStop(1,'#040708');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  x.strokeStyle='rgba(120,160,175,.055)'; x.lineWidth=1;
+  for(var i=-1;i<9;i++){ var px=-20+i*54; x.beginPath(); x.moveTo(px,0); x.lineTo(px,hz); x.stroke(); }
+  for(var j=0;j<5;j++){ var py=40+j*62; x.beginPath(); x.moveTo(0,py); x.lineTo(W,py); x.stroke(); }
+  /* floor in perspective */
+  x.fillStyle='#070B0D'; x.fillRect(0,hz,W,H-hz);
+  x.strokeStyle='rgba(120,160,175,.07)';
+  for(var k=1;k<9;k++){ var fy=hz+Math.pow(k/9,1.7)*(H-hz); x.beginPath(); x.moveTo(0,fy); x.lineTo(W,fy); x.stroke(); }
+  for(var m=-4;m<=4;m++){ x.beginPath(); x.moveTo(W/2+m*22,hz); x.lineTo(W/2+m*150,H); x.stroke(); }
+  /* pipes along the ceiling */
+  x.strokeStyle='rgba(90,120,132,.12)'; x.lineWidth=5;
+  x.beginPath(); x.moveTo(0,26); x.lineTo(W,26); x.stroke();
+  x.beginPath(); x.moveTo(0,40); x.lineTo(W,40); x.stroke();
+}
+/* a cryo pod. cx,by = centre and base. s = scale. open = 0..1 canopy lift. */
+function smPodArt(x,cx,by,s,open,glow,t,figure,cl){
+  var pw=100*s, ph=224*s, py=by-ph;
+  function cap(a,b,w,h,r){ x.beginPath(); x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r); x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath(); }
+  /* floor shadow */
+  x.fillStyle='rgba(0,0,0,.55)'; x.beginPath(); x.ellipse(cx,by+6*s,pw*.78,15*s,0,0,Math.PI*2); x.fill();
+  /* base block */
+  x.fillStyle='#151C21'; cap(cx-pw*.66,by-26*s,pw*1.32,30*s,6*s); x.fill();
+  x.strokeStyle='#2B363D'; x.lineWidth=2*s; x.stroke();
+  /* status lights on the base */
+  for(var L=0;L<3;L++){
+    var on=(Math.sin(t*2.4+L*1.8)>0);
+    x.fillStyle=L===0?(on?'#7ED957':'#20361f'):(L===1?(on?'#6FB8DC':'#1b2c35'):'#3a2a14');
+    x.beginPath(); x.arc(cx-pw*.44+L*13*s,by-11*s,3.1*s,0,Math.PI*2); x.fill();
+  }
+  /* side frame rails */
+  x.fillStyle='#192126';
+  cap(cx-pw/2-11*s,py-6*s,11*s,ph+6*s,4*s); x.fill();
+  cap(cx+pw/2,py-6*s,11*s,ph+6*s,4*s); x.fill();
+  x.strokeStyle='#2E3A41'; x.lineWidth=1.6*s;
+  cap(cx-pw/2-11*s,py-6*s,11*s,ph+6*s,4*s); x.stroke();
+  cap(cx+pw/2,py-6*s,11*s,ph+6*s,4*s); x.stroke();
+  /* rail bolts */
+  x.fillStyle='#39464E';
+  for(var r2=0;r2<5;r2++){ var ry=py+18*s+r2*((ph-30*s)/4);
+    x.beginPath(); x.arc(cx-pw/2-5.5*s,ry,2.2*s,0,Math.PI*2); x.fill();
+    x.beginPath(); x.arc(cx+pw/2+5.5*s,ry,2.2*s,0,Math.PI*2); x.fill(); }
+  /* chamber */
+  cap(cx-pw/2,py,pw,ph,pw*.30); x.fillStyle='#081013'; x.fill();
+  var ig=x.createRadialGradient(cx,py+ph*.46,6*s,cx,py+ph*.46,pw*1.05);
+  ig.addColorStop(0,'rgba(110,190,212,'+glow+')'); ig.addColorStop(1,'rgba(110,190,212,0)');
+  x.fillStyle=ig; x.fill();
+  /* the sleeper */
+  x.save(); cap(cx-pw/2,py,pw,ph,pw*.30); x.clip(); if(figure) figure(x,cx,py,pw,ph,s); x.restore();
+  /* glass, frost and sheen */
+  x.save(); cap(cx-pw/2,py,pw,ph,pw*.30); x.clip();
+  var fr=(1-open);
+  if(fr>.02){
+    x.strokeStyle='rgba(206,232,242,'+(.10*fr)+')'; x.lineWidth=.9*s;
+    for(var f=0;f<16;f++){
+      var side=(f%2?1:-1), fy2=py+10*s+((f*71)%(ph-20*s)), fx2=cx+side*(pw*.30+((f*13)%(pw*.18)));
+      var ln=(5+(f%4)*5)*s, an=side>0?-.5-((f%3)*.4):(-2.6+((f%3)*.4));
+      x.beginPath(); x.moveTo(fx2,fy2); x.lineTo(fx2+Math.cos(an)*ln,fy2+Math.sin(an)*ln); x.stroke();
+    }
+    var fg=x.createLinearGradient(cx-pw/2,0,cx+pw/2,0);
+    fg.addColorStop(0,'rgba(200,228,240,'+(.12*fr)+')'); fg.addColorStop(.5,'rgba(200,228,240,'+(.03*fr)+')'); fg.addColorStop(1,'rgba(200,228,240,'+(.12*fr)+')');
+    x.fillStyle=fg; x.fillRect(cx-pw/2,py,pw,ph);
+  }
+  x.fillStyle='rgba(255,255,255,.055)';
+  x.beginPath(); x.moveTo(cx-pw*.52,py+ph*.30); x.lineTo(cx-pw*.14,py); x.lineTo(cx+pw*.04,py); x.lineTo(cx-pw*.32,py+ph*.52); x.closePath(); x.fill();
+  x.restore();
+  /* chamber edge */
+  cap(cx-pw/2,py,pw,ph,pw*.30); x.strokeStyle='#38464E'; x.lineWidth=2.4*s; x.stroke();
+  /* the canopy: the glass panel slides up into the headpiece */
+  if(open>.001){
+    var rise=open*(ph*.80);
+    x.save();
+    x.beginPath(); x.rect(cx-pw/2-14*s,py-2*s,pw+28*s,ph+6*s); x.clip();
+    x.translate(0,-rise);
+    x.fillStyle='rgba(126,172,190,.15)'; cap(cx-pw/2+3*s,py+3*s,pw-6*s,ph-6*s,pw*.27); x.fill();
+    x.strokeStyle='rgba(138,188,208,.55)'; x.lineWidth=2.4*s; x.stroke();
+    x.fillStyle='rgba(255,255,255,.06)';
+    x.beginPath(); x.moveTo(cx-pw*.46,py+ph*.30); x.lineTo(cx-pw*.12,py+6*s); x.lineTo(cx+pw*.04,py+6*s); x.lineTo(cx-pw*.30,py+ph*.52); x.closePath(); x.fill();
+    /* grab bar across the bottom of the panel */
+    x.fillStyle='#2B363D'; cap(cx-pw*.30,py+ph-16*s,pw*.60,9*s,4*s); x.fill();
+    x.restore();
+    /* headpiece the panel slides into */
+    x.fillStyle='#1A2227'; cap(cx-pw/2-12*s,py-16*s,pw+24*s,20*s,5*s); x.fill();
+    x.strokeStyle='#303D45'; x.lineWidth=1.8*s; x.stroke();
+    /* vapour pouring out of the open mouth */
+    for(var v=0;v<18;v++){
+      var vp=((t*.42+v*.097)%1), vy=py+ph*.30-vp*96*s, vx=cx-pw*.46+((v*41)%(pw*.92))+Math.sin(t*1.4+v)*8*s;
+      x.fillStyle='rgba(196,226,238,'+(.15*(1-vp)*open)+')'; x.beginPath(); x.arc(vx,vy,(5+vp*17)*s,0,Math.PI*2); x.fill();
+    }
+  }
+}
+function smSleeper(slump,eyes,t){
+  return function(x,cx,py,pw,ph,s){
+    var hy=py+ph*.28+slump*14*s, hx=cx+slump*5*s, tilt=slump*.3;
+    /* torso: narrower at the shoulders, tapering down */
+    x.fillStyle='#0D1518';
+    x.beginPath();
+    x.moveTo(cx-pw*.30,py+ph);
+    x.lineTo(cx-pw*.27,hy+34*s);
+    x.quadraticCurveTo(cx-pw*.17,hy+24*s,hx-8*s,hy+22*s);
+    x.lineTo(hx+8*s,hy+22*s);
+    x.quadraticCurveTo(cx+pw*.17+slump*5*s,hy+24*s,cx+pw*.27+slump*4*s,hy+34*s);
+    x.lineTo(cx+pw*.30,py+ph); x.closePath(); x.fill();
+    /* neck */
+    x.beginPath(); x.rect(hx-5.5*s,hy+8*s,11*s,16*s); x.fill();
+    /* head */
+    x.save(); x.translate(hx,hy); x.rotate(tilt);
+    x.beginPath(); x.ellipse(0,0,13.5*s,16.5*s,0,0,Math.PI*2); x.fill();
+    /* jaw shade */
+    x.fillStyle='#0A1114'; x.beginPath(); x.ellipse(0,7*s,10*s,8*s,0,0,Math.PI*2); x.fill();
+    /* eyes */
+    if(eyes>.01){
+      x.fillStyle='rgba(196,238,248,'+(eyes*.92)+')';
+      x.beginPath(); x.ellipse(-5.2*s,-1.5*s,2.3*s,1.15*s,0,0,Math.PI*2); x.fill();
+      x.beginPath(); x.ellipse(5.2*s,-1.5*s,2.3*s,1.15*s,0,0,Math.PI*2); x.fill();
+    }
+    /* rim light down the left of the face */
+    x.globalAlpha=.55; x.strokeStyle='rgba(158,220,240,.85)'; x.lineWidth=1.4*s;
+    x.beginPath(); x.ellipse(0,0,13.8*s,16.8*s,0,2.1,4.3); x.stroke(); x.globalAlpha=1;
+    x.restore();
+    /* rim light along the shoulder */
+    x.save(); x.globalAlpha=.42; x.strokeStyle='rgba(158,220,240,.8)'; x.lineWidth=1.5*s;
+    x.beginPath(); x.moveTo(hx-8*s,hy+22*s); x.quadraticCurveTo(cx-pw*.17,hy+24*s,cx-pw*.27,hy+34*s);
+    x.lineTo(cx-pw*.30,py+ph); x.stroke(); x.restore();
+  };
+}
+/* cut 1: the room, pod shut, slow push in */
+function smPodWide(x,t,ct,W,H,cl,eo){
+  var p=eo(cl(ct/7.2,0,1)), z=1+p*.26;
+  smRoom(x,t,W,H,250);
+  x.save(); x.translate(W/2,330); x.scale(z,z); x.translate(-W/2,-330);
+  /* two dead pods behind */
+  [[70,300,.52],[292,300,.52]].forEach(function(q){
+    x.save(); x.globalAlpha=.42; smPodArt(x,q[0],q[1],q[2],0,.03,t,null,cl); x.restore();
+  });
+  var glow=.14+.07*Math.sin(t*2.1)+(t>3.2?.1:0);
+  smPodArt(x,W/2,430,1,0,glow,t,smSleeper(0,cl((t-3.4)/1.6,0,1),t),cl);
+  x.restore();
+  /* light shaft */
+  var sa=.07+.05*Math.sin(t*1.7)+(Math.sin(t*23)>.93?.06:0);
+  var sg=x.createLinearGradient(W/2,40,W/2,430); sg.addColorStop(0,'rgba(150,200,215,'+(sa+.1)+')'); sg.addColorStop(1,'rgba(150,200,215,0)');
+  x.fillStyle=sg; x.beginPath(); x.moveTo(W/2-22,40); x.lineTo(W/2+22,40); x.lineTo(W/2+96,436); x.lineTo(W/2-96,436); x.closePath(); x.fill();
+  if(t>1.3&&t<1.95) smStatic(x,W,t);
+}
+/* cut 2: closer, the canopy opens */
+function smPodNear(x,t,ct,W,H,cl,eo){
+  smRoom(x,t,W,H,210);
+  var open=eo(cl((ct-.5)/2.0,0,1)), slump=eo(cl((ct-1.4)/2.4,0,1));
+  var z=1.22+eo(cl(ct/4.4,0,1))*.10;
+  x.save(); x.translate(W/2,350); x.scale(z,z); x.translate(-W/2,-350);
+  smPodArt(x,W/2,470,1,open,.26+.08*Math.sin(t*2),t,smSleeper(slump,cl(1-(ct-1.0)/2.4,.25,1),t),cl);
+  x.restore();
+  if(ct>3.6&&ct<4.1) smStatic(x,W,t);
+}
+/* cut 3: a close-up of the crane, lying where it fell out of his hand */
+function smPodHand(x,t,ct,W,H,cl,eo){
+  var g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,'#070B0E'); g.addColorStop(.6,'#0B1013'); g.addColorStop(1,'#05080A');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  var cx=W/2, cy=350, o=eo(cl(ct/1.5,0,1)), z=1+eo(cl(ct/2.6,0,1))*.14;
+  /* warm light falling from the upper left */
+  var kg=x.createRadialGradient(cx-60,cy-130,10,cx-10,cy-20,300);
+  kg.addColorStop(0,'rgba(246,224,180,'+(.30*o)+')'); kg.addColorStop(.4,'rgba(214,184,138,'+(.11*o)+')'); kg.addColorStop(1,'rgba(214,184,138,0)');
+  x.fillStyle=kg; x.fillRect(0,0,W,H);
+  x.save(); x.translate(cx,cy); x.scale(z,z); x.translate(-cx,-cy);
+  /* the floor of the pod: a dark plate, lit where the crane sits */
+  var fy=cy+30;
+  x.fillStyle='#070C0F'; x.beginPath(); x.moveTo(-20,H); x.lineTo(70,fy); x.lineTo(W-70,fy); x.lineTo(W+20,H); x.closePath(); x.fill();
+  var fg=x.createLinearGradient(cx-110,fy,cx+90,fy+110);
+  fg.addColorStop(0,'rgba(244,220,172,'+(.16*o)+')'); fg.addColorStop(1,'rgba(244,220,172,0)');
+  x.fillStyle=fg; x.fill();
+  x.strokeStyle='rgba(150,190,205,.05)'; x.lineWidth=1;
+  x.beginPath(); x.moveTo(70,fy); x.lineTo(W-70,fy); x.stroke();
+  /* the crane's shadow */
+  x.save(); x.globalAlpha=.55*o; x.fillStyle='#060A0C';
+  x.beginPath(); x.ellipse(cx+6,cy+40,52,9,0,0,Math.PI*2); x.fill(); x.restore();
+  /* the crane */
+  x.save(); x.globalAlpha=o; smCrane(x,cx-6,cy+8,52,1); x.restore();
+  x.restore();
+  /* motes drifting through the light */
+  for(var d2=0;d2<18;d2++){
+    var mp=((t*.14+d2*.117)%1), mx=cx-130+((d2*73)%260), my=cy-170+mp*250;
+    x.fillStyle='rgba(248,230,190,'+(.16*(1-Math.abs(mp-.5)*2)*o)+')';
+    x.beginPath(); x.arc(mx,my,1+(d2%3)*.5,0,Math.PI*2); x.fill();
+  }
+}
+/* cut 4: the chapter card */
+function smPodTitle(x,t,ct,W,H,cl,eo){
+  x.fillStyle='#04070A'; x.fillRect(0,0,W,H);
+  var a=cl(ct/.8,0,1);
+  x.save(); x.globalAlpha=a*.5; smCrane(x,W/2,224,22,1); x.restore();
+  x.save(); x.globalAlpha=a; x.textAlign='center';
+  x.fillStyle='#8F8470'; x.font="700 12px 'Barlow Semi Condensed','Arial Narrow',sans-serif";
+  x.fillText('THE LAZARUS FILES',W/2,300);
+  x.fillStyle='#EDE3CE'; x.font="38px 'Black Ops One',Impact,sans-serif";
+  x.fillText('WAKE UP',W/2,348);
+  x.fillStyle='#6FB8DC'; x.font="700 12px 'Barlow Semi Condensed','Arial Narrow',sans-serif";
+  x.fillText('CHAPTER ONE',W/2,374);
+  x.globalAlpha=a*.35; x.fillStyle='#8F8470'; x.lineWidth=1; x.strokeStyle='rgba(143,132,112,.4)';
+  x.beginPath(); x.moveTo(W/2-54,316); x.lineTo(W/2+54,316); x.stroke();
+  x.restore();
+}
+function smStatic(x,W,t){
+  for(var r=0;r<9;r++){ var ry=52+r*3.6, rw=20+Math.abs(Math.sin(t*40+r))*94;
+    x.fillStyle='rgba(111,184,220,.2)'; x.fillRect(W/2-rw/2,ry,rw,1.5); }
+}
+/* a folded paper crane at rest. s is roughly half its wingspan. */
+function smCrane(x,cx,cy,s,a){
+  x.save(); x.globalAlpha=(a==null?1:a); x.translate(cx,cy);
+  function poly(p,c){ x.beginPath(); p.forEach(function(q,i){ x[i?'lineTo':'moveTo'](q[0]*s,q[1]*s); }); x.closePath(); x.fillStyle=c; x.fill(); }
+  function line(p,c,w){ x.beginPath(); p.forEach(function(q,i){ x[i?'lineTo':'moveTo'](q[0]*s,q[1]*s); }); x.strokeStyle=c; x.lineWidth=Math.max(.7,s*w); x.stroke(); }
+  /* tail: wide at the body, tapering up and back */
+  poly([[.02,-.28],[.20,-.36],[.92,-.80],[.72,-.94]],'#BCB093');
+  poly([[.92,-.80],[.72,-.94],[.98,-.96]],'#CCC0A3');
+  /* far wing (right), two folds */
+  poly([[.06,-.42],[1.04,-.02],[.60,.06],[.12,.04]],'#A99C80');
+  poly([[.06,-.42],[1.04,-.02],[.74,-.16],[.10,-.18]],'#C0B497');
+  /* neck: wide at the body, tapering up and forward, with a folded head */
+  poly([[-.02,-.30],[-.17,-.34],[-.62,-1.06],[-.47,-1.14]],'#E8DEC0');
+  poly([[-.47,-1.14],[-.62,-1.06],[-1.00,-1.00],[-.82,-1.18]],'#F6EED4');
+  /* the body keel */
+  poly([[-.19,-.34],[.19,-.34],[.24,.22],[0,.56],[-.24,.22]],'#EDE3C9');
+  poly([[0,-.34],[.19,-.34],[.24,.22],[0,.56]],'#DED3B6');
+  /* near wing (left), two folds, lightest */
+  poly([[-.06,-.44],[-1.10,-.04],[-.64,.06],[-.12,.04]],'#FBF4DF');
+  poly([[-.06,-.44],[-1.10,-.04],[-.78,-.18],[-.10,-.20]],'#EFE6CC');
+  /* creases */
+  line([[-.06,-.44],[-1.10,-.04]],'rgba(122,108,80,.40)',.022);
+  line([[.06,-.42],[1.04,-.02]],'rgba(122,108,80,.40)',.022);
+  line([[0,-.34],[0,.54]],'rgba(122,108,80,.45)',.022);
+  line([[-.10,-.32],[-.56,-1.08]],'rgba(122,108,80,.30)',.018);
+  x.restore();
+}
+
 /* ================= battle start / win / loss screens ================= */
 var CINE={on:false,el:null,cv:null,kind:'',d:null,t0:0,dur:0,then:null,raf:0};
 var CINE_SAY={start:['RELEASING STRAIN…','BREACHING DEFENCES…','NO ONE ESCAPES.'],win:'THEY NEVER STOOD A CHANCE.',lossSub:'THE CURE WAS FOUND',lossSub2:'THEY HELD THE LINE',lossEnd:'THEIR COUNTER-STRAIN IS COMING…'};
@@ -10861,6 +11454,7 @@ function cineDraw(now){
   CINE.raf=requestAnimationFrame(cineDraw);
 }
 function cineScene(x,kind,d,t){
+  if(kind==='story'){ smScene(x,d,t); return; }
   var W2=360,H2=640,TAU2=Math.PI*2, FD="'Black Ops One',Impact,sans-serif", FB="'Barlow Semi Condensed','Arial Narrow',sans-serif";
   function cl(v,a,b){ return Math.max(a,Math.min(b,v)); }
   function eo(p){ return 1-Math.pow(1-cl(p,0,1),3); }
