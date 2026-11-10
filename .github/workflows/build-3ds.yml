@@ -49,6 +49,7 @@ jobs:
           curl -sL "$(cat mk.url)" -o mk.zip && unzip -o -q mk.zip -d mk && find mk -name makerom -exec cp {} ./makerom \; && chmod +x makerom
           docker pull minionguyjpro/bannertool:latest
           docker image inspect minionguyjpro/bannertool --format 'ep={{.Config.Entrypoint}} cmd={{.Config.Cmd}}'
+          docker run --rm --entrypoint bash minionguyjpro/bannertool -c 'ls -la /usr/bin/bannertool; head -c 200 /usr/bin/bannertool | od -c | head -5; ls /lib* /usr/lib | head -30; (file /usr/bin/bannertool || true)'
           docker run --rm -v "$PWD":/w -w /w --entrypoint bash minionguyjpro/bannertool -c 'B=$(command -v bannertool || find / -type f -name "bannertool*" -perm -u+x 2>/dev/null | head -1); echo bt=$B; $B makebanner -i banner.png -a audio.wav -o banner.bnr'
           ls -la banner.bnr
           ./makerom -f cia -o lazarus3ds.cia -elf lazarus3ds.elf -rsf app.rsf -icon lazarus3ds.smdh -banner banner.bnr -exefslogo -target t
