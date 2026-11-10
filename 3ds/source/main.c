@@ -795,6 +795,7 @@ int main(void) {
   if (!cropSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing crops\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
   viSheet = C2D_SpriteSheetLoad("romfs:/gfx/vicons.t3x");
   if (!viSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing vicons\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
+  C2D_SpriteSheet logoSheet = C2D_SpriteSheetLoad("romfs:/gfx/logo.t3x"); int titleMode = logoSheet ? 1 : 0; float titleT = 0;
   audioInit(); srand((unsigned)time(NULL));
   loadGame(); lastMs = osGetTime();
   u64 lastSave = lastMs, prevMs = lastMs;
@@ -802,6 +803,22 @@ int main(void) {
     hidScanInput();
     u32 kd = hidKeysDown();
     if (kd & KEY_START) break;
+    if (titleMode) {
+      titleT += 1.0f / 60; bgm(SND_BGM0);
+      if (kd & (KEY_A | KEY_TOUCH)) { titleMode = 0; sfx(SND_CLICK); }
+      C2D_TextBufClear(tbuf); C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+      C2D_TargetClear(top, C2D_Color32(0x14, 0x10, 0x0C, 255)); C2D_SceneBegin(top);
+      float k = 1.0f + 0.04f * sinf(titleT * 2.4f), a = titleT < 1 ? titleT : 1;
+      C2D_Image im = C2D_SpriteSheetGetImage(logoSheet, 0); float sz = 160 * k;
+      C2D_DrawCircleSolid(200, 110, 0.2f, 96 + 8 * sinf(titleT * 2.4f), C2D_Color32(0x4A, 0xB0, 0x30, (int)(70 * a)));
+      C2D_DrawImageAt(im, 200 - sz / 2, 110 - sz / 2, 0.3f, NULL, k, k);
+      txt(158, 200, 0.9f, C2D_Color32(0xF2, 0xB9, 0x30, (int)(255 * a)), "LAZARUS");
+      C2D_TargetClear(bot, C2D_Color32(0x1E, 0x1A, 0x16, 255)); C2D_SceneBegin(bot);
+      if (((int)(titleT * 1.6f)) % 2 == 0) txt(84, 110, 0.6f, C2D_Color32(255, 255, 255, 255), "Touch or press A to start");
+      txt(8, 222, 0.4f, C2D_Color32(0xB0, 0xA8, 0x98, 255), "Axiom Games");
+      C3D_FrameEnd(0);
+      continue;
+    }
     u64 nowMs = osGetTime(); float dt = (nowMs - prevMs) / 1000.0f; if (dt > 0.05f) dt = 0.05f; prevMs = nowMs;
     if (!labMode && !raidMode) {
       if (kd & KEY_DUP) { if (cury > 0) cury--; }
