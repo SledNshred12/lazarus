@@ -4,7 +4,7 @@
    and the old one is thrown away. The page itself is fetched network-first, so a
    new version is picked up as soon as there is a connection, and the cached copy
    is only used when the network is not there. */
-var CACHE = 'lazarus-v138';   /* the patch rewrites this to the release version */
+var CACHE = 'lazarus-v139';   /* the patch rewrites this to the release version */
 var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', function (e) {
