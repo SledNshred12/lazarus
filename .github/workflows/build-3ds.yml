@@ -21,28 +21,44 @@ jobs:
       - name: Build
         working-directory: 3ds
         run: make
-      - name: Build CIA (home menu installer)
-        continue-on-error: true
-        working-directory: 3ds
-        run: |
-          apt-get update -qq && apt-get install -y -qq unzip curl >/dev/null
-          curl -sL https://api.github.com/repos/3DSGuy/Project_CTR/releases/latest | grep browser_download_url | grep -i 'makerom.*ubuntu' | head -1 | cut -d'"' -f4 > mk.url
-          curl -sL "$(cat mk.url)" -o mk.zip && unzip -o -q mk.zip -d mk && find mk -name makerom -exec cp {} ./makerom \; && chmod +x makerom
-          (dkp-pacman -Ss bannertool; dkp-pacman -Ss 3ds-tools; which bannertool; ls $DEVKITPRO/tools/bin) 2>&1 | head -30
-          curl -sL https://api.github.com/repos/Steveice10/bannertool/releases | head -c 600
-          curl -sIL https://github.com/Steveice10/bannertool/releases/download/1.2.0/bannertool.zip | head -5
-          ./bannertool makebanner -i banner.png -a audio.wav -o banner.bnr
-          ./makerom -f cia -o lazarus3ds.cia -elf lazarus3ds.elf -rsf app.rsf -icon lazarus3ds.smdh -banner banner.bnr -exefslogo -target t
       - uses: actions/upload-artifact@v4
         with:
           name: lazarus3ds
+          path: 3ds/lazarus3ds.3dsx
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cia-inputs
           path: |
-            3ds/lazarus3ds.3dsx
-            3ds/lazarus3ds.cia
-          if-no-files-found: warn
+            3ds/lazarus3ds.elf
+            3ds/lazarus3ds.smdh
+            3ds/romfs
+
+  cia:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: cia-inputs
+          path: 3ds
+      - name: Build CIA
+        working-directory: 3ds
+        run: |
+          curl -sL https://api.github.com/repos/3DSGuy/Project_CTR/releases/latest | grep browser_download_url | grep -i 'makerom.*ubuntu' | head -1 | cut -d'"' -f4 > mk.url
+          curl -sL "$(cat mk.url)" -o mk.zip && unzip -o -q mk.zip -d mk && find mk -name makerom -exec cp {} ./makerom \; && chmod +x makerom
+          docker pull minionguyjpro/bannertool:latest
+          docker image inspect minionguyjpro/bannertool --format 'ep={{.Config.Entrypoint}} cmd={{.Config.Cmd}}'
+          docker run --rm -v "$PWD":/w -w /w minionguyjpro/bannertool makebanner -i banner.png -a audio.wav -o banner.bnr
+          ls -la banner.bnr
+          ./makerom -f cia -o lazarus3ds.cia -elf lazarus3ds.elf -rsf app.rsf -icon lazarus3ds.smdh -banner banner.bnr -exefslogo -target t
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lazarus3ds-cia
+          path: 3ds/lazarus3ds.cia
 
   release:
-    needs: build
+    needs: [build, cia]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -50,6 +66,9 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: lazarus3ds
+      - uses: actions/download-artifact@v4
+        with:
+          name: lazarus3ds-cia
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
