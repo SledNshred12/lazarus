@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lazarus Lite</title>
+<style>
+body{margin:0;background:#111;color:#cfd;font-family:sans-serif;font-size:12px}
+#c{display:block;margin:0 auto;background:#1b2a1b}
+#t{padding:4px 8px;line-height:1.5}
+.ok{color:#6f6}.no{color:#f66}
+</style>
+</head>
+<body>
+<canvas id="c" width="320" height="200"></canvas>
+<div id="t"></div>
+<script>
+/* ES5 only: no let/const/arrow/template strings/classes, so old browsers can parse it. */
+var cv=document.getElementById('c');
+var cx=cv.getContext?cv.getContext('2d'):null;
+var out=document.getElementById('t');
+
+/* ---- feature report ---- */
+function chk(name,f){var r=false;try{r=!!f()}catch(e){r=false}
+ return '<span class="'+(r?'ok':'no')+'">'+name+(r?' yes':' NO')+'</span>'}
+var rep=[];
+rep.push(chk('canvas',function(){return cx&&cx.fillRect}));
+rep.push(chk('touch',function(){return 'ontouchstart' in window}));
+rep.push(chk('localStorage',function(){localStorage.setItem('lz','1');return localStorage.getItem('lz')==='1'}));
+rep.push(chk('JSON',function(){return JSON.parse('{"a":1}').a===1}));
+rep.push(chk('rAF',function(){return window.requestAnimationFrame}));
+rep.push(chk('Promise',function(){return window.Promise}));
+rep.push(chk('fetch',function(){return window.fetch}));
+rep.push(chk('serviceWorker',function(){return navigator.serviceWorker}));
+rep.push(chk('WebAudio',function(){return window.AudioContext||window.webkitAudioContext}));
+rep.push(chk('ES6 arrow',function(){return new Function('return (()=>1)()')()===1}));
+rep.push(chk('ES6 let',function(){return new Function('"use strict";let a=1;return a')()===1}));
+rep.push(chk('Array.forEach',function(){return [].forEach}));
+
+/* ---- tiny colony ---- */
+var S={food:20,scrap:10,farms:1,lv:1,t:0};
+try{var sv=JSON.parse(localStorage.getItem('lzlite')||'null');if(sv){S=sv}}catch(e){}
+function save(){try{localStorage.setItem('lzlite',JSON.stringify(S))}catch(e){}}
+var btns=[
+ {x:8,y:150,w:96,h:40,l:'Build farm',s:'10 scrap',f:function(){if(S.scrap>=10&&S.farms<8){S.scrap-=10;S.farms++}}},
+ {x:112,y:150,w:96,h:40,l:'Upgrade bunker',s:'40 food',f:function(){var c=40*S.lv;if(S.food>=c){S.food-=c;S.lv++}}},
+ {x:216,y:150,w:96,h:40,l:'Scavenge',s:'+3 scrap',f:function(){S.scrap+=3}}
+];
+function draw(){
+ if(!cx)return;
+ cx.fillStyle='#1b2a1b';cx.fillRect(0,0,320,200);
+ /* bunker */
+ cx.fillStyle='#556';cx.fillRect(130,40,60,40);
+ cx.fillStyle='#889';cx.fillRect(130,34,60,8);
+ cx.fillStyle='#223';cx.fillRect(152,58,16,22);
+ /* farms */
+ var i;for(i=0;i<S.farms;i++){
+  cx.fillStyle='#4a3';cx.fillRect(14+i*36,96,30,24);
+  cx.fillStyle='#8c5';cx.fillRect(18+i*36,100,22,6);
+ }
+ cx.fillStyle='#cfd';cx.font='12px sans-serif';
+ cx.fillText('Food '+Math.floor(S.food)+'   Scrap '+S.scrap+'   Bunker Lv '+S.lv+'   Farms '+S.farms,8,14);
+ cx.fillText('Lazarus Lite',8,28);
+ for(i=0;i<btns.length;i++){var b=btns[i];
+  cx.fillStyle='#2a3a4a';cx.fillRect(b.x,b.y,b.w,b.h);
+  cx.fillStyle='#fff';cx.fillText(b.l,b.x+6,b.y+17);
+  cx.fillStyle='#9ab';cx.fillText(b.s,b.x+6,b.y+32);
+ }
+}
+function hit(px,py){
+ var r=cv.getBoundingClientRect();
+ var x=(px-r.left)*(320/r.width),y=(py-r.top)*(200/r.height);
+ for(var i=0;i<btns.length;i++){var b=btns[i];
+  if(x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h){b.f();save();draw();return}}
+}
+cv.onclick=function(e){hit(e.clientX,e.clientY)};
+if(cv.addEventListener){cv.addEventListener('touchstart',function(e){
+ var t=e.touches[0];if(t){hit(t.clientX,t.clientY);e.preventDefault()}},false)}
+setInterval(function(){S.food+=S.farms*0.5*S.lv;S.t++;if(S.t%10===0)save();draw()},1000);
+draw();
+out.innerHTML=rep.join(' | ');
+</script>
+</body>
+</html>
