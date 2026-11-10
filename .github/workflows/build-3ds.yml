@@ -28,8 +28,9 @@ jobs:
           apt-get update -qq && apt-get install -y -qq unzip curl >/dev/null
           curl -sL https://api.github.com/repos/3DSGuy/Project_CTR/releases/latest | grep browser_download_url | grep -i 'makerom.*ubuntu' | head -1 | cut -d'"' -f4 > mk.url
           curl -sL "$(cat mk.url)" -o mk.zip && unzip -o -q mk.zip -d mk && find mk -name makerom -exec cp {} ./makerom \; && chmod +x makerom
-          curl -sL https://api.github.com/repos/Steveice10/bannertool/releases/latest | grep browser_download_url | cut -d'"' -f4 | tee bt.urls
-          curl -sL "$(grep -i 'bannertool.zip' bt.urls | head -1)" -o bt.zip && unzip -o -q bt.zip -d bt && find bt -ipath '*linux*' -name bannertool -exec cp {} ./bannertool \; && chmod +x bannertool
+          (dkp-pacman -Ss bannertool; dkp-pacman -Ss 3ds-tools; which bannertool; ls $DEVKITPRO/tools/bin) 2>&1 | head -30
+          curl -sL https://api.github.com/repos/Steveice10/bannertool/releases | head -c 600
+          curl -sIL https://github.com/Steveice10/bannertool/releases/download/1.2.0/bannertool.zip | head -5
           ./bannertool makebanner -i banner.png -a audio.wav -o banner.bnr
           ./makerom -f cia -o lazarus3ds.cia -elf lazarus3ds.elf -rsf app.rsf -icon lazarus3ds.smdh -banner banner.bnr -exefslogo -target t
       - uses: actions/upload-artifact@v4
