@@ -58,3 +58,10 @@ static const short ANCH[NTYPES][20][4]={
 typedef struct { const char *name; int sec, food, hall, seed; } Crop;
 static const Crop CROPS[NCROPS]={{"Wheat",45,9,1,3},{"Corn",180,45,1,15},{"Berries",600,165,2,50}};
 static const short CROPANCH[NCROPS][3][2]={{{20,1},{20,4},{20,7}},{{21,1},{21,4},{21,7}},{{20,0},{20,2},{22,4}}};
+typedef struct { const char *name; int unlock, radius; float trans, detect; } Vec;
+static const Vec VECS[5]={{"Contact",0,80,1.0f,0.8f},{"Airborne",60,135,0.9f,1.35f},{"Waterborne",210,100,1.0f,1.0f},{"Vermin",260,70,0.9f,0.9f},{"Spore burst",400,90,1.1f,1.15f}};
+typedef struct { const char *name; int unlock; } Trait;
+static const Trait TRAITS[5]={{"Spread",0},{"Lethality",0},{"Resilience",30},{"Stealth",90},{"Mutation",160}};
+static const char *PRE[12]={"Crimson","Pale","Gray","Velvet","Hollow","Amber","Ashen","Cobalt","Scarlet","Jade","Violet","Ember"};
+static const char *SUF[10]={"Fever","Blight","Wilt","Rot","Shiver","Cough","Pox","Bloom","Creep","Rash"};
+static const unsigned STRAIN_RGB[6]={0x7ED957,0xF062D0,0x45C4F5,0xFFB02E,0xB28DFF,0xFF6B6B};

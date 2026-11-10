@@ -17,13 +17,17 @@
 #define HHS 9.0f
 
 typedef struct { int type, lv, x, y, crop; long long t0; float st; } Bld;
+typedef struct { char name[24]; int vec, ci, tr[5], samples; } Strain;
 typedef struct {
   unsigned magic; int nb; Bld b[MAXB];
   double credits, food; int seeds[NCROPS]; int cropSel; long long savedAt;
+  Strain str[6]; int nstr, trophies, peak, bossWins;
+  int reserved[512];   /* room for later stages so saves keep working */
 } Save;
 
 static Save S;
-static C2D_SpriteSheet sheets[NTYPES], cropSheet;
+static C2D_SpriteSheet sheets[NTYPES], cropSheet, viSheet;
+static int labMode = 0, labSel = 0, labRow = 0;
 static C2D_TextBuf tbuf;
 static int curx = 5, cury = 5;
 static int buildMode = 0, buildType = 1;
@@ -31,7 +35,7 @@ static char note[96] = "";
 static int noteT = 0;
 static u64 lastMs;
 
-#define SAVE_MAGIC 0x4C5A3332u
+#define SAVE_MAGIC 0x4C5A3333u
 #define SAVE_PATH "sdmc:/3ds/lazarus3ds.sav"
 
 static void say(const char *m) { snprintf(note, sizeof note, "%s", m); noteT = 180; }
@@ -45,6 +49,7 @@ static void defaults(void) {
   for (int i = 0; i < 8; i++) { S.b[i].type = d[i][0]; S.b[i].lv = d[i][1]; S.b[i].x = d[i][2]; S.b[i].y = d[i][3]; S.b[i].crop = -1; }
   S.b[5].crop = 0; S.b[5].t0 = nowS() - 50;   /* like the game: one garden starts planted */
   S.nb = 8; S.savedAt = nowS();
+  Strain *v = &S.str[0]; snprintf(v->name, sizeof v->name, "Alpha-1"); v->vec = 0; v->ci = 0; v->tr[0] = 4; v->tr[1] = 3; v->samples = 5; S.nstr = 1;
 }
 static void saveGame(void) {
   S.savedAt = nowS();
@@ -171,6 +176,48 @@ static void tick(void) {
   }
 }
 
+/* ---- virus lab ---- */
+static int strainPts(const Strain *v) { int n = 0; for (int k = 0; k < 5; k++) n += v->tr[k]; return n; }
+static int labPoints(void) { return 8 + 3 * bestLv(4); }
+static int traitCap(void) { int c = 4 + bestLv(4); return c > 10 ? 10 : c; }
+static int maxStrains(void) { int m = 2 + hallLv(); return m > 6 ? 6 : m; }
+static int sampleCap(void) { int c = 0; for (int i = 0; i < S.nb; i++) if (S.b[i].type == 3) c += 4 + 2 * S.b[i].lv; return c; }
+static int sampleCount(void) { int n = 0; for (int i = 0; i < S.nstr; i++) n += S.str[i].samples; return n; }
+static int cultureCost(const Strain *v) { double m = 1 + (S.food > 0 ? S.food : 0) / 10000.0; return (int)floor((8 + 2 * strainPts(v)) * m + 0.5); }
+static int traitOpen(int k) { return S.peak >= TRAITS[k].unlock; }
+static int vecOpen(int v) { return S.peak >= VECS[v].unlock; }
+static void randName(char *out, int n) { snprintf(out, n, "%s %s", PRE[rand() % 12], SUF[rand() % 10]); }
+static Strain *curStrain(void) { if (labSel >= S.nstr) labSel = S.nstr - 1; if (labSel < 0) labSel = 0; return &S.str[labSel]; }
+static void labAdj(int d) {
+  Strain *v = curStrain(); int k = labRow;
+  if (d > 0) {
+    if (!traitOpen(k)) { char m[48]; snprintf(m, sizeof m, "Needs %d trophies", TRAITS[k].unlock); say(m); return; }
+    if (v->tr[k] >= traitCap()) { say("Research Lab limit reached"); return; }
+    if (strainPts(v) >= labPoints()) { say("No design points left"); return; }
+    v->tr[k]++;
+  } else if (v->tr[k] > 0) v->tr[k]--;
+}
+static void labVec(void) { Strain *v = curStrain(); for (int i = 1; i <= 5; i++) { int n = (v->vec + i) % 5; if (vecOpen(n)) { v->vec = n; return; } } }
+static void labCulture(int many) {
+  Strain *v = curStrain(); int cost = cultureCost(v), space = sampleCap() - sampleCount(), afford = (int)(S.food / cost);
+  int n = many ? 1000 : 1; if (n > space) n = space; if (n > afford) n = afford;
+  if (n <= 0) { say(space <= 0 ? "Culture Vaults are full" : "Not enough food"); return; }
+  S.food -= (double)n * cost; v->samples += n;
+  char m[48]; snprintf(m, sizeof m, "Cultured %d", n); say(m);
+}
+static void labNew(void) {
+  if (S.nstr >= maxStrains()) { say("Strain limit. Upgrade the Bunker"); return; }
+  int used[6] = {0}, ci = 0; for (int i = 0; i < S.nstr; i++) used[S.str[i].ci % 6] = 1;
+  while (used[ci] && ci < 5) ci++;
+  Strain *v = &S.str[S.nstr]; memset(v, 0, sizeof *v); randName(v->name, sizeof v->name); v->ci = ci; v->tr[0] = 3; v->tr[1] = 2;
+  labSel = S.nstr++; say("New strain");
+}
+static void labDel(void) {
+  if (S.nstr < 2) { say("Keep at least one strain"); return; }
+  for (int i = labSel; i < S.nstr - 1; i++) S.str[i] = S.str[i + 1];
+  S.nstr--; if (labSel >= S.nstr) labSel = S.nstr - 1; say("Deleted");
+}
+
 /* ---- drawing ---- */
 static void txt(float x, float y, float s, u32 col, const char *fmt, ...) {
   char buf[128]; va_list ap; va_start(ap, fmt); vsnprintf(buf, sizeof buf, fmt, ap); va_end(ap);
@@ -243,6 +290,38 @@ static void drawTop(void) {
   txt(250, 1, 0.5f, C2D_Color32(0x9C, 0xD0, 0x6A, 255), "Food %ld", (long)S.food);
 }
 
+static u32 rgbOf(unsigned c) { return C2D_Color32((c >> 16) & 255, (c >> 8) & 255, c & 255, 255); }
+static void drawIcon(int vec, int ci, float x, float y, float sc, float z) {
+  C2D_Image im = C2D_SpriteSheetGetImage(viSheet, (vec % 5) * 6 + (ci % 6));
+  C2D_DrawImageAt(im, x, y, z, NULL, sc, sc);
+}
+static void drawLabTop(void) {
+  Strain *v = curStrain();
+  u32 white = C2D_Color32(255, 255, 255, 255), dim = C2D_Color32(0xB0, 0xA8, 0x98, 255);
+  C2D_DrawRectSolid(0, 0, 0.1f, 400, 240, C2D_Color32(0x1B, 0x1F, 0x1B, 255));
+  C2D_DrawRectSolid(0, 0, 0.55f, 400, 18, C2D_Color32(20, 14, 10, 200));
+  txt(6, 1, 0.5f, C2D_Color32(0xE8, 0xD8, 0xB8, 255), "VIRUS LAB");
+  txt(110, 1, 0.5f, C2D_Color32(0xF2, 0xB9, 0x30, 255), "Credits %ld", (long)S.credits);
+  txt(250, 1, 0.5f, C2D_Color32(0x9C, 0xD0, 0x6A, 255), "Food %ld", (long)S.food);
+  for (int i = 0; i < S.nstr; i++) {
+    float x = 12 + i * 34;
+    C2D_DrawRectSolid(x - 2, 24, 0.3f, 32, 32, i == labSel ? C2D_Color32(0x55, 0x55, 0x55, 255) : C2D_Color32(0x2A, 0x2E, 0x2A, 255));
+    drawIcon(S.str[i].vec, S.str[i].ci, x, 26, 0.45f, 0.4f);
+  }
+  drawIcon(v->vec, v->ci, 24, 74, 1.5f, 0.4f);
+  txt(130, 62, 0.75f, rgbOf(STRAIN_RGB[v->ci % 6]), "%s", v->name);
+  txt(130, 90, 0.5f, white, "%s", VECS[v->vec].name);
+  txt(130, 106, 0.42f, dim, "Range %d   Spread x%.2f   Spotted x%.2f", VECS[v->vec].radius, VECS[v->vec].trans, VECS[v->vec].detect);
+  for (int k = 0; k < 5; k++) {
+    float y = 130 + k * 20;
+    txt(12, y, 0.45f, traitOpen(k) ? white : dim, "%s", TRAITS[k].name);
+    C2D_DrawRectSolid(110, y + 4, 0.3f, 200, 8, C2D_Color32(0x30, 0x34, 0x30, 255));
+    if (v->tr[k] > 0) C2D_DrawRectSolid(110, y + 4, 0.35f, 200.0f * v->tr[k] / 10.0f, 8, rgbOf(STRAIN_RGB[v->ci % 6]));
+    txt(318, y, 0.45f, traitOpen(k) ? white : dim, traitOpen(k) ? "%d" : "locked", v->tr[k]);
+  }
+  txt(12, 226 - 8, 0.42f, dim, "Points %d / %d     Samples %d / %d     Culture: %d food each", strainPts(v), labPoints(), sampleCount(), sampleCap(), cultureCost(v));
+}
+
 typedef struct { int x, y, w, h; char label[24]; int id; u32 col; } Btn;
 static Btn btns[8]; static int nbtn;
 static void addBtn(int slot, const char *label, int id, u32 col) {
@@ -251,6 +330,33 @@ static void addBtn(int slot, const char *label, int id, u32 col) {
   snprintf(b->label, sizeof b->label, "%s", label);
   C2D_DrawRectSolid(b->x, b->y, 0.3f, b->w, b->h, col);
   txt(b->x + 8, b->y + 5, 0.5f, C2D_Color32(255, 255, 255, 255), "%s", b->label);
+}
+static void addBtnXY(int x, int y, int w, int h, const char *label, int id, u32 col) {
+  Btn *b = &btns[nbtn++]; b->x = x; b->y = y; b->w = w; b->h = h; b->id = id; b->col = col;
+  snprintf(b->label, sizeof b->label, "%s", label);
+  C2D_DrawRectSolid(x, y, 0.3f, w, h, col);
+  txt(x + 6, y + (h > 28 ? 5 : 3), 0.5f, C2D_Color32(255, 255, 255, 255), "%s", label);
+}
+static void drawLabBottom(void) {
+  nbtn = 0;
+  Strain *v = curStrain();
+  u32 white = C2D_Color32(255, 255, 255, 255), dim = C2D_Color32(0xB0, 0xA8, 0x98, 255);
+  u32 blue = C2D_Color32(0x28, 0x58, 0x90, 255), green = C2D_Color32(0x30, 0x70, 0x50, 255), grey = C2D_Color32(0x55, 0x55, 0x55, 255), red = C2D_Color32(0x90, 0x38, 0x30, 255);
+  for (int k = 0; k < 5; k++) {
+    int y = 4 + k * 26;
+    if (k == labRow) C2D_DrawRectSolid(0, y - 1, 0.2f, 320, 26, C2D_Color32(0x2C, 0x30, 0x38, 255));
+    txt(8, y + 2, 0.5f, traitOpen(k) ? white : dim, "%s", TRAITS[k].name);
+    txt(150, y + 2, 0.5f, white, "%d", v->tr[k]);
+    addBtnXY(190, y, 56, 22, "  -", 100 + k * 2, grey);
+    addBtnXY(254, y, 56, 22, "  +", 101 + k * 2, blue);
+  }
+  addBtnXY(8, 140, 148, 26, "Vector (Y)", 20, blue);
+  addBtnXY(164, 140, 148, 26, "Culture 1 (A)", 21, green);
+  addBtnXY(8, 170, 148, 26, "Culture max (R)", 22, green);
+  addBtnXY(164, 170, 148, 26, "New strain (X)", 23, grey);
+  addBtnXY(8, 200, 148, 26, "Delete strain", 24, red);
+  addBtnXY(164, 200, 148, 26, "Back (B)", 25, grey);
+  if (noteT > 0) { noteT--; txt(8, 228, 0.45f, C2D_Color32(0xF2, 0xB9, 0x30, 255), "%s", note); }
 }
 static void drawBottom(void) {
   nbtn = 0;
@@ -275,10 +381,10 @@ static void drawBottom(void) {
     addBtn(1, "Upgrade (A)", 1, blue);
     snprintf(lab, sizeof lab, "Plant %s (Y)", CROPS[S.cropSel].name); addBtn(2, lab, 8, green);
     addBtn(3, "Build (X)", 2, green);
-    addBtn(4, "Sell food (SEL)", 9, gold);
+    addBtn(4, "Sell food", 9, gold);
     snprintf(lab, sizeof lab, "Seeds x10: %dcr", CROPS[S.cropSel].seed * 10); addBtn(5, lab, 10, grey);
     snprintf(lab, sizeof lab, "Crop: %s (L/R)", CROPS[S.cropSel].name); addBtn(6, lab, 11, grey);
-    addBtn(7, "Save", 3, grey);
+    addBtn(7, "Virus lab (SEL)", 13, blue);
   } else {
     txt(8, 2, 0.62f, white, "Build: %s", BTYPES[buildType].name);
     txt(8, 22, 0.48f, dim, "Cost %ld credits", buildcost(buildType));
@@ -305,6 +411,14 @@ static void act(int id) {
     case 10: doBuySeeds(); break;
     case 11: nextCrop(1); break;
     case 12: nextType(-1); break;
+    case 13: labMode = 1; break;
+    case 20: labVec(); break;
+    case 21: labCulture(0); break;
+    case 22: labCulture(1); break;
+    case 23: labNew(); break;
+    case 24: labDel(); break;
+    case 25: labMode = 0; break;
+    default: if (id >= 100 && id < 110) { labRow = (id - 100) / 2; labAdj((id & 1) ? 1 : -1); } break;
   }
 }
 
@@ -320,17 +434,34 @@ int main(void) {
   }
   cropSheet = C2D_SpriteSheetLoad("romfs:/gfx/crops.t3x");
   if (!cropSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing crops\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
+  viSheet = C2D_SpriteSheetLoad("romfs:/gfx/vicons.t3x");
+  if (!viSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing vicons\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
+  srand((unsigned)time(NULL));
   loadGame(); lastMs = osGetTime();
   u64 lastSave = lastMs;
   while (aptMainLoop()) {
     hidScanInput();
     u32 kd = hidKeysDown();
     if (kd & KEY_START) break;
-    if (kd & KEY_DUP) { if (cury > 0) cury--; }
-    if (kd & KEY_DDOWN) { if (cury < GRID - 1) cury++; }
-    if (kd & KEY_DLEFT) { if (curx > 0) curx--; }
-    if (kd & KEY_DRIGHT) { if (curx < GRID - 1) curx++; }
-    if (buildMode) {
+    if (!labMode) {
+      if (kd & KEY_DUP) { if (cury > 0) cury--; }
+      if (kd & KEY_DDOWN) { if (cury < GRID - 1) cury++; }
+      if (kd & KEY_DLEFT) { if (curx > 0) curx--; }
+      if (kd & KEY_DRIGHT) { if (curx < GRID - 1) curx++; }
+    }
+    if (labMode) {
+      if (kd & KEY_UP) { labRow = (labRow + 4) % 5; }
+      if (kd & KEY_DOWN) { labRow = (labRow + 1) % 5; }
+      if (kd & KEY_LEFT) labAdj(-1);
+      if (kd & KEY_RIGHT) labAdj(1);
+      if (kd & KEY_L) { labSel = (labSel + S.nstr - 1) % S.nstr; }
+      if (kd & KEY_R) labCulture(1);
+      if (kd & KEY_A) labCulture(0);
+      if (kd & KEY_X) labNew();
+      if (kd & KEY_Y) labVec();
+      if (kd & KEY_SELECT) { Strain *v = curStrain(); randName(v->name, sizeof v->name); }
+      if (kd & KEY_B) labMode = 0;
+    } else if (buildMode) {
       if (kd & KEY_L) nextType(-1);
       if (kd & KEY_R) nextType(1);
       if (kd & KEY_A) doPlace();
@@ -342,7 +473,7 @@ int main(void) {
       if (kd & KEY_B) doCollect();
       if (kd & KEY_X) buildMode = 1;
       if (kd & KEY_Y) doPlant();
-      if (kd & KEY_SELECT) doSell();
+      if (kd & KEY_SELECT) labMode = 1;
     }
     if (kd & KEY_TOUCH) {
       touchPosition tp; hidTouchRead(&tp);
@@ -353,14 +484,14 @@ int main(void) {
     C2D_TextBufClear(tbuf);
     C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
     C2D_TargetClear(top, C2D_Color32(0x5A, 0x3A, 0x30, 255));
-    C2D_SceneBegin(top); drawTop();
+    C2D_SceneBegin(top); if (labMode) drawLabTop(); else drawTop();
     C2D_TargetClear(bot, C2D_Color32(0x1E, 0x1A, 0x16, 255));
-    C2D_SceneBegin(bot); drawBottom();
+    C2D_SceneBegin(bot); if (labMode) drawLabBottom(); else drawBottom();
     C3D_FrameEnd(0);
   }
   saveGame();
   for (int i = 0; i < NTYPES; i++) if (sheets[i]) C2D_SpriteSheetFree(sheets[i]);
-  C2D_SpriteSheetFree(cropSheet);
+  C2D_SpriteSheetFree(cropSheet); C2D_SpriteSheetFree(viSheet);
   C2D_TextBufDelete(tbuf); C2D_Fini(); C3D_Fini(); romfsExit(); gfxExit();
   return 0;
 }
