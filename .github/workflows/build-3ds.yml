@@ -1,0 +1,47 @@
+name: Build 3DS app
+
+# Builds the Nintendo 3DS / 2DS homebrew version (3ds/ folder) into lazarus3ds.3dsx
+# and publishes it to the release tagged 3ds-latest. Does not touch the web game or the APK.
+on:
+  push:
+    branches: [ main ]
+    paths: [ '3ds/**', '.github/workflows/build-3ds.yml' ]
+  workflow_dispatch:
+
+concurrency:
+  group: build-3ds
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        working-directory: 3ds
+        run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lazarus3ds
+          path: 3ds/lazarus3ds.3dsx
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: lazarus3ds
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: 3ds-latest
+          name: Lazarus for 3DS (latest)
+          body: |
+            Lazarus for Nintendo 3DS / 2DS (homebrew, needs custom firmware).
+            Copy lazarus3ds.3dsx into the 3ds folder on the SD card and start it from the Homebrew Launcher.
+          files: lazarus3ds.3dsx
+          make_latest: "false"

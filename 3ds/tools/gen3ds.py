@@ -1,0 +1,50 @@
+import re, json
+from PIL import Image
+SRC='/home/claude/lazarus/web/index.html'
+OUT='/home/claude/lazarus/3ds'
+S=open(SRC,encoding='utf-8').read()
+TYPES=['hall','farm','trade','incubator','lab','clinic','scout','tower','shelter','dronebay','kennel']
+def obj(name):
+    i=S.index('var '+name+'=')+len('var '+name+'=')
+    j=S.index(';',i) if name in('COSTS','LIM') else S.index('\n};',i)+2
+    t=S[i:j]
+    return t
+def parse_arrays(t):
+    return {m.group(1):[int(x) for x in m.group(2).split(',')] for m in re.finditer(r'(\w+):\[([\d,]+)\]',t)}
+COSTS=parse_arrays(obj('COSTS')); LIM=parse_arrays(obj('LIM'))
+bt=obj('BT')
+BT={}
+for t in TYPES:
+    m=re.search(t+r":\{name:'([^']+)',w:(\d),h:(\d),hz:(\d+),max:(\d+)(?:,base:(\d+))?",bt)
+    BT[t]=dict(name=m.group(1),w=int(m.group(2)),h=int(m.group(3)),base=int(m.group(6) or 0))
+SC=0.6
+meta=json.load(open('/home/claude/sprites/meta_all.json'))
+anch={}
+for t in TYPES:
+    lines=[]
+    for lv in range(1,21):
+        im=Image.open(f'/home/claude/sprites/{t}_{lv}.png').convert('RGBA')
+        w,h=im.size; nw,nh=max(1,round(w*SC)),max(1,round(h*SC))
+        im=im.resize((nw,nh),Image.LANCZOS)
+        im.save(f'{OUT}/gfx/{t}_{lv}.png')
+        m=meta[f'{t}_{lv}']
+        anch[(t,lv)]=(round(m['ax']*SC),round(m['ay']*SC),nw,nh)
+        lines.append(f'{t}_{lv}.png')
+    open(f'{OUT}/gfx/{t}.t3s','w').write('--atlas -f rgba -z auto\n'+'\n'.join(lines)+'\n')
+h=['/* generated from the game source by tools/gen3ds.py */','#pragma once',f'#define NTYPES {len(TYPES)}','typedef struct { const char *id,*name; int w,h,base; } BType;','static const BType BTYPES[NTYPES]={']
+for t in TYPES: h.append(f'  {{"{t}","{BT[t]["name"]}",{BT[t]["w"]},{BT[t]["h"]},{BT[t]["base"]}}},')
+h.append('};')
+h.append('static const int COSTS[NTYPES][9]={')
+for t in TYPES:
+    c=COSTS.get(t,[0]*9); c=(c+[0]*9)[:9]; h.append('  {'+','.join(map(str,c))+'},')
+h.append('};')
+h.append('static const int LIMS[NTYPES][10]={')
+for t in TYPES:
+    c=LIM.get(t,[0]*10); c=(c+[0]*10)[:10]; h.append('  {'+','.join(map(str,c))+'},')
+h.append('};')
+h.append('static const short ANCH[NTYPES][20][4]={')
+for t in TYPES:
+    h.append('  {'+','.join('{%d,%d,%d,%d}'%anch[(t,lv)] for lv in range(1,21))+'},')
+h.append('};')
+open(f'{OUT}/source/data.h','w').write('\n'.join(h)+'\n')
+print(BT); print({t:COSTS.get(t) for t in TYPES}); print({t:LIM.get(t) for t in TYPES})
