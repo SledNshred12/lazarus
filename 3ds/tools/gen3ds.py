@@ -12,6 +12,8 @@ def obj(name):
 def parse_arrays(t):
     return {m.group(1):[int(x) for x in m.group(2).split(',')] for m in re.finditer(r'(\w+):\[([\d,]+)\]',t)}
 COSTS=parse_arrays(obj('COSTS')); LIM=parse_arrays(obj('LIM'))
+for k,a in COSTS.items():
+    while len(a)<19: a.append(int(a[-1]*1.3/50+0.5)*50)
 bt=obj('BT')
 BT={}
 for t in TYPES:
@@ -34,9 +36,9 @@ for t in TYPES:
 h=['/* generated from the game source by tools/gen3ds.py */','#pragma once',f'#define NTYPES {len(TYPES)}','typedef struct { const char *id,*name; int w,h,base; } BType;','static const BType BTYPES[NTYPES]={']
 for t in TYPES: h.append(f'  {{"{t}","{BT[t]["name"]}",{BT[t]["w"]},{BT[t]["h"]},{BT[t]["base"]}}},')
 h.append('};')
-h.append('static const int COSTS[NTYPES][9]={')
+h.append('static const int COSTS[NTYPES][19]={')
 for t in TYPES:
-    c=COSTS.get(t,[0]*9); c=(c+[0]*9)[:9]; h.append('  {'+','.join(map(str,c))+'},')
+    c=COSTS.get(t,[0]*19); c=(c+[0]*19)[:19]; h.append('  {'+','.join(map(str,c))+'},')
 h.append('};')
 h.append('static const int LIMS[NTYPES][10]={')
 for t in TYPES:
@@ -48,3 +50,19 @@ for t in TYPES:
 h.append('};')
 open(f'{OUT}/source/data.h','w').write('\n'.join(h)+'\n')
 print(BT); print({t:COSTS.get(t) for t in TYPES}); print({t:LIM.get(t) for t in TYPES})
+
+# crops
+cm=json.load(open('/home/claude/sprites/meta_crops.json'))
+lines=[]; ca=[]
+for c in ['wheat','corn','berries']:
+    row=[]
+    for i in range(3):
+        im=Image.open(f'/home/claude/sprites/crop_{c}_{i}.png').convert('RGBA')
+        nw,nh=max(1,round(im.width*SC)),max(1,round(im.height*SC)); im=im.resize((nw,nh),Image.LANCZOS)
+        im.save(f'{OUT}/gfx/crop_{c}_{i}.png'); lines.append(f'crop_{c}_{i}.png')
+        m=cm[f'crop_{c}_{i}']; row.append('{%d,%d}'%(round(m['ax']*SC),round(m['ay']*SC)))
+    ca.append('{'+','.join(row)+'}')
+open(f'{OUT}/gfx/crops.t3s','w').write('--atlas -f rgba -z auto\n'+'\n'.join(lines)+'\n')
+h2=['#define NCROPS 3','typedef struct { const char *name; int sec, food, hall, seed; } Crop;','static const Crop CROPS[NCROPS]={{"Wheat",45,9,1,3},{"Corn",180,45,1,15},{"Berries",600,165,2,50}};',
+ 'static const short CROPANCH[NCROPS][3][2]={'+','.join(ca)+'};']
+open(f'{OUT}/source/data.h','a').write('\n'.join(h2)+'\n')

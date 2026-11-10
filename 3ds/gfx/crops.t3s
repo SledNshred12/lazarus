@@ -1,0 +1,10 @@
+--atlas -f rgba -z auto
+crop_wheat_0.png
+crop_wheat_1.png
+crop_wheat_2.png
+crop_corn_0.png
+crop_corn_1.png
+crop_corn_2.png
+crop_berries_0.png
+crop_berries_1.png
+crop_berries_2.png
