@@ -110,6 +110,35 @@ static int cropReady(const Bld *b) { return b->type == 1 && b->crop >= 0 && crop
 static int cropLeft(const Bld *b) { long long l = CROPS[b->crop].sec - (nowS() - b->t0); return l < 0 ? 0 : (int)l; }
 static int cropYield(const Bld *b) { return (int)floor(CROPS[b->crop].food * (1 + 0.25 * (b->lv - 1)) * infectMult() + 0.5); }
 
+
+/* ---- audio: the game's own synthesized music and effects, baked to PCM ---- */
+enum { SND_BGM0, SND_BGM1, SND_CREDITS, SND_FARM, SND_UP, SND_BUILD, SND_WIN, SND_CLICK, NSND };
+static const char *SNDF[NSND] = {"bgm_colony", "bgm_raid", "sfx_credits", "sfx_farm", "sfx_upgrade", "sfx_build", "sfx_win", "sfx_click"};
+static s16 *sndD[NSND]; static int sndN[NSND]; static ndspWaveBuf chBuf[8]; static int audioOK = 0, bgmCur = -1, sfxRR = 0;
+static void audioInit(void) {
+  if (R_FAILED(ndspInit())) return;
+  ndspSetOutputMode(NDSP_OUTPUT_STEREO);
+  for (int i = 0; i < NSND; i++) {
+    char p[64]; snprintf(p, sizeof p, "romfs:/audio/%s.pcm", SNDF[i]); FILE *f = fopen(p, "rb"); if (!f) continue;
+    fseek(f, 0, SEEK_END); long n = ftell(f); fseek(f, 0, SEEK_SET);
+    s16 *d = (s16 *)linearAlloc(n); if (!d) { fclose(f); continue; }
+    if (fread(d, 1, n, f) != (size_t)n) { fclose(f); linearFree(d); continue; }
+    fclose(f); DSP_FlushDataCache(d, n); sndD[i] = d; sndN[i] = (int)(n / 2);
+  }
+  for (int c = 0; c < 8; c++) {
+    ndspChnReset(c); ndspChnSetInterp(c, NDSP_INTERP_LINEAR); ndspChnSetRate(c, 22050); ndspChnSetFormat(c, NDSP_FORMAT_MONO_PCM16);
+    float mix[12] = {0}; mix[0] = mix[1] = (c == 0 ? 0.45f : 0.8f); ndspChnSetMix(c, mix);
+  }
+  audioOK = 1;
+}
+static void playOn(int ch, int snd, int loop) {
+  if (!audioOK || !sndD[snd]) return;
+  ndspChnWaveBufClear(ch); memset(&chBuf[ch], 0, sizeof chBuf[ch]);
+  chBuf[ch].data_vaddr = sndD[snd]; chBuf[ch].nsamples = sndN[snd]; chBuf[ch].looping = loop;
+  ndspChnWaveBufAdd(ch, &chBuf[ch]);
+}
+static void sfx(int snd) { if (!audioOK) return; int ch = 1 + (sfxRR++ % 7); playOn(ch, snd, 0); }
+static void bgm(int snd) { if (!audioOK || snd == bgmCur) return; bgmCur = snd; playOn(0, snd, 1); }
 static void doCollect(void) {
   long food = 0, cr = 0;
   for (int i = 0; i < S.nb; i++) {
@@ -119,6 +148,7 @@ static void doCollect(void) {
   }
   if (!food && !cr) { say("Nothing is ready yet"); return; }
   S.food += food; S.credits += cr;
+  if (cr) sfx(SND_CREDITS); if (food) sfx(SND_FARM);
   char m[64]; snprintf(m, sizeof m, "+%ld food, +%ld credits", food, cr); say(m);
 }
 static void doPlant(void) {
@@ -154,7 +184,7 @@ static void doUpgrade(void) {
   if (b->type != 0 && b->lv >= hallLv() + 1) { say("Upgrade the Bunker first"); return; }
   long c = upcost(b->type, b->lv);
   if (S.credits < c) { say("Not enough credits"); return; }
-  S.credits -= c; b->lv++; say("Upgraded");
+  S.credits -= c; b->lv++; say("Upgraded"); sfx(SND_UP);
 }
 static void doPlace(void) {
   int t = buildType;
@@ -165,7 +195,7 @@ static void doPlace(void) {
   if (S.credits < c) { say("Not enough credits"); return; }
   S.credits -= c;
   Bld *b = &S.b[S.nb++]; memset(b, 0, sizeof *b); b->type = t; b->lv = 1; b->x = curx; b->y = cury; b->crop = -1;
-  buildMode = 0; say("Built");
+  buildMode = 0; say("Built"); sfx(SND_BUILD);
 }
 static void nextType(int d) { buildType += d; if (buildType < 1) buildType = NTYPES - 1; if (buildType >= NTYPES) buildType = 1; }
 static void nextCrop(int d) { S.cropSel = (S.cropSel + d + NCROPS) % NCROPS; }
@@ -283,7 +313,7 @@ static void endBattle(const char *why) {
     int l = 8 + c->tier / 2; if (l > S.trophies) l = S.trophies; Bt.dT = -l; S.trophies += Bt.dT; S.losses++; S.infected = 1;
   }
   if (S.trophies > S.peak) S.peak = S.trophies;
-  Bt.win = win; Bt.loot = loot; raidMode = 3; Bt.cx = 0;
+  Bt.win = win; Bt.loot = loot; raidMode = 3; Bt.cx = 0; if (win) sfx(SND_WIN);
 }
 static void fallB(int i) {
   BB *b = &Bt.b[i]; if (b->fallen) return;
@@ -718,6 +748,7 @@ static void launchRaid(void) {
   startBattle(raidSel);
 }
 static void act(int id) {
+  sfx(SND_CLICK);
   switch (id) {
     case 30: raidMode = 1; break;
     case 41: launchRaid(); break;
@@ -764,7 +795,7 @@ int main(void) {
   if (!cropSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing crops\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
   viSheet = C2D_SpriteSheetLoad("romfs:/gfx/vicons.t3x");
   if (!viSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing vicons\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
-  srand((unsigned)time(NULL));
+  audioInit(); srand((unsigned)time(NULL));
   loadGame(); lastMs = osGetTime();
   u64 lastSave = lastMs, prevMs = lastMs;
   while (aptMainLoop()) {
@@ -833,6 +864,7 @@ int main(void) {
       touchPosition tp; hidTouchRead(&tp);
       for (int i = 0; i < nbtn; i++) if (tp.px >= btns[i].x && tp.px < btns[i].x + btns[i].w && tp.py >= btns[i].y && tp.py < btns[i].y + btns[i].h) { act(btns[i].id); break; }
     }
+    bgm(raidMode >= 2 ? SND_BGM1 : SND_BGM0);
     tick();
     if (osGetTime() - lastSave > 30000) { int keep = noteT; saveGame(); lastSave = osGetTime(); noteT = keep; }
     C2D_TextBufClear(tbuf);
@@ -844,6 +876,7 @@ int main(void) {
     C3D_FrameEnd(0);
   }
   saveGame();
+  if (audioOK) { ndspChnWaveBufClear(0); ndspExit(); }
   for (int i = 0; i < NTYPES; i++) if (sheets[i]) C2D_SpriteSheetFree(sheets[i]);
   C2D_SpriteSheetFree(cropSheet); C2D_SpriteSheetFree(viSheet);
   C2D_TextBufDelete(tbuf); C2D_Fini(); C3D_Fini(); romfsExit(); gfxExit();
