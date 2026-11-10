@@ -86,7 +86,7 @@ static double buildMult(void) { double m = S.credits / 100000.0; if (m > 2) m = 
 static long upcost(int type, int lv) { return (long)floor(COSTS[type][lv - 1] * buildMult() / 10.0 + 0.5) * 10; }
 static int countType(int t) { int n = 0; for (int i = 0; i < S.nb; i++) if (S.b[i].type == t) n++; return n; }
 static long buildcost(int t) { return (long)floor(BTYPES[t].base * (1 + countType(t) * 0.5) * buildMult() / 10.0 + 0.5) * 10; }
-static int limitFor(int t) { int h = hallLv(); if (h > 20) h = 20; return LIMS[t][h - 1]; }
+static int limitFor(int t) { int h = hallLv(); if (h > 10) h = 10; return LIMS[t][h - 1]; }
 static int bldAt(int x, int y) {
   for (int i = 0; i < S.nb; i++) {
     const BType *d = &BTYPES[S.b[i].type];
