@@ -1,0 +1,53 @@
+BasicInfo:
+  Title                   : Lazarus
+  CompanyCode             : "00"
+  ProductCode             : CTR-P-LZRS
+  ContentType             : Application
+  Logo                    : None
+
+TitleInfo:
+  UniqueId                : 0xF7A10
+  Category                : Application
+
+Option:
+  UseOnSD                 : true
+  FreeProductCode         : true
+  MediaFootPadding        : false
+  EnableCrypt             : false
+  EnableCompress          : true
+
+AccessControlInfo:
+  CoreVersion             : 2
+  DescVersion             : 2
+  ReleaseKernelMajor      : "02"
+  ReleaseKernelMinor      : "33"
+  UseExtSaveData          : false
+  FileSystemAccess:
+   - DirectSdmc
+  IdealProcessor          : 0
+  AffinityMask            : 1
+  Priority                : 16
+  MaxCpu                  : 0x9E
+  MemoryType              : Application
+  SystemMode              : 64MB
+  CpuSpeed                : 804MHz
+  EnableL2Cache           : true
+  CanAccessCore2          : true
+  DisableDebug            : false
+  EnableForceDebug        : false
+  CanWriteSharedPage      : true
+  CanUsePrivilegedPriority: false
+  CanUseNonAlphabetAndNumber: true
+  PermitMainFunctionArgument: true
+  CanShareDeviceMemory    : true
+  RunnableOnSleep         : false
+  SpecialMemoryArrange    : true
+  ResourceLimitCategory   : Application
+
+SystemControlInfo:
+  SaveDataSize            : 0KB
+  RemasterVersion         : 0
+  StackSize               : 0x40000
+
+RomFs:
+  RootPath                : romfs

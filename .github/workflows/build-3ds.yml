@@ -21,10 +21,23 @@ jobs:
       - name: Build
         working-directory: 3ds
         run: make
+      - name: Build CIA (home menu installer)
+        continue-on-error: true
+        working-directory: 3ds
+        run: |
+          apt-get update -qq && apt-get install -y -qq unzip curl >/dev/null
+          curl -sL https://api.github.com/repos/3DSGuy/Project_CTR/releases/latest | grep browser_download_url | grep -i 'makerom.*ubuntu' | head -1 | cut -d'"' -f4 > mk.url
+          curl -sL "$(cat mk.url)" -o mk.zip && unzip -o -q mk.zip -d mk && find mk -name makerom -exec cp {} ./makerom \; && chmod +x makerom
+          curl -sL https://github.com/Steveice10/bannertool/releases/download/1.2.0/bannertool.zip -o bt.zip && unzip -o -q bt.zip -d bt && cp bt/linux-x86_64/bannertool ./bannertool && chmod +x bannertool
+          ./bannertool makebanner -i banner.png -a audio.wav -o banner.bnr
+          ./makerom -f cia -o lazarus3ds.cia -elf lazarus3ds.elf -rsf app.rsf -icon lazarus3ds.smdh -banner banner.bnr -exefslogo -target t
       - uses: actions/upload-artifact@v4
         with:
           name: lazarus3ds
-          path: 3ds/lazarus3ds.3dsx
+          path: |
+            3ds/lazarus3ds.3dsx
+            3ds/lazarus3ds.cia
+          if-no-files-found: warn
 
   release:
     needs: build
@@ -43,5 +56,7 @@ jobs:
           body: |
             Lazarus for Nintendo 3DS / 2DS (homebrew, needs custom firmware).
             Copy lazarus3ds.3dsx into the 3ds folder on the SD card and start it from the Homebrew Launcher.
-          files: lazarus3ds.3dsx
+          files: |
+            lazarus3ds.3dsx
+            lazarus3ds.cia
           make_latest: "false"
