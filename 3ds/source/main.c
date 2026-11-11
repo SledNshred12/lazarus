@@ -781,9 +781,11 @@ static void act(int id) {
   }
 }
 
+static void lg(const char *m) { FILE *f = fopen("sdmc:/3ds/lazarus_boot.log", "a"); if (f) { fputs(m, f); fputc(10, f); fclose(f); } }
 int main(void) {
-  gfxInitDefault(); C3D_Init(C3D_DEFAULT_CMDBUF_SIZE); C2D_Init(C2D_DEFAULT_MAX_OBJECTS); C2D_Prepare();
-  romfsInit();
+  { FILE *f = fopen("sdmc:/3ds/lazarus_boot.log", "w"); if (f) { fputs("main entered\n", f); fclose(f); } }
+  gfxInitDefault(); lg("gfx ok"); C3D_Init(C3D_DEFAULT_CMDBUF_SIZE); C2D_Init(C2D_DEFAULT_MAX_OBJECTS); C2D_Prepare();
+  { Result rr = romfsInit(); char b[48]; snprintf(b, sizeof b, "romfs %08lx", (unsigned long)rr); lg(b); }
   C3D_RenderTarget *top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT), *bot = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
   tbuf = C2D_TextBufNew(4096);
   for (int i = 0; i < NTYPES; i++) {
@@ -796,8 +798,8 @@ int main(void) {
   viSheet = C2D_SpriteSheetLoad("romfs:/gfx/vicons.t3x");
   if (!viSheet) { gfxExit(); consoleInit(GFX_TOP, NULL); printf("Missing vicons\n"); while (aptMainLoop()) { hidScanInput(); if (hidKeysDown() & KEY_START) break; gspWaitForVBlank(); } return 1; }
   C2D_SpriteSheet logoSheet = C2D_SpriteSheetLoad("romfs:/gfx/logo.t3x"); int titleMode = logoSheet ? 1 : 0; float titleT = 0;
-  audioInit(); srand((unsigned)time(NULL));
-  loadGame(); lastMs = osGetTime();
+  lg("sheets ok"); audioInit(); lg("audio done"); srand((unsigned)time(NULL));
+  loadGame(); lg("save loaded"); lastMs = osGetTime();
   u64 lastSave = lastMs, prevMs = lastMs;
   while (aptMainLoop()) {
     hidScanInput();
