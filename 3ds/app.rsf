@@ -24,6 +24,7 @@ AccessControlInfo:
   UseExtSaveData          : false
   FileSystemAccess:
    - DirectSdmc
+   - DirectSdmcWrite
   IdealProcessor          : 0
   AffinityMask            : 1
   Priority                : 16
