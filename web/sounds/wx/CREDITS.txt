@@ -1,0 +1,2 @@
+Weather sounds (rain, heavy rain, wind, howling wind, wind in trees, thunder) come from the Moodist project (github.com/remvze/moodist).
+Those recordings are under CC0 or the Pixabay Content License. They were trimmed and looped for this game.
