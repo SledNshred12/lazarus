@@ -567,6 +567,10 @@ html:not(.inbattle):not(.mapfs) .tab .mi{display:grid}
 .misi{flex:none;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:#7BE05A;background:rgba(123,224,90,.14)}
 .misbox .btns .btn{width:100%}
 .acct.pfp>.pfpl,.acct.pfp>.pfpi{flex:none}
+.cbv{margin:0 0 10px;padding:10px 12px;border-radius:14px;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.cbvh{display:flex;flex-direction:column;gap:2px}.cbvh b{font-size:15px}.cbvh span{font-size:13px;color:var(--ink-2)}
+.cbvr{display:flex;flex-wrap:wrap;gap:4px 12px;margin:8px 0;font-size:13px}.cbvr span{color:var(--ink-2);width:100%}
+.cbvb{display:flex;flex-wrap:wrap;gap:6px}
 .dp{margin:-18px;display:flex;flex-direction:column}
 .dphero{position:relative;background:radial-gradient(circle at 50% 85%,rgba(126,217,87,.16),transparent 60%),#1B1915;background-size:cover;background-position:center;background-repeat:no-repeat;min-height:130px}
 .dphero.col{aspect-ratio:360/250;min-height:0}
@@ -966,10 +970,10 @@ function unlockLabel(u){ var p=u.split(':'); return p[0]==='t'?'Trait: '+tName(p
 var GN=12, OX=240, OY=20, HW=20, HH=15;   /* starting 12x12 tile map, isometric tile 40 x 30 px */
 /* land you can buy: each step adds a ring of tiles all round. [size, credits, Bunker level needed] */
 var LAND=[[12,0,1],[14,2500,3],[16,8000,5],[18,20000,7],[20,45000,9]];
-function gn(){ var t=(typeof colTown==='function')?colTown():null, n=t?t.land:S.land; return (typeof n==='number'&&n>=12)?n:12; }
+function gn(){ var t=(typeof colTown==='function')?colTown():null, n=t?t.land:((typeof cbOn==='function'&&cbOn())?CB.land:S.land); return (typeof n==='number'&&n>=12)?n:12; }
 function zk(){ return GN/gn()*ZM.c; }   /* how far the colony view is zoomed out */
 function landStep(){ var n=gn(); for(var i=0;i<LAND.length;i++) if(LAND[i][0]===n) return i; return 0; }
-function nextLand(){ var i=landStep(); return i+1<LAND.length?LAND[i+1]:null; }
+function nextLand(){ if(typeof cbOn==='function'&&cbOn()) return null; var i=landStep(); return i+1<LAND.length?LAND[i+1]:null; }
 var BT={
   hall:{name:'Bunker',w:3,h:3,hz:30,max:20,blurb:'The heart of the settlement.'},
   farm:{name:'Scrap Garden',w:2,h:2,hz:20,max:20,base:120,blurb:'Plant and harvest crops for food.'},
@@ -991,9 +995,12 @@ var BT={
 var MAXLV=20;   /* highest level for every building, Bunker included */
 var BUILDABLE=['farm','trade','incubator','lab','clinic','scout','tower','shelter','dronebay','kennel'];
 var BUILD_WATER=['rain','pump','filter'];
-function buildableList(){ return BUILDABLE; }
+function buildableList(){ return (typeof cbOn==='function'&&cbOn()&&!ui.colony)?BUILDABLE.concat(['cvault']):BUILDABLE; }
 var LIM={dronebay:[0,0,1,1,1,1,1,1,1,1],kennel:[0,0,0,1,1,1,1,1,1,1],farm:[3,4,5,6,7,7,8,9,9,10],trade:[2,3,4,5,5,6,6,7,7,7],incubator:[1,2,2,3,3,3,4,4,4,4],lab:[1,1,2,2,2,3,3,3,3,3],clinic:[1,1,2,2,2,3,3,3,3,3],scout:[1,2,2,3,3,3,4,4,4,4],tower:[0,1,1,1,1,1,1,1,1,1],shelter:[0,0,1,1,1,2,2,2,3,3],rain:[2,3,4,5],pump:[1,2,2,3],filter:[1,1,2,2]};   /* by Bunker level */
 var COSTS={dronebay:[1200,2600,5400,10800,20000,34000,52000,75000,105000],kennel:[900,2000,4200,8400,16000,27000,42000,61000,85000],hall:[400,900,1800,3250,5850,10550,19000,34200,61550],farm:[150,350,700,1400,2500,4500,8100,14600,26300],trade:[200,450,900,1800,3250,5850,10550,19000,34200],incubator:[250,550,1100,2200,3950,7100,12800,23050,41500],lab:[300,700,1400,2800,5050,9100,16400,29500,53100],clinic:[250,600,1200,2400,4300,7750,13950,25100,45200],scout:[200,450,900,1800,3250,5850,10550,19000,34200],tower:[300,700,1400,2800,5050,9100,16400,29500,53100],shelter:[350,800,1600,3200,5800,10400,18700,33700,60700],rain:[120,300,650,1300],pump:[300,650,1300,2600],filter:[260,600,1200,2400]};
+BT.cvault={name:'Clan Vault',w:2,h:2,hz:26,max:20,base:600,blurb:'Holds your clan’s shared credits and food. Upgrade it to hold more.'};
+LIM.cvault=[1,1,1,1,1,1,1,1,1,1];
+COSTS.cvault=COSTS.trade.map(function(x){ return x*2; });
 
 /* ================= save / state ================= */
 var KEY='lazarus-save-v3', V2='lazarus-save-v2', V1='quarantine-clash-save-v1';
@@ -1080,7 +1087,7 @@ function bestLv(type){ var m=0; bl(type).forEach(function(b){ m=Math.max(m,b.lv)
 function infectMult(){ return S.infected ? clamp(.4+.1*bestLv('clinic'),0,1) : 1; }
 function tradeRate(b){ return 20*b.lv/60*infectMult()*leagueBonus()*crewMul('quartermaster')*wevMul('gold',1.5); }
 function tradeCap(b){ return 200*b.lv; }
-function tickEconomy(dt){ var wk=wxFx().res, bz=shIn('buildings')?0:wk; bl('trade').forEach(function(b){ b.st=Math.min(tradeCap(b),(b.st||0)+tradeRate(b)*dt*bz); }); tickEarth(dt*wk); }
+function tickEconomy(dt){ var wk=wxFx().res, bz=shIn('buildings')?0:wk; var cbm=(typeof cbOn==='function'&&cbOn()); bl('trade').forEach(function(b){ if(cbm){ b.st=Math.min(tradeCap(b),tradeRate(b)*Math.max(0,Date.now()-(b.ct||Date.now()))/1000); return; } b.st=Math.min(tradeCap(b),(b.st||0)+tradeRate(b)*dt*bz); }); tickEarth(dt*wk); }
 function waiting(){ var r=0; bl('trade').forEach(function(b){ r+=Math.floor(b.st||0); }); return r; }
 function income(){ var r=0; bl('trade').forEach(function(b){ r+=tradeRate(b)*60; }); return r; }
 function sampleCap(){ var c=0; bl('incubator').forEach(function(b){ c+=4+2*b.lv; }); return c; }
@@ -1980,8 +1987,9 @@ function paidFor(b){
   for(i=0;i<(b.lv||1)-1;i++) p+=cs[i]||0;
   return Math.round(p);
 }
-function canDemolish(b){ return !!b&&b.type!=='hall'; }
+function canDemolish(b){ return !!b&&b.type!=='hall'&&b.type!=='cvault'; }
 function doDemolish(id){
+  if(cbOn()&&!ui.colony){ cbDemolish(id); return; }
   var b=abGet(id); if(!canDemolish(b)) return;
   if(mode!=='home'){ toast('Finish your outbreak first.'); return; }
   var back=paidFor(b), list=AB(), i; if(b.at&&Date.now()-b.at<120000) achEv('redo');
@@ -2006,16 +2014,19 @@ function stripWater(){
   save();
 }
 function doUpgrade(id){
+  if(cbOn()&&!ui.colony){ cbUpgrade(id); return; }
   var b=abGet(id); if(!b||b.lv>=Math.min(BT[b.type].max,ui.colony?abCap(b):bCap(b))) return;
   var cost=upCost(b);
   if(S.credits<cost){ toast('Not enough credits.'); return; }
   S.credits-=cost; b.paid=paidFor(b)+cost; b.lv++; b.upAt=gtime; floatAt(b,'Level '+b.lv); sfxUpgrade(b.lv); save(); renderAll();
 }
 function doCollect(id){
+  if(cbOn()){ var cb0=getB(id); if(cb0) cbCollect([cb0],function(){ renderAll(); }); return; }
   var b=getB(id); if(!b) return; if(shBlock('buildings','Your buildings are shut in the shelter.')) return; var a=Math.floor(b.st||0); if(a<1) return;
   S.credits+=a; b.st-=a; floatAt(b,'+'+a); sfxCollect('credits'); save(); renderAll();
 }
 function doPlant(id,crop){
+  if(cbOn()){ cbPlant(id,crop); return; }
   var b=getB(id); if(!b||b.type!=='farm'||b.crop) return;
   if(shBlock('crops','Your crops are in the shelter.')) return;
   if(CROPS[crop].hall>hallLv()){ toast('Upgrade the Bunker to grow '+CROPS[crop].name+'.'); return; }
@@ -2032,8 +2043,9 @@ function harvestOne(b){
   if(!cropReady(b)||shIn('crops')) return 0;
   var y=cropYield(b); S.food+=y; achEv('harv'); floatAt(b,'+'+y+' food'); b.crop=null; b.t0=0; return y;
 }
-function doHarvest(id){ var b=getB(id); if(!b) return; if(shBlock('crops','Your crops are in the shelter.')) return; if(harvestOne(b)){ sfxCollect('farm'); save(); renderAll(); } }
+function doHarvest(id){ var b=getB(id); if(!b) return; if(cbOn()){ cbHarvest([b],function(){ renderAll(); }); return; } if(shBlock('crops','Your crops are in the shelter.')) return; if(harvestOne(b)){ sfxCollect('farm'); save(); renderAll(); } }
 function collectAll(){
+  if(cbOn()){ cbCollectAll(); return; }
   if(shIn('crops')&&shIn('buildings')){ shBlock('crops','Your crops and buildings are in the shelter.'); return; }
   var tot=0, food=0;
   readyFarms().forEach(function(b){ food+=harvestOne(b); });
@@ -2051,7 +2063,7 @@ function startPlace(type,id){
   var d=BT[type], b=id?abGet(id):null, gx, gy;
   if(!b){
     if(abBl(type).length>=abLimit(type)){ toast(abHall()<MAXLV&&LIM[type][abHall()]>abLimit(type)?'Limit reached. Upgrade the Bunker for more.':'Limit reached. You have the most you can build.'); return; }
-    if(S.credits<abBuildCost(type)){ toast('Not enough credits.'); return; }
+    if(cbFunds()<abBuildCost(type)){ toast(cbOn()&&!ui.colony?'The Clan Vault needs '+fmt(abBuildCost(type))+' credits for that. Donate some!':'Not enough credits.'); return; }
     var s=findSpot(d.w,d.h); if(!s){ toast('No room left on the map.'); return; }
     gx=s.x; gy=s.y;
   } else { gx=b.x; gy=b.y; }
@@ -2060,6 +2072,7 @@ function startPlace(type,id){
 }
 function doPlace(){
   var p=ui.place; if(!p||!p.valid) return;
+  if(cbOn()&&!ui.colony){ cbPlace(); return; }
   if(p.id){ var b=abGet(p.id); b.x=p.gx; b.y=p.gy; floatAt(b,'Moved'); }
   else {
     var c=abBuildCost(p.type);
@@ -2147,7 +2160,7 @@ function exitColony(){ ui.colony=null; ui.sel=null; ui.place=null; ui.menu=false
 /* ================= panels ================= */
 function pips(n,max){ var s=''; for(var i=1;i<=max;i++) s+='<i class="'+(i<=n?'on':'')+'"></i>'; return '<div class="pips" aria-label="Level '+n+' of '+max+'">'+s+'</div>'; }
 function placePanel(){
-  var p=ui.place, d=BT[p.type], cost=p.id?0:buildCost(p.type), can=p.valid&&(p.id||S.credits>=cost);
+  var p=ui.place, d=BT[p.type], cost=p.id?0:buildCost(p.type), can=p.valid&&(p.id||cbFunds()>=(cbOn()&&!ui.colony?abBuildCost(p.type):cost));
   return '<div class="row"><div class="info"><div class="name">'+(p.id?'Move ':'Place ')+d.name+' · '+d.w+'×'+d.h+' tiles</div><div class="sub">'+(p.valid?'Tap or drag on the map to position it. Green means the spot is free.':'That spot is taken or off the map. Pick another tile.')+'</div></div>'+
     '<div class="acts"><button class="btn primary" data-act="place" '+(can?'':'disabled')+' type="button">'+(p.id?'Move here':'Build · '+fmt(cost))+'</button><button class="btn" data-act="cancel" type="button">Cancel</button></div></div>';
 }
@@ -2230,7 +2243,7 @@ function colonyPanel(){
     else desc='Part of this colony.';
     if(b.lv>=d.max) btn+='<button class="btn" disabled type="button">Max level</button>';
     else if(b.lv>=capLv) btn+='<button class="btn" disabled type="button">Needs Bunker '+b.lv+'</button>';
-    else { var c=upCost(b); btn+='<button class="btn primary" data-act="up" data-id="'+b.id+'" '+(S.credits<c?'disabled':'')+' type="button">Upgrade · '+fmt(c)+'</button>'; }
+    else { var c=upCost(b); btn+='<button class="btn primary" data-act="up" data-id="'+b.id+'" '+(cbFunds()<c?'disabled':'')+' type="button">Upgrade · '+fmt(c)+'</button>'; }
     btn+='<button class="btn" data-act="move" data-id="'+b.id+'" type="button">Move</button>';
     if(canDemolish(b)) btn+='<button class="btn" data-act="del" data-id="'+b.id+'" type="button">'+(ui.confirmDel===b.id?'Tap again · +'+fmt(paidFor(b)):'Knock down')+'</button>';
     h+='<div class="row"><div class="info"><div class="name">'+d.name+' · Level '+b.lv+'</div><div class="sub">'+desc+'</div>'+pips(b.lv,d.max)+'</div><div class="acts">'+btn+'</div></div>';
@@ -2244,7 +2257,7 @@ function basePanel(){
   if(ui.colony) return colonyPanel();
   if(ui.place) return placePanel();
   var nReady=readyFarms().length, nWait=waiting();
-  var h='<div class="acts"><button class="btn primary" data-act="menu" type="button">'+(ui.menu?'Close build menu':'Build')+'</button><button class="btn" data-act="collectall" '+((nReady<1&&nWait<1)?'disabled':'')+' type="button">Collect all · '+nReady+' crop'+(nReady===1?'':'s')+', '+fmt(nWait)+' cr</button></div>';
+  var h=cbVaultRow()+'<div class="acts"><button class="btn primary" data-act="menu" type="button">'+(ui.menu?'Close build menu':'Build')+'</button><button class="btn" data-act="collectall" '+((nReady<1&&nWait<1)?'disabled':'')+' type="button">Collect all · '+nReady+' crop'+(nReady===1?'':'s')+', '+fmt(nWait)+' cr</button></div>';
   if(ui.menu) h+='<div>'+buildMenu()+'</div>';
   var b=ui.sel?getB(ui.sel):null;
   if(b){
@@ -2279,11 +2292,12 @@ function basePanel(){
     else if(b.type==='kennel') desc='Breeds infected animals for raids: rats at level 1, dogs at 3, crows at 5. Room for '+petCap()+' packs (up to 12). From level 7 animals get faster, and packs get bigger at levels 11 and 16'+(kenLv()>6?' (now '+Math.round((petBoost()-1)*100)+'% faster)':'')+'.';
     else desc='While infected, farms and trade run at '+Math.round(clamp(.4+.1*bestLv('clinic'),0,1)*100)+'%'+(bestLv('clinic')<6?' (10% more a level, full speed at level 6)':'')+'. Rival attacks are also '+(4*bestLv('clinic'))+'% less likely to infect you.';
     if(b.type==='tower'){ var tfm=wxFcMin(b.lv); desc='Reads the sky. '+(tfm?'Warns you about '+tfm+' minutes ahead. ':'Upgrade to level 2 to see storms coming. ')+'Storm Scan shows '+(b.lv<=1?'rough colors':b.lv===2?'clearer colors':'every detail')+' and reaches '+(b.lv>=5?'the whole world':b.lv>=4?'far across the map':b.lv>=3?'a wide area':'only near your region')+'. Open it on the Earth tab.'; }
+    else if(b.type==='cvault'){ desc='Holds your clan’s shared credits and food. Right now it can hold '+fmt(CB.cap||0)+' of each. Upgrade it to hold more. Farms and Bazaars fill it, and anyone can give to it.'; }
     else if(b.type==='shelter'){ var si=shInfo(); desc='Put your <b>crops</b>, your <b>people</b> or your <b>buildings</b> inside and storms can\'t touch them, for as long as you like. But you can\'t use what is inside until you bring it out: sheltered crops stop growing and can\'t be planted or harvested, sheltered people can\'t scout, spy or raid, and sheltered buildings stop making credits. Holds '+(si.cap===3?'all 3 at once':si.cap+' thing'+(si.cap>1?'s':'')+' at a time')+(si.cap<3?' (level '+(si.cap<2?5:10)+' holds more)':'')+'.'; ['crops','people','buildings'].forEach(function(m){ var on=si.inside[m]; btn+='<button class="btn'+(on?' primary':'')+'" data-act="shmode" data-m="'+m+'" '+((!on&&si.used>=si.cap)?'disabled':'')+' type="button">'+(on?'Bring '+m+' out':'Shelter '+m)+'</button>'; }); }
     if(b.dmg>b.lv){ var rc=repairCost(b); btn+='<button class="btn primary" data-act="repair" data-id="'+b.id+'" '+(S.credits<rc?'disabled':'')+' type="button">Repair · '+fmt(rc)+'</button>'; desc='<b>Storm damage.</b> It fell from level '+b.dmg+' to '+b.lv+'. '+desc; }
     if(b.lv>=d.max) btn+='<button class="btn" disabled type="button">Max level</button>';
     else if(b.lv>=capLv) btn+='<button class="btn" disabled type="button">Needs Bunker '+b.lv+'</button>';
-    else { var c=upCost(b); btn+='<button class="btn primary" data-act="up" data-id="'+b.id+'" '+(S.credits<c?'disabled':'')+' type="button">Upgrade · '+fmt(c)+'</button>'; }
+    else { var c=upCost(b); btn+='<button class="btn primary" data-act="up" data-id="'+b.id+'" '+(cbFunds()<c?'disabled':'')+' type="button">Upgrade · '+fmt(c)+'</button>'; }
     btn+='<button class="btn" data-act="move" data-id="'+b.id+'" type="button">Move</button>';
     if(canDemolish(b)) btn+='<button class="btn" data-act="del" data-id="'+b.id+'" type="button">'+(ui.confirmDel===b.id?'Tap again · +'+fmt(paidFor(b)):'Knock down')+'</button>';
     h+='<div class="row"><div class="info"><div class="name">'+d.name+' · Level '+b.lv+'</div><div class="sub">'+desc+'</div>'+extra+pips(b.lv,d.max)+'</div><div class="acts">'+btn+'</div></div>';
@@ -2416,6 +2430,7 @@ function worldPanelBase(){
 }
 function renderPanel(){
   try{ wwSync(); }catch(e){}
+  try{ cbSync(); }catch(e){}
   if(typeof smIn==='function'&&smIn()&&(ui.tab==='road'||ui.tab==='social')) ui.tab='base';
   try{ if(DEF.on) ui.tab='base'; }catch(e){}
   var p=$('#panel');
@@ -3002,6 +3017,8 @@ function drawBuilding(b,time,ghost){
     ctx.fillStyle=gr; ctx.strokeStyle='#6C7479'; ctx.lineWidth=1.2; ctx.beginPath(); ctx.arc(dp.x,dp.y-13,14,0,TAU); ctx.fill(); ctx.stroke();
     ctx.strokeStyle='rgba(108,116,121,.7)'; ctx.lineWidth=.8; ctx.beginPath(); ctx.ellipse(dp.x,dp.y-13,14,5,0,0,TAU); ctx.moveTo(dp.x,dp.y-27); ctx.lineTo(dp.x,dp.y+1); ctx.ellipse(dp.x,dp.y-13,5,14,0,0,TAU); ctx.stroke();
     ctx.fillStyle=(Math.sin(time*3+x)>0)?'#FF5A3C':'#7A2A1C'; ctx.beginPath(); ctx.arc(dp.x,dp.y-28,2.2,0,TAU); ctx.fill();
+  } else if(b.type==='cvault'){
+    cvDraw(x,y,w,h,time);
   } else if(b.type==='shelter'){
     drawBox(x,y,w,h,0,11,'#8E948F','#737A75','#5C625E');
     fillPts(fL(x,y,w,h,.3,.7,0,8),'#1F2423');
@@ -3637,8 +3654,8 @@ function earthPanel0(){
 }
 
 /* ================= version notes (shown under the bell) ================= */
-var GAME_VERSION=152;
-var CHANGELOG=[{"v": 152, "name": "0.97.1", "d": "Nov 11, 2026", "items": ["Fixed letter profile pictures getting squashed when you had new clan chat.", "Fixed some text buttons showing without their style."]},{"v": 151, "name": "0.97.0", "d": "Nov 11, 2026", "items": ["Phone notifications. Turn them on in Settings to hear when an expedition team is back, when your colony is under attack, when a friend messages you, and 30 minutes before a storm reaches your region.", "On iPhone and iPad, add Lazarus to your Home Screen first, then open it from there to turn notifications on."]},{"v": 150, "name": "0.96.0", "d": "Nov 11, 2026", "items": ["Weather now has real sound. Rain, heavy storms, wind, howling blizzards and soft snowy wind, plus real thunder after every lightning flash.", "A lightning strike on your colony cracks loud and close.", "Turn weather sounds on or off, and set their volume, in Settings under Sound."]},{"v": 149, "name": "0.95.0", "d": "Nov 11, 2026", "items": ["Virus missiles in friend wars. Tap a country a friend holds on the Earth map and fire a missile at it from anywhere. If it hits, the country is yours.", "Each missile costs 20,000 credits and 5 virus samples. You can fire one every 30 minutes.", "Your friend's drones can shoot missiles down. More drones and a higher Drone Bay mean a better chance."]},{"v": 148, "name": "0.94.1", "d": "Nov 11, 2026", "items": ["Friend wars now have their own Wasteland. Pick a region next to yours to invade and you get a fresh wasteland there. Take 3 of its colonies to win the region.", "Your own Wasteland is kept safe while you are in a war and comes back when you leave.", "Expedition places on the Wasteland map stay hidden until you explore that spot."]},{"v": 147, "name": "0.94.0", "d": "Nov 11, 2026", "items": ["Taking an Earth region now only needs 3 colonies in your Wasteland, not all 14.", "Expedition places now show up on the Wasteland map: the Pharmacy, the crashed plane, the subway, the hospital, the bunker and Station Kappa. Tap one to plan a trip there.", "You can watch your expedition teams walk out and back on the map."]},{"v": 146, "name": "0.93.0", "d": "Nov 11, 2026", "items": ["New Social tab. Friend wars, messages, your clan, the leaderboard and your friends are all in one place.", "You can now message your friends. Tap Messages, pick a friend and chat.", "A red dot on the Social tab shows new messages, clan chat and friend requests."]},{"v": 145, "name": "0.92.1", "d": "Nov 11, 2026", "items": ["The soft fade at the bottom of the map now shows on every tab, not just Colony.", "Map hints like Explored and Tap a region moved up so the fade does not hide them."]},{"v": 144, "name": "0.92.0", "d": "Nov 11, 2026", "items": ["New main menu. Your colony fills the screen edge to edge, with your credits, food, trophies and health in a row above it.", "The Launch an Outbreak button sits right on the bottom edge of the map.", "The menu tabs are now a bar at the bottom of the screen with icons, like a phone app, and they stay put while you scroll: Colony, Lab, Wasteland, Earth and Ranks (plus Journal in story mode).", "The Trophies tab is now called Ranks."]},{"v": 143, "name": "0.91.0", "d": "Nov 11, 2026", "items": ["The outbreak screen is new. Everything fits on one screen now, so you never scroll away from the map.", "The map sits at the top, edge to edge. Under it, a dark dock with your strains and supports side by side in one row you can swipe.", "Strains show how many samples are left in a red corner badge. A support you have picked glows gold.", "Infection energy, rival alert and cure progress are three slim bars under the map.", "Bigger Surge and Mutate buttons, with End beside them.", "The long how-to text is gone. One short line under the buttons tells you what a tap will do right now, and changes when you pick a support."]},{"v": 142, "name": "0.90.0", "d": "Nov 10, 2026", "items": ["Ranks, like Rocket League and R6: Bronze, Silver, Gold, Platinum, Diamond and Champion, each with divisions I, II and III, and Grand Champion at the top.", "Your rank follows the trophies you have right now. Win to climb a division; lose enough and you drop one. A rank-up or demotion screen tells you when it happens.", "Your rank badge sits on the trophy chip at the top, on your Account and on other players' profiles.", "Grand Champion takes 10,000 trophies. The divisions below it are spread evenly, about 555 trophies apart: Silver starts at 1,670, Gold at 3,330, Platinum at 5,000, Diamond at 6,670 and Champion at 8,330.", "Monthly seasons. At the end of each month you get credits and food for the best rank you hit that season, and trophies above 2,000 are pulled halfway back so everyone climbs again.", "The old league names are gone. The bonus for reaching the top ranks is still for good: Bazaars and farms +7% each for ever reaching Diamond, Champion and Grand Champion."]},{"v": 139, "name": "0.89.0", "d": "Nov 9, 2026", "items": ["The Journal tab now opens Cole's own field journal. Tap the cover to open it.", "Inside there is a page for every chapter, written by Cole. A line appears for each thing you finish, and the choices you made are written in too.", "Every chapter page has its scenes, so you can watch them again from the journal.", "What to do next is still on the journal's front, with a Watch button when a scene is waiting."]},{"v": 138, "name": "0.88.0", "d": "Nov 9, 2026", "items": ["Story mode is finished. All five chapters are playable now, from waking up in the pod to the core of the Black Fortress.", "Chapter 2, Scavengers: the memory of the paper crane, expeditions for Kessler's notes, a drifter who says she has met you before, and the marks inside your pod.", "Chapter 3, The Remnant: Commander Vance hunts you, and you decide what to do with his son's dog tags.", "Chapter 4, Ground Zero: open Research Station Kappa and find out what Kessler did. Then you get ninety seconds to talk to her.", "Chapter 5, The Black Fortress: the warning, the Citadel, and the last choice. Three endings. The third only opens if both Kessler and Vance trust you.", "Your earlier choices now matter: what you told Kessler, and what you did with the dog tags, decide whether the cure is possible.", "Any chapter that has nothing in it yet now says Coming soon instead of Chapter complete.", "Fixed: the Mutate objectives said to use the Virus lab. They mean the Mutate button during an outbreak."]},{"v": 137, "name": "0.87.0", "d": "Nov 9, 2026", "items": ["Achievements are now shared between online, offline and story mode. Earn one anywhere and it shows as earned everywhere, and it only pays out once.", "Drones have to be put together from drone parts before you can build them. Drone parts come back from expeditions: the Crashed Cargo Plane, Military Bunker and Research Station Kappa have the most.", "Each drone in the Drone Bay hangar shows how many parts it needs. Drones you already had stay unlocked.", "Fixed: pressing Defend with no drones closed the alarm and seemed to do nothing. It now shows how the attack went and how to get drones for next time.", "Fixed: pressing Defend while scrolled down the page started the fight off screen. The colony now scrolls into view so you can watch your drones.", "Story mode: expeditions no longer ask for trophies. The Flooded Subway opens in chapter 2, the Overrun Hospital in chapter 3, the Military Bunker in chapter 4 and Research Station Kappa in chapter 5."]},{"v": 136, "name": "0.86.1", "d": "Nov 9, 2026", "items": ["Story mode no longer has the attack alarm. Rival attacks there work the way they always did."]},{"v": 135, "name": "0.86.0", "d": "Nov 9, 2026", "items": ["Rival colonies now attack you for real. The screen goes red, a siren sounds and the colony that is attacking is named: DEFEND YOUR COLONY.", "Press Defend and watch: their virus lands on your buildings one at a time, and the drones from your Drone Bay fly out on their own, spray the worst one clean and move to the next. More drones, and a higher Drone Bay, save more buildings.", "Save every building and the attack is stopped cold, with a credit bonus. Lose half of them and your colony is infected, the way it always was.", "An attack that lands while you are away is defended by your drones on their own. Each drone you keep in the bay makes an attack more likely to fail."]},{"v": 130, "name": "0.85.2", "d": "Nov 9, 2026", "items": ["Attack and world reports no longer cover the middle of your colony. They slide in from the side like an achievement, slide back out after a few seconds, and tapping one opens the full list of recent reports."]},{"v": 128, "name": "0.85.1", "d": "Nov 9, 2026", "items": ["Moving into a new chapter now fades to black and shows the chapter number and its name before fading back into your colony."]},{"v": 127, "name": "0.85.0", "d": "Nov 9, 2026", "items": ["In story mode, strain traits and spread types no longer ask for trophies. They open up as you get through the chapters, and the labels say which chapter.", "Seven more story achievements: starting the story, your first answer to Kessler, each chapter you finish, and one for watching every scene."]},{"v": 126, "name": "0.84.0", "d": "Nov 9, 2026", "items": ["A Journal tab sits beside Earth while you are in story mode, with a dot on it when the story is waiting for you.", "New legendary achievement, The Lazarus Files, for finishing story mode."]},{"v": 125, "name": "0.83.1", "d": "Nov 9, 2026", "items": ["Closing a radio message now puts you straight back in your colony instead of opening the story journal."]},{"v": 124, "name": "0.83.0", "d": "Nov 8, 2026", "items": ["Story lines now stay on screen about twice as long, worked out from how much there is to read. Nothing needs tapping; the scene plays itself.", "A small SKIP button sits in the top corner if you want to get on with it."]},{"v": 123, "name": "0.82.5", "d": "Nov 8, 2026", "items": ["The hospital scene is rebuilt: a proper bed with Mira asleep in it, a heart monitor on a wheeled stand instead of floating, and a real heartbeat trace instead of plain spikes.", "The camera now pushes slowly in on the bed."]},{"v": 122, "name": "0.82.4", "d": "Nov 8, 2026", "items": ["Rewrote every line in the story scenes in plain words, so you can follow what is happening without guessing.", "The scene with Cole's sister is now clearly a hospital room: a heart monitor, a drip and a bed."]},{"v": 121, "name": "0.82.3", "d": "Nov 8, 2026", "items": ["Story scenes now say where and when you are in the corner.", "Fixed the dog tags hanging off nothing instead of off the chain."]},{"v": 120, "name": "0.82.2", "d": "Nov 8, 2026", "items": ["Fixed the story objective bar getting stuck at zero if your story carried over from before story mode had its own colony.", "Every story scene now has music written for it: warm, dread, a heartbeat, cold and so on, instead of one pad for everything."]},{"v": 119, "name": "0.82.1", "d": "Nov 8, 2026", "items": ["The blue story bar is gone. In its place there is an objective card above Launch an outbreak that shows the chapter, what you have to do and how far along you are.", "Tap that card to open the journal. Leaving story mode is in your profile.", "Friend wars and Friends no longer show on the Earth tab inside the story."]},{"v": 118, "name": "0.82.0", "d": "Nov 8, 2026", "items": ["Story mode is its own game now. No trophies, no leaderboard, no clans, friends, wars or customise while you are in it.", "Your profile in story mode shows the chapter you are on, the scenes you have seen and the choices you have made."]},{"v": 117, "name": "0.81.1", "d": "Nov 8, 2026", "items": ["Fixed the Change picture button on your profile, which story mode had stretched out of shape.", "The book icon is gone from the top bar. Story mode opens from your profile, and the Journal button on the story bar while you are in it."]},{"v": 116, "name": "0.81.0", "d": "Nov 8, 2026", "items": ["Story mode is now a world of its own. It has its own colony and its own save, so nothing you do in the story touches the colony you already have.", "Open it from your profile. A bar across the top shows when you are in it, with Journal and Leave.", "Your story carries on where it was if you had already started chapter one."]},{"v": 115, "name": "0.80.1", "d": "Nov 8, 2026", "items": ["The story now opens properly: fade to black, an Axiom Games card, then the title, then the scene.", "Soft music plays under every story scene, and the Lazarus music steps aside while one is running.", "Story subtitles stay on screen long enough to read, and scenes end on their own instead of waiting for a tap."]},{"v": 114, "name": "0.80.0", "d": "Nov 8, 2026", "items": ["Story mode. Tap the book at the top of the screen to open The Lazarus Files: who you are, who woke you up, and why anyone would do that to a person.", "Chapter one is playable now. Objectives are things you were going to do anyway, and the choices you make are remembered.", "Animated scenes play inside the game, in the game's own style."]},{"v": 113, "name": "0.79.0", "d": "Nov 8, 2026", "items": ["New Play multiplayer button on your Account screen. It takes you to your clan, or lets you pick a friend to challenge to a war. You need to be signed in with a username."]},{"v": 112, "name": "0.78.6", "d": "Nov 8, 2026", "items": ["Profiles now show the whole colony across the top, with the picture and name sitting on its corner. This goes for other players and for your own Account screen."]},{"v": 111, "name": "0.78.5", "d": "Nov 8, 2026", "items": ["Your Account screen (tap your picture) now looks like a profile: a big picture at the top, your trophies in a row, your league, and an overview of your colony. Everything it had before is still there."]},{"v": 110, "name": "0.78.4", "d": "Nov 8, 2026", "items": ["Player profiles have a new look: a big picture at the top, your stats in a row, and an overview of your colony, record and achievements.", "Your colony now sits on a thick slab of ground with a shadow underneath, and buildings cast a softer, longer shadow.", "New How to play topic: Weather and storms. Tap the forecast badge to open it.", "Deleting your account now also removes your profile picture from the device."]},{"v": 109, "name": "0.78.3", "d": "Nov 7, 2026", "items": ["Rats and dogs now run around buildings instead of over them, and go behind buildings that are in front of them.", "Picking a support no longer jumps the raid window back to the top.", "Friend requests now show up under the bell. Accept or decline them right there.", "The bell gets a red dot when someone sends you a friend request."]},{"v": 108, "name": "0.78.2", "d": "Nov 7, 2026", "items": ["The Axiom Games intro now plays its own theme music. Tap to start, then sit back.", "The intro animation matches the original Axiom Games intro.", "No more TAP TO ENTER. The game opens on its own once it has loaded."]},{"v": 107, "name": "0.78.1", "d": "Nov 7, 2026", "items": ["The Drone Bay is now a launch tower that grows with every level.", "The Drone Bay and Kennel now go up to level 20. Higher levels hold more and make drones and animals faster and stronger.", "Axiom Games intro when the game starts, and the Axiom logo on the loading screen."]},{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
+var GAME_VERSION=153;
+var CHANGELOG=[{"v": 153, "name": "0.98.0", "d": "Nov 11, 2026", "items": ["Clans now share one colony. While you are in a clan, your Colony tab is the clan's colony and everyone builds, moves and upgrades in it together. You see what the others do live.", "New building: the Clan Vault. Builds and upgrades are paid from it, and farm and Bazaar income goes into it. Give credits and food to fill it. Upgrade it to hold more.", "Your own colony is kept safe and comes back if you leave your clan."]},{"v": 152, "name": "0.97.1", "d": "Nov 11, 2026", "items": ["Fixed letter profile pictures getting squashed when you had new clan chat.", "Fixed some text buttons showing without their style."]},{"v": 151, "name": "0.97.0", "d": "Nov 11, 2026", "items": ["Phone notifications. Turn them on in Settings to hear when an expedition team is back, when your colony is under attack, when a friend messages you, and 30 minutes before a storm reaches your region.", "On iPhone and iPad, add Lazarus to your Home Screen first, then open it from there to turn notifications on."]},{"v": 150, "name": "0.96.0", "d": "Nov 11, 2026", "items": ["Weather now has real sound. Rain, heavy storms, wind, howling blizzards and soft snowy wind, plus real thunder after every lightning flash.", "A lightning strike on your colony cracks loud and close.", "Turn weather sounds on or off, and set their volume, in Settings under Sound."]},{"v": 149, "name": "0.95.0", "d": "Nov 11, 2026", "items": ["Virus missiles in friend wars. Tap a country a friend holds on the Earth map and fire a missile at it from anywhere. If it hits, the country is yours.", "Each missile costs 20,000 credits and 5 virus samples. You can fire one every 30 minutes.", "Your friend's drones can shoot missiles down. More drones and a higher Drone Bay mean a better chance."]},{"v": 148, "name": "0.94.1", "d": "Nov 11, 2026", "items": ["Friend wars now have their own Wasteland. Pick a region next to yours to invade and you get a fresh wasteland there. Take 3 of its colonies to win the region.", "Your own Wasteland is kept safe while you are in a war and comes back when you leave.", "Expedition places on the Wasteland map stay hidden until you explore that spot."]},{"v": 147, "name": "0.94.0", "d": "Nov 11, 2026", "items": ["Taking an Earth region now only needs 3 colonies in your Wasteland, not all 14.", "Expedition places now show up on the Wasteland map: the Pharmacy, the crashed plane, the subway, the hospital, the bunker and Station Kappa. Tap one to plan a trip there.", "You can watch your expedition teams walk out and back on the map."]},{"v": 146, "name": "0.93.0", "d": "Nov 11, 2026", "items": ["New Social tab. Friend wars, messages, your clan, the leaderboard and your friends are all in one place.", "You can now message your friends. Tap Messages, pick a friend and chat.", "A red dot on the Social tab shows new messages, clan chat and friend requests."]},{"v": 145, "name": "0.92.1", "d": "Nov 11, 2026", "items": ["The soft fade at the bottom of the map now shows on every tab, not just Colony.", "Map hints like Explored and Tap a region moved up so the fade does not hide them."]},{"v": 144, "name": "0.92.0", "d": "Nov 11, 2026", "items": ["New main menu. Your colony fills the screen edge to edge, with your credits, food, trophies and health in a row above it.", "The Launch an Outbreak button sits right on the bottom edge of the map.", "The menu tabs are now a bar at the bottom of the screen with icons, like a phone app, and they stay put while you scroll: Colony, Lab, Wasteland, Earth and Ranks (plus Journal in story mode).", "The Trophies tab is now called Ranks."]},{"v": 143, "name": "0.91.0", "d": "Nov 11, 2026", "items": ["The outbreak screen is new. Everything fits on one screen now, so you never scroll away from the map.", "The map sits at the top, edge to edge. Under it, a dark dock with your strains and supports side by side in one row you can swipe.", "Strains show how many samples are left in a red corner badge. A support you have picked glows gold.", "Infection energy, rival alert and cure progress are three slim bars under the map.", "Bigger Surge and Mutate buttons, with End beside them.", "The long how-to text is gone. One short line under the buttons tells you what a tap will do right now, and changes when you pick a support."]},{"v": 142, "name": "0.90.0", "d": "Nov 10, 2026", "items": ["Ranks, like Rocket League and R6: Bronze, Silver, Gold, Platinum, Diamond and Champion, each with divisions I, II and III, and Grand Champion at the top.", "Your rank follows the trophies you have right now. Win to climb a division; lose enough and you drop one. A rank-up or demotion screen tells you when it happens.", "Your rank badge sits on the trophy chip at the top, on your Account and on other players' profiles.", "Grand Champion takes 10,000 trophies. The divisions below it are spread evenly, about 555 trophies apart: Silver starts at 1,670, Gold at 3,330, Platinum at 5,000, Diamond at 6,670 and Champion at 8,330.", "Monthly seasons. At the end of each month you get credits and food for the best rank you hit that season, and trophies above 2,000 are pulled halfway back so everyone climbs again.", "The old league names are gone. The bonus for reaching the top ranks is still for good: Bazaars and farms +7% each for ever reaching Diamond, Champion and Grand Champion."]},{"v": 139, "name": "0.89.0", "d": "Nov 9, 2026", "items": ["The Journal tab now opens Cole's own field journal. Tap the cover to open it.", "Inside there is a page for every chapter, written by Cole. A line appears for each thing you finish, and the choices you made are written in too.", "Every chapter page has its scenes, so you can watch them again from the journal.", "What to do next is still on the journal's front, with a Watch button when a scene is waiting."]},{"v": 138, "name": "0.88.0", "d": "Nov 9, 2026", "items": ["Story mode is finished. All five chapters are playable now, from waking up in the pod to the core of the Black Fortress.", "Chapter 2, Scavengers: the memory of the paper crane, expeditions for Kessler's notes, a drifter who says she has met you before, and the marks inside your pod.", "Chapter 3, The Remnant: Commander Vance hunts you, and you decide what to do with his son's dog tags.", "Chapter 4, Ground Zero: open Research Station Kappa and find out what Kessler did. Then you get ninety seconds to talk to her.", "Chapter 5, The Black Fortress: the warning, the Citadel, and the last choice. Three endings. The third only opens if both Kessler and Vance trust you.", "Your earlier choices now matter: what you told Kessler, and what you did with the dog tags, decide whether the cure is possible.", "Any chapter that has nothing in it yet now says Coming soon instead of Chapter complete.", "Fixed: the Mutate objectives said to use the Virus lab. They mean the Mutate button during an outbreak."]},{"v": 137, "name": "0.87.0", "d": "Nov 9, 2026", "items": ["Achievements are now shared between online, offline and story mode. Earn one anywhere and it shows as earned everywhere, and it only pays out once.", "Drones have to be put together from drone parts before you can build them. Drone parts come back from expeditions: the Crashed Cargo Plane, Military Bunker and Research Station Kappa have the most.", "Each drone in the Drone Bay hangar shows how many parts it needs. Drones you already had stay unlocked.", "Fixed: pressing Defend with no drones closed the alarm and seemed to do nothing. It now shows how the attack went and how to get drones for next time.", "Fixed: pressing Defend while scrolled down the page started the fight off screen. The colony now scrolls into view so you can watch your drones.", "Story mode: expeditions no longer ask for trophies. The Flooded Subway opens in chapter 2, the Overrun Hospital in chapter 3, the Military Bunker in chapter 4 and Research Station Kappa in chapter 5."]},{"v": 136, "name": "0.86.1", "d": "Nov 9, 2026", "items": ["Story mode no longer has the attack alarm. Rival attacks there work the way they always did."]},{"v": 135, "name": "0.86.0", "d": "Nov 9, 2026", "items": ["Rival colonies now attack you for real. The screen goes red, a siren sounds and the colony that is attacking is named: DEFEND YOUR COLONY.", "Press Defend and watch: their virus lands on your buildings one at a time, and the drones from your Drone Bay fly out on their own, spray the worst one clean and move to the next. More drones, and a higher Drone Bay, save more buildings.", "Save every building and the attack is stopped cold, with a credit bonus. Lose half of them and your colony is infected, the way it always was.", "An attack that lands while you are away is defended by your drones on their own. Each drone you keep in the bay makes an attack more likely to fail."]},{"v": 130, "name": "0.85.2", "d": "Nov 9, 2026", "items": ["Attack and world reports no longer cover the middle of your colony. They slide in from the side like an achievement, slide back out after a few seconds, and tapping one opens the full list of recent reports."]},{"v": 128, "name": "0.85.1", "d": "Nov 9, 2026", "items": ["Moving into a new chapter now fades to black and shows the chapter number and its name before fading back into your colony."]},{"v": 127, "name": "0.85.0", "d": "Nov 9, 2026", "items": ["In story mode, strain traits and spread types no longer ask for trophies. They open up as you get through the chapters, and the labels say which chapter.", "Seven more story achievements: starting the story, your first answer to Kessler, each chapter you finish, and one for watching every scene."]},{"v": 126, "name": "0.84.0", "d": "Nov 9, 2026", "items": ["A Journal tab sits beside Earth while you are in story mode, with a dot on it when the story is waiting for you.", "New legendary achievement, The Lazarus Files, for finishing story mode."]},{"v": 125, "name": "0.83.1", "d": "Nov 9, 2026", "items": ["Closing a radio message now puts you straight back in your colony instead of opening the story journal."]},{"v": 124, "name": "0.83.0", "d": "Nov 8, 2026", "items": ["Story lines now stay on screen about twice as long, worked out from how much there is to read. Nothing needs tapping; the scene plays itself.", "A small SKIP button sits in the top corner if you want to get on with it."]},{"v": 123, "name": "0.82.5", "d": "Nov 8, 2026", "items": ["The hospital scene is rebuilt: a proper bed with Mira asleep in it, a heart monitor on a wheeled stand instead of floating, and a real heartbeat trace instead of plain spikes.", "The camera now pushes slowly in on the bed."]},{"v": 122, "name": "0.82.4", "d": "Nov 8, 2026", "items": ["Rewrote every line in the story scenes in plain words, so you can follow what is happening without guessing.", "The scene with Cole's sister is now clearly a hospital room: a heart monitor, a drip and a bed."]},{"v": 121, "name": "0.82.3", "d": "Nov 8, 2026", "items": ["Story scenes now say where and when you are in the corner.", "Fixed the dog tags hanging off nothing instead of off the chain."]},{"v": 120, "name": "0.82.2", "d": "Nov 8, 2026", "items": ["Fixed the story objective bar getting stuck at zero if your story carried over from before story mode had its own colony.", "Every story scene now has music written for it: warm, dread, a heartbeat, cold and so on, instead of one pad for everything."]},{"v": 119, "name": "0.82.1", "d": "Nov 8, 2026", "items": ["The blue story bar is gone. In its place there is an objective card above Launch an outbreak that shows the chapter, what you have to do and how far along you are.", "Tap that card to open the journal. Leaving story mode is in your profile.", "Friend wars and Friends no longer show on the Earth tab inside the story."]},{"v": 118, "name": "0.82.0", "d": "Nov 8, 2026", "items": ["Story mode is its own game now. No trophies, no leaderboard, no clans, friends, wars or customise while you are in it.", "Your profile in story mode shows the chapter you are on, the scenes you have seen and the choices you have made."]},{"v": 117, "name": "0.81.1", "d": "Nov 8, 2026", "items": ["Fixed the Change picture button on your profile, which story mode had stretched out of shape.", "The book icon is gone from the top bar. Story mode opens from your profile, and the Journal button on the story bar while you are in it."]},{"v": 116, "name": "0.81.0", "d": "Nov 8, 2026", "items": ["Story mode is now a world of its own. It has its own colony and its own save, so nothing you do in the story touches the colony you already have.", "Open it from your profile. A bar across the top shows when you are in it, with Journal and Leave.", "Your story carries on where it was if you had already started chapter one."]},{"v": 115, "name": "0.80.1", "d": "Nov 8, 2026", "items": ["The story now opens properly: fade to black, an Axiom Games card, then the title, then the scene.", "Soft music plays under every story scene, and the Lazarus music steps aside while one is running.", "Story subtitles stay on screen long enough to read, and scenes end on their own instead of waiting for a tap."]},{"v": 114, "name": "0.80.0", "d": "Nov 8, 2026", "items": ["Story mode. Tap the book at the top of the screen to open The Lazarus Files: who you are, who woke you up, and why anyone would do that to a person.", "Chapter one is playable now. Objectives are things you were going to do anyway, and the choices you make are remembered.", "Animated scenes play inside the game, in the game's own style."]},{"v": 113, "name": "0.79.0", "d": "Nov 8, 2026", "items": ["New Play multiplayer button on your Account screen. It takes you to your clan, or lets you pick a friend to challenge to a war. You need to be signed in with a username."]},{"v": 112, "name": "0.78.6", "d": "Nov 8, 2026", "items": ["Profiles now show the whole colony across the top, with the picture and name sitting on its corner. This goes for other players and for your own Account screen."]},{"v": 111, "name": "0.78.5", "d": "Nov 8, 2026", "items": ["Your Account screen (tap your picture) now looks like a profile: a big picture at the top, your trophies in a row, your league, and an overview of your colony. Everything it had before is still there."]},{"v": 110, "name": "0.78.4", "d": "Nov 8, 2026", "items": ["Player profiles have a new look: a big picture at the top, your stats in a row, and an overview of your colony, record and achievements.", "Your colony now sits on a thick slab of ground with a shadow underneath, and buildings cast a softer, longer shadow.", "New How to play topic: Weather and storms. Tap the forecast badge to open it.", "Deleting your account now also removes your profile picture from the device."]},{"v": 109, "name": "0.78.3", "d": "Nov 7, 2026", "items": ["Rats and dogs now run around buildings instead of over them, and go behind buildings that are in front of them.", "Picking a support no longer jumps the raid window back to the top.", "Friend requests now show up under the bell. Accept or decline them right there.", "The bell gets a red dot when someone sends you a friend request."]},{"v": 108, "name": "0.78.2", "d": "Nov 7, 2026", "items": ["The Axiom Games intro now plays its own theme music. Tap to start, then sit back.", "The intro animation matches the original Axiom Games intro.", "No more TAP TO ENTER. The game opens on its own once it has loaded."]},{"v": 107, "name": "0.78.1", "d": "Nov 7, 2026", "items": ["The Drone Bay is now a launch tower that grows with every level.", "The Drone Bay and Kennel now go up to level 20. Higher levels hold more and make drones and animals faster and stronger.", "Axiom Games intro when the game starts, and the Axiom logo on the loading screen."]},{"v": 106, "name": "0.78.0", "d": "Nov 7, 2026", "items": ["New: Drone Bay with six drones you build and unlock, from the Scrap Duster to the Specter.", "New: Kennel. Breed rats, dogs and crows to send into raids.", "New: supply crates that burst open inside their walls, and spy sabotage before a fight.", "Pick up to 2 supports before a raid (3 at Bunker 10). Bigger colonies fight back with anti-air and crate inspectors.", "New: Friends. Add friends by username.", "New: Friend wars. Pick a country, win outbreaks to take the regions next to you, make or break alliances, and take over the world first.", "Profiles now show analytics: win rate, Bunker level, colonies captured, strains, clan and more."]},{"v": 105, "name": "0.77.6", "d": "Nov 7, 2026", "items": ["The Last Citadel is now The Black Fortress, with its own black iron fortress on the map.", "Test world: every colony is discovered."]},{"v": 104, "name": "0.77.5", "d": "Nov 7, 2026", "items": ["Military Outpost patrols now drive on the roads and turn like real vehicles.", "Six patrol designs: tank, little troop truck, cure tanker, armored patrol, troop truck and medic van."]},{"v": 103, "name": "0.77.4", "d": "Nov 7, 2026", "items": ["Messages now show on top of popups instead of hiding behind them.", "Create account and Sign in can no longer get stuck, and show progress while they work."]},{"v": 102, "name": "0.77.3", "d": "Nov 7, 2026", "items": ["New: Report a problem in Settings. Tell us when something breaks."]},{"v": 101, "name": "0.77.2", "d": "Nov 7, 2026", "items": ["No more clan window every time you open the game if you are not in a clan.", "Virus lab shows a clear note and a Culture button when you have no samples.", "Account buttons no longer get stuck after a slow connection."]},{"v": 100, "name": "0.77.1", "d": "Nov 7, 2026", "items": ["Clan screen buttons are easier to tell apart, especially in dark mode."]},{"v": 99, "name": "0.77.0", "d": "Nov 6, 2026", "items": ["Clans! Online is now one shared world. Join a clan or start your own (up to 20 members) to play online.", "Take over the world together: every outbreak you win online pushes your clan's control in that region. The clan with the most control owns it, shown in its colour on the Earth map.", "Clans can steal regions from each other, and control fades a little every hour, so keep fighting to hold your land.", "Owned regions pay every clan member credits and food every hour. Your clan's land also lets you move your base into new regions.", "4-week seasons: the map resets and the top 3 clans win big rewards. Season 1 starts November 9.", "Clan chat with a swear filter and reporting, plus gifts of credits, food and samples to clan mates.", "Leaders and Officers can accept requests, mute, remove and promote members, and share an invite code.", "Offline play is exactly the same as before. Old online worlds have been retired.", "You can now delete your account from the account screen.", "New achievements: Brothers in Arms and Generous."]},{"v": 98, "name": "0.76.3", "d": "Nov 6, 2026", "items": ["Moved the top of the game down so the profile, bell, sound and settings buttons are easy to tap on phones with a notch or Dynamic Island."]},{"v": 97, "name": "0.76.2", "d": "Nov 6, 2026", "items": ["New accounts now pick a username when they sign up, and the game checks that nobody else has it.", "Any account without a username, including Google sign-ins, has to pick one before playing."]},{"v": 96, "name": "0.76.1", "d": "Nov 6, 2026", "items": ["Fixed the game getting stuck in a battle after looking at a specimen, specialist or tech tree from the results screen. Closing them now takes you back to the results."]},{"v": 95, "name": "0.76.0", "d": "Nov 6, 2026", "items": ["Virus Tech Tree: 4 branches of upgrades that work for every strain, plus The Lazarus Strain at the end. Earn Gene Points by winning outbreaks, beating Citadels and from the daily chest.", "The daily chest now spins! Win credits, Gene Points or a new specialist, from Common to Legendary.", "Your custom banner now flies on every flag in your colony, at every building level.", "Fixed colony buildings overlapping each other or sitting outside the walls in battles. Fortress Camps have bigger walls now.", "Fixed the bonus goal staying on screen after a battle.", "New achievements: Gene Splicer and The Lazarus Strain."]},{"v": 94, "name": "0.75.0", "d": "Nov 6, 2026", "items": ["Virus evolution: strains earn XP from battles and level up. At levels 3, 6 and 9 you pick one of three mutations.", "Daily and weekly missions at the top of the Trophies tab. Finish all 3 dailies to open the daily chest.", "Specialists: recruit Virologists, Engineers, Pathfinders, Medics and more. Up to 3 work in your crew at once, and you can train them to level 5.", "Expeditions: send scouts and specialists to 6 places in the Wasteland, from the Looted Pharmacy to Research Station Kappa. Make a choice when they return.", "Specimen Archive: find 24 rare specimens in 6 sets. Finished sets give bonuses for good and unlock new looks.", "Customize: design your colony banner, change strain colours and pick a profile picture frame.", "World events: every 4 hours, everyone gets the same event for 2 hours, like Blood Moon, Supply Airdrop, Gold Rush or a Trader Caravan.", "Every colony is different now: 7 colony types, 5 places, named leaders who hold grudges, bonus goals and events during battles.", "Earth regions now send their virus samples in one batch every 10 minutes, so used samples don't refill as fast.", "Emojis replaced with drawn icons everywhere.", "New achievements and missions for all of the above."]},
 {"v": 92, "name": "0.74.1", "d": "Nov 4, 2026", "items": ["Fix: choosing a profile picture now works on phones. Your picture is also saved to your account, so it follows you to other devices.", "Achievements have filters: All, Bronze, Silver and Gold, with how many of each you have earned.", "Leaderboard profiles: everyone on the leaderboard shows their profile picture. Tap a player to see their picture, league, trophies, wins, a picture of their colony and every achievement they have earned."]},
 {"v": 91, "name": "0.74.0", "d": "Nov 4, 2026", "items": ["Achievements! Over 50 goals to beat across the virus, outbreaks, Citadels, Earth, your colony, scouting, weather and trophies, plus a few secret ones. Many have Bronze, Silver and Gold tiers.", "Every achievement pays credits: 500 for Bronze, 5,000 for Silver and 25,000 for Gold. Beat the Black Fortress for the legendary Lazarus achievement and 2,000,000 credits.", "A pop-up slides in when you earn one. See them all, with your progress, from the Achievements button in your account or in Settings. Anything you've already done counts.", "Storm Scan has a new Temp map. Switch between Storms and Temp to see where it is hot or cold, watch heatwaves and cold snaps move in, and read your region's temperature now or on the forecast.", "The Online button is now your profile picture, with a green dot when you are online and a grey dot when you are offline. Tap it to open your account, where you can add or change your picture.", "Battles and Citadel fights now fill the screen. The top bar hides while you fight and comes back after.", "Removed the extra Send Scout button in the corner of the Wasteland. Tap a tile to send a scout."]},
 {"v": 90, "name": "0.73.2", "d": "Nov 3, 2026", "items": ["The build menu now shows a picture of every building next to what it does."]},
@@ -4102,6 +4119,7 @@ document.addEventListener('click',function(e){
   if(act==='suppick'){ supToggle(el.getAttribute('data-k'),el.getAttribute('data-id')); return; }
   if(act==='supbuy'){ supBuy(el.getAttribute('data-k'),el.getAttribute('data-id')); return; }
   if(act&&/^so/.test(act)&&soAct(act,el)) return;
+  if(act==='cbdon'&&cbAct(act,el)) return;
   if(act&&/^(fr|wv|mpplay|mpclango)/.test(act)&&wvAct(act,el)) return;
   if(tab){ if(ui.place) return; if(ui.colony&&tab!=='base') ui.colony=null; ui.tab=tab; ui.confirmReset=false; ui.confirmDel=null; renderPanel(); return; }
   if(ov){
@@ -4503,10 +4521,12 @@ function tickWx(dt){
   var raining=(fx.type==='rain'||fx.type==='thunder')&&fx.lvl>0, parched=(fx.type==='drought'||fx.type==='heat')&&fx.lvl>0;
   WX.wetD=Math.max(0,Math.min(1,(WX.wetD||0)+(raining?.015*fx.lvl:-.005)*dt));
   WX.dryD=Math.max(0,Math.min(fx.type==='heat'?.5:1,(WX.dryD||0)+(parched?.01*fx.lvl:-.004)*dt));
-  if(shIn('crops')) bl('farm').forEach(function(b){ if(b.crop&&b.t0&&!cropReady(b)) b.t0+=dt*1000; });
+  var cbw=(typeof cbOn==='function'&&cbOn());
+  if(cbw){}
+  else if(shIn('crops')) bl('farm').forEach(function(b){ if(b.crop&&b.t0&&!cropReady(b)) b.t0+=dt*1000; });
   else if(fx.grow!==1) bl('farm').forEach(function(b){ if(b.crop&&b.t0&&!cropReady(b)) b.t0+=(1-fx.grow)*dt*1000; });
-  if(fx.bolt>0&&Math.random()<fx.bolt/60*dt) wxStrike(fx);
-  if(fx.die>0){
+  if(!cbw&&fx.bolt>0&&Math.random()<fx.bolt/60*dt) wxStrike(fx);
+  if(!cbw&&fx.die>0){
     var n=0; bl('farm').forEach(function(b){ if(b.crop&&!cropReady(b)&&Math.random()<fx.die/60*dt){ b.crop=null; b.t0=0; n++; } });
     if(n){ WX.lost+=n; if(now-WX.msgAt>8000){ WX.msgAt=now; toast((fx.type==='drought'?'The drought':'The cold')+' killed '+(n>1?n+' crops':'a crop')+'.'); } save(); renderAll(); }
   }
@@ -4828,7 +4848,7 @@ function wxToggle(){
 }
 
 function frame(now){
-  var dt=Math.min(.05,Math.max(0,(now-last)/1000)); last=now; gtime+=dt; try{ wxsTick(dt); }catch(e){} try{ pushTick(dt); }catch(e){}
+  var dt=Math.min(.05,Math.max(0,(now-last)/1000)); last=now; gtime+=dt; try{ wxsTick(dt); }catch(e){} try{ pushTick(dt); }catch(e){} try{ cbTick(dt); }catch(e){}
   if(mode==='home'){
     tickEconomy(dt); tickWx(dt); if(tickWorld(dt)) renderAll();
     if(ui.tab==='earth'){ drawEarth(dt,gtime); try{ misDraw(gtime); }catch(e){} } else if(ui.tab==='world') drawWorld(dt,gtime); else drawHome(dt);
@@ -14031,6 +14051,264 @@ function pushSettingsHtml(){
   h+=setRow('Friend messages','When a friend sends you a message',setSw('nDm',SET.nDm!==false,dis));
   h+=setRow('Storm warning','30 minutes before a storm reaches your region',setSw('nStorm',SET.nStorm!==false,dis));
   return h;
+}
+
+/* ================= clan colony =================
+   While you are in a clan (online, not in story mode) your Colony tab IS the
+   clan's colony. Everyone plays it at the same time: the server holds the
+   buildings and the Clan Vault, every change goes through lzcb_op, and the game
+   checks for changes every 2 seconds so you see what the others do live.
+   Your own colony waits in S._bmain and comes back if you leave the clan.
+   Saves always write your own colony (see wwJSON). Builds and upgrades are paid
+   from the Clan Vault. Farm and Bazaar income goes into the vault, which can
+   only hold as much as its level allows. */
+var CB={sw:null,ver:null,bld:null,vault:{credits:0,food:0},cap:0,land:12,ev:[],seen:-1,busy:false,acc:0,loading:false,init:false,err:0};
+function cbWant(){ return typeof clOn==='function'&&clOn()&&!!clMine()&&!!MP.user&&!!MP.sb&&!(typeof smIn==='function'&&smIn()); }
+function cbOn(){ return !!(CB.sw&&CB.sw.S===S&&S._bmain); }
+function cbFunds(){ return cbOn()&&!ui.colony?(+CB.vault.credits||0):S.credits; }
+/* saves keep your own wasteland and your own colony, never the shared ones */
+function wwJSON(){ var o={}; for(var k in this){ if(Object.prototype.hasOwnProperty.call(this,k)&&k!=='_wmain'&&k!=='_bmain') o[k]=this[k]; } if(this._wmain) o.world=this._wmain; if(this._bmain) o.bld=this._bmain; return o; }
+function cbJSONOn(){ try{ Object.defineProperty(S,'toJSON',{value:wwJSON,configurable:true,enumerable:false,writable:true}); }catch(e){} }
+function cbSwapIn(){
+  if(!CB.bld) return;
+  S._bmain=S.bld; S.bld=CB.bld; cbJSONOn(); CB.sw={S:S};
+  ui.sel=null; ui.place=null; ui.menu=false;
+}
+function cbSwapOut(){
+  if(CB.sw&&CB.sw.S===S&&S._bmain){ S.bld=S._bmain; }
+  try{ delete S._bmain; if(!S._wmain) delete S.toJSON; }catch(e){}
+  CB.sw=null; CB.bld=null; CB.ver=null; CB.seen=-1; ui.sel=null; ui.place=null;
+}
+function cbSync(){
+  if(CB.sw&&CB.sw.S!==S) CB.sw=null;
+  var want=cbWant();
+  if(!want){ if(cbOn()) { cbSwapOut(); try{ renderAll(); }catch(e){} } return; }
+  if(!CB.bld&&!CB.loading) cbFetch();
+  if(CB.bld&&!cbOn()) cbSwapIn();
+}
+function cbEvText(e){
+  var nm=esc(e.name||'Someone'), T=e.type&&BT[e.type]?BT[e.type].name:'building';
+  if(e.op==='build') return nm+' built a '+T+'.';
+  if(e.op==='up') return nm+' upgraded the '+T+' to level '+e.lv+'.';
+  if(e.op==='move') return nm+' moved the '+T+'.';
+  if(e.op==='del') return nm+' knocked down the '+T+'.';
+  if(e.op==='donate'&&(e.credits>0||e.food>0)) return nm+' put '+[e.credits>0?fmt(e.credits)+' credits':'',e.food>0?fmt(e.food)+' food':''].filter(Boolean).join(' and ')+' in the Clan Vault.';
+  if(e.op==='init') return nm+' set up the clan colony.';
+  return '';
+}
+function cbApply(d,quiet){
+  if(!d) return;
+  if(d.vault) CB.vault=d.vault; if(d.cap!=null) CB.cap=+d.cap;
+  if(d.same) return;
+  CB.ver=d.ver; CB.land=d.land||CB.land||12; CB.ev=d.ev||[];
+  var nb=(d.bld||[]).map(function(b){ if(b.type==='trade'){ b.st=Math.min(tradeCap(b),tradeRate(b)*Math.max(0,Date.now()-(b.ct||Date.now()))/1000); } return b; });
+  CB.bld=nb;
+  if(cbOn()){ S.bld=nb; if(ui.sel&&!getB(ui.sel)) ui.sel=null; if(ui.place&&ui.place.id&&!getB(ui.place.id)) ui.place=null; }
+  var top=0; (CB.ev||[]).forEach(function(e){ top=Math.max(top,+e.v||0); });
+  if(CB.seen<0||quiet){ CB.seen=top; }
+  else {
+    var fresh=(CB.ev||[]).filter(function(e){ return (+e.v||0)>CB.seen&&e.uid!==(MP.user&&MP.user.id); }).sort(function(a,b){ return a.v-b.v; });
+    CB.seen=top;
+    fresh.slice(-3).forEach(function(e){ var t=cbEvText(e); if(t) toast(t); var b=e.id&&getB(e.id); if(b&&cbOn()) try{ floatAt(b,e.op==='up'?'Level '+e.lv:e.op==='build'?'Built':e.op==='move'?'Moved':''); }catch(x){} });
+  }
+  try{ renderAll(); }catch(e){}
+}
+function cbFetch(){
+  CB.loading=true;
+  frR('lzcb_get',{p_ver:null}).then(function(d){
+    if(d&&d.none){
+      if(CB.init) return; CB.init=true;
+      /* the clan colony starts as a copy of the first member's colony, plus a Clan Vault */
+      var mine=S._bmain||S.bld, copy=JSON.parse(JSON.stringify(mine)).map(function(b,i){ b.id='k'+(i+1); b.ct=Date.now(); b.st=0; delete b.dmg; delete b.hit; return b; });
+      var vd=BT.cvault, sp=null; try{ sp=findSpot(vd.w,vd.h); }catch(e){}
+      if(sp) copy.push({id:'k'+(copy.length+1),type:'cvault',lv:1,x:sp.x,y:sp.y,st:0,paid:0,at:Date.now()});
+      return frR('lzcb_init',{p_bld:copy,p_land:S.land||12}).then(function(d2){ cbApply(d2,true); if(cbWant()&&!cbOn()) cbSwapIn(); toast('Your clan colony is ready. Everyone in your clan builds here together.'); renderAll(); });
+    }
+    cbApply(d,true); if(cbWant()&&!cbOn()) cbSwapIn(); renderAll();
+  }).catch(function(){ CB.err=Date.now(); }).then(function(){ CB.loading=false; });
+}
+function cbTick(dt){
+  CB.acc+=dt; if(CB.acc<2) return; CB.acc=0;
+  try{ cbSync(); }catch(e){}
+  if(!cbOn()||document.hidden||CB.busy||CB.polling) return;
+  CB.polling=true;
+  frR('lzcb_get',{p_ver:CB.ver}).then(function(d){ cbApply(d); }).catch(function(){}).then(function(){ CB.polling=false; });
+}
+function cbErr(e){ var m=String((e&&(e.message||e))||''); return /vault_short/.test(m)?'The Clan Vault doesn’t have enough credits. Donate some!':/limit/.test(m)?'Your clan already has one.':/max/.test(m)?'That is already max level.':/no_building/.test(m)?'Someone just changed that building.':/not_in_clan/.test(m)?'You are not in a clan anymore.':'Could not do that. Try again.'; }
+function cbOp(op,then){
+  if(CB.busy){ toast('One moment…'); return; }
+  CB.busy=true;
+  frR('lzcb_op',{p_op:op}).then(function(d){ CB.busy=false; cbApply(d,true); if(then) then(d); })
+  .catch(function(e){ CB.busy=false; toast(cbErr(e)); CB.ver=null; frR('lzcb_get',{p_ver:null}).then(function(d){ cbApply(d,true); }).catch(function(){}); });
+}
+/* ---- the actions, sent to the server ---- */
+function cbPlace(){
+  var p=ui.place; if(!p||!p.valid) return;
+  if(p.id){ ui.place=null; cbOp({op:'move',id:p.id,x:p.gx,y:p.gy},function(){ var b=getB(p.id); if(b) floatAt(b,'Moved'); }); renderAll(); return; }
+  var c=abBuildCost(p.type);
+  if(cbFunds()<c){ toast('The Clan Vault needs '+fmt(c)+' credits for that. Donate some!'); return; }
+  if(abBl(p.type).length>=abLimit(p.type)){ toast('Limit reached.'); return; }
+  ui.place=null; renderAll();
+  cbOp({op:'build',type:p.type,x:p.gx,y:p.gy,cost:c},function(d){ var id=d&&d.ev&&d.ev[0]&&d.ev[0].id; var b=id&&getB(id); if(b){ ui.sel=id; floatAt(b,'Built'); } sfxBuild(); achEv('built'); renderAll(); });
+}
+function cbUpgrade(id){
+  var b=getB(id); if(!b||b.lv>=Math.min(BT[b.type].max,bCap(b))) return;
+  var c=upCost(b); if(cbFunds()<c){ toast('The Clan Vault needs '+fmt(c)+' credits for that. Donate some!'); return; }
+  cbOp({op:'up',id:id,cost:c},function(){ var b2=getB(id); if(b2){ floatAt(b2,'Level '+b2.lv); sfxUpgrade(b2.lv); } });
+}
+function cbDemolish(id){
+  var b=getB(id); if(!canDemolish(b)||b.type==='cvault') return;
+  ui.confirmDel=null; ui.sel=null;
+  cbOp({op:'del',id:id},function(){ toast(BT[b.type].name+' knocked down. Its credits went back into the Clan Vault.'); });
+}
+function cbPlant(id,crop){
+  var b=getB(id); if(!b||b.type!=='farm'||b.crop) return;
+  if(CROPS[crop].hall>hallLv()){ toast('Upgrade the Bunker to grow '+CROPS[crop].name+'.'); return; }
+  var sd=seedsOf(); if(!(sd[crop]>0)){ toast('No '+CROPS[crop].name.toLowerCase()+' seeds. Buy some below.'); return; }
+  var ids=[b].concat(emptyFarms().filter(function(f){ return f.id!==b.id; })).slice(0,sd[crop]).map(function(f){ return f.id; });
+  cbOp({op:'plant',ids:ids,crop:crop},function(){ sd[crop]=Math.max(0,sd[crop]-ids.length); save(); renderAll(); toast('Planted '+ids.length+' farm'+(ids.length>1?'s':'')+' with '+CROPS[crop].name+'.'); });
+}
+function cbHarvest(list,then){
+  var food={}, any=false; list.forEach(function(b){ if(cropReady(b)){ food[b.id]=cropYield(b); any=true; } });
+  if(!any){ if(then) then(0); return; }
+  cbOp({op:'harvest',food:food},function(d){ var g=d&&d.got?+d.got.food:0; list.forEach(function(b){ var b2=getB(b.id); if(b2&&food[b.id]) floatAt(b2,'+'+food[b.id]+' food'); }); achEv('harv'); sfxCollect('farm'); if(then) then(g); });
+}
+function cbCollect(list,then){
+  var rate={}, tcap={}, any=false; list.forEach(function(b){ if((b.st||0)>=1){ rate[b.id]=tradeRate(b); tcap[b.id]=tradeCap(b); any=true; } });
+  if(!any){ if(then) then(0); return; }
+  cbOp({op:'collect',rate:rate,tcap:tcap},function(d){ var g=d&&d.got?+d.got.credits:0; if(g>0){ var t=getB(list[0].id); if(t) floatAt(t,'+'+fmt(g)); sfxCollect('credits'); } if(then) then(g); });
+}
+function cbCollectAll(){
+  var farms=readyFarms(), trades=bl('trade').filter(function(b){ return (b.st||0)>=1; });
+  if(!farms.length&&!trades.length){ toast('Nothing is ready yet.'); return; }
+  cbHarvest(farms,function(){ setTimeout(function(){ cbCollect(trades,function(){ if(CB.vault&&(+CB.vault.credits>=CB.cap||+CB.vault.food>=CB.cap)) toast('The Clan Vault is full. Upgrade it to hold more.'); renderAll(); }); },50); });
+}
+function cbDonate(cr,fd){
+  cr=Math.max(0,Math.min(Math.floor(S.credits),Math.floor(cr||0))); fd=Math.max(0,Math.min(Math.floor(S.food),Math.floor(fd||0)));
+  if(!cr&&!fd){ toast('You have nothing to give.'); return; }
+  cbOp({op:'donate',credits:cr,food:fd},function(d){
+    var g=d&&d.got?d.got:{credits:0,food:0}; S.credits-=+g.credits||0; S.food-=+g.food||0; save(); renderAll();
+    if(!(+g.credits)&&!(+g.food)) toast('The Clan Vault is full. Upgrade it to hold more.');
+    else toast('You put '+[+g.credits?fmt(+g.credits)+' credits':'',+g.food?fmt(+g.food)+' food':''].filter(Boolean).join(' and ')+' in the Clan Vault.'+((+g.credits<cr||+g.food<fd)?' It is full now.':''));
+  });
+}
+function cbVaultRow(){
+  if(!cbOn()||ui.colony) return '';
+  var v=CB.vault||{}, cap=CB.cap||0;
+  return '<div class="cbv"><div class="cbvh"><b>'+esc((clMine()||{}).name||'Clan')+' colony</b><span>Everyone in your clan builds here together.</span></div>'+
+    '<div class="cbvr"><span>Clan Vault</span><b>'+fmt(Math.floor(+v.credits||0))+' / '+fmt(cap)+' credits</b><b>'+fmt(Math.floor(+v.food||0))+' / '+fmt(cap)+' food</b></div>'+
+    '<div class="cbvb"><button class="btn sm" data-act="cbdon" data-c="1000" type="button">Give 1,000 credits</button><button class="btn sm" data-act="cbdon" data-c="10000" type="button">Give 10,000 credits</button><button class="btn sm" data-act="cbdon" data-f="500" type="button">Give 500 food</button></div></div>';
+}
+function cbAct(act,el){
+  if(act!=='cbdon') return false;
+  var c=el.getAttribute('data-c'), f=el.getAttribute('data-f');
+  cbDonate(+c||0,+f||0); return true;
+}
+
+/* ================= Clan Vault building art ================= */
+var CVLOOK='D';
+function cvFlag(px,py,h){ ctx.fillStyle=(typeof clMine==='function'&&clMine()&&clMine().color)||'#E58B4B'; ctx.strokeStyle='#2A1F0E'; ctx.lineWidth=1.1; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(px,py-h); ctx.stroke(); ctx.beginPath(); ctx.moveTo(px,py-h); ctx.lineTo(px+10,py-h+3.5); ctx.lineTo(px,py-h+7); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+function cvDraw(x,y,w,h,time){
+  var L=CVLOOK, i;
+  if(L==='D') return cvDrawSafe(x,y,w,h,time);
+  if(L==='E') return cvDrawDoor(x,y,w,h,time);
+  if(L==='A'){
+    /* bank vault: a heavy concrete block with a big round steel door on the front */
+    drawBox(x,y,w,h,0,17,'#A39E92','#8A857A','#726E64');
+    fillPts(fL(x,y,w,h,0,1,15,17),'#C9A13A'); fillPts(fR(x,y,w,h,0,1,15,17),'#A9852A');
+    for(i=0;i<3;i++) fillPts(fR(x,y,w,h,.15+i*.28,.27+i*.28,5,11),'#5E5A52');
+    var c=P(x+w*.5,y+h,8.5), R=9.5;
+    ctx.save(); ctx.translate(c.x,c.y); ctx.transform(1,.5,0,1,0,0);
+    ctx.fillStyle='#3E4348'; ctx.strokeStyle='#1C1F22'; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(0,0,R,0,TAU); ctx.fill(); ctx.stroke();
+    var dg=ctx.createRadialGradient(-2,-2,1,0,0,R*.85); dg.addColorStop(0,'#C3CBD1'); dg.addColorStop(1,'#7C858C');
+    ctx.fillStyle=dg; ctx.beginPath(); ctx.arc(0,0,R*.8,0,TAU); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle='#D9B24A'; ctx.lineWidth=1.7;
+    for(i=0;i<3;i++){ var a=i*Math.PI/3; ctx.beginPath(); ctx.moveTo(Math.cos(a)*R*.55,Math.sin(a)*R*.55); ctx.lineTo(-Math.cos(a)*R*.55,-Math.sin(a)*R*.55); ctx.stroke(); }
+    ctx.fillStyle='#D9B24A'; ctx.beginPath(); ctx.arc(0,0,2,0,TAU); ctx.fill();
+    for(i=0;i<10;i++){ var a2=i*TAU/10; ctx.fillStyle='#24282B'; ctx.beginPath(); ctx.arc(Math.cos(a2)*R*.9,Math.sin(a2)*R*.9,.7,0,TAU); ctx.fill(); }
+    ctx.fillStyle='#5A6066'; ctx.fillRect(R*.82,-2.5,2.6,5);
+    ctx.restore();
+    var t=P(x+w*.8,y+h*.2,17); cvFlag(t.x,t.y,14);
+  } else if(L==='B'){
+    /* storehouse: a fenced yard piled with crates, food sacks and a stack of coins */
+    drawBox(x,y,w,h,0,2,'#6C6450','#58513F','#463F31');
+    drawBox(x+.15,y+.15,.8,.8,2,10,'#B08A55','#93703F','#7A5C33');
+    drawBox(x+.15,y+.15,.8,.8,10,17,'#B9935D','#9A7745','#7F6238');
+    drawBox(x+1.05,y+.2,.75,.7,2,9,'#A9834E','#8C6A3A','#73572F');
+    var s=P(x+.6,y+1.45,2); ctx.fillStyle='#D8C48E'; ctx.strokeStyle='#5A4A2A'; ctx.lineWidth=1;
+    for(i=0;i<3;i++){ ctx.beginPath(); ctx.ellipse(s.x-8+i*7,s.y-4-(i%2)*2,4.2,5.2,0,0,TAU); ctx.fill(); ctx.stroke(); }
+    var g=P(x+1.45,y+1.4,2);
+    for(i=0;i<5;i++){ ctx.fillStyle=i%2?'#E3B941':'#C99A22'; ctx.strokeStyle='#7A5A10'; ctx.lineWidth=.8; ctx.beginPath(); ctx.ellipse(g.x,g.y-2-i*2.4,5,2.2,0,0,TAU); ctx.fill(); ctx.stroke(); }
+    ctx.strokeStyle='#8A8578'; ctx.lineWidth=1.1;
+    [[0,0,1,0],[1,0,1,1]].forEach(function(e){ var a=P(x+e[0]*w,y+e[1]*h,0), b=P(x+e[2]*w,y+e[3]*h,0); for(var k=0;k<=6;k++){ var u=k/6, px=a.x+(b.x-a.x)*u, py=a.y+(b.y-a.y)*u; ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(px,py-7); ctx.stroke(); } ctx.beginPath(); ctx.moveTo(a.x,a.y-6); ctx.lineTo(b.x,b.y-6); ctx.stroke(); });
+    var t2=P(x+.55,y+.55,17); cvFlag(t2.x,t2.y,12);
+  } else {
+    /* treasure tower: a steel tower with gold bands and a gold dome on top */
+    drawBox(x+.1,y+.1,w-.2,h-.2,0,6,'#7C8288','#62676C','#4C5055');
+    drawBox(x+.45,y+.45,w-.9,h-.9,6,28,'#8A9096','#6E7378','#575B60');
+    for(i=0;i<3;i++){ fillPts(fL(x+.45,y+.45,w-.9,h-.9,0,1,9+i*7,11+i*7),'#D9A933'); fillPts(fR(x+.45,y+.45,w-.9,h-.9,0,1,9+i*7,11+i*7),'#B8891F'); }
+    fillPts(fL(x+.45,y+.45,w-.9,h-.9,.3,.7,6,13),'#2E3236');
+    var d=P(x+w/2,y+h/2,28), gr=ctx.createRadialGradient(d.x-3,d.y-8,1,d.x,d.y-4,10); gr.addColorStop(0,'#FFF0B0'); gr.addColorStop(1,'#C9961E');
+    ctx.fillStyle=gr; ctx.strokeStyle='#6E5210'; ctx.lineWidth=1.1; ctx.beginPath(); ctx.ellipse(d.x,d.y,10,5,0,Math.PI,0); ctx.quadraticCurveTo(d.x+10,d.y-12,d.x,d.y-13); ctx.quadraticCurveTo(d.x-10,d.y-12,d.x-10,d.y); ctx.fill(); ctx.stroke();
+    cvFlag(d.x,d.y-12,12);
+    var gl=.5+.5*Math.sin(time*2); ctx.fillStyle='rgba(255,215,90,'+(.15+.2*gl)+')'; ctx.beginPath(); ctx.arc(d.x,d.y-7,14,0,TAU); ctx.fill();
+  }
+}
+
+function cvSkew(c){ ctx.save(); ctx.translate(c.x,c.y); ctx.transform(1,.5,0,1,0,0); }
+function cvDial(R){
+  ctx.fillStyle='#1E2226'; ctx.beginPath(); ctx.arc(0,0,R+1.6,0,TAU); ctx.fill();
+  var g=ctx.createRadialGradient(-R*.3,-R*.3,1,0,0,R); g.addColorStop(0,'#F4E3A1'); g.addColorStop(1,'#B88A22');
+  ctx.fillStyle=g; ctx.strokeStyle='#6E5210'; ctx.lineWidth=1; ctx.beginPath(); ctx.arc(0,0,R,0,TAU); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle='#5A430C'; ctx.lineWidth=.8; for(var i=0;i<16;i++){ var a=i*TAU/16, r1=R*(i%4?.78:.66); ctx.beginPath(); ctx.moveTo(Math.cos(a)*r1,Math.sin(a)*r1); ctx.lineTo(Math.cos(a)*R*.92,Math.sin(a)*R*.92); ctx.stroke(); }
+  ctx.fillStyle='#3A2C08'; ctx.beginPath(); ctx.arc(0,0,R*.38,0,TAU); ctx.fill();
+  ctx.fillStyle='#E9C75A'; ctx.beginPath(); ctx.arc(0,0,R*.26,0,TAU); ctx.fill();
+}
+function cvDrawSafe(x,y,w,h,time){
+  /* D: a giant safe, dark steel with a gold dial and a wheel handle */
+  var x0=x+.15, y0=y+.15, w0=w-.3, h0=h-.3, i;
+  [[x0+.1,y0+h0-.2],[x0+w0-.2,y0+h0-.2],[x0+w0-.2,y0+.1]].forEach(function(f){ drawBox(f[0],f[1],.1,.1,0,2,'#2A2E31','#202326','#181A1C'); });
+  drawBox(x0,y0,w0,h0,2,26,'#4B5D53','#3C4C43','#2E3B34');
+  fillPts(fL(x0,y0,w0,h0,.06,.94,4.5,23.5),'#43554B');
+  fillPts(fL(x0,y0,w0,h0,0,1,24,26),'#C9A13A'); fillPts(fR(x0,y0,w0,h0,0,1,24,26),'#A9852A');
+  fillPts(fL(x0,y0,w0,h0,0,1,2,3.5),'#C9A13A'); fillPts(fR(x0,y0,w0,h0,0,1,2,3.5),'#A9852A');
+  for(i=0;i<2;i++) fillPts(fR(x0,y0,w0,h0,.05,.16,7+i*10,11+i*10),'#1F2622');
+  cvSkew(P(x0+w0*.4,y0+h0,14)); cvDial(8);
+  ctx.strokeStyle='#D8DEE2'; ctx.lineWidth=1.9; ctx.lineCap='round';
+  for(i=0;i<3;i++){ var a=i*TAU/3+.3; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.cos(a)*9.5,Math.sin(a)*9.5); ctx.stroke(); ctx.fillStyle='#F2F5F7'; ctx.strokeStyle='#6E777D'; ctx.lineWidth=.7; ctx.beginPath(); ctx.arc(Math.cos(a)*9.5,Math.sin(a)*9.5,1.5,0,TAU); ctx.fill(); ctx.stroke(); ctx.strokeStyle='#D8DEE2'; ctx.lineWidth=1.9; }
+  ctx.fillStyle='#9AA3A9'; ctx.strokeStyle='#4E565B'; ctx.lineWidth=.8; ctx.beginPath(); ctx.arc(0,0,2.4,0,TAU); ctx.fill(); ctx.stroke();
+  ctx.restore();
+  cvSkew(P(x0+w0*.85,y0+h0,14));
+  ctx.fillStyle='#1B1F22'; ctx.strokeStyle='#0E1012'; ctx.lineWidth=.8; ctx.fillRect(-3.6,-6.5,7.2,12); ctx.strokeRect(-3.6,-6.5,7.2,12);
+  ctx.fillStyle='#7BE05A'; ctx.fillRect(-2.6,-5.6,5.2,1.8);
+  for(var r=0;r<4;r++) for(var q=0;q<3;q++){ ctx.fillStyle=(r===3&&q===2)?'#E0B23A':'#AEB6BB'; ctx.fillRect(-2.6+q*1.85,-2.9+r*1.95,1.35,1.4); }
+  var bl=Math.sin(time*3)>0; ctx.fillStyle=bl?'#FF5A3C':'#5A1E14'; ctx.beginPath(); ctx.arc(2.4,-7.8,.7,0,TAU); ctx.fill();
+  ctx.restore();
+  var t=P(x0+w0*.85,y0+h0*.15,26); cvFlag(t.x,t.y,12);
+}
+function cvDrawDoor(x,y,w,h,time){
+  /* E: a concrete strongroom with a huge round vault door, opened a crack to show the gold inside */
+  var i;
+  drawBox(x,y,w,h,0,22,'#A7A296','#8C877C','#747066');
+  fillPts(fL(x,y,w,h,0,1,20,22),'#7D786D'); fillPts(fR(x,y,w,h,0,1,20,22),'#68645B');
+  for(i=0;i<3;i++) fillPts(fR(x,y,w,h,.18+i*.26,.3+i*.26,8,14),'#5E5A52');
+  var c=P(x+w*.47,y+h,11), R=9.6;
+  cvSkew(c);
+  ctx.fillStyle='#2B2E31'; ctx.strokeStyle='#1A1C1E'; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(0,0,R+1.8,0,TAU); ctx.fill(); ctx.stroke();
+  ctx.fillStyle='#120F08'; ctx.beginPath(); ctx.arc(0,0,R,0,TAU); ctx.fill();
+  ctx.save(); ctx.beginPath(); ctx.arc(0,0,R,0,TAU); ctx.clip();
+  for(i=0;i<9;i++){ ctx.fillStyle=i%2?'#E3B941':'#C99A22'; ctx.beginPath(); ctx.ellipse(-5+(i%3)*3.2,R-2-Math.floor(i/3)*2.2,2.6,1.2,0,0,TAU); ctx.fill(); }
+  var gl=.5+.5*Math.sin(time*2.5); ctx.fillStyle='rgba(255,215,90,'+(.18+.18*gl)+')'; ctx.fillRect(-R,-R,R*2,R*2);
+  ctx.restore();
+  ctx.save(); ctx.translate(R*.95,0); ctx.scale(.42,1);
+  ctx.fillStyle='#6F787F'; ctx.beginPath(); ctx.arc(0,0,R,0,TAU); ctx.fill(); ctx.stroke();
+  var dg=ctx.createRadialGradient(-2,-3,1,0,0,R); dg.addColorStop(0,'#D7DEE2'); dg.addColorStop(1,'#8C959C');
+  ctx.fillStyle=dg; ctx.beginPath(); ctx.arc(0,0,R*.86,0,TAU); ctx.fill();
+  ctx.strokeStyle='#D9B24A'; ctx.lineWidth=2.4; for(i=0;i<3;i++){ var a=i*Math.PI/3; ctx.beginPath(); ctx.moveTo(Math.cos(a)*R*.55,Math.sin(a)*R*.55); ctx.lineTo(-Math.cos(a)*R*.55,-Math.sin(a)*R*.55); ctx.stroke(); }
+  ctx.restore();
+  ctx.fillStyle='#4A5157'; ctx.fillRect(R*.6,-3,2.6,6);
+  ctx.restore();
+  var t=P(x+w*.8,y+h*.2,22); cvFlag(t.x,t.y,12);
 }
 
 /* ================= battle start / win / loss screens ================= */
