@@ -4,7 +4,7 @@
    and the old one is thrown away. The page itself is fetched network-first, so a
    new version is picked up as soon as there is a connection, and the cached copy
    is only used when the network is not there. */
-var CACHE = 'lazarus-v150';   /* the patch rewrites this to the release version */
+var CACHE = 'lazarus-v151';   /* the patch rewrites this to the release version */
 var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', function (e) {
@@ -62,6 +62,32 @@ self.addEventListener('fetch', function (e) {
         caches.open(CACHE).then(function (c) { c.put(r, copy); }).catch(function () { });
         return res;
       });
+    })
+  );
+});
+
+
+/* ---- phone notifications ---- */
+self.addEventListener('push', function (e) {
+  var d = {};
+  try { d = e.data ? e.data.json() : {}; } catch (err) { d = { title: 'Lazarus', body: e.data ? e.data.text() : '' }; }
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (cs) {
+      /* the game is open and on screen: it shows its own message, so stay quiet */
+      if (cs.some(function (c) { return c.visibilityState === 'visible'; })) return;
+      return self.registration.showNotification(d.title || 'Lazarus', {
+        body: d.body || '', tag: d.tag || d.kind || 'lazarus', renotify: true,
+        icon: 'icon-192.png', badge: 'icon-192.png', data: { kind: d.kind || '' }
+      });
+    })
+  );
+});
+self.addEventListener('notificationclick', function (e) {
+  e.notification.close();
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (cs) {
+      for (var i = 0; i < cs.length; i++) { if ('focus' in cs[i]) return cs[i].focus(); }
+      return self.clients.openWindow('./');
     })
   );
 });
