@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build
         working-directory: 3ds
-        run: make
+        run: make && make -C test
       - uses: actions/upload-artifact@v4
         with:
           name: lazarus3ds
@@ -32,6 +32,12 @@ jobs:
             3ds/lazarus3ds.elf
             3ds/lazarus3ds.smdh
             3ds/romfs
+            3ds/test/t1.elf
+            3ds/test/t2.elf
+            3ds/test/t3.elf
+            3ds/test/t1.smdh
+            3ds/test/t2.smdh
+            3ds/test/t3.smdh
 
   cia:
     needs: build
@@ -53,11 +59,21 @@ jobs:
           sudo dpkg --add-architecture i386 && sudo apt-get update -qq && sudo apt-get install -y -qq libc6:i386 libstdc++6:i386 libgcc-s1:i386 >/dev/null
           ./bannertool makebanner -i banner.png -a audio.wav -o banner.bnr
           ls -la banner.bnr
+          for n in 1 2 3; do
+            id=$(printf '0xF7A%02d' $((10+n)))
+            sed -e "s/Title                   : Lazarus/Title                   : LZ Test $n/" -e "s/CTR-P-LZRS/CTR-P-LZT$n/" -e "s/0xF7A10/$id/" -e "s#RootPath                : romfs#RootPath                : test/tromfs#" app.rsf > t$n.rsf
+            if [ $n = 1 ]; then head -n -3 t$n.rsf > t$n.tmp && mv t$n.tmp t$n.rsf; fi
+            ./makerom -f cia -o lztest$n.cia -elf test/t$n.elf -rsf t$n.rsf -icon test/t$n.smdh -banner banner.bnr -exefslogo -target t
+          done
           ./makerom -f cia -o lazarus3ds.cia -elf lazarus3ds.elf -rsf app.rsf -icon lazarus3ds.smdh -banner banner.bnr -exefslogo -target t
       - uses: actions/upload-artifact@v4
         with:
           name: lazarus3ds-cia
-          path: 3ds/lazarus3ds.cia
+          path: |
+            3ds/lazarus3ds.cia
+            3ds/lztest1.cia
+            3ds/lztest2.cia
+            3ds/lztest3.cia
 
   release:
     needs: [build, cia]
@@ -82,4 +98,7 @@ jobs:
           files: |
             lazarus3ds.3dsx
             lazarus3ds.cia
+            lztest1.cia
+            lztest2.cia
+            lztest3.cia
           make_latest: "false"
