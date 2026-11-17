@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Buckley Takeover</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#e8eaed;overflow:hidden}
+  #map{position:fixed;inset:0}
+  .ui{position:fixed;z-index:1000}
+  /* search bar (maps style) */
+  #top{top:10px;left:10px;right:10px}
+  #searchWrap{background:#fff;border-radius:24px;box-shadow:0 2px 6px rgba(0,0,0,.25);display:flex;align-items:center;padding:0 14px;height:48px}
+  #searchWrap span{font-size:18px;margin-right:8px}
+  #search{border:0;outline:0;font-size:16px;flex:1;background:transparent}
+  #results{background:#fff;border-radius:12px;margin-top:6px;box-shadow:0 2px 6px rgba(0,0,0,.2);max-height:40vh;overflow:auto;display:none}
+  .res{padding:12px 14px;border-bottom:1px solid #eee;display:flex;gap:10px;align-items:center;cursor:pointer}
+  .dot{width:12px;height:12px;border-radius:50%;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px #0003}
+  #stats{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .chip{background:#fff;border-radius:16px;padding:6px 12px;font-weight:700;font-size:14px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+  #prog{margin-top:8px;background:#fff;border-radius:12px;padding:6px 10px;box-shadow:0 1px 4px rgba(0,0,0,.25);font-size:12px;font-weight:700}
+  #bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:#ddd;margin-top:4px}
+  #bar div{height:100%;transition:width .4s}
+  /* side buttons */
+  #fabs{right:12px;bottom:calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+  .fab{width:52px;height:52px;border-radius:50%;border:0;background:#fff;font-size:22px;box-shadow:0 2px 6px rgba(0,0,0,.3);cursor:pointer}
+  .fab.on{background:#1a73e8}
+  #recruit{left:12px;bottom:calc(24px + env(safe-area-inset-bottom));border:0;border-radius:26px;height:52px;padding:0 18px;background:#1a73e8;color:#fff;font-weight:800;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+  /* place pins */
+  .pin{width:38px;height:38px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--c);border:3px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+  .pin span{transform:rotate(45deg);font-size:18px}
+  .pin.near{animation:bob 1s infinite alternate}
+  @keyframes bob{to{box-shadow:0 0 0 6px rgba(255,255,255,.7),0 2px 5px rgba(0,0,0,.4)}}
+  /* player avatar */
+  .me{width:30px;height:30px;border-radius:50%;background:#1a73e8;border:4px solid #fff;box-shadow:0 0 0 0 rgba(26,115,232,.6);animation:pulse 1.6s infinite;display:flex;align-items:center;justify-content:center;font-size:14px}
+  @keyframes pulse{to{box-shadow:0 0 0 22px rgba(26,115,232,0)}}
+  /* bottom sheet */
+  #sheet{left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;box-shadow:0 -2px 12px rgba(0,0,0,.25);padding:10px 18px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;z-index:1100}
+  #sheet.open{transform:none}
+  .grab{width:40px;height:5px;background:#ccc;border-radius:3px;margin:0 auto 10px}
+  #sheet h2{margin:0;font-size:20px}
+  .sub{color:#5f6368;font-size:14px;margin:4px 0 10px}
+  .row{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}
+  .stat{flex:1;background:#f1f3f4;border-radius:10px;padding:8px;text-align:center;font-size:13px;min-width:80px}
+  .stat b{display:block;font-size:18px}
+  .btn{border:0;border-radius:24px;padding:13px 18px;font-weight:800;font-size:16px;cursor:pointer;width:100%;margin-top:8px}
+  .primary{background:#1a73e8;color:#fff}.danger{background:#d93025;color:#fff}.ghost{background:#f1f3f4;color:#202124}
+  .btn:disabled{opacity:.45}
+  input[type=range]{width:100%}
+  /* overlays */
+  .overlay{position:fixed;inset:0;z-index:2000;background:rgba(10,20,40,.85);color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;padding:24px;text-align:center}
+  .overlay.show{display:flex}
+  .card{background:#fff;color:#202124;border-radius:20px;padding:22px;max-width:420px;width:100%;text-align:left}
+  .card h1{margin:0 0 4px;font-size:28px;text-align:center}
+  .card ul{padding-left:20px;line-height:1.5;font-size:15px}
+  #tapBtn{width:200px;height:200px;border-radius:50%;border:0;background:#d93025;color:#fff;font-size:30px;font-weight:900;box-shadow:0 8px 0 #8c1d18;margin:20px 0;touch-action:manipulation;user-select:none}
+  #tapBtn:active{transform:translateY(4px);box-shadow:0 4px 0 #8c1d18}
+  #powerBar{width:260px;height:18px;background:#fff3;border-radius:9px;overflow:hidden}
+  #powerBar div{height:100%;width:0;background:linear-gradient(90deg,#fbbc04,#ea4335)}
+  #toast{left:50%;transform:translateX(-50%);top:150px;background:#202124;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90%;text-align:center;z-index:1500}
+  #toast.show{opacity:.95}
+  .lb{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee;font-size:16px}
+  .lb b{margin-left:auto}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div id="top" class="ui">
+  <div id="searchWrap"><span>🔍</span><input id="search" placeholder="Search places in Buckley" autocomplete="off"></div>
+  <div id="results"></div>
+  <div id="stats">
+    <div class="chip">🪙 <span id="coins">0</span></div>
+    <div class="chip">👥 <span id="crew">0</span> crew</div>
+    <div class="chip">🏢 <span id="owned">0</span></div>
+    <div class="chip" id="modeChip">🚶 Walk mode</div>
+  </div>
+  <div id="prog"><span id="progTxt">Buckley: 0% yours</span><div id="bar"></div></div>
+</div>
+
+<div id="fabs" class="ui">
+  <button class="fab" id="lbBtn" title="Leaderboard">🏆</button>
+  <button class="fab" id="gpsBtn" title="Use real GPS">🛰️</button>
+  <button class="fab" id="locBtn" title="Center on me">📍</button>
+</div>
+<button id="recruit" class="ui">➕ Recruit 5 crew · 20🪙</button>
+
+<div id="sheet" class="ui"><div class="grab"></div><div id="sheetBody"></div></div>
+<div id="toast" class="ui"></div>
+
+<div id="intro" class="overlay show"><div class="card">
+  <h1>🏙️ BUCKLEY TAKEOVER</h1>
+  <p style="text-align:center;color:#5f6368;margin-top:0" id="loadTxt">Scouting Buckley for real places…</p>
+  <ul>
+    <li><b>Walk</b> to real places on the map. Tap the map to walk there, or turn on 🛰️ to use your real GPS.</li>
+    <li>When you're close (inside your blue circle), tap a place to <b>capture</b> or <b>attack</b> it.</li>
+    <li>Every place you own earns 🪙 coins. Spend them on crew and defenses.</li>
+    <li>Three rival crews are trying to take over too. Whoever owns <b>all of Buckley</b> wins!</li>
+  </ul>
+  <button class="btn primary" id="playBtn" disabled>Loading…</button>
+  <button class="btn ghost" id="newBtn" style="display:none">Start a new game</button>
+</div></div>
+
+<div id="battle" class="overlay">
+  <div style="font-size:18px;font-weight:700" id="bTitle">Attacking…</div>
+  <div style="font-size:15px;opacity:.85;margin-top:6px" id="bInfo"></div>
+  <button id="tapBtn">TAP!</button>
+  <div id="powerBar"><div></div></div>
+  <div style="margin-top:10px;font-size:22px;font-weight:800" id="bTimer">5.0</div>
+</div>
+
+<div id="msg" class="overlay"><div class="card" id="msgCard"></div></div>
+
+<script>
+const CENTER=[47.1632,-122.0268];
+const BBOX=[47.143,-122.075,47.187,-121.985]; // south,west,north,east around Buckley
+const RANGE=100;          // meters you must be within
+const WALK_SPEED=45;      // meters per second in walk mode
+const MAX_PLACES=60;
+const SAVE_KEY='buckleyTakeover_v1';
+
+const PLAYERS=[
+  {id:0,name:'You',color:'#1a73e8'},
+  {id:1,name:'Red Raiders',color:'#d93025'},
+  {id:2,name:'Purple Pack',color:'#8e24aa'},
+  {id:3,name:'Gold Gang',color:'#f29900'}
+];
+const NEUTRAL='#80868b';
+
+let S=null; // game state
+let map,meMarker,rangeCircle,markers={},follow=true,walkTarget=null,gpsWatch=null,selected=null;
+
+// ---------- helpers ----------
+const $=id=>document.getElementById(id);
+const rand=(a,b)=>a+Math.random()*(b-a);
+function dist(a,b){const R=6371000,t=Math.PI/180;const dLat=(b.lat-a.lat)*t,dLng=(b.lng-a.lng)*t;
+  const x=Math.sin(dLat/2)**2+Math.cos(a.lat*t)*Math.cos(b.lat*t)*Math.sin(dLng/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function fmtDist(m){return m<1000?Math.round(m)+' m':(m/1000).toFixed(1)+' km'}
+function toast(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>el.classList.remove('show'),3200)}
+function colorOf(owner){return owner==null?NEUTRAL:PLAYERS[owner].color}
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(e){}}
+
+// ---------- classify real places ----------
+function classify(t){
+  const a=t.amenity,s=t.shop,l=t.leisure;
+  const K=(kind,emoji,income,def,prio)=>({kind,emoji,income,def,prio});
+  if(['school','college','university','kindergarten'].includes(a))return K('School','🏫',8,45,1);
+  if(a==='townhall'||a==='courthouse')return K('City building','🏛️',9,50,1);
+  if(a==='fire_station')return K('Fire station','🚒',7,45,1);
+  if(a==='police')return K('Police station','🚓',7,50,1);
+  if(a==='library')return K('Library','📚',6,35,1);
+  if(a==='post_office')return K('Post office','📮',5,30,2);
+  if(a==='community_centre'||a==='social_facility')return K('Community center','🏠',5,30,2);
+  if(a==='place_of_worship')return K('Church','⛪',4,25,3);
+  if(a==='fuel')return K('Gas station','⛽',6,30,2);
+  if(a==='bank')return K('Bank','🏦',8,40,2);
+  if(['pharmacy','doctors','clinic','dentist','hospital','veterinary'].includes(a))return K('Health','🏥',5,30,2);
+  if(a==='fast_food')return K('Fast food','🍔',5,25,2);
+  if(a==='restaurant')return K('Restaurant','🍽️',5,25,2);
+  if(a==='cafe'||a==='ice_cream')return K('Café','☕',4,20,2);
+  if(a==='pub'||a==='bar')return K('Restaurant','🍽️',4,20,3);
+  if(s==='supermarket'||s==='convenience')return K('Store','🛒',6,30,2);
+  if(s==='car_repair'||s==='car'||s==='tyres')return K('Auto shop','🔧',4,20,3);
+  if(s==='hardware'||s==='doityourself')return K('Hardware store','🔨',5,25,2);
+  if(s)return K('Shop','🛍️',3,15,3);
+  if(l==='park'||l==='playground'||l==='nature_reserve')return K('Park','🌳',2,12,3);
+  if(l)return K('Sports','🏟️',4,25,2);
+  if(t.tourism)return K('Attraction','📸',3,15,3);
+  if(a)return K('Business','🏢',3,15,4);
+  return K('Spot','📍',3,15,4);
+}
+
+const SKIP=new Set(['parking','parking_space','bench','waste_basket','toilets','bicycle_parking','post_box','vending_machine','atm','charging_station','shelter','drinking_water','recycling','fountain','waste_disposal','parking_entrance','telephone','clock','hunting_stand','grave_yard']);
+
+async function fetchPlaces(){
+  const b=BBOX.join(',');
+  const q=`[out:json][timeout:25];(nwr["name"]["amenity"](${b});nwr["name"]["shop"](${b});nwr["name"]["leisure"~"park|playground|stadium|sports_centre|pitch|nature_reserve"](${b});nwr["name"]["tourism"](${b}););out center tags;`;
+  const urls=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
+  for(const u of urls){
+    try{
+      const r=await fetch(u,{method:'POST',body:'data='+encodeURIComponent(q),headers:{'Content-Type':'application/x-www-form-urlencoded'}});
+      if(!r.ok)continue;
+      const j=await r.json();
+      const seen=new Set(),out=[];
+      for(const e of j.elements){
+        const t=e.tags||{};if(!t.name||SKIP.has(t.amenity))continue;
+        if(t.leisure==='pitch'&&!t.name)continue;
+        const key=t.name.toLowerCase();if(seen.has(key))continue;seen.add(key);
+        const lat=e.lat??e.center?.lat,lng=e.lon??e.center?.lon;if(lat==null)continue;
+        const c=classify(t);
+        out.push({name:t.name,lat,lng,...c});
+      }
+      if(out.length>=5){
+        out.sort((a,b)=>a.prio-b.prio||dist({lat:a.lat,lng:a.lng},{lat:CENTER[0],lng:CENTER[1]})-dist({lat:b.lat,lng:b.lng},{lat:CENTER[0],lng:CENTER[1]}));
+        return {real:true,list:out.slice(0,MAX_PLACES)};
+      }
+    }catch(e){}
+  }
+  // offline fallback: made-up spots around downtown
+  const names=['Main St Diner','Corner Market','River Park','Foothills Gas','Town Hall','Buckley Bakery','Ball Field','Pizza Spot','Hardware Barn','Coffee Stand','Library','Old Church','Burger Shack','Auto Fix','Ice Cream Hut','Fire Station','Bank','Pet Clinic','Book Nook','Skate Park'];
+  const kinds=[['Restaurant','🍽️'],['Store','🛒'],['Park','🌳'],['Gas station','⛽'],['City building','🏛️'],['Café','☕'],['Sports','🏟️'],['Fast food','🍔'],['Hardware store','🔨'],['Café','☕'],['Library','📚'],['Church','⛪'],['Fast food','🍔'],['Auto shop','🔧'],['Café','☕'],['Fire station','🚒'],['Bank','🏦'],['Health','🏥'],['Shop','🛍️'],['Park','🌳']];
+  return {real:false,list:names.map((n,i)=>({name:n,lat:CENTER[0]+rand(-.009,.009),lng:CENTER[1]+rand(-.014,.014),kind:kinds[i][0],emoji:kinds[i][1],income:4,def:20,prio:2}))};
+}
+
+// ---------- game setup ----------
+function newGame(data){
+  const places=data.list.map((p,i)=>({id:i,name:p.name,lat:p.lat,lng:p.lng,kind:p.kind,emoji:p.emoji,income:p.income,maxDef:p.def,def:p.def,owner:null}));
+  S={real:data.real,coins:60,crew:20,me:{lat:CENTER[0],lng:CENTER[1]},places,
+     rivals:[null,{crew:20,coins:0},{crew:20,coins:0},{crew:20,coins:0}],time:0,over:false};
+  // each rival starts with one place far from the middle
+  const far=[...places].sort((a,b)=>dist(b,{lat:CENTER[0],lng:CENTER[1]})-dist(a,{lat:CENTER[0],lng:CENTER[1]}));
+  [1,2,3].forEach((r,i)=>{const p=far[i*3]||far[i];if(p&&p.owner==null){p.owner=r;p.def=Math.round(p.maxDef*0.8)}});
+}
+
+function initMap(){
+  map=L.map('map',{zoomControl:false,attributionControl:true}).setView([S.me.lat,S.me.lng],17);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+    maxZoom:20,subdomains:'abcd',attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);
+  rangeCircle=L.circle([S.me.lat,S.me.lng],{radius:RANGE,color:'#1a73e8',weight:2,fillColor:'#1a73e8',fillOpacity:.08}).addTo(map);
+  meMarker=L.marker([S.me.lat,S.me.lng],{icon:L.divIcon({className:'',html:'<div class="me">🧢</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:1000}).addTo(map);
+  S.places.forEach(p=>{
+    markers[p.id]=L.marker([p.lat,p.lng],{icon:pinIcon(p)}).addTo(map).on('click',ev=>{L.DomEvent.stopPropagation(ev);openPlace(p.id)});
+  });
+  map.on('click',e=>{
+    closeSheet();
+    if(S.mode==='gps'){toast('GPS mode is on — walk for real! (tap 🛰️ to switch to walk mode)');return}
+    walkTo(e.latlng);
+  });
+  map.on('dragstart',()=>follow=false);
+}
+
+function pinIcon(p){
+  const near=p.owner!==0&&dist(S.me,p)<=RANGE;
+  return L.divIcon({className:'',html:`<div class="pin${near?' near':''}" style="--c:${colorOf(p.owner)}"><span>${p.emoji}</span></div>`,iconSize:[38,38],iconAnchor:[19,40]});
+}
+function refreshPins(){S.places.forEach(p=>markers[p.id].setIcon(pinIcon(p)))}
+
+// ---------- movement ----------
+function walkTo(ll){walkTarget={lat:ll.lat,lng:ll.lng};follow=true}
+let lastFrame=performance.now(),pinTimer=0;
+function frame(now){
+  const dt=Math.min(.1,(now-lastFrame)/1000);lastFrame=now;
+  if(walkTarget&&S.mode!=='gps'){
+    const d=dist(S.me,walkTarget),step=WALK_SPEED*dt;
+    if(d<=step){S.me={...walkTarget};walkTarget=null}
+    else{const f=step/d;S.me={lat:S.me.lat+(walkTarget.lat-S.me.lat)*f,lng:S.me.lng+(walkTarget.lng-S.me.lng)*f}}
+    moveMe();
+  }
+  pinTimer+=dt;if(pinTimer>.5){pinTimer=0;refreshPins();if(selected!=null)openPlace(selected,true)}
+  requestAnimationFrame(frame);
+}
+function moveMe(){
+  meMarker.setLatLng([S.me.lat,S.me.lng]);rangeCircle.setLatLng([S.me.lat,S.me.lng]);
+  if(follow)map.panTo([S.me.lat,S.me.lng],{animate:false});
+}
+
+function toggleGPS(){
+  if(S.mode==='gps'){stopGPS();toast('Walk mode: tap the map to walk');return}
+  if(!navigator.geolocation){toast('GPS not available here');return}
+  toast('Finding you…');
+  gpsWatch=navigator.geolocation.watchPosition(pos=>{
+    const p={lat:pos.coords.latitude,lng:pos.coords.longitude};
+    if(dist(p,{lat:CENTER[0],lng:CENTER[1]})>6000){toast("You're not in Buckley right now — staying in walk mode");stopGPS();return}
+    if(S.mode!=='gps'){S.mode='gps';updateHUD();toast('GPS on! Walk around Buckley for real 🛰️')}
+    S.me=p;walkTarget=null;follow=true;moveMe();
+  },()=>{toast('Could not get your location — staying in walk mode');stopGPS()},{enableHighAccuracy:true,maximumAge:2000});
+}
+function stopGPS(){if(gpsWatch!=null)navigator.geolocation.clearWatch(gpsWatch);gpsWatch=null;S.mode='walk';updateHUD()}
+
+// ---------- HUD ----------
+function updateHUD(){
+  const counts=[0,0,0,0];let neutral=0;
+  S.places.forEach(p=>p.owner==null?neutral++:counts[p.owner]++);
+  const total=S.places.length;
+  $('coins').textContent=Math.floor(S.coins);$('crew').textContent=S.crew;
+  $('owned').textContent=counts[0]+'/'+total;
+  $('progTxt').textContent=`Buckley: ${Math.round(counts[0]/total*100)}% yours`;
+  $('bar').innerHTML=counts.map((c,i)=>`<div style="width:${c/total*100}%;background:${PLAYERS[i].color}"></div>`).join('');
+  $('modeChip').textContent=S.mode==='gps'?'🛰️ GPS mode':'🚶 Walk mode';
+  $('gpsBtn').classList.toggle('on',S.mode==='gps');
+  $('recruit').disabled=S.coins<20;$('recruit').style.opacity=S.coins<20?.6:1;
+}
+
+// ---------- place sheet ----------
+function openPlace(id,quiet){
+  selected=id;const p=S.places[id],d=dist(S.me,p),inRange=d<=RANGE;
+  const ownerName=p.owner==null?'Nobody yet':PLAYERS[p.owner].name;
+  let actions='';
+  if(p.owner===0){
+    actions=`<button class="btn primary" onclick="fortify(${id})" ${S.coins<30?'disabled':''}>🛡️ Fortify +10 defense · 30🪙</button>`;
+  }else if(!inRange){
+    actions=`<button class="btn ghost" onclick="goTo(${id})">🚶 Walk closer (${fmtDist(d-RANGE+5)} to go)</button>`;
+  }else{
+    const keep=$('sendRange')?$('sendRange').value:null;
+    const max=Math.max(1,S.crew),val=Math.min(max,keep?+keep:Math.max(1,Math.min(S.crew,Math.ceil(p.def*1.2))));
+    actions=`<div style="font-size:14px;margin-top:6px">Send <b id="sendVal">${val}</b> of your ${S.crew} crew</div>
+      <input type="range" id="sendRange" min="1" max="${max}" value="${val}" oninput="$('sendVal').textContent=this.value">
+      <button class="btn ${p.owner==null?'primary':'danger'}" onclick="startBattle(${id})" ${S.crew<1?'disabled':''}>${p.owner==null?'🚩 Capture it!':'⚔️ Attack '+PLAYERS[p.owner].name}</button>`;
+  }
+  if(quiet&&$('sendRange')&&inRange&&p.owner!==0){ // don't rebuild slider while dragging
+    return;
+  }
+  $('sheetBody').innerHTML=`
+    <h2>${p.emoji} ${p.name}</h2>
+    <div class="sub">${p.kind} · ${fmtDist(d)} away</div>
+    <div class="row">
+      <div class="stat"><b style="color:${colorOf(p.owner)}">●</b>${ownerName}</div>
+      <div class="stat"><b>🛡️ ${Math.round(p.def)}</b>defense</div>
+      <div class="stat"><b>🪙 ${p.income}</b>per turn</div>
+    </div>${actions}
+    <button class="btn ghost" onclick="closeSheet()">Close</button>`;
+  $('sheet').classList.add('open');
+  if(!quiet){follow=false;map.panTo([p.lat,p.lng])}
+}
+function closeSheet(){$('sheet').classList.remove('open');selected=null}
+function goTo(id){const p=S.places[id];if(S.mode==='gps'){toast('Walk there for real! It\'s '+fmtDist(dist(S.me,p))+' away');return}walkTo({lat:p.lat,lng:p.lng});closeSheet()}
+function fortify(id){const p=S.places[id];if(S.coins<30)return;S.coins-=30;p.maxDef+=10;p.def+=10;toast('🛡️ '+p.name+' is stronger!');updateHUD();save();openPlace(id,false)}
+
+// ---------- battle ----------
+let battle=null;
+function startBattle(id){
+  const p=S.places[id];const sent=Math.min(S.crew,+$('sendRange').value);
+  if(sent<1)return;closeSheet();
+  battle={id,sent,taps:0,t:5};
+  $('bTitle').textContent=(p.owner==null?'Capturing ':'Attacking ')+p.name;
+  $('bInfo').textContent=`👥 ${sent} crew  vs  🛡️ ${Math.round(p.def)} defense — tap fast to power up!`;
+  $('powerBar').firstElementChild.style.width='0%';$('bTimer').textContent='5.0';
+  $('battle').classList.add('show');
+  const start=performance.now();
+  battle.int=setInterval(()=>{
+    const left=Math.max(0,5-(performance.now()-start)/1000);$('bTimer').textContent=left.toFixed(1);
+    if(left<=0){clearInterval(battle.int);finishBattle()}
+  },50);
+}
+$('tapBtn').addEventListener('pointerdown',e=>{e.preventDefault();if(!battle)return;battle.taps++;
+  $('powerBar').firstElementChild.style.width=Math.min(100,battle.taps/40*100)+'%'});
+function fight(sent,def,boost){
+  const atk=sent*boost*rand(.85,1.15),dfn=def*rand(.85,1.15);
+  return {win:atk>dfn,atk,dfn};
+}
+function finishBattle(){
+  const b=battle;battle=null;$('battle').classList.remove('show');
+  const p=S.places[b.id],boost=1+Math.min(b.taps,40)*.015;
+  const prev=p.owner,r=fight(b.sent,p.def,boost);
+  let html;
+  if(r.win){
+    const lost=Math.min(b.sent-1,Math.round(b.sent*(r.dfn/r.atk)*.5));S.crew-=lost;
+    p.owner=0;p.def=Math.round(p.maxDef*.6);
+    html=`<h1>🎉 Victory!</h1><p style="text-align:center">You took <b>${p.name}</b>${prev!=null?' from '+PLAYERS[prev].name:''}!<br>Power ${Math.round(r.atk)} vs ${Math.round(r.dfn)} · You lost ${lost} crew.</p>`;
+  }else{
+    const lost=Math.round(b.sent*.5);S.crew-=lost;
+    p.def=Math.max(1,p.def-r.atk*.5);
+    html=`<h1>💥 Pushed back!</h1><p style="text-align:center">${p.name} held on.<br>Power ${Math.round(r.atk)} vs ${Math.round(r.dfn)} · You lost ${lost} crew.<br>But its defense dropped to ${Math.round(p.def)} — try again!</p>`;
+  }
+  showMsg(html+`<button class="btn primary" onclick="hideMsg()">OK</button>`);
+  updateHUD();refreshPins();save();checkEnd();
+}
+function showMsg(h){$('msgCard').innerHTML=h;$('msg').classList.add('show')}
+function hideMsg(){$('msg').classList.remove('show')}
+
+// ---------- economy + rivals ----------
+function tick(){
+  if(S.over)return;S.time++;
+  // income
+  let inc=1;S.places.forEach(p=>{if(p.owner===0)inc+=p.income;if(p.def<p.maxDef)p.def=Math.min(p.maxDef,p.def+1)});
+  S.coins+=inc;if(S.time%2===0)S.crew+=1;
+  // rivals
+  for(const r of [1,2,3]){
+    const R=S.rivals[r];const mine=S.places.filter(p=>p.owner===r);
+    R.coins+=1+mine.reduce((s,p)=>s+p.income,0)*.8;
+    while(R.coins>=20){R.coins-=20;R.crew+=5}
+    if(S.time<6||Math.random()>.28||R.crew<8)continue;
+    // pick a target near their turf
+    const base=mine.length?mine[Math.floor(Math.random()*mine.length)]:{lat:CENTER[0],lng:CENTER[1]};
+    const targets=S.places.filter(p=>p.owner!==r).sort((a,b)=>dist(base,a)-dist(base,b)).slice(0,4);
+    if(!targets.length)continue;
+    const t=targets[Math.floor(Math.random()*targets.length)];
+    const sent=Math.round(R.crew*.7);const res=fight(sent,t.def,1.2);
+    const prev=t.owner;
+    if(res.win){R.crew-=Math.round(sent*(res.dfn/res.atk)*.5);t.owner=r;t.def=Math.round(t.maxDef*.6);
+      if(prev===0)toast(`🚨 ${PLAYERS[r].name} took ${t.name} from you!`);
+      else if(Math.random()<.4)toast(`${PLAYERS[r].name} captured ${t.name}`);
+    }else{R.crew-=Math.round(sent*.5);t.def=Math.max(1,t.def-res.atk*.3);
+      if(prev===0)toast(`🛡️ You defended ${t.name} from ${PLAYERS[r].name}!`);}
+  }
+  updateHUD();refreshPins();save();checkEnd();
+}
+function checkEnd(){
+  const owners=new Set(S.places.map(p=>p.owner));
+  if(owners.size===1&&!owners.has(null)){
+    const w=[...owners][0];S.over=true;save();
+    showMsg(w===0?`<h1>👑 YOU OWN BUCKLEY!</h1><p style="text-align:center">Every single place in town is yours. Legendary.</p><button class="btn primary" onclick="restart()">Play again</button>`
+      :`<h1>😵 Game over</h1><p style="text-align:center">${PLAYERS[w].name} took over all of Buckley.</p><button class="btn primary" onclick="restart()">Try again</button>`);
+  }
+}
+function leaderboard(){
+  const counts=[0,0,0,0];S.places.forEach(p=>{if(p.owner!=null)counts[p.owner]++});
+  const rows=PLAYERS.map((pl,i)=>({pl,c:counts[i],crew:i===0?S.crew:S.rivals[i].crew})).sort((a,b)=>b.c-a.c)
+    .map(x=>`<div class="lb"><span class="dot" style="background:${x.pl.color}"></span>${x.pl.name}<span style="color:#5f6368;font-size:13px">👥 ${x.crew}</span><b>${x.c} 🏢</b></div>`).join('');
+  showMsg(`<h1>🏆 Who owns Buckley</h1>${rows}<p style="color:#5f6368;font-size:13px">${S.places.length} places total${S.real?' — real places from OpenStreetMap':' — offline practice map'}.</p><button class="btn primary" onclick="hideMsg()">Back</button>`);
+}
+function restart(){try{localStorage.removeItem(SAVE_KEY)}catch(e){}location.reload()}
+
+// ---------- search ----------
+$('search').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase(),box=$('results');
+  if(!q){box.style.display='none';return}
+  const hits=S.places.filter(p=>p.name.toLowerCase().includes(q)||p.kind.toLowerCase().includes(q)).slice(0,8);
+  box.innerHTML=hits.length?hits.map(p=>`<div class="res" onclick="pickResult(${p.id})"><span class="dot" style="background:${colorOf(p.owner)}"></span>${p.emoji} ${p.name}<span style="margin-left:auto;color:#5f6368;font-size:13px">${fmtDist(dist(S.me,p))}</span></div>`).join(''):'<div class="res">No places found</div>';
+  box.style.display='block';
+});
+function pickResult(id){$('results').style.display='none';$('search').value='';$('search').blur();map.setView([S.places[id].lat,S.places[id].lng],18);openPlace(id)}
+
+// ---------- buttons ----------
+$('recruit').onclick=()=>{if(S.coins<20){toast('Need 20🪙 — own more places to earn faster');return}S.coins-=20;S.crew+=5;updateHUD();save();toast('👥 +5 crew!')};
+$('locBtn').onclick=()=>{follow=true;map.setView([S.me.lat,S.me.lng],17)};
+$('gpsBtn').onclick=toggleGPS;
+$('lbBtn').onclick=leaderboard;
+
+// ---------- start ----------
+let saved=null;try{saved=JSON.parse(localStorage.getItem(SAVE_KEY))}catch(e){}
+function begin(){
+  $('intro').classList.remove('show');S.mode='walk';
+  initMap();updateHUD();requestAnimationFrame(frame);setInterval(tick,5000);
+  toast('Tap the map to walk. Glowing pins are close enough to capture!');
+}
+if(saved&&saved.places&&!saved.over){
+  $('loadTxt').textContent='Your takeover is saved — welcome back!';
+  $('playBtn').disabled=false;$('playBtn').textContent='▶ Continue';
+  $('newBtn').style.display='block';
+  $('playBtn').onclick=()=>{S=saved;begin()};
+  $('newBtn').onclick=restart;
+}else{
+  fetchPlaces().then(data=>{
+    newGame(data);
+    $('loadTxt').textContent=data.real?`Found ${data.list.length} real places in Buckley!`:'Could not load real places (no internet?) — using a practice map.';
+    $('playBtn').disabled=false;$('playBtn').textContent='▶ Play';
+    $('playBtn').onclick=begin;
+  });
+}
+</script>
+</body>
+</html>
